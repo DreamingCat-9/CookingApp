@@ -24,11 +24,12 @@ nutrition_estimee: true
 - 6 escalopes de poulet (environ 450 g / 1 lb, voir notes)
 
 ## Préparation
-1. Préchauffer le four à 220 °C (425 °F). Placer la grille à la position la plus basse du four. Tapisser une plaque de cuisson de papier parchemin. À l'aide d'un pinceau de cuisine, badigeonner le papier parchemin d'huile.
-2. Dans une assiette creuse, déposer la chapelure, l'origan, le sel et le piment de Cayenne. À l'aide d'une râpe fine (de type Microplane), zester le citron directement dans l'assiette. Poivrer généreusement et mélanger avec les doigts.
-3. À l'aide du pinceau de cuisine, badigeonner de moutarde les 2 côtés de chaque escalope. Déposer une escalope dans la chapelure assaisonnée et la retourner pour bien l'enrober. Placer l'escalope panée sur la plaque de cuisson. Répéter l'opération pour les autres escalopes.
-4. Couper le citron zesté en 6 quartiers et les répartir autour des escalopes. Cuire au four 20 minutes.
-5. Servir les escalopes et le citron rôti avec des tagliatelles enrobées d'un filet d'huile d'olive et une salade verte. Si désiré, accompagner de mayo à l'ail.
+1. Zester le citron (réservé pour l'étape 2). Couper le citron zesté en 6 quartiers (réservés pour l'étape 4).
+2. Préchauffer le four à 220 °C (425 °F). Placer la grille à la position la plus basse du four. Tapisser une plaque de cuisson de papier parchemin. À l'aide d'un pinceau de cuisine, badigeonner le papier parchemin d'huile.
+3. Dans une assiette creuse, déposer la chapelure, l'origan, le sel, le piment de Cayenne et le zeste de citron. Poivrer généreusement et mélanger avec les doigts.
+4. À l'aide du pinceau de cuisine, badigeonner de moutarde les 2 côtés de chaque escalope. Déposer une escalope dans la chapelure assaisonnée et la retourner pour bien l'enrober. Placer l'escalope panée sur la plaque de cuisson. Répéter l'opération pour les autres escalopes.
+5. Répartir les quartiers de citron autour des escalopes. Cuire au four 20 minutes.
+6. Servir les escalopes et le citron rôti avec des tagliatelles enrobées d'un filet d'huile d'olive et une salade verte. Si désiré, accompagner de mayo à l'ail.
 
 ## Notes
 - Se conserve 3 jours au réfrigérateur et 4 mois au congélateur.
