@@ -208,6 +208,151 @@
   }
 
   .hidden { display: none; }
+
+  /* Filtres */
+  .filters {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .filters .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .filters .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.5rem;
+    min-width: 80px;
+  }
+  .filters input[type="search"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .pill {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .pill:hover { background: rgba(0,0,0,0.04); }
+  .pill.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  .pill.tag-pill.active {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* Bouton voir ingrédients sur la carte */
+  .recipe-actions {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+  }
+  .btn-view {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+  .btn-view:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+  }
+
+  /* Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 100;
+  }
+  .modal {
+    background: var(--panel);
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+  }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+  .modal-meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+  .modal-close {
+    background: transparent;
+    color: var(--muted);
+    border: 0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+  .modal h3 {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+  .modal h3:first-of-type { margin-top: 0; }
+  .modal ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .modal li {
+    margin-bottom: 0.25rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    color: var(--muted);
+    padding: 2rem;
+    font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -222,12 +367,24 @@
 </header>
 
 <main>
+  <section class="filters" id="filters">
+    <div class="row">
+      <input type="search" id="search" placeholder="Rechercher une recette…">
+      <button class="pill" id="reset-filters" type="button">Réinitialiser</button>
+    </div>
+    <div class="row">
+      <span class="label">Catégories</span>
+      <div id="folder-pills" class="row" style="gap:0.4rem"></div>
+    </div>
+  </section>
   <section id="recipes-section"></section>
   <section id="shopping" class="hidden">
     <h2>Liste de courses</h2>
     <div id="shopping-list"></div>
   </section>
 </main>
+
+<div id="modal-root"></div>
 
 <script>
 const RECIPES_RAW = /*__RECIPES_DATA__*/;
@@ -431,6 +588,10 @@ const recipes = RECIPES_RAW.map(r => ({
 
 const STATE_KEY = 'gestion_alimentaire_state_v1';
 const state = loadState();
+const filters = {
+  search: '',
+  folders: new Set(),
+};
 
 function loadState() {
   try {
@@ -448,19 +609,39 @@ function saveState() {
   localStorage.setItem(STATE_KEY, JSON.stringify(state));
 }
 
+function recipeMatchesFilters(r) {
+  if (filters.search) {
+    const q = filters.search.toLowerCase();
+    if (!r.titre.toLowerCase().includes(q)) return false;
+  }
+  if (filters.folders.size > 0 && !filters.folders.has(r.folder)) return false;
+  return true;
+}
+
 // ---------- UI: recipe list ----------
 
 function render() {
   const root = document.getElementById('recipes-section');
   root.innerHTML = '';
 
+  const visible = recipes.filter(recipeMatchesFilters);
+
+  if (visible.length === 0) {
+    const msg = document.createElement('div');
+    msg.className = 'empty-state';
+    msg.textContent = 'Aucune recette ne correspond aux filtres.';
+    root.appendChild(msg);
+    updateCount();
+    return;
+  }
+
   const byFolder = {};
-  for (const r of recipes) {
+  for (const r of visible) {
     if (!byFolder[r.folder]) byFolder[r.folder] = [];
     byFolder[r.folder].push(r);
   }
 
-  const folderOrder = ['Volaille', 'Boeuf', 'Porc', 'Végé', 'Autres'];
+  const folderOrder = ['Volaille', 'Boeuf', 'Porc', 'Végé', 'Divers', 'Autres'];
   const folders = Object.keys(byFolder).sort((a, b) => {
     const ai = folderOrder.indexOf(a);
     const bi = folderOrder.indexOf(b);
@@ -484,6 +665,26 @@ function render() {
   }
 
   updateCount();
+}
+
+function renderFilters() {
+  const folders = [...new Set(recipes.map(r => r.folder))].sort();
+
+  const folderRoot = document.getElementById('folder-pills');
+  folderRoot.innerHTML = '';
+  for (const f of folders) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'pill' + (filters.folders.has(f) ? ' active' : '');
+    btn.textContent = f;
+    btn.addEventListener('click', () => {
+      if (filters.folders.has(f)) filters.folders.delete(f);
+      else filters.folders.add(f);
+      renderFilters();
+      render();
+    });
+    folderRoot.appendChild(btn);
+  }
 }
 
 function renderRecipe(r) {
@@ -534,18 +735,104 @@ function renderRecipe(r) {
   });
 
   meta.appendChild(portions);
-  for (const tag of r.tags) {
-    const t = document.createElement('span');
-    t.className = 'tag';
-    t.textContent = tag;
-    meta.appendChild(t);
-  }
+
+  const actions = document.createElement('div');
+  actions.className = 'recipe-actions';
+  const viewBtn = document.createElement('button');
+  viewBtn.type = 'button';
+  viewBtn.className = 'btn-view';
+  viewBtn.textContent = 'Voir les ingrédients';
+  viewBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    showIngredientsModal(r);
+  });
+  actions.appendChild(viewBtn);
 
   body.appendChild(title);
   body.appendChild(meta);
+  body.appendChild(actions);
   card.appendChild(cb);
   card.appendChild(body);
   return card;
+}
+
+function showIngredientsModal(r) {
+  const root = document.getElementById('modal-root');
+  root.innerHTML = '';
+
+  const backdrop = document.createElement('div');
+  backdrop.className = 'modal-backdrop';
+  backdrop.addEventListener('click', e => {
+    if (e.target === backdrop) closeModal();
+  });
+
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+
+  const header = document.createElement('div');
+  header.className = 'modal-header';
+  const titleWrap = document.createElement('div');
+  const metaParts = [];
+  if (r.portions) metaParts.push(`${r.portions} portions`);
+  if (r.tempsPrep) metaParts.push(`prép. ${r.tempsPrep}`);
+  if (r.tempsCuisson) metaParts.push(`cuisson ${r.tempsCuisson}`);
+  titleWrap.innerHTML = `<h2>${r.titre}</h2>` +
+    (metaParts.length ? `<div class="modal-meta">${metaParts.join(' · ')}</div>` : '');
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'modal-close';
+  closeBtn.type = 'button';
+  closeBtn.innerHTML = '×';
+  closeBtn.setAttribute('aria-label', 'Fermer');
+  closeBtn.addEventListener('click', closeModal);
+  header.appendChild(titleWrap);
+  header.appendChild(closeBtn);
+  modal.appendChild(header);
+
+  const bySub = {};
+  const order = [];
+  for (const ing of r.ingredients) {
+    const key = ing.subsection || '';
+    if (!(key in bySub)) {
+      bySub[key] = [];
+      order.push(key);
+    }
+    bySub[key].push(ing.raw);
+  }
+
+  if (r.ingredients.length === 0) {
+    const p = document.createElement('p');
+    p.className = 'empty-state';
+    p.textContent = 'Aucun ingrédient listé.';
+    modal.appendChild(p);
+  } else {
+    for (const sub of order) {
+      if (sub) {
+        const h3 = document.createElement('h3');
+        h3.textContent = sub;
+        modal.appendChild(h3);
+      }
+      const ul = document.createElement('ul');
+      for (const item of bySub[sub]) {
+        const li = document.createElement('li');
+        li.textContent = item;
+        ul.appendChild(li);
+      }
+      modal.appendChild(ul);
+    }
+  }
+
+  backdrop.appendChild(modal);
+  root.appendChild(backdrop);
+  document.addEventListener('keydown', escClose);
+}
+
+function escClose(e) {
+  if (e.key === 'Escape') closeModal();
+}
+
+function closeModal() {
+  document.getElementById('modal-root').innerHTML = '';
+  document.removeEventListener('keydown', escClose);
 }
 
 function updateCount() {
@@ -696,6 +983,20 @@ document.getElementById('reset').addEventListener('click', () => {
   render();
 });
 
+document.getElementById('search').addEventListener('input', e => {
+  filters.search = e.target.value.trim();
+  render();
+});
+
+document.getElementById('reset-filters').addEventListener('click', () => {
+  filters.search = '';
+  filters.folders.clear();
+  document.getElementById('search').value = '';
+  renderFilters();
+  render();
+});
+
+renderFilters();
 render();
 </script>
 </body>
