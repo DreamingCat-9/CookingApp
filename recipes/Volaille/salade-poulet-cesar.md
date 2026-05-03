@@ -4,6 +4,11 @@ portions: 4
 temps_prep: 25 min
 temps_cuisson: 1 h
 tags: [salade, four, césar]
+calories: 365
+proteines: 45
+glucides: 22
+lipides: 12
+nutrition_estimee: true
 derniere_fois: 
 ---
 

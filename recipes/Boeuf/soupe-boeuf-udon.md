@@ -4,6 +4,11 @@ portions: 5
 temps_prep: 20 min
 temps_cuisson: 8 h
 tags: [asiatique, mijoteuse, soupe]
+calories: 825
+proteines: 45
+glucides: 75
+lipides: 25
+nutrition_estimee: true
 derniere_fois: 
 ---
 

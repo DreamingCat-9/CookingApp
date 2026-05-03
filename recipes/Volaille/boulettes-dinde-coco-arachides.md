@@ -4,6 +4,11 @@ portions: 4
 temps_prep: 25 min
 temps_cuisson: 25 min
 tags: [asiatique, four, boulettes]
+calories: 737
+proteines: 45
+glucides: 25
+lipides: 50
+nutrition_estimee: true
 derniere_fois: 
 ---
 

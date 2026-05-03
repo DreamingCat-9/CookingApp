@@ -4,6 +4,11 @@ portions: 4
 temps_prep: 20 min
 temps_cuisson: 15 min
 tags: [asiatique, wok, sauté]
+calories: 410
+proteines: 25
+glucides: 16
+lipides: 20
+nutrition_estimee: true
 derniere_fois: 
 ---
 

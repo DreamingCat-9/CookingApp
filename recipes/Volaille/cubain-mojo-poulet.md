@@ -4,6 +4,11 @@ portions: 5
 temps_prep: 25 min
 temps_cuisson: 40 min
 tags: [cubain, poêle, riz, marinade]
+calories: 543
+proteines: 50
+glucides: 50
+lipides: 7
+nutrition_estimee: true
 derniere_fois: 
 ---
 

@@ -4,6 +4,11 @@ portions: 6
 temps_prep: 45 min
 temps_cuisson: 45 min
 tags: [français, four, boulettes, mijoté]
+calories: 510
+proteines: 38
+glucides: 12
+lipides: 30
+nutrition_estimee: true
 derniere_fois: 
 ---
 

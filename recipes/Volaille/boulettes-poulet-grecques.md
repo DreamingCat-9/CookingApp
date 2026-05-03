@@ -4,6 +4,11 @@ portions: 4
 temps_prep: 35 min
 temps_cuisson: 20 min
 tags: [grec, four, été]
+calories: 620
+proteines: 50
+glucides: 30
+lipides: 26
+nutrition_estimee: true
 derniere_fois: 
 ---
 

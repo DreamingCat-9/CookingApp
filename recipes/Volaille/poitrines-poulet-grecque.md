@@ -4,6 +4,11 @@ portions: 4
 temps_prep: 20 min
 temps_cuisson: 35 min
 tags: [grec, four, marinade]
+calories: 535
+proteines: 70
+glucides: 3
+lipides: 23
+nutrition_estimee: true
 derniere_fois: 
 ---
 

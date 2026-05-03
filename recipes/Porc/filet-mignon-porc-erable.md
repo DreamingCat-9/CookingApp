@@ -4,6 +4,11 @@ portions: 3
 temps_prep: 15 min
 temps_cuisson: 10 min
 tags: [poêle, érable, rapide]
+calories: 310
+proteines: 33
+glucides: 12
+lipides: 14
+nutrition_estimee: true
 derniere_fois: 
 ---
 

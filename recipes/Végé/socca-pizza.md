@@ -4,6 +4,11 @@ portions: 2
 temps_prep: 10 min
 temps_cuisson: 10 min
 tags: [méditerranéen, végé, pizza, four, rapide]
+calories: 270
+proteines: 16
+glucides: 22
+lipides: 11
+nutrition_estimee: true
 derniere_fois: 
 ---
 

@@ -4,6 +4,11 @@ portions: 4
 temps_prep: 25 min
 temps_cuisson: 30 min
 tags: [poêle, sauce-cremeuse]
+calories: 600
+proteines: 60
+glucides: 8
+lipides: 27
+nutrition_estimee: true
 derniere_fois: 
 ---
 

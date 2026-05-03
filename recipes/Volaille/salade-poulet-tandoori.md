@@ -4,6 +4,11 @@ portions: 4
 temps_prep: 15 min
 temps_cuisson: 15 min
 tags: [indien, salade, poêle, rapide]
+calories: 240
+proteines: 35
+glucides: 8
+lipides: 5
+nutrition_estimee: true
 derniere_fois: 
 ---
 

@@ -4,6 +4,11 @@ portions: 4
 temps_prep: 
 temps_cuisson: 15 min
 tags: [air-fryer, déjeuner, pain]
+calories: 150
+proteines: 9
+glucides: 26
+lipides: 1
+nutrition_estimee: true
 derniere_fois: 
 ---
 

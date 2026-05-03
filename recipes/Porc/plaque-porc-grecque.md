@@ -4,6 +4,11 @@ portions: 6
 temps_prep: 15 min
 temps_cuisson: 30 min
 tags: [grec, four, plaque]
+calories: 300
+proteines: 22
+glucides: 26
+lipides: 13
+nutrition_estimee: true
 derniere_fois: 
 ---
 

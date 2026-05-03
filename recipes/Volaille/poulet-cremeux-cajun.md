@@ -4,6 +4,11 @@ portions: 4
 temps_prep: 15 min
 temps_cuisson: 20 min
 tags: [cajun, poêle, sauce-cremeuse]
+calories: 693
+proteines: 50
+glucides: 5
+lipides: 50
+nutrition_estimee: true
 derniere_fois: 
 ---
 
