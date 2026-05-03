@@ -297,13 +297,70 @@
   /* ============ Pills catégories (scroll horizontal) ============ */
   .cat-pills {
     display: flex;
-    gap: 0.55rem;
-    overflow-x: auto;
+    flex-direction: column;
+    gap: 0.5rem;
     margin: 0 -1.25rem 1.25rem;
     padding: 0 1.25rem 0.4rem;
-    scrollbar-width: none;
   }
-  .cat-pills::-webkit-scrollbar { display: none; }
+  .cat-pills-row {
+    display: flex;
+    gap: 0.55rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 -1.25rem;
+    padding: 0 1.25rem;
+  }
+  .cat-pills-row::-webkit-scrollbar { display: none; }
+  .filter-toggle {
+    display: inline-flex;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 0.22rem;
+    align-self: flex-start;
+    box-shadow: var(--shadow-sm);
+  }
+  .toggle-opt {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: transparent;
+    border: none;
+    padding: 0.45rem 0.95rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .toggle-opt .count {
+    background: var(--panel);
+    color: var(--muted);
+    font-size: 0.7rem;
+    padding: 0.08rem 0.4rem;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+  }
+  .toggle-opt.active.opt-certifie {
+    background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+    color: #78350f;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.35);
+  }
+  .toggle-opt.active.opt-certifie .count {
+    background: rgba(120, 53, 15, 0.18);
+    color: #78350f;
+  }
+  .toggle-opt.active.opt-decouverte {
+    background: var(--panel);
+    color: var(--text);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+  .toggle-opt.active.opt-decouverte .count {
+    background: var(--bg-soft);
+    color: var(--text-soft);
+  }
   .cat-pill {
     display: inline-flex;
     align-items: center;
@@ -311,7 +368,7 @@
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: var(--radius-pill);
-    padding: 0.5rem 0.95rem;
+    padding: 0.5rem 0.7rem;
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--text-soft);
@@ -320,8 +377,13 @@
     box-shadow: var(--shadow-sm);
     transition: all 0.15s;
   }
+  .cat-pill.icon-only {
+    padding: 0.5rem 0.65rem;
+    min-width: 2.4rem;
+    justify-content: center;
+  }
   .cat-pill:active { transform: scale(0.96); }
-  .cat-pill .icon { font-size: 1rem; }
+  .cat-pill .icon { font-size: 1.1rem; }
   .cat-pill .count {
     background: var(--bg-soft);
     color: var(--muted);
@@ -340,16 +402,6 @@
   .cat-pill.active .count {
     background: rgba(255,255,255,0.25);
     color: white;
-  }
-  .cat-pill-certifie.active {
-    background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
-    border-color: #f59e0b;
-    color: #78350f;
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
-  }
-  .cat-pill-certifie.active .count {
-    background: rgba(120, 53, 15, 0.18);
-    color: #78350f;
   }
 
   /* ============ Recipe feed cards ============ */
@@ -1829,7 +1881,7 @@ const ui = {
   detailTab: 'ingredients',
   searchQuery: '',
   activeCategory: null,
-  certifiedOnly: false,
+  certifMode: 'certifie', // 'certifie' | 'decouverte'
   ingredientChecks: {}, // recipeId -> ingredient idx -> bool (per-recipe checklist on detail)
   theme: localStorage.getItem(THEME_KEY) || 'framboise',
 };
@@ -1989,39 +2041,61 @@ function renderHero() {
 }
 
 function renderCatPills() {
-  const counts = {};
-  for (const r of recipes) counts[r.folder] = (counts[r.folder] || 0) + 1;
-  const folders = Object.keys(counts).sort((a, b) => folderOrder(a) - folderOrder(b));
-
   const root = document.getElementById('cat-pills');
   root.innerHTML = '';
 
+  // === Rangée 1 : toggle Certifiée / Découverte ===
+  const nCertif = recipes.filter(r => r.certifieBittle).length;
+  const nDecouv = recipes.length - nCertif;
+  const toggle = document.createElement('div');
+  toggle.className = 'filter-toggle';
+  toggle.innerHTML = `
+    <button class="toggle-opt opt-certifie ${ui.certifMode === 'certifie' ? 'active' : ''}" data-mode="certifie">
+      <span>👑</span><span>Certifiée Bittle</span><span class="count">${nCertif}</span>
+    </button>
+    <button class="toggle-opt opt-decouverte ${ui.certifMode === 'decouverte' ? 'active' : ''}" data-mode="decouverte">
+      <span>🔍</span><span>Découverte</span><span class="count">${nDecouv}</span>
+    </button>
+  `;
+  toggle.querySelectorAll('.toggle-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      ui.certifMode = btn.dataset.mode;
+      renderRecipesView();
+    });
+  });
+  root.appendChild(toggle);
+
+  // === Rangée 2 : catégories en icônes seules ===
+  // Compteurs basés sur le mode actif (pour ne pas afficher des catégories vides)
+  const inMode = recipes.filter(r =>
+    ui.certifMode === 'certifie' ? r.certifieBittle : !r.certifieBittle);
+  const counts = {};
+  for (const r of inMode) counts[r.folder] = (counts[r.folder] || 0) + 1;
+  const folders = Object.keys(counts).sort((a, b) => folderOrder(a) - folderOrder(b));
+
+  const row = document.createElement('div');
+  row.className = 'cat-pills-row';
+
   const allBtn = document.createElement('button');
-  allBtn.className = 'cat-pill' + (ui.activeCategory === null ? ' active' : '');
-  allBtn.innerHTML = `<span class="icon">🍽️</span><span>Tout</span><span class="count">${recipes.length}</span>`;
+  allBtn.className = 'cat-pill icon-only' + (ui.activeCategory === null ? ' active' : '');
+  allBtn.title = `Tout (${inMode.length})`;
+  allBtn.innerHTML = `<span class="icon">🍽️</span>`;
   allBtn.addEventListener('click', () => { ui.activeCategory = null; renderRecipesView(); });
-  root.appendChild(allBtn);
+  row.appendChild(allBtn);
 
   for (const f of folders) {
     const btn = document.createElement('button');
-    btn.className = 'cat-pill' + (ui.activeCategory === f ? ' active' : '');
-    btn.innerHTML = `<span class="icon">${folderIcon(f)}</span><span>${f}</span><span class="count">${counts[f]}</span>`;
+    btn.className = 'cat-pill icon-only' + (ui.activeCategory === f ? ' active' : '');
+    btn.title = `${f} (${counts[f]})`;
+    btn.innerHTML = `<span class="icon">${folderIcon(f)}</span>`;
     btn.addEventListener('click', () => {
       ui.activeCategory = ui.activeCategory === f ? null : f;
       renderRecipesView();
     });
-    root.appendChild(btn);
+    row.appendChild(btn);
   }
 
-  const certCount = recipes.filter(r => r.certifieBittle).length;
-  const certBtn = document.createElement('button');
-  certBtn.className = 'cat-pill cat-pill-certifie' + (ui.certifiedOnly ? ' active' : '');
-  certBtn.innerHTML = `<span class="icon">👑</span><span>Certifiées</span><span class="count">${certCount}</span>`;
-  certBtn.addEventListener('click', () => {
-    ui.certifiedOnly = !ui.certifiedOnly;
-    renderRecipesView();
-  });
-  root.appendChild(certBtn);
+  root.appendChild(row);
 }
 
 function recipeMatchesFilters(r) {
@@ -2030,7 +2104,8 @@ function recipeMatchesFilters(r) {
     if (!r.titre.toLowerCase().includes(q)) return false;
   }
   if (ui.activeCategory && r.folder !== ui.activeCategory) return false;
-  if (ui.certifiedOnly && !r.certifieBittle) return false;
+  if (ui.certifMode === 'certifie' && !r.certifieBittle) return false;
+  if (ui.certifMode === 'decouverte' && r.certifieBittle) return false;
   return true;
 }
 
