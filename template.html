@@ -1130,6 +1130,40 @@ function normalizeUnit(u) {
   return u.replace(/s$/,'').replace(/\s+/g,' ');
 }
 
+// Conversions vers une unité de base pour pouvoir additionner
+// des unités compatibles (ml/L, g/kg, etc.) lors du merge.
+const UNIT_CONVERSIONS = {
+  'ml':         { base: 'ml', factor: 1 },
+  'l':          { base: 'ml', factor: 1000 },
+  'tasse':      { base: 'ml', factor: 250 },
+  'c. à thé':   { base: 'ml', factor: 5 },
+  'c. à the':   { base: 'ml', factor: 5 },
+  'c. à soupe': { base: 'ml', factor: 15 },
+  'g':          { base: 'g',  factor: 1 },
+  'kg':         { base: 'g',  factor: 1000 },
+  'lb':         { base: 'g',  factor: 454 },
+  'oz':         { base: 'g',  factor: 28.35 },
+};
+
+function getBase(unit) {
+  if (!unit) return null;
+  const u = normalizeUnit(unit);
+  return UNIT_CONVERSIONS[u] || null;
+}
+
+function displayQty(qtyInBase, baseUnit) {
+  if (qtyInBase === null || qtyInBase === undefined) return { qty: '', unit: '' };
+  if (baseUnit === 'ml') {
+    if (qtyInBase >= 1000) return { qty: formatQty(qtyInBase / 1000), unit: 'L' };
+    return { qty: formatQty(qtyInBase), unit: 'ml' };
+  }
+  if (baseUnit === 'g') {
+    if (qtyInBase >= 1000) return { qty: formatQty(qtyInBase / 1000), unit: 'kg' };
+    return { qty: formatQty(qtyInBase), unit: 'g' };
+  }
+  return { qty: formatQty(qtyInBase), unit: baseUnit || '' };
+}
+
 const CATEGORIES = [
   ['Viandes & charcuterie', ['poulet','dinde','boeuf','porc','lardon','saucisse','cotelette','roti','palette','bifteck','tournedos','poitrine','haut de cuisse','filet de porc','filet mignon','viande','jambon','chair','crevette','saumon','poisson']],
   ['Produits laitiers & œufs', ['lait de coco','lait','creme de soya','creme','beurre d\'arachides','beurre de sesame','beurre','yogourt','fromage','parmesan','mozzarella','ricotta','feta','cheddar','monterey','bocconcini','halloumi','chevre','oeuf']],
@@ -1584,8 +1618,13 @@ function buildShoppingList() {
       const parsed = parseIngredient(ing.raw);
       if (isPantryStaple(parsed.name)) continue;
       const scaledQty = parsed.qty !== null ? parsed.qty * factor : null;
+      // Convertit vers une unité de base (ml ou g) pour permettre le merge
+      // entre unités compatibles (3 L + 750 ml → 3,75 L).
+      const conv = getBase(parsed.unit);
+      const baseUnit = conv ? conv.base : (normalizeUnit(parsed.unit) || '');
+      const baseQty = (scaledQty !== null && conv) ? scaledQty * conv.factor : scaledQty;
       items.push({
-        qty: scaledQty, unit: parsed.unit, unitKey: normalizeUnit(parsed.unit) || '',
+        qty: baseQty, baseUnit,
         name: parsed.name, nameKey: nameForMatching(parsed.name),
         category: categorize(parsed.name), fromRecipe: r.titre,
       });
@@ -1595,17 +1634,18 @@ function buildShoppingList() {
   for (const item of items) {
     if (!byCategory[item.category]) byCategory[item.category] = new Map();
     const map = byCategory[item.category];
-    const key = `${item.nameKey}||${item.unitKey}`;
+    // Sans qty: regroupe par nom uniquement (pas de doublon « persil pour garnir »).
+    const key = item.qty === null
+      ? `${item.nameKey}||__noqty__`
+      : `${item.nameKey}||${item.baseUnit}`;
     if (map.has(key)) {
       const ex = map.get(key);
       if (ex.qty !== null && item.qty !== null) {
         ex.qty += item.qty;
-        if (!ex.fromRecipes.includes(item.fromRecipe)) ex.fromRecipes.push(item.fromRecipe);
-        continue;
       }
-      map.set(`${key}__d${map.size}`, { qty: item.qty, unit: item.unit, name: item.name, fromRecipes: [item.fromRecipe] });
+      if (!ex.fromRecipes.includes(item.fromRecipe)) ex.fromRecipes.push(item.fromRecipe);
     } else {
-      map.set(key, { qty: item.qty, unit: item.unit, name: item.name, fromRecipes: [item.fromRecipe] });
+      map.set(key, { qty: item.qty, baseUnit: item.baseUnit, name: item.name, fromRecipes: [item.fromRecipe] });
     }
   }
   return byCategory;
@@ -1625,10 +1665,11 @@ function renderListView() {
     const items = Array.from(byCategory[cat].values()).sort((a, b) => a.name.localeCompare(b.name));
     html += `<div class="list-cat"><h3 class="list-cat-h">${cat}</h3>`;
     for (const it of items) {
-      const key = `${nameForMatching(it.name)}||${it.unit || ''}`;
+      const key = `${nameForMatching(it.name)}||${it.baseUnit || ''}`;
       const checked = state.checked[key];
-      const qtyStr = it.qty !== null ? `${formatQty(it.qty)} ` : '';
-      const unitStr = it.unit ? `${it.unit} ` : '';
+      const display = displayQty(it.qty, it.baseUnit);
+      const qtyStr = display.qty ? `${display.qty} ` : '';
+      const unitStr = display.unit ? `${display.unit} ` : '';
       html += `
         <div class="list-item ${checked ? 'checked' : ''}" data-key="${key}">
           <div class="ingr-check ${checked ? 'checked' : ''}">${checked ? '✓' : ''}</div>
