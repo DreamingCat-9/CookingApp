@@ -3,12 +3,13 @@ titre: Burger de dinde aux légumes
 portions: 4
 temps_prep: 15 min
 temps_cuisson: 15 min
-calories: 437
+calories: 420
 proteines: 30
-glucides: 29
-lipides: 23
+glucides: 35
+lipides: 18
 tags: [dinde, burger, poêle]
 derniere_fois: 
+nutrition_estimee: true
 ---
 
 ## Ingrédients

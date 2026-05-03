@@ -3,12 +3,13 @@ titre: Bœuf aux légumes (à la mijoteuse)
 portions: 8
 temps_prep: 10 min
 temps_cuisson: 8 h
-calories: 425
+calories: 450
 proteines: 55
 glucides: 14
-lipides: 13
+lipides: 14
 tags: [boeuf, mijoteuse, ragoût, hiver]
 derniere_fois: 
+nutrition_estimee: true
 ---
 
 ## Ingrédients

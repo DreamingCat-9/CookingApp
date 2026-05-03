@@ -3,12 +3,13 @@ titre: Buddha bowl à la grecque
 portions: 4
 temps_prep: 20 min
 temps_cuisson: 15 min
-calories: 395
-proteines: 16
-glucides: 51
+calories: 440
+proteines: 18
+glucides: 55
 lipides: 16
 tags: [végé, bowl, grec, four]
 derniere_fois: 
+nutrition_estimee: true
 ---
 
 ## Ingrédients

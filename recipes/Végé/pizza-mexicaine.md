@@ -3,12 +3,13 @@ titre: Pizza mexicaine
 portions: 8
 temps_prep: 5 min
 temps_cuisson: 15 min
-calories: 246
-proteines: 17
-glucides: 25
-lipides: 10
+calories: 280
+proteines: 18
+glucides: 28
+lipides: 12
 tags: [végé, pizza, mexicain, four]
 derniere_fois: 
+nutrition_estimee: true
 ---
 
 ## Ingrédients

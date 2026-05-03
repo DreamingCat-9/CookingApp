@@ -3,12 +3,13 @@ titre: Roulades de poulet aux tomates séchées
 portions: 6
 temps_prep: 10 min
 temps_cuisson: 15 min
-calories: 152
-proteines: 20
-glucides: 3
-lipides: 6
+calories: 200
+proteines: 22
+glucides: 4
+lipides: 10
 tags: [poulet, poêle, élégant, tomates séchées]
 derniere_fois: 
+nutrition_estimee: true
 ---
 
 ## Ingrédients

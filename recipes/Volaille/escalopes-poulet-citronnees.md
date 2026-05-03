@@ -3,12 +3,13 @@ titre: Escalopes de poulet citronnées
 portions: 6
 temps_prep: 15 min
 temps_cuisson: 20 min
-calories: 141
-proteines: 18
-glucides: 3
-lipides: 11
+calories: 195
+proteines: 26
+glucides: 8
+lipides: 6
 tags: [poulet, four, panko, citron]
 derniere_fois: 
+nutrition_estimee: true
 ---
 
 ## Ingrédients

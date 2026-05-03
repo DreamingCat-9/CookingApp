@@ -3,12 +3,13 @@ titre: Salade d'orzo au poulet grillé
 portions: 6
 temps_prep: 15 min
 temps_cuisson: 10 min
-calories: 468
-proteines: 31
-glucides: 41
-lipides: 19
+calories: 470
+proteines: 30
+glucides: 42
+lipides: 18
 tags: [poulet, salade, orzo, lunch]
 derniere_fois: 
+nutrition_estimee: true
 ---
 
 ## Ingrédients

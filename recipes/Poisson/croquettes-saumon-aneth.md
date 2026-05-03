@@ -3,12 +3,13 @@ titre: Croquettes de saumon à l'aneth
 portions: 6
 temps_prep: 15 min
 temps_cuisson: 30 min
-calories: 326
+calories: 340
 proteines: 23
-glucides: 25
-lipides: 15
+glucides: 24
+lipides: 14
 tags: [poisson, four, saumon, congélateur]
 derniere_fois: 
+nutrition_estimee: true
 ---
 
 ## Ingrédients
