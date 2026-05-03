@@ -1744,9 +1744,9 @@ function renderWeekView() {
         </div>
       </div>
       <div class="week-summary-macros">
-        <div class="m"><span class="v">${Math.round(totalP)}</span><span class="l">prot</span></div>
-        <div class="m"><span class="v">${Math.round(totalG)}</span><span class="l">gluc</span></div>
-        <div class="m"><span class="v">${Math.round(totalL)}</span><span class="l">lip</span></div>
+        <div class="m"><span class="v">${Math.round(totalP)} g</span><span class="l">protéines</span></div>
+        <div class="m"><span class="v">${Math.round(totalG)} g</span><span class="l">glucides</span></div>
+        <div class="m"><span class="v">${Math.round(totalL)} g</span><span class="l">lipides</span></div>
       </div>
     </div>`;
   for (const r of sel) {
@@ -1769,12 +1769,12 @@ function renderWeekView() {
         </div>
         <div class="week-macros">
           <div class="week-macro"><div class="v">${px}${fmt(tCal)}</div><div class="l">kcal</div></div>
-          <div class="week-macro"><div class="v">${px}${fmt(tP)}</div><div class="l">prot g</div></div>
-          <div class="week-macro"><div class="v">${px}${fmt(tG)}</div><div class="l">gluc g</div></div>
-          <div class="week-macro"><div class="v">${px}${fmt(tL)}</div><div class="l">lip g</div></div>
+          <div class="week-macro"><div class="v">${px}${fmt(tP)} g</div><div class="l">protéines</div></div>
+          <div class="week-macro"><div class="v">${px}${fmt(tG)} g</div><div class="l">glucides</div></div>
+          <div class="week-macro"><div class="v">${px}${fmt(tL)} g</div><div class="l">lipides</div></div>
         </div>
         <div class="week-per-portion">
-          <span class="pp-tag">/ portion :</span> ${px}${ppCal} kcal · ${ppP}P · ${ppG}G · ${ppL}L
+          <span class="pp-tag">/ portion :</span> ${px}${ppCal} kcal · ${ppP} g protéines · ${ppG} g glucides · ${ppL} g lipides
         </div>
         <div class="week-card-footer">
           <span class="week-card-time">${r.tempsCuisson ? '⏱ ' + r.tempsCuisson : ''}</span>
