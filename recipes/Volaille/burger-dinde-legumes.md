@@ -3,7 +3,7 @@ titre: Burger de dinde aux légumes
 portions: 4
 temps_prep: 15 min
 temps_cuisson: 15 min
-tags: [dinde, burger, poêle]
+tags: [burger, poêle]
 certifie_bittle: true
 ---
 

@@ -3,7 +3,7 @@ titre: Boulettes de dinde, sauce moutarde et érable
 portions: 6
 temps_prep: 20 min
 temps_cuisson: 15 min
-tags: [poêle, boulettes, érable]
+tags: [poêle, boulettes]
 certifie_bittle: true
 ---
 

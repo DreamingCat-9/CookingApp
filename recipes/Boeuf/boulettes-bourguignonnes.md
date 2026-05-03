@@ -3,7 +3,7 @@ titre: Boulettes style bourguignon
 portions: 6
 temps_prep: 45 min
 temps_cuisson: 45 min
-tags: [français, four, boulettes, mijoté]
+tags: [français, four, boulettes, mijoteuse]
 certifie_bittle: true
 ---
 

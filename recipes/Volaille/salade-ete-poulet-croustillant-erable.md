@@ -3,7 +3,7 @@ titre: Salade d'été au poulet croustillant piquant à l'érable
 portions: 4
 temps_prep: 40 min
 temps_cuisson: 20 min
-tags: [salade, four, érable]
+tags: [salade, four]
 certifie_bittle: true
 ---
 

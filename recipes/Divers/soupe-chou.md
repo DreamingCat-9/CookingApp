@@ -3,7 +3,7 @@ titre: Soupe au chou
 portions: 8
 temps_prep: 20 min
 temps_cuisson: 40 min
-tags: [soupe, hiver, économique, légumes]
+tags: [soupe, hiver, économique]
 certifie_bittle: true
 ---
 

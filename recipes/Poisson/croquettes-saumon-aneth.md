@@ -3,7 +3,7 @@ titre: Croquettes de saumon à l'aneth
 portions: 6
 temps_prep: 15 min
 temps_cuisson: 30 min
-tags: [poisson, four, saumon, congélateur]
+tags: [four, congélateur]
 certifie_bittle: true
 ---
 

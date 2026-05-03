@@ -3,7 +3,7 @@ titre: Cubain-Mojo
 portions: 5
 temps_prep: 25 min
 temps_cuisson: 40 min
-tags: [cubain, poêle, riz, marinade]
+tags: [cubain, poêle, marinade]
 certifie_bittle: true
 ---
 

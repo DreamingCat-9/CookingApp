@@ -3,7 +3,7 @@ titre: Suprêmes de volaille sauce minute
 portions: 6
 temps_prep: 20 min
 temps_cuisson: 15 min
-tags: [poêle, érable, rapide]
+tags: [poêle, rapide]
 certifie_bittle: true
 ---
 

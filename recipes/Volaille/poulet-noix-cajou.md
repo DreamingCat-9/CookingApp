@@ -3,7 +3,7 @@ titre: Poulet aux noix de cajou
 portions: 5
 temps_prep: 10 min
 temps_cuisson: 1 h
-tags: [poulet, four, asiatique, pilons]
+tags: [four, asiatique]
 certifie_bittle: true
 ---
 

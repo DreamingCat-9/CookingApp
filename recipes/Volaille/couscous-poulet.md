@@ -3,7 +3,7 @@ titre: Couscous au poulet
 portions: 8
 temps_prep: 10 min
 temps_cuisson: 20 min
-tags: [poulet, marocain, ras-el-hanout, casserole]
+tags: [marocain, casserole]
 certifie_bittle: true
 ---
 

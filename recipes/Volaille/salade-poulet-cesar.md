@@ -3,7 +3,7 @@ titre: Salade poulet césar du fit cook
 portions: 4
 temps_prep: 25 min
 temps_cuisson: 1 h
-tags: [salade, four, césar]
+tags: [salade, four]
 certifie_bittle: true
 ---
 

@@ -3,7 +3,7 @@ titre: Bœuf aux légumes (à la mijoteuse)
 portions: 8
 temps_prep: 10 min
 temps_cuisson: 8 h
-tags: [boeuf, mijoteuse, ragoût, hiver]
+tags: [mijoteuse, ragoût, hiver]
 certifie_bittle: true
 ---
 

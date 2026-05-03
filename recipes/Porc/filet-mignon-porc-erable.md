@@ -3,7 +3,7 @@ titre: Filet mignon de porc à l'érable
 portions: 3
 temps_prep: 15 min
 temps_cuisson: 10 min
-tags: [poêle, érable, rapide]
+tags: [poêle, rapide]
 certifie_bittle: true
 ---
 

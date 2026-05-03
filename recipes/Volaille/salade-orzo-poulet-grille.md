@@ -3,7 +3,7 @@ titre: Salade d'orzo au poulet grillé
 portions: 6
 temps_prep: 15 min
 temps_cuisson: 10 min
-tags: [poulet, salade, orzo, lunch]
+tags: [salade, lunch]
 certifie_bittle: true
 ---
 

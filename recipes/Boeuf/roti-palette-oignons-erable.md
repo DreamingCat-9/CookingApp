@@ -3,7 +3,7 @@ titre: Rôti de palette aux oignons et à l'érable à la mijoteuse
 portions: 6
 temps_prep: 20 min
 temps_cuisson: 8 h
-tags: [mijoteuse, érable, rôti]
+tags: [mijoteuse, rôti]
 certifie_bittle: true
 ---
 

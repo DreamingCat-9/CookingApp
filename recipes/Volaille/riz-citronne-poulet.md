@@ -3,7 +3,7 @@ titre: Riz citronné au poulet tout-en-un
 portions: 6
 temps_prep: 15 min
 temps_cuisson: 1 h 10 min
-tags: [four, tout-en-un, citron]
+tags: [four, tout-en-un]
 certifie_bittle: true
 ---
 

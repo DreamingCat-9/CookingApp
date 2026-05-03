@@ -3,7 +3,7 @@ titre: Bagels au air-fryer
 portions: 4
 temps_prep: 
 temps_cuisson: 15 min
-tags: [air-fryer, déjeuner, pain]
+tags: [air-fryer, déjeuner]
 certifie_bittle: true
 ---
 

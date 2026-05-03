@@ -3,7 +3,7 @@ titre: Roulades de poulet aux tomates séchées
 portions: 6
 temps_prep: 10 min
 temps_cuisson: 15 min
-tags: [poulet, poêle, élégant, tomates séchées]
+tags: [poêle]
 certifie_bittle: true
 ---
 

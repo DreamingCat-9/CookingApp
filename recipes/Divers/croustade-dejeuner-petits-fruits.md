@@ -3,7 +3,7 @@ titre: Croustade déjeuner aux petits fruits
 portions: 8
 temps_prep: 5 min
 temps_cuisson: 30 min
-tags: [déjeuner, four, fruits, avoine]
+tags: [déjeuner, four]
 certifie_bittle: true
 ---
 

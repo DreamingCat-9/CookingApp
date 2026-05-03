@@ -3,7 +3,7 @@ titre: Rôti de palette à la mijoteuse (balsamique)
 portions: 8
 temps_prep: 10 min
 temps_cuisson: 5 h
-tags: [boeuf, mijoteuse, balsamique]
+tags: [mijoteuse]
 certifie_bittle: true
 ---
 

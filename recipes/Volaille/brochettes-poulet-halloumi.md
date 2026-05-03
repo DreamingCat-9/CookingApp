@@ -3,7 +3,7 @@ titre: Brochettes de poulet et de halloumi
 portions: 6
 temps_prep: 20 min
 temps_cuisson: 10 min
-tags: [poulet, brochettes, four, moyen-orient, zaatar]
+tags: [brochettes, four, libanais]
 certifie_bittle: true
 ---
 

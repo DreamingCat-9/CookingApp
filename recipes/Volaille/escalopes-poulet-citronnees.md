@@ -3,7 +3,7 @@ titre: Escalopes de poulet citronnées
 portions: 6
 temps_prep: 15 min
 temps_cuisson: 20 min
-tags: [poulet, four, panko, citron]
+tags: [four]
 certifie_bittle: true
 ---
 

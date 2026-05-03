@@ -3,7 +3,7 @@ titre: Côtelettes de porc au four, sauce barbecue express
 portions: 4
 temps_prep: 15 min
 temps_cuisson: 30 min
-tags: [bbq, plaque, four, érable]
+tags: [bbq, plaque, four]
 certifie_bittle: true
 ---
 

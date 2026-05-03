@@ -3,7 +3,7 @@ titre: Boulettes de saucisses à la courgette, orzo au brocoli
 portions: 4
 temps_prep: 20 min
 temps_cuisson: 20 min
-tags: [italien, four, orzo, boulettes]
+tags: [italien, four, boulettes]
 certifie_bittle: true
 ---
 

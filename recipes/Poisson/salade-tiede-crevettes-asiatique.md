@@ -3,7 +3,7 @@ titre: Salade tiède de crevettes à l'asiatique
 portions: 8
 temps_prep: 10 min
 temps_cuisson: 10 min
-tags: [asiatique, salade, fruits de mer]
+tags: [asiatique, salade]
 certifie_bittle: true
 ---
 
