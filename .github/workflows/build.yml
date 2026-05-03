@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'recipes/**'
+      - 'data/**'
       - 'template.html'
       - 'build.py'
   workflow_dispatch:
@@ -21,6 +22,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+
+      - name: Install Python deps
+        run: pip install pyyaml
 
       - name: Build index.html
         run: python build.py
