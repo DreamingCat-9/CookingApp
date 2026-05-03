@@ -15,15 +15,16 @@ nutrition_estimee: true
 ## Ingrédients
 - 6 escalopes de poulet ou de dindon (environ 450 g / 1 lb, voir notes)
 - 500 ml (2 tasses) jeunes épinards
-- 125 ml (1/2 tasse) tomates séchées dans l'huile, égouttées et tranchées
+- 125 ml (1/2 tasse) tomates séchées dans l'huile
 - 125 ml (1/2 tasse) fromage de chèvre non affiné à pâte molle
 - Poivre et sel
 - 5 ml (1 c. à thé) huile de canola
 
 ## Préparation
-1. Déposer les escalopes sur un plan de travail propre et les recouvrir d'épinards. Au centre et sur toute la longueur des escalopes, ajouter les tomates séchées et le fromage en s'assurant que les garnitures ne débordent pas.
-2. Rouler les escalopes sur la longueur. Insérer profondément un cure-dent pour maintenir chaque roulade fermée. Poivrer généreusement et ajouter une pincée de sel.
-3. Dans un grand poêlon antiadhésif, chauffer l'huile à feu moyen. Cuire les roulades 5 minutes sur le premier côté. Retourner et poursuivre la cuisson 5 minutes. Retourner sur le troisième côté et cuire encore 5 minutes. La viande doit être dorée sur toute la surface et cuite à l'intérieur. Pour servir, accompagner de riz, si désiré.
+1. Égoutter et trancher les tomates séchées.
+2. Déposer les escalopes sur un plan de travail propre et les recouvrir d'épinards. Au centre et sur toute la longueur des escalopes, ajouter les tomates séchées et le fromage en s'assurant que les garnitures ne débordent pas.
+3. Rouler les escalopes sur la longueur. Insérer profondément un cure-dent pour maintenir chaque roulade fermée. Poivrer généreusement et ajouter une pincée de sel.
+4. Dans un grand poêlon antiadhésif, chauffer l'huile à feu moyen. Cuire les roulades 5 minutes sur le premier côté. Retourner et poursuivre la cuisson 5 minutes. Retourner sur le troisième côté et cuire encore 5 minutes. La viande doit être dorée sur toute la surface et cuite à l'intérieur. Pour servir, accompagner de riz, si désiré.
 
 ## Notes
 - Se conserve 3 jours au réfrigérateur ou 3 mois au congélateur.
