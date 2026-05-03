@@ -13,26 +13,104 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fdf5e6;
-    --bg-soft: #f8edd9;
-    --panel: #ffffff;
     --text: #2a1810;
     --text-soft: #5a4838;
     --muted: #8a7866;
-    --border: #efe2cf;
-    --orange: #ee6e2c;
-    --orange-deep: #d8541a;
-    --orange-bright: #f5783a;
-    --orange-light: #fde0d0;
-    --orange-pale: #fff1e6;
-    --shadow-sm: 0 2px 8px rgba(180, 110, 50, 0.08);
-    --shadow-md: 0 6px 20px rgba(180, 110, 50, 0.15);
-    --shadow-lg: 0 16px 40px rgba(180, 110, 50, 0.18);
+    --panel: #ffffff;
     --radius: 18px;
     --radius-lg: 24px;
     --radius-pill: 999px;
     --tab-h: 76px;
     --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* ============ Thèmes (couleurs accent + fond) ============ */
+  /* Crème (par défaut) */
+  :root, body.theme-creme {
+    --bg: #fdf5e6;
+    --bg-soft: #f8edd9;
+    --border: #efe2cf;
+    --border-soft: #f5e8d6;
+    --orange: #ee6e2c;
+    --orange-deep: #d8541a;
+    --orange-bright: #f5783a;
+    --orange-light: #fde0d0;
+    --orange-pale: #fff1e6;
+    --accent-rgb: 238, 110, 44;
+    --shadow-sm: 0 2px 8px rgba(180, 110, 50, 0.08);
+    --shadow-md: 0 6px 20px rgba(180, 110, 50, 0.15);
+    --shadow-lg: 0 16px 40px rgba(180, 110, 50, 0.18);
+    --hero-grad: linear-gradient(135deg, #ed5e1f 0%, #f48b3a 100%);
+    --hero-grad-empty: linear-gradient(135deg, #fde0d0 0%, #fef0e0 100%);
+    --detail-grad: linear-gradient(160deg, #ee6e2c 0%, #f5894a 90%);
+    --hero-shadow: 0 18px 40px rgba(220, 90, 30, 0.25);
+    --grad-shadow: 0 12px 28px rgba(220, 90, 30, 0.25);
+  }
+
+  /* Lin et framboise */
+  body.theme-framboise {
+    --bg: #f7f0e6;
+    --bg-soft: #efe5d6;
+    --border: #ecdfc8;
+    --border-soft: #f1e7d4;
+    --orange: #c2185b;
+    --orange-deep: #9d1148;
+    --orange-bright: #d63970;
+    --orange-light: #fadce6;
+    --orange-pale: #fdedf3;
+    --accent-rgb: 194, 24, 91;
+    --shadow-sm: 0 2px 8px rgba(160, 30, 80, 0.08);
+    --shadow-md: 0 6px 20px rgba(160, 30, 80, 0.15);
+    --shadow-lg: 0 16px 40px rgba(160, 30, 80, 0.18);
+    --hero-grad: linear-gradient(135deg, #c2185b 0%, #e94986 100%);
+    --hero-grad-empty: linear-gradient(135deg, #fadce6 0%, #fdedf3 100%);
+    --detail-grad: linear-gradient(160deg, #c2185b 0%, #e94986 90%);
+    --hero-shadow: 0 18px 40px rgba(180, 30, 80, 0.25);
+    --grad-shadow: 0 12px 28px rgba(180, 30, 80, 0.25);
+  }
+
+  /* Beurre et olive */
+  body.theme-olive {
+    --bg: #fef8e8;
+    --bg-soft: #f8eccd;
+    --border: #e8dfb8;
+    --border-soft: #f0e8c4;
+    --orange: #7a8c3a;
+    --orange-deep: #5d6e23;
+    --orange-bright: #97a85d;
+    --orange-light: #dde2bd;
+    --orange-pale: #f0f3dc;
+    --accent-rgb: 122, 140, 58;
+    --shadow-sm: 0 2px 8px rgba(110, 130, 60, 0.08);
+    --shadow-md: 0 6px 20px rgba(110, 130, 60, 0.15);
+    --shadow-lg: 0 16px 40px rgba(110, 130, 60, 0.18);
+    --hero-grad: linear-gradient(135deg, #7a8c3a 0%, #a6b85a 100%);
+    --hero-grad-empty: linear-gradient(135deg, #dde2bd 0%, #f0f3dc 100%);
+    --detail-grad: linear-gradient(160deg, #7a8c3a 0%, #a6b85a 90%);
+    --hero-shadow: 0 18px 40px rgba(110, 130, 60, 0.25);
+    --grad-shadow: 0 12px 28px rgba(110, 130, 60, 0.25);
+  }
+
+  /* Sauge et abricot */
+  body.theme-sauge {
+    --bg: #eef0e6;
+    --bg-soft: #e2e6d4;
+    --border: #d6dac8;
+    --border-soft: #e0e3d2;
+    --orange: #d68a5c;
+    --orange-deep: #b86d3f;
+    --orange-bright: #e29e75;
+    --orange-light: #f5d8c2;
+    --orange-pale: #faece0;
+    --accent-rgb: 214, 138, 92;
+    --shadow-sm: 0 2px 8px rgba(180, 120, 80, 0.08);
+    --shadow-md: 0 6px 20px rgba(180, 120, 80, 0.15);
+    --shadow-lg: 0 16px 40px rgba(180, 120, 80, 0.18);
+    --hero-grad: linear-gradient(135deg, #d68a5c 0%, #e8a785 100%);
+    --hero-grad-empty: linear-gradient(135deg, #f5d8c2 0%, #faece0 100%);
+    --detail-grad: linear-gradient(160deg, #d68a5c 0%, #e8a785 90%);
+    --hero-shadow: 0 18px 40px rgba(180, 120, 80, 0.25);
+    --grad-shadow: 0 12px 28px rgba(180, 120, 80, 0.25);
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; }
@@ -101,7 +179,7 @@
     justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
-    box-shadow: 0 6px 14px rgba(238, 110, 44, 0.35);
+    box-shadow: 0 6px 14px rgba(var(--accent-rgb), 0.35);
     transition: transform 0.12s;
   }
   .icon-btn-circle:active { transform: scale(0.94); }
@@ -154,10 +232,10 @@
   /* ============ Hero card (recettes vue) ============ */
   .hero {
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, #ed5e1f 0%, #f48b3a 100%);
+    background: var(--hero-grad);
     padding: 1.4rem 1.4rem 1rem;
     color: white;
-    box-shadow: 0 18px 40px rgba(220, 90, 30, 0.25);
+    box-shadow: var(--hero-shadow);
     position: relative;
     overflow: hidden;
     margin-bottom: 1.5rem;
@@ -208,7 +286,7 @@
   .hero-cta:active { transform: scale(0.99); }
 
   .hero-empty {
-    background: linear-gradient(135deg, #fde0d0 0%, #fef0e0 100%);
+    background: var(--hero-grad-empty);
     color: var(--text);
     box-shadow: var(--shadow-sm);
   }
@@ -257,7 +335,7 @@
     background: var(--orange);
     border-color: var(--orange);
     color: white;
-    box-shadow: 0 4px 12px rgba(238, 110, 44, 0.35);
+    box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.35);
   }
   .cat-pill.active .count {
     background: rgba(255,255,255,0.25);
@@ -354,7 +432,7 @@
     padding: 0 0 1rem;
   }
   .detail-hero {
-    background: linear-gradient(160deg, #ee6e2c 0%, #f5894a 90%);
+    background: var(--detail-grad);
     color: white;
     padding: 1.25rem 1.25rem 1.5rem;
     position: relative;
@@ -489,7 +567,7 @@
     font-size: 1.15rem;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 3px 8px rgba(238,110,44,0.35);
+    box-shadow: 0 3px 8px rgba(var(--accent-rgb), 0.35);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -676,7 +754,7 @@
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 12px 28px rgba(238,110,44,0.4);
+    box-shadow: 0 12px 28px rgba(var(--accent-rgb), 0.4);
     z-index: 50;
   }
   .detail-cta.in-selection {
@@ -688,12 +766,12 @@
 
   /* ============ Vue Semaine ============ */
   .week-summary {
-    background: linear-gradient(135deg, #ed5e1f 0%, #f48b3a 100%);
+    background: var(--hero-grad);
     color: white;
     border-radius: var(--radius-lg);
     padding: 1.1rem 1.25rem 1.25rem;
     margin-bottom: 1.25rem;
-    box-shadow: 0 12px 28px rgba(220,90,30,0.25);
+    box-shadow: var(--grad-shadow);
   }
   .week-summary-top {
     display: flex;
@@ -882,7 +960,7 @@
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(238,110,44,0.3);
+    box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.3);
   }
   .week-cta:active { transform: scale(0.99); }
 
@@ -968,6 +1046,51 @@
     box-shadow: var(--shadow-sm);
   }
   .profile-action.danger { color: #b91c1c; }
+
+  /* ============ Sélecteur de thème ============ */
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+  .theme-swatch {
+    background: var(--panel);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.7rem 0.6rem 0.65rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s;
+    width: 100%;
+  }
+  .theme-swatch:active { transform: scale(0.98); }
+  .theme-swatch.active {
+    border-color: var(--orange);
+    background: var(--orange-pale);
+  }
+  .swatch-color {
+    width: 100%;
+    height: 36px;
+    border-radius: 10px;
+    display: block;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .swatch-creme     { background: linear-gradient(135deg, #ed5e1f 0%, #f48b3a 100%); }
+  .swatch-framboise { background: linear-gradient(135deg, #c2185b 0%, #e94986 100%); }
+  .swatch-olive     { background: linear-gradient(135deg, #7a8c3a 0%, #a6b85a 100%); }
+  .swatch-sauge     { background: linear-gradient(135deg, #d68a5c 0%, #e8a785 100%); }
+  .swatch-label {
+    font-size: 0.78rem;
+    color: var(--text);
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.15;
+  }
 
   /* ============ Avatar profil ============ */
   .avatar {
@@ -1363,6 +1486,14 @@ function categorize(name) {
 // ---------- State ----------
 const recipes = RECIPES_RAW.map(r => ({ ...r, ...parseRecipe(r.raw) }));
 const STATE_KEY = 'gestion_alimentaire_state_v1';
+const THEME_KEY = 'bittle_theme_v1';
+const THEMES = [
+  { id: 'creme',     label: 'Crème',           color: '#ee6e2c' },
+  { id: 'framboise', label: 'Lin & framboise', color: '#c2185b' },
+  { id: 'olive',     label: 'Beurre & olive',  color: '#7a8c3a' },
+  { id: 'sauge',     label: 'Sauge & abricot', color: '#d68a5c' },
+];
+
 const state = loadState();
 const ui = {
   view: 'recipes',
@@ -1371,7 +1502,19 @@ const ui = {
   searchQuery: '',
   activeCategory: null,
   ingredientChecks: {}, // recipeId -> ingredient idx -> bool (per-recipe checklist on detail)
+  theme: localStorage.getItem(THEME_KEY) || 'creme',
 };
+
+function applyTheme(themeId) {
+  if (!THEMES.find(t => t.id === themeId)) themeId = 'creme';
+  document.body.classList.remove(...THEMES.map(t => 'theme-' + t.id));
+  document.body.classList.add('theme-' + themeId);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  const t = THEMES.find(x => x.id === themeId);
+  if (meta && t) meta.setAttribute('content', t.color);
+  localStorage.setItem(THEME_KEY, themeId);
+  ui.theme = themeId;
+}
 
 function loadState() {
   try {
@@ -1975,6 +2118,16 @@ function renderProfileView() {
       </div>
     </div>
 
+    <p class="hello" style="margin:1rem 0 0.5rem">Apparence</p>
+    <div class="theme-grid">
+      ${THEMES.map(t => `
+        <button class="theme-swatch ${ui.theme === t.id ? 'active' : ''}" data-theme="${t.id}">
+          <span class="swatch-color swatch-${t.id}"></span>
+          <span class="swatch-label">${t.label}</span>
+        </button>
+      `).join('')}
+    </div>
+
     <p class="hello" style="margin:1rem 0 0.5rem">Sauvegarde</p>
     <input type="file" accept="application/json,.json" id="prof-import-file" hidden>
     <button class="profile-action" id="prof-export">📤 Exporter ma sélection (.json)</button>
@@ -1986,6 +2139,12 @@ function renderProfileView() {
     <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1.5rem">Bittle · v0.5 · ${recipes.length} recettes</p>
     <p style="text-align:center;font-size:0.7rem;color:var(--muted);margin-top:0.25rem">Données stockées localement sur cet appareil. <br>Exporte régulièrement pour ne rien perdre.</p>
   `;
+  document.querySelectorAll('.theme-swatch').forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyTheme(btn.dataset.theme);
+      renderProfileView();
+    });
+  });
   document.getElementById('prof-export').addEventListener('click', exportState);
   document.getElementById('prof-import').addEventListener('click', () => {
     document.getElementById('prof-import-file').click();
@@ -2043,6 +2202,7 @@ document.getElementById('deselect-all-btn').addEventListener('click', () => {
 });
 
 // ---------- Init ----------
+applyTheme(ui.theme);
 setGreeting();
 switchView('recipes');
 </script>
