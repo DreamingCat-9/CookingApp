@@ -17,12 +17,12 @@ derniere_fois:
 ### Sauté
 - 450 g (1 lb) bifteck de flanc ou tournedos d'intérieur de ronde
 - 5 ml (1 c. à thé) bicarbonate de soude
-- 450 g (1 lb) brocoli, coupé en bouquets
-- 45 ml (3 c. à soupe) huile végétale, divisée
-- 2 oignons verts émincés, le blanc et le vert séparés
-- 2 gousses d'ail hachées
-- 1 petite carotte, coupée en deux sur la longueur et émincée
-- 15 ml (1 c. à soupe) gingembre frais haché
+- 450 g (1 lb) brocoli
+- 45 ml (3 c. à soupe) huile végétale
+- 2 oignons verts
+- 2 gousses d'ail
+- 1 petite carotte
+- 15 ml (1 c. à soupe) gingembre frais
 - Sel et poivre
 
 ### Sauce
@@ -34,15 +34,16 @@ derniere_fois:
 - 5 ml (1 c. à thé) huile de sésame grillé
 
 ## Préparation
-1. Sur un plan de travail, trancher le bifteck dans le sens contraire du grain de la viande. Dans un bol, mélanger la viande avec le bicarbonate de soude. Laisser macérer 15 minutes (voir notes).
-2. Rincer la viande à l'eau froide, égoutter et éponger à l'aide de papier absorbant. Saler et poivrer.
-3. Entre-temps, dans une casserole d'eau bouillante salée, blanchir le brocoli 2 minutes. Égoutter.
-4. Dans un bol, mélanger au fouet tous les ingrédients de la sauce. Réserver.
-5. Dans un wok ou une grande poêle antiadhésive à feu élevé, cuire la moitié de la viande à la fois 2 minutes de chaque côté dans 15 ml (1 c. à soupe) de l'huile, ou jusqu'à ce qu'elle soit bien dorée. Réserver sur une assiette.
-6. Dans le même wok à feu élevé, cuire le blanc des oignons verts, l'ail, la carotte et le gingembre dans le reste de l'huile 2 minutes en remuant.
-7. Ajouter le brocoli et la sauce. Poursuivre la cuisson jusqu'à ce que la sauce épaississe légèrement.
-8. Remettre la viande dans le wok et bien l'enrober de la sauce.
-9. Dans une grande assiette de service, répartir le bœuf au brocoli. Parsemer du vert des oignons verts. Accompagner de riz au jasmin ou de vermicelles de riz, si désiré.
+1. Couper le brocoli en bouquets. Émincer les oignons verts, séparer le blanc du vert. Hacher l'ail. Couper la carotte en deux sur la longueur, puis l'émincer. Hacher le gingembre.
+2. Sur un plan de travail, trancher le bifteck dans le sens contraire du grain de la viande. Dans un bol, mélanger la viande avec le bicarbonate de soude. Laisser macérer 15 minutes (voir notes).
+3. Rincer la viande à l'eau froide, égoutter et éponger à l'aide de papier absorbant. Saler et poivrer.
+4. Entre-temps, dans une casserole d'eau bouillante salée, blanchir le brocoli 2 minutes. Égoutter.
+5. Dans un bol, mélanger au fouet tous les ingrédients de la sauce. Réserver.
+6. Dans un wok ou une grande poêle antiadhésive à feu élevé, cuire la moitié de la viande à la fois 2 minutes de chaque côté dans le tiers de l'huile, ou jusqu'à ce qu'elle soit bien dorée. Réserver sur une assiette.
+7. Dans le même wok à feu élevé, cuire le blanc des oignons verts, l'ail, la carotte et le gingembre dans le reste de l'huile 2 minutes en remuant.
+8. Ajouter le brocoli et la sauce. Poursuivre la cuisson jusqu'à ce que la sauce épaississe légèrement.
+9. Remettre la viande dans le wok et bien l'enrober de la sauce.
+10. Dans une grande assiette de service, répartir le bœuf au brocoli. Parsemer du vert des oignons verts. Accompagner de riz au jasmin ou de vermicelles de riz, si désiré.
 
 ## Notes
 - Le bicarbonate de soude attendrit la viande lors du temps de macération de 15 min.
