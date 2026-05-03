@@ -987,6 +987,8 @@ function renderNutrition() {
     return;
   }
 
+  // r.calories/proteines/glucides/lipides sont des valeurs PAR PORTION (frontmatter).
+  // Total = par-portion × portions désirées.
   let totalCalories = 0, totalProteines = 0, totalGlucides = 0, totalLipides = 0;
   let totalPortions = 0;
   let recipesWithoutData = [];
@@ -994,13 +996,12 @@ function renderNutrition() {
   for (const r of sel) {
     const wanted = state.selected[r.id].wantedPortions;
     totalPortions += wanted;
-    const factor = wanted / r.portions;
     if (r.calories !== null || r.proteines !== null || r.glucides !== null || r.lipides !== null) {
       if (r.nutritionEstimee) hasEstimated = true;
-      if (r.calories !== null)  totalCalories  += r.calories  * factor;
-      if (r.proteines !== null) totalProteines += r.proteines * factor;
-      if (r.glucides !== null)  totalGlucides  += r.glucides  * factor;
-      if (r.lipides !== null)   totalLipides   += r.lipides   * factor;
+      if (r.calories !== null)  totalCalories  += r.calories  * wanted;
+      if (r.proteines !== null) totalProteines += r.proteines * wanted;
+      if (r.glucides !== null)  totalGlucides  += r.glucides  * wanted;
+      if (r.lipides !== null)   totalLipides   += r.lipides   * wanted;
     } else {
       recipesWithoutData.push(r.titre);
     }
@@ -1133,7 +1134,7 @@ function renderRecipe(r) {
   const metaParts = [`${r.portions} portions`];
   if (r.tempsPrep) metaParts.push(`prép. ${r.tempsPrep}`);
   if (r.tempsCuisson) metaParts.push(`cuisson ${r.tempsCuisson}`);
-  if (r.calories) metaParts.push(`${r.nutritionEstimee ? '≈ ' : ''}${r.calories} cal`);
+  if (r.calories) metaParts.push(`${r.nutritionEstimee ? '≈ ' : ''}${r.calories} cal/portion`);
   meta.innerHTML = metaParts.map(p => `<span>${p}</span>`).join('');
 
   const actions = document.createElement('div');
@@ -1176,7 +1177,7 @@ function showIngredientsModal(r) {
   if (r.portions) metaParts.push(`${r.portions} portions`);
   if (r.tempsPrep) metaParts.push(`prép. ${r.tempsPrep}`);
   if (r.tempsCuisson) metaParts.push(`cuisson ${r.tempsCuisson}`);
-  if (r.calories) metaParts.push(`${r.nutritionEstimee ? '≈ ' : ''}${r.calories} cal`);
+  if (r.calories) metaParts.push(`${r.nutritionEstimee ? '≈ ' : ''}${r.calories} cal/portion`);
   titleWrap.innerHTML = `<h2>${folderIcon(r.folder)} ${r.titre}</h2>` +
     (metaParts.length ? `<div class="modal-meta">${metaParts.join(' · ')}</div>` : '');
   const closeBtn = document.createElement('button');
