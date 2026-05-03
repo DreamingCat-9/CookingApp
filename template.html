@@ -802,6 +802,66 @@
     margin-top: 0.5rem;
     font-style: italic;
   }
+  .nutri-breakdown {
+    margin-top: 1.5rem;
+  }
+  .nutri-breakdown h4 {
+    font-size: 0.95rem;
+    margin: 0 0 0.6rem 0;
+    color: var(--text);
+  }
+  .nutri-breakdown-note {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin: 0 0 0.7rem 0;
+  }
+  .im-row {
+    display: grid;
+    grid-template-columns: 1fr 3rem 3.2rem 2.4rem 2.4rem 2.4rem;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.45rem 0.55rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  .im-row.im-header {
+    font-weight: 600;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.35rem;
+  }
+  .im-row.im-skip {
+    color: var(--muted);
+    font-style: italic;
+  }
+  .im-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+  }
+  .im-name .im-bar {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+    opacity: 0.55;
+  }
+  .im-num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .im-row.im-total {
+    font-weight: 700;
+    border-top: 2px solid var(--border);
+    border-bottom: none;
+    padding-top: 0.55rem;
+  }
 
   /* ============ Bouton flottant CTA détail ============ */
   .detail-cta {
@@ -2132,6 +2192,7 @@ function renderDetailTabContent(r, wanted) {
     const g = r.glucides !== null ? r.glucides * factor : null;
     const l = r.lipides !== null ? r.lipides * factor : null;
     const fmt = v => v ? Math.round(v) : '—';
+    const fmt1 = v => v ? v.toFixed(1) : '—';
     const px = r.nutritionEstimee ? '≈' : '';
     let html = `
       <div class="nutri-grid">
@@ -2142,6 +2203,70 @@ function renderDetailTabContent(r, wanted) {
       </div>
       <p class="nutri-note">Pour ${wanted} portion${wanted > 1 ? 's' : ''}. ${r.nutritionEstimee ? '≈ valeurs estimées (USDA / Santé Canada)' : ''}</p>
     `;
+
+    // Ventilation par ingrédient (depuis macros_par_ingredient embarqué par build.py)
+    if (r.macros_par_ingredient && r.macros_par_ingredient.length) {
+      const portionFactor = wanted / (r.portions || 1);
+      const items = r.macros_par_ingredient
+        .filter(m => m.status === 'ok')
+        .map(m => ({
+          name: m.raw,
+          grams: m.grams * portionFactor,
+          kcal: m.kcal * portionFactor,
+          prot: m.prot * portionFactor,
+          gluc: m.gluc * portionFactor,
+          lip:  m.lip  * portionFactor,
+        }))
+        .sort((a, b) => b.kcal - a.kcal);
+      const totalKcal = items.reduce((s, m) => s + m.kcal, 0) || 1;
+      const tot = items.reduce((s, m) => ({
+        grams: s.grams + m.grams, kcal: s.kcal + m.kcal,
+        prot: s.prot + m.prot, gluc: s.gluc + m.gluc, lip: s.lip + m.lip,
+      }), { grams: 0, kcal: 0, prot: 0, gluc: 0, lip: 0 });
+      const skipped = r.macros_par_ingredient.filter(m => m.status !== 'ok').length;
+      const escapeHtml = s => s.replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+
+      html += `
+        <div class="nutri-breakdown">
+          <h4>Ventilation par ingrédient</h4>
+          <p class="nutri-breakdown-note">Pour ${wanted} portion${wanted > 1 ? 's' : ''}. Trié par calories décroissantes.${skipped ? ` ${skipped} ingrédient${skipped > 1 ? 's' : ''} sans macros (sel, eau, garnitures…)` : ''}</p>
+          <div class="im-row im-header">
+            <span>Ingrédient</span>
+            <span class="im-num">g</span>
+            <span class="im-num">kcal</span>
+            <span class="im-num">P</span>
+            <span class="im-num">G</span>
+            <span class="im-num">L</span>
+          </div>
+          ${items.map(m => {
+            const pctKcal = (m.kcal / totalKcal) * 100;
+            return `
+              <div class="im-row">
+                <span class="im-name" title="${escapeHtml(m.name)}">
+                  ${escapeHtml(m.name)}
+                  <span class="im-bar" style="width:${pctKcal.toFixed(1)}%"></span>
+                </span>
+                <span class="im-num">${fmt(m.grams)}</span>
+                <span class="im-num">${fmt(m.kcal)}</span>
+                <span class="im-num">${fmt1(m.prot)}</span>
+                <span class="im-num">${fmt1(m.gluc)}</span>
+                <span class="im-num">${fmt1(m.lip)}</span>
+              </div>`;
+          }).join('')}
+          <div class="im-row im-total">
+            <span>Total</span>
+            <span class="im-num">${fmt(tot.grams)}</span>
+            <span class="im-num">${fmt(tot.kcal)}</span>
+            <span class="im-num">${fmt1(tot.prot)}</span>
+            <span class="im-num">${fmt1(tot.gluc)}</span>
+            <span class="im-num">${fmt1(tot.lip)}</span>
+          </div>
+        </div>
+      `;
+    }
+
     root.innerHTML = html;
   }
 }
