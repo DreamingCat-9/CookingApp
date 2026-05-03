@@ -1721,14 +1721,68 @@ function renderListView() {
 }
 
 // ---------- Vue Profil ----------
+function exportState() {
+  const data = {
+    app: 'bittle',
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    selected: state.selected,
+    checked: state.checked,
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const date = new Date().toISOString().slice(0, 10);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `bittle-${date}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importStateFromFile(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data || typeof data !== 'object') throw new Error('Format invalide');
+      const sel = data.selected || {};
+      const chk = data.checked || {};
+      const nSel = Object.keys(sel).length;
+      const nChk = Object.keys(chk).length;
+      if (nSel === 0 && nChk === 0) throw new Error('Le fichier ne contient aucune donnée à importer');
+
+      const dateStr = data.exportedAt ? new Date(data.exportedAt).toLocaleDateString('fr-CA') : 'inconnue';
+      const msg = `Importer la sauvegarde du ${dateStr} ?\n\n• ${nSel} recette${nSel > 1 ? 's' : ''} sélectionnée${nSel > 1 ? 's' : ''}\n• ${nChk} item${nChk > 1 ? 's' : ''} coché${nChk > 1 ? 's' : ''}\n\nCela remplacera ta sélection actuelle.`;
+      if (!confirm(msg)) return;
+
+      // Filtre les recettes inconnues (au cas où certaines auraient été supprimées)
+      const knownIds = new Set(recipes.map(r => r.id));
+      const cleanSel = {};
+      let dropped = 0;
+      for (const id in sel) {
+        if (knownIds.has(id)) cleanSel[id] = sel[id];
+        else dropped++;
+      }
+
+      state.selected = cleanSel;
+      state.checked = chk;
+      saveState();
+      switchView('recipes');
+      const note = dropped > 0 ? `\n(${dropped} recette${dropped > 1 ? 's' : ''} introuvable${dropped > 1 ? 's' : ''} ignorée${dropped > 1 ? 's' : ''})` : '';
+      alert('Importation réussie ✓' + note);
+    } catch (err) {
+      alert('Erreur d\'importation : ' + err.message);
+    }
+  };
+  reader.onerror = () => alert('Impossible de lire le fichier.');
+  reader.readAsText(file);
+}
+
 function renderProfileView() {
   const root = document.getElementById('profile-content');
   const sel = selectedRecipes();
-  let totalCal = 0;
-  for (const r of sel) {
-    const w = state.selected[r.id].wantedPortions;
-    if (r.calories !== null) totalCal += r.calories * w;
-  }
   root.innerHTML = `
     <div class="profile-card">
       <p class="hello" style="margin-bottom:0.6rem">Aperçu</p>
@@ -1743,11 +1797,26 @@ function renderProfileView() {
         </div>
       </div>
     </div>
-    <button class="profile-action" id="prof-export">📤 Exporter ma sélection (à venir)</button>
-    <button class="profile-action" id="prof-share">🔗 Partager ma liste (à venir)</button>
+
+    <p class="hello" style="margin:1rem 0 0.5rem">Sauvegarde</p>
+    <input type="file" accept="application/json,.json" id="prof-import-file" hidden>
+    <button class="profile-action" id="prof-export">📤 Exporter ma sélection (.json)</button>
+    <button class="profile-action" id="prof-import">📥 Importer une sauvegarde</button>
+
+    <p class="hello" style="margin:1rem 0 0.5rem">Zone de danger</p>
     <button class="profile-action danger" id="prof-reset">🗑 Tout réinitialiser</button>
-    <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1rem">Bittle · v0.4 · ${recipes.length} recettes</p>
+
+    <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1.5rem">Bittle · v0.5 · ${recipes.length} recettes</p>
+    <p style="text-align:center;font-size:0.7rem;color:var(--muted);margin-top:0.25rem">Données stockées localement sur cet appareil. <br>Exporte régulièrement pour ne rien perdre.</p>
   `;
+  document.getElementById('prof-export').addEventListener('click', exportState);
+  document.getElementById('prof-import').addEventListener('click', () => {
+    document.getElementById('prof-import-file').click();
+  });
+  document.getElementById('prof-import-file').addEventListener('change', (e) => {
+    if (e.target.files && e.target.files.length) importStateFromFile(e.target.files[0]);
+    e.target.value = ''; // reset pour pouvoir réimporter le même fichier
+  });
   document.getElementById('prof-reset').addEventListener('click', () => {
     if (!confirm('Effacer toute la sélection et les cases cochées ?')) return;
     state.selected = {}; state.checked = {}; ui.ingredientChecks = {};
