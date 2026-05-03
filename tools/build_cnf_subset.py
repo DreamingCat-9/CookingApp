@@ -3,27 +3,35 @@
 
 Lit data/ingredients.yml pour identifier les FoodIDs nécessaires, puis extrait
 les valeurs nutritionnelles + facteurs de conversion correspondants depuis les
-CSV CNF placés dans /tmp/cnf/. Écrit data/cnf_foods.json.
+CSV CNF.
 
-Source des CSV CNF (à télécharger une fois dans /tmp/cnf/) :
-  https://raw.githubusercontent.com/STAT231-S24/CanadianNutrient/main/data-raw/
-    FOOD_NAME.csv, NUTRIENT_AMOUNT.csv, NUTRIENT_NAME.csv,
-    CONVERSION_FACTOR.csv, MEASURE_NAME.csv
-
-Le miroir GitHub est dérivé du Fichier canadien des éléments nutritifs (CNF)
-de Santé Canada, version 2015. Voir https://www.canada.ca/fr/sante-canada/
-services/aliments-nutrition/saine-alimentation/donnees-nutritionnelles.html
+Les CSV sont téléchargés automatiquement dans /tmp/cnf/ depuis le miroir GitHub
+STAT231-S24/CanadianNutrient (dérivé du Fichier canadien des éléments
+nutritifs 2015 de Santé Canada). Pour forcer un re-téléchargement, supprimer
+/tmp/cnf/.
 
 Usage : python3 tools/build_cnf_subset.py
 """
 import csv
 import json
 import sys
+import urllib.request
 from pathlib import Path
 
 import yaml
 
 CNF_DIR = Path("/tmp/cnf")
+CNF_FILES = [
+    "FOOD_NAME.csv",
+    "NUTRIENT_AMOUNT.csv",
+    "NUTRIENT_NAME.csv",
+    "CONVERSION_FACTOR.csv",
+    "MEASURE_NAME.csv",
+]
+CNF_BASE_URL = (
+    "https://raw.githubusercontent.com/STAT231-S24/CanadianNutrient/main/data-raw"
+)
+
 REPO = Path(__file__).parent.parent
 ING_YML = REPO / "data" / "ingredients.yml"
 OUT = REPO / "data" / "cnf_foods.json"
@@ -31,9 +39,26 @@ OUT = REPO / "data" / "cnf_foods.json"
 NUTR = {"208": "kcal", "203": "prot", "204": "lip", "205": "gluc"}
 
 
+def ensure_cnf_files():
+    """Télécharge les CSV CNF dans /tmp/cnf/ s'ils sont absents."""
+    CNF_DIR.mkdir(parents=True, exist_ok=True)
+    missing = [f for f in CNF_FILES if not (CNF_DIR / f).exists()]
+    if not missing:
+        return
+    print(f"Téléchargement de {len(missing)} fichier(s) CNF dans {CNF_DIR}...")
+    for fname in missing:
+        url = f"{CNF_BASE_URL}/{fname}"
+        dest = CNF_DIR / fname
+        print(f"  {fname} ...", end="", flush=True)
+        try:
+            urllib.request.urlretrieve(url, dest)
+            print(f" {dest.stat().st_size // 1024} KB")
+        except Exception as e:
+            sys.exit(f"\nErreur lors du téléchargement de {url} : {e}")
+
+
 def main():
-    if not CNF_DIR.exists():
-        sys.exit(f"Erreur : {CNF_DIR} n'existe pas. Voir le docstring du script.")
+    ensure_cnf_files()
     if not ING_YML.exists():
         sys.exit(f"Erreur : {ING_YML} introuvable.")
 
