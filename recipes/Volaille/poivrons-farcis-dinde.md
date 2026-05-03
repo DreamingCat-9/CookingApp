@@ -1,0 +1,35 @@
+---
+titre: Poivrons farcis à la dinde
+portions: 6
+temps_prep: 10 min
+temps_cuisson: 35 min
+tags: [italien, four, farci]
+derniere_fois: 
+---
+
+## Ingrédients
+- 6 poivrons, coupés en deux dans le sens de la longueur et épépinés
+- 45 ml (3 c. à soupe) huile d'olive extra-vierge
+- 3 gousses d'ail, hachées
+- 1/2 oignon jaune, coupé en dés
+- 2 branches de céleri, coupées en dés
+- 450 g (1 lb) dinde hachée
+- 700 ml coulis de tomates
+- 500 ml (2 tasses) jeunes épinards, hachés grossièrement
+- 375 ml (1 1/2 tasse) riz cuit
+- 7,5 ml (1/2 c. à soupe) assaisonnement italien
+- Sel casher et poivre noir moulu, au goût
+- 125 ml (1/2 tasse) fromage Monterey Jack ou cheddar
+- Persil haché, pour garnir
+
+## Préparation
+1. Préchauffer le four à 175 °C (350 °F). Couper les poivrons en deux dans le sens de la longueur et retirer les graines et la membrane.
+2. Arroser les poivrons avec 15 ml (1 c. à soupe) d'huile et frotter l'intérieur et l'extérieur pour bien les enrober. Disposer à l'envers dans deux plats de cuisson ou sur une grande plaque, puis précuire 15 minutes.
+3. Pendant ce temps, faire chauffer les 30 ml (2 c. à soupe) d'huile restantes dans une grande poêle à feu moyen-vif. Faire revenir l'oignon et l'ail environ 2 minutes, jusqu'à ce qu'ils soient légèrement attendris. Ajouter le céleri et cuire environ 2 minutes.
+4. Ajouter la dinde hachée et faire cuire jusqu'à ce qu'elle soit bien dorée, en la défaisant avec une spatule au besoin.
+5. Égoutter l'excédent de liquide, puis incorporer le coulis de tomates, le riz, les épinards, l'assaisonnement italien, le sel et le poivre. Mélanger 1 à 2 minutes, jusqu'à ce que les épinards tombent.
+6. Retirer les poivrons du four et les retourner avec des pinces. Farcir du mélange de dinde, puis parsemer de fromage. Remettre au four et cuire 15 à 20 minutes, ou jusqu'à ce que les poivrons soient tendres.
+7. Avant de servir, garnir de persil frais haché.
+
+## Notes
+- L'étape 4 de la recette originale parlait du « bœuf haché », mais l'ingrédient principal est la dinde — j'ai corrigé.
