@@ -691,12 +691,41 @@
     background: linear-gradient(135deg, #ed5e1f 0%, #f48b3a 100%);
     color: white;
     border-radius: var(--radius-lg);
-    padding: 1.25rem;
+    padding: 1.1rem 1.25rem 1.25rem;
     margin-bottom: 1.25rem;
     box-shadow: 0 12px 28px rgba(220,90,30,0.25);
+  }
+  .week-summary-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    margin-bottom: 0.85rem;
+  }
+  .week-summary-macros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.25);
+  }
+  .week-summary-macros .m {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+  }
+  .week-summary-macros .m .v {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+  .week-summary-macros .m .l {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+    margin-top: 0.15rem;
   }
   .week-summary-num {
     font-family: 'Fraunces', Georgia, serif;
@@ -730,28 +759,75 @@
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 1rem 1.1rem;
+    padding: 0.95rem 1rem 0.85rem;
     box-shadow: var(--shadow-sm);
-    margin-bottom: 0.65rem;
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
+    margin-bottom: 0.7rem;
   }
-  .week-card-body { flex: 1; min-width: 0; }
+  .week-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.65rem;
+  }
   .week-card-title {
     font-family: 'Fraunces', Georgia, serif;
     font-weight: 700;
-    font-size: 1rem;
-    line-height: 1.2;
-    margin: 0 0 0.3rem;
+    font-size: 1.02rem;
+    line-height: 1.25;
+    margin: 0;
+    flex: 1;
+    cursor: pointer;
   }
-  .week-card-meta {
-    font-size: 0.78rem;
+  .week-macros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.35rem;
+    margin-bottom: 0.55rem;
+  }
+  .week-macro {
+    background: var(--orange-pale);
+    border-radius: 10px;
+    padding: 0.45rem 0.2rem;
+    text-align: center;
+  }
+  .week-macro .v {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--orange-deep);
+    line-height: 1;
+  }
+  .week-macro .l {
+    font-size: 0.6rem;
     color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 0.18rem;
+    font-weight: 600;
+  }
+  .week-per-portion {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+    padding-left: 0.1rem;
+  }
+  .week-per-portion .pp-tag {
+    color: var(--text-soft);
+    font-weight: 600;
+  }
+  .week-card-footer {
     display: flex;
-    gap: 0.6rem;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .week-card-time {
+    font-size: 0.75rem;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
   }
   .week-card-controls {
     display: flex;
@@ -780,8 +856,9 @@
     min-width: 22px;
     text-align: center;
     font-weight: 700;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     color: var(--text);
+    padding: 0 0.15rem;
   }
   .week-remove {
     background: transparent;
@@ -789,8 +866,9 @@
     color: var(--muted);
     font-size: 1.4rem;
     line-height: 1;
-    padding: 0.2rem 0.5rem;
+    padding: 0.1rem 0.45rem;
     cursor: pointer;
+    flex-shrink: 0;
   }
   .week-remove:hover { color: var(--orange); }
   .week-cta {
@@ -1655,30 +1733,57 @@ function renderWeekView() {
   }
   let html = `
     <div class="week-summary">
-      <div>
-        <div class="week-summary-num">${sel.length}</div>
-        <div class="week-summary-lbl">recette${sel.length > 1 ? 's' : ''} · ${totalPortions} portion${totalPortions > 1 ? 's' : ''}</div>
+      <div class="week-summary-top">
+        <div>
+          <div class="week-summary-num">${sel.length}</div>
+          <div class="week-summary-lbl">recette${sel.length > 1 ? 's' : ''} · ${totalPortions} portion${totalPortions > 1 ? 's' : ''}</div>
+        </div>
+        <div class="week-stat-block">
+          <div class="v">≈${Math.round(totalCal).toLocaleString('fr-CA')}</div>
+          <div class="l">kcal total</div>
+        </div>
       </div>
-      <div class="week-stat-block">
-        <div class="v">≈${Math.round(totalCal).toLocaleString('fr-CA')}</div>
-        <div class="l">kcal total</div>
+      <div class="week-summary-macros">
+        <div class="m"><span class="v">${Math.round(totalP)}</span><span class="l">prot</span></div>
+        <div class="m"><span class="v">${Math.round(totalG)}</span><span class="l">gluc</span></div>
+        <div class="m"><span class="v">${Math.round(totalL)}</span><span class="l">lip</span></div>
       </div>
     </div>`;
   for (const r of sel) {
     const w = state.selected[r.id].wantedPortions;
-    const cal = r.calories ? Math.round(r.calories * w) : null;
+    const px = r.nutritionEstimee ? '≈' : '';
+    const fmt = v => v ? Math.round(v) : '—';
+    const tCal = r.calories !== null ? r.calories * w : null;
+    const tP   = r.proteines !== null ? r.proteines * w : null;
+    const tG   = r.glucides !== null ? r.glucides * w : null;
+    const tL   = r.lipides !== null ? r.lipides * w : null;
+    const ppCal = r.calories !== null ? r.calories : '—';
+    const ppP   = r.proteines !== null ? r.proteines : '—';
+    const ppG   = r.glucides !== null ? r.glucides : '—';
+    const ppL   = r.lipides !== null ? r.lipides : '—';
     html += `
       <div class="week-card" data-id="${r.id}">
-        <div class="week-card-body" data-action="open">
-          <h3 class="week-card-title">${folderIcon(r.folder)} ${r.titre}</h3>
-          <div class="week-card-meta">${cal ? `≈${cal} kcal` : ''}${r.tempsCuisson ? ' · ⏱ ' + r.tempsCuisson : ''}</div>
+        <div class="week-card-top">
+          <h3 class="week-card-title" data-action="open">${folderIcon(r.folder)} ${r.titre}</h3>
+          <button class="week-remove" data-action="remove">×</button>
         </div>
-        <div class="week-card-controls">
-          <button data-action="dec">−</button>
-          <span class="qty">${w}</span>
-          <button data-action="inc">+</button>
+        <div class="week-macros">
+          <div class="week-macro"><div class="v">${px}${fmt(tCal)}</div><div class="l">kcal</div></div>
+          <div class="week-macro"><div class="v">${px}${fmt(tP)}</div><div class="l">prot g</div></div>
+          <div class="week-macro"><div class="v">${px}${fmt(tG)}</div><div class="l">gluc g</div></div>
+          <div class="week-macro"><div class="v">${px}${fmt(tL)}</div><div class="l">lip g</div></div>
         </div>
-        <button class="week-remove" data-action="remove">×</button>
+        <div class="week-per-portion">
+          <span class="pp-tag">/ portion :</span> ${px}${ppCal} kcal · ${ppP}P · ${ppG}G · ${ppL}L
+        </div>
+        <div class="week-card-footer">
+          <span class="week-card-time">${r.tempsCuisson ? '⏱ ' + r.tempsCuisson : ''}</span>
+          <div class="week-card-controls">
+            <button data-action="dec">−</button>
+            <span class="qty">${w} portion${w > 1 ? 's' : ''}</span>
+            <button data-action="inc">+</button>
+          </div>
+        </div>
       </div>`;
   }
   html += `<button class="week-cta" id="week-list-cta">Voir la liste de courses →</button>`;
