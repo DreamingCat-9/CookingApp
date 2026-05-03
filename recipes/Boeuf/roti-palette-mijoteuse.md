@@ -4,12 +4,6 @@ portions: 15
 temps_prep: 20 min
 temps_cuisson: 8 h
 tags: [mijoteuse, rôti]
-calories: 130
-proteines: 14
-glucides: 4
-lipides: 7
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

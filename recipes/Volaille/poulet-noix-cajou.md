@@ -3,13 +3,7 @@ titre: Poulet aux noix de cajou
 portions: 5
 temps_prep: 10 min
 temps_cuisson: 1 h
-calories: 380
-proteines: 38
-glucides: 25
-lipides: 18
 tags: [poulet, four, asiatique, pilons]
-derniere_fois: 
-nutrition_estimee: true
 certifie_bittle: true
 ---
 

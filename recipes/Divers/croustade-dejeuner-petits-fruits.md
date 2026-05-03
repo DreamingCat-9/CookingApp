@@ -3,13 +3,7 @@ titre: Croustade déjeuner aux petits fruits
 portions: 8
 temps_prep: 5 min
 temps_cuisson: 30 min
-calories: 320
-proteines: 11
-glucides: 55
-lipides: 7
 tags: [déjeuner, four, fruits, avoine]
-derniere_fois: 
-nutrition_estimee: true
 certifie_bittle: true
 ---
 

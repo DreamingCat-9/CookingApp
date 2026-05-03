@@ -4,12 +4,6 @@ portions: 4
 temps_prep: 25 min
 temps_cuisson: 25 min
 tags: [grec, plaque, four]
-calories: 626
-proteines: 60
-glucides: 35
-lipides: 28
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

@@ -4,12 +4,6 @@ portions: 6
 temps_prep: 20 min
 temps_cuisson: 6 min
 tags: [asiatique, salade, poêle, rapide]
-calories: 295
-proteines: 28
-glucides: 18
-lipides: 12
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

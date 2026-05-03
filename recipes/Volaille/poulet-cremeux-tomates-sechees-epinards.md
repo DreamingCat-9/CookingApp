@@ -4,12 +4,6 @@ portions: 4
 temps_prep: 15 min
 temps_cuisson: 20 min
 tags: [italien, poêle, sauce-cremeuse]
-calories: 595
-proteines: 55
-glucides: 12
-lipides: 35
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

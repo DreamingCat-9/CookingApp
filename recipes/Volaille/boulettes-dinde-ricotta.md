@@ -4,12 +4,6 @@ portions: 4
 temps_prep: 20 min
 temps_cuisson: 20 min
 tags: [italien, four, salade]
-calories: 460
-proteines: 35
-glucides: 25
-lipides: 23
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

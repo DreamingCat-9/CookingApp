@@ -4,12 +4,6 @@ portions: 4
 temps_prep: 20 min
 temps_cuisson: 25 min
 tags: [méditerranéen, poêle, four, sauce-cremeuse]
-calories: 490
-proteines: 55
-glucides: 7
-lipides: 29
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

@@ -3,13 +3,7 @@ titre: Salade tiède de crevettes à l'asiatique
 portions: 8
 temps_prep: 10 min
 temps_cuisson: 10 min
-calories: 280
-proteines: 17
-glucides: 32
-lipides: 10
 tags: [asiatique, salade, fruits de mer]
-derniere_fois: 
-nutrition_estimee: true
 certifie_bittle: true
 ---
 

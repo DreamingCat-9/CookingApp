@@ -4,12 +4,6 @@ portions: 6
 temps_prep: 15 min
 temps_cuisson: 15 min
 tags: [asiatique, wok, rapide, sauté]
-calories: 215
-proteines: 25
-glucides: 14
-lipides: 6
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

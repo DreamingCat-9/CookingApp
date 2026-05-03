@@ -4,12 +4,6 @@ portions: 4
 temps_prep: 20 min
 temps_cuisson: 35 min
 tags: [italien, four, farci]
-calories: 305
-proteines: 13
-glucides: 19
-lipides: 17
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

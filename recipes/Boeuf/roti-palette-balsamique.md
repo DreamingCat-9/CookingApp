@@ -3,13 +3,7 @@ titre: Rôti de palette à la mijoteuse (balsamique)
 portions: 8
 temps_prep: 10 min
 temps_cuisson: 5 h
-calories: 230
-proteines: 25
-glucides: 2
-lipides: 14
 tags: [boeuf, mijoteuse, balsamique]
-derniere_fois: 
-nutrition_estimee: true
 certifie_bittle: true
 ---
 

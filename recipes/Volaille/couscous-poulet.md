@@ -3,13 +3,7 @@ titre: Couscous au poulet
 portions: 8
 temps_prep: 10 min
 temps_cuisson: 20 min
-calories: 380
-proteines: 25
-glucides: 55
-lipides: 8
 tags: [poulet, marocain, ras-el-hanout, casserole]
-derniere_fois: 
-nutrition_estimee: true
 certifie_bittle: true
 ---
 

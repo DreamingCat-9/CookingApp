@@ -4,12 +4,6 @@ portions: 4
 temps_prep: 15 min
 temps_cuisson: 30 min
 tags: [bbq, plaque, four, érable]
-calories: 610
-proteines: 50
-glucides: 30
-lipides: 28
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

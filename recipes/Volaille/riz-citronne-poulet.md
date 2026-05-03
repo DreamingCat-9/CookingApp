@@ -4,12 +4,6 @@ portions: 6
 temps_prep: 15 min
 temps_cuisson: 1 h 10 min
 tags: [four, tout-en-un, citron]
-calories: 465
-proteines: 38
-glucides: 40
-lipides: 15
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

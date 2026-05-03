@@ -4,12 +4,6 @@ portions: 4
 temps_prep: 20 min
 temps_cuisson: 25 min
 tags: [asiatique, air-fryer, boulettes]
-calories: 278
-proteines: 25
-glucides: 20
-lipides: 10
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

@@ -4,12 +4,6 @@ portions: 8
 temps_prep: 15 min
 temps_cuisson: 15 min
 tags: [libanais, poêle, rapide]
-calories: 230
-proteines: 35
-glucides: 5
-lipides: 8
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

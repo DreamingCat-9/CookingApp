@@ -3,13 +3,7 @@ titre: Soupe au chou
 portions: 8
 temps_prep: 20 min
 temps_cuisson: 40 min
-calories: 120
-proteines: 5
-glucides: 22
-lipides: 2
 tags: [soupe, hiver, économique, légumes]
-derniere_fois: 
-nutrition_estimee: true
 certifie_bittle: true
 ---
 

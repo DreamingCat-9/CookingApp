@@ -4,12 +4,6 @@ portions: 4
 temps_prep: 40 min
 temps_cuisson: 20 min
 tags: [salade, four, érable]
-calories: 762
-proteines: 55
-glucides: 60
-lipides: 30
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

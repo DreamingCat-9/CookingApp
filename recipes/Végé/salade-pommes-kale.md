@@ -3,13 +3,7 @@ titre: Salade de pommes et de kale
 portions: 6
 temps_prep: 10 min
 temps_cuisson: aucune
-calories: 210
-proteines: 9
-glucides: 27
-lipides: 11
 tags: [végé, salade, lunch]
-derniere_fois: 
-nutrition_estimee: true
 certifie_bittle: true
 ---
 

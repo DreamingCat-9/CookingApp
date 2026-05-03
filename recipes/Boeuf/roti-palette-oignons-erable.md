@@ -4,12 +4,6 @@ portions: 6
 temps_prep: 20 min
 temps_cuisson: 8 h
 tags: [mijoteuse, érable, rôti]
-calories: 511
-proteines: 32
-glucides: 28
-lipides: 18
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 

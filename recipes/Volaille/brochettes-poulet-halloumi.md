@@ -3,13 +3,7 @@ titre: Brochettes de poulet et de halloumi
 portions: 6
 temps_prep: 20 min
 temps_cuisson: 10 min
-calories: 240
-proteines: 23
-glucides: 8
-lipides: 12
 tags: [poulet, brochettes, four, moyen-orient, zaatar]
-derniere_fois: 
-nutrition_estimee: true
 certifie_bittle: true
 ---
 

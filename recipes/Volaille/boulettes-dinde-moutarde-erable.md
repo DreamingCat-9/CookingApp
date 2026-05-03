@@ -4,12 +4,6 @@ portions: 6
 temps_prep: 20 min
 temps_cuisson: 15 min
 tags: [poêle, boulettes, érable]
-calories: 400
-proteines: 28
-glucides: 12
-lipides: 22
-nutrition_estimee: true
-derniere_fois:
 certifie_bittle: true
 ---
 
