@@ -1390,7 +1390,7 @@ function renderDetailView() {
     </div>
     <div class="tab-content" id="detail-tab-content"></div>
     <button class="detail-cta ${sel ? 'in-selection' : ''}" id="detail-cta">
-      ${sel ? '✓ Dans la sélection · Retirer' : '+ Ajouter à la sélection'}
+      ${sel ? `✓ Dans la sélection · Retirer (${wanted} portion${wanted > 1 ? 's' : ''})` : `+ Ajouter ${wanted} portion${wanted > 1 ? 's' : ''} à la sélection`}
     </button>`;
 
   document.getElementById('detail-back').addEventListener('click', () => switchView('recipes'));
@@ -1398,8 +1398,8 @@ function renderDetailView() {
   document.getElementById('port-plus').addEventListener('click', () => adjustPortion(r, 1));
   document.getElementById('detail-cta').addEventListener('click', () => {
     toggleSelection(r);
-    renderDetailView();
     updateBadges();
+    switchView('recipes');
   });
   document.querySelectorAll('.detail-tab').forEach(t => {
     t.addEventListener('click', () => { ui.detailTab = t.dataset.dtab; renderDetailView(); });
