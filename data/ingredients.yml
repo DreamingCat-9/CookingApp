@@ -1,0 +1,1027 @@
+# Mapping canonique français → CNF (Santé Canada)
+#
+# Pour chaque aliment, on définit :
+#   cnf_id   : FoodID dans le CNF (data/cnf_foods.json)
+#   aliases  : liste de chaînes (sans accents, minuscules, sans qty/unit)
+#              que le parser cherchera dans la ligne d'ingrédient
+#   count_g  : (optionnel) grammes par défaut pour "1 unité" sans poids
+#              (ex. "1 oignon" → 110 g)
+#   skip     : (optionnel, true) ignorer cet aliment (macros = 0)
+#
+# Format : YAML simplifié — un parser maison (pas de dépendance PyYAML)
+# le lit. Voir tools/parse_yaml.py.
+
+skip_keywords:
+  - sel
+  - poivre
+  - sel et poivre
+  - poivre et sel
+  - poivre, au goût
+  - sel et poivre, au goût
+  - sel et poivre au goût
+  - sel casher
+  - sel casher et poivre noir moulu, au goût
+  - poivre noir fraîchement moulu
+  - poivre noir concassé
+  - poivre du moulin
+  - eau
+  - eau très chaude
+  - spray de cuisson
+  - huile végétale en vaporisateur
+  - un filet d'huile d'olive
+  - 1 filet d'huile
+  - filet d'huile
+  - feuilles de basilic frais
+  - basilic frais
+  - origan frais, pour garnir
+  - persil ou thym frais
+  - brins d'aneth
+  - feuilles d'origan frais
+  - romarin et thym frais
+  - estragon frais et fleur de sel, pour garnir
+  - ciboulette, au goût
+  - ciboulette
+  - feuilles de laitue ou de chou
+  - pickles
+  - tomate
+  - persil frais (pour garnir)
+  - persil frais
+  - graines de sésame grillées
+  - graines de sésame
+  - sauce piquante sriracha
+  - mayonnaise allégée
+  - sauce à spaghetti
+  - garnir de graines de sésame
+  - garnir d'épices everything bagel
+  - ajouter 1/4 tasse de fromage râpé au mélange
+  - "**cuisson longue** : oignons en fines tranches, carottes en rondelles, céleris tranchés en biseau, pieds de brocoli tranchés"
+  - "**cuisson courte** : pois mange-tout, mini-bok choys tranchés, poivrons en lanières, fleurons de brocoli, chou chinois nappa en fines tranches, oignons verts en tronçons, courgettes tranchées en biseau, fèves germées"
+  - "légumes au choix :"
+
+ingredients:
+  # === Huiles & gras ===
+  huile_olive:
+    cnf_id: 422
+    aliases:
+      - huile d'olive extra vierge
+      - huile d'olive extra-vierge
+      - huile d'olive
+  huile_canola:
+    cnf_id: 451
+    aliases:
+      - huile de canola
+  huile_vegetale:
+    cnf_id: 5510
+    aliases:
+      - huile végétale
+  huile_sesame:
+    cnf_id: 424
+    aliases:
+      - huile de sésame grillé
+      - huile de sésame
+  beurre:
+    cnf_id: 5307
+    aliases:
+      - beurre non salé
+      - beurre
+  creme_35:
+    cnf_id: 138
+    aliases:
+      - crème épaisse
+      - crème 35%
+      - crème à fouetter 35%
+      - crème à fouetter
+  creme_soya:
+    cnf_id: 5241
+    aliases:
+      - crème de soya
+      - crème de soya ou d'avoine de type belsoy
+      - crème de soya belsoy
+      - boisson de soya
+      - lait de soya
+  lait:
+    cnf_id: 61
+    aliases:
+      - lait
+  lait_coco:
+    cnf_id: 2565
+    aliases:
+      - lait de coco en boîte
+      - lait de coco en conserve
+      - lait de coco
+
+  # === Oignons & aromatiques ===
+  oignon_jaune:
+    cnf_id: 2401
+    aliases:
+      - oignon jaune
+      - gros oignon rouge
+      - oignon rouge
+      - petit oignon rouge
+      - petit oignon
+      - gros oignon
+      - oignon
+    count_g: 110  # 1 oignon moyen
+  oignon_vert:
+    cnf_id: 2145
+    aliases:
+      - oignons verts
+      - oignon vert
+    count_g: 15  # 1 oignon vert moyen
+  echalote:
+    cnf_id: 2326
+    aliases:
+      - échalote française
+      - échalote
+      - échalotes françaises
+    count_g: 15
+  ail_gousse:
+    cnf_id: 2394
+    aliases:
+      - gousses d'ail
+      - gousse d'ail
+      - 2 petites gousses d'ail
+      - 1 petite gousse d'ail
+      - petites gousses d'ail
+      - petite gousse d'ail
+      - têtes d'ail
+    count_g: 3   # 1 gousse ≈ 3 g
+  ail_pot:
+    cnf_id: 2394
+    aliases:
+      - ail haché en pot
+      - ail haché
+  gingembre_frais:
+    cnf_id: 2091
+    aliases:
+      - gingembre haché en pot
+      - gingembre frais
+      - gingembre
+
+  # === Légumes ===
+  carotte:
+    cnf_id: 2380
+    aliases:
+      - carottes nantaises
+      - grosses carottes
+      - carotte nantaise
+      - grosse carotte
+      - petite carotte
+      - carottes
+      - carotte
+    count_g: 60  # 1 carotte moyenne
+  celeri:
+    cnf_id: 2386
+    aliases:
+      - branches de céleri
+      - branche de céleri
+      - céleri
+    count_g: 40  # 1 branche moyenne
+  poivron_rouge:
+    cnf_id: 2484
+    aliases:
+      - poivrons rouges
+      - poivron rouge
+    count_g: 120  # 1 poivron moyen
+  poivron_vert:
+    cnf_id: 2413
+    aliases:
+      - poivron vert
+    count_g: 120
+  poivron_jaune:
+    cnf_id: 2344
+    aliases:
+      - poivron jaune
+    count_g: 120
+  poivron_generic:
+    cnf_id: 2484
+    aliases:
+      - poivrons
+      - poivron
+    count_g: 120
+  pomme_de_terre:
+    cnf_id: 2505
+    aliases:
+      - pommes de terre grelots
+      - pommes de terre grelot
+      - pommes de terre
+      - pomme de terre
+    count_g: 30  # 1 grelot
+  brocoli:
+    cnf_id: 2374
+    aliases:
+      - petit brocoli
+      - brocolis
+      - brocoli
+    count_g: 280
+  courgette:
+    cnf_id: 2346
+    aliases:
+      - courgette verte (zucchini) moyenne
+      - courgette verte (zucchini)
+      - courgettes moyennes
+      - courgettes
+      - petite courgette
+      - courgette
+    count_g: 200
+  tomates_cerises:
+    cnf_id: 2460
+    aliases:
+      - tomates cerises
+      - barquette de tomates cerises
+    count_g: 17  # 1 tomate cerise
+  concombre:
+    cnf_id: 4848
+    aliases:
+      - concombres libanais
+      - concombre libanais
+      - concombre
+    count_g: 100  # 1 concombre libanais
+  epinards:
+    cnf_id: 2213
+    aliases:
+      - jeunes pousses d'épinards
+      - jeunes épinards
+      - bébés épinards
+      - épinards
+  laitue_romaine:
+    cnf_id: 2116
+    aliases:
+      - cœur de laitue romaine
+      - laitue romaine
+    count_g: 250  # 1 cœur ou 1/2 laitue
+  laitue_iceberg:
+    cnf_id: 2398
+    aliases:
+      - laitue iceberg
+  asperges:
+    cnf_id: 1990
+    aliases:
+      - botte d'asperges
+      - asperges
+    count_g: 325  # 1 botte standard ≈ 325 g
+  rutabaga:
+    cnf_id: 2444
+    aliases:
+      - petit rutabaga
+      - rutabaga
+      - rutabaga (ou navet)
+    count_g: 600  # 1 rutabaga entier moyen ≈ 1.2kg, donc 1/2 = 600g
+  chou_vert:
+    cnf_id: 2395
+    aliases:
+      - chou vert
+    count_g: 900  # 1/2 chou
+  chou_rouge:
+    cnf_id: 2034
+    aliases:
+      - chou rouge
+    count_g: 900
+  chou_nappa:
+    cnf_id: 2398  # iceberg comme proxy (CNF n'a pas chou nappa direct)
+    aliases:
+      - chou chinois nappa
+      - chou nappa
+    count_g: 800
+  bok_choy:
+    cnf_id: 2398  # proxy
+    aliases:
+      - bébés bok choys
+      - bébé bok choy
+      - bok choy
+      - mini-bok choys
+    count_g: 100
+  kale:
+    cnf_id: 2395
+    aliases:
+      - botte de kale
+      - kale
+    count_g: 200
+  radis:
+    cnf_id: 2443
+    aliases:
+      - radis
+    count_g: 5
+  radicchio:
+    cnf_id: 2345
+    aliases:
+      - petit radicchio
+      - radicchio
+    count_g: 250
+  fenouil:
+    cnf_id: 2350
+    aliases:
+      - fenouil
+    count_g: 234  # 1 fenouil moyen
+  pois_mange_tout:
+    cnf_id: 2408
+    aliases:
+      - pois mange-tout
+    count_g: 4  # 1 pois mange-tout
+  petits_pois:
+    cnf_id: 2151
+    aliases:
+      - petits pois blanchis
+      - petits pois
+  mais_grains:
+    cnf_id: 2391
+    aliases:
+      - maïs en grains surgelés non décongelés
+      - maïs en grains
+      - maïs
+  poireau:
+    cnf_id: 2396
+    aliases:
+      - poireaux tranchés du commerce
+      - poireaux
+      - poireau
+  roquette:
+    cnf_id: 2352
+    aliases:
+      - roquette
+
+  # === Fruits ===
+  citron_jus:
+    cnf_id: 1589
+    aliases:
+      - jus de 1 citron
+      - jus de citron
+      - le jus et le zeste de 1 citron
+      - le jus de 1 citron
+  citron:
+    cnf_id: 1587
+    aliases:
+      - citron bien lavé
+      - citron
+      - citrons
+    count_g: 60  # 1 citron moyen
+  lime_jus:
+    cnf_id: 1594
+    aliases:
+      - jus de 1/2 lime
+      - jus de lime
+  lime:
+    cnf_id: 1593
+    aliases:
+      - lime
+    count_g: 50
+  orange_jus:
+    cnf_id: 1619
+    aliases:
+      - jus d'orange pur
+      - jus d'orange
+      - jus de 3 oranges
+  orange:
+    cnf_id: 1616
+    aliases:
+      - orange
+    count_g: 140
+  pomme:
+    cnf_id: 1696
+    aliases:
+      - pommes honeycrisp ou gala
+      - pomme rouge
+      - pomme honeycrisp
+      - pomme gala
+      - pomme
+    count_g: 180
+  petits_fruits:
+    cnf_id: 1705
+    aliases:
+      - petits fruits surgelés non décongelés
+      - petits fruits surgelés
+      - petits fruits
+  tomates_sechees:
+    cnf_id: 2349
+    aliases:
+      - tomates séchées dans l'huile
+      - tomates séchées
+
+  # === Protéines ===
+  poulet_poitrine:
+    cnf_id: 841
+    aliases:
+      - poitrines de poulet désossées et sans peau
+      - poitrines de poulet désossées, sans la peau
+      - poitrines de poulet désossées
+      - poitrines de poulet, sans la peau
+      - demi-poitrines de poulet désossées et sans peau
+      - demi-poitrines de poulet
+      - escalopes de poulet ou de dindon
+      - escalopes de poulet
+      - poitrines de poulet
+      - poitrine de poulet
+      - poulet cuit
+    count_g: 200  # 1 poitrine moyenne
+  poulet_haut_cuisse:
+    cnf_id: 841  # proxy: pas de match direct, on utilise poitrine
+    aliases:
+      - hauts de cuisse de poulet désossés, sans la peau
+      - hauts de cuisse de poulet
+      - haut de cuisse de poulet
+    count_g: 70
+  poulet_pilon:
+    cnf_id: 841  # proxy
+    aliases:
+      - pilons de poulet sans la peau
+      - pilons de poulet
+    count_g: 70
+  poulet_hache:
+    cnf_id: 815  # proxy: dinde haché crue
+    aliases:
+      - poulet haché
+  dinde_hachee:
+    cnf_id: 815
+    aliases:
+      - dinde hachée extra-maigre
+      - dinde hachée
+  boeuf_palette:
+    cnf_id: 5946
+    aliases:
+      - rôti de palette de bœuf sans os
+      - rôti de palette de boeuf désossé
+      - rôti de palette de bœuf
+      - rôti de palette
+      - cubes de bœuf à ragoût
+  boeuf_flanc:
+    cnf_id: 6022
+    aliases:
+      - bifteck de flanc ou tournedos d'intérieur de ronde
+      - bifteck de flanc
+  boeuf_hache:
+    cnf_id: 2683
+    aliases:
+      - bœuf haché
+      - boeuf haché
+  porc_filet:
+    cnf_id: 1931
+    aliases:
+      - filet de porc
+  porc_cotelette:
+    cnf_id: 1785
+    aliases:
+      - côtelettes de porc désossées
+      - côtelettes de porc
+    count_g: 150
+  saucisse_italienne:
+    cnf_id: 502564
+    aliases:
+      - saucisses italiennes douces ou fortes
+      - saucisses italiennes
+  prosciutto:
+    cnf_id: 502369
+    aliases:
+      - prosciutto
+  lardons:
+    cnf_id: 1979
+    aliases:
+      - lardons
+  saumon_cuit:
+    cnf_id: 3182
+    aliases:
+      - saumon cuit
+  crevettes:
+    cnf_id: 3211
+    aliases:
+      - crevettes nordiques surgelées non décongelées
+      - crevettes nordiques surgelées
+      - crevettes nordiques
+      - crevettes
+
+  # === Œufs & laitiers ===
+  oeuf:
+    cnf_id: 125
+    aliases:
+      - œuf de grande taille
+      - œufs
+      - œuf
+      - oeuf
+    count_g: 50  # 1 œuf
+  yogourt_grec:
+    cnf_id: 502776
+    aliases:
+      - yogourt grec nature 0%
+      - yogourt grec nature
+      - yogourt grec
+  yogourt_nature:
+    cnf_id: 502776  # proxy
+    aliases:
+      - yogourt nature
+
+  # === Fromages ===
+  parmesan:
+    cnf_id: 39
+    aliases:
+      - parmesan fraîchement râpé
+      - parmesan frais râpé
+      - parmesan râpé
+      - parmesan
+  mozzarella:
+    cnf_id: 111
+    aliases:
+      - fromage mozzarella râpé
+      - fromage mozzarella
+      - mozzarella
+  feta:
+    cnf_id: 108
+    aliases:
+      - fromage feta léger
+      - fromage feta
+      - feta
+  ricotta:
+    cnf_id: 44
+    aliases:
+      - fromage ricotta à 5 % m.g.
+      - fromage ricotta
+      - ricotta
+  fromage_chevre:
+    cnf_id: 119  # proxy : cheddar (CNF n'a pas chèvre frais)
+    aliases:
+      - fromage de chèvre non affiné à pâte molle
+      - fromage de chèvre
+      - chèvre
+  halloumi:
+    cnf_id: 108  # proxy : feta
+    aliases:
+      - fromage halloumi
+      - halloumi
+  bocconcini:
+    cnf_id: 111  # proxy : mozzarella
+    aliases:
+      - boules fromage bocconcini de taille cocktail
+      - perles de bocconcini
+      - bocconcini
+    count_g: 10  # 1 boule cocktail ≈ 10 g
+  cheddar:
+    cnf_id: 119
+    aliases:
+      - fromage râpé tex-mex
+      - fromage râpé à l'italienne
+      - fromage monterey jack ou cheddar
+      - fromage cheddar
+      - cheddar
+
+  # === Riz, pâtes, céréales ===
+  riz_blanc_cuit:
+    cnf_id: 4523
+    aliases:
+      - riz cuit
+      - riz blanc cuit
+      - riz à sushi cuit
+  riz_blanc_sec:
+    cnf_id: 4476  # grain court
+    aliases:
+      - riz blanc sec
+      - riz blanc étuvé à grains longs
+      - riz blanc à grains longs
+      - riz blanc
+  riz_sauvage_cuit:
+    cnf_id: 4450
+    aliases:
+      - riz sauvage précuit
+      - riz sauvage cuit
+      - riz sauvage
+  quinoa_cuit:
+    cnf_id: 5917
+    aliases:
+      - quinoa cuit
+  orzo:
+    cnf_id: 4468  # nouilles aux œufs cuites comme proxy
+    aliases:
+      - orzo
+  couscous:
+    cnf_id: 4490
+    aliases:
+      - semoule de blé entier
+      - couscous
+  nouilles_udon:
+    cnf_id: 4468  # proxy : nouilles
+    aliases:
+      - nouilles udon
+      - nouilles asiatiques de blé
+  nouilles_chow_mein:
+    cnf_id: 4459
+    aliases:
+      - nouilles frites chow mein
+  flocons_avoine:
+    cnf_id: 1462
+    aliases:
+      - flocons d'avoine à cuisson rapide
+      - gruau rapide
+      - flocons d'avoine
+  chapelure:
+    cnf_id: 4060
+    aliases:
+      - chapelure de blé entier à l'italienne
+      - chapelure de céréales de riz soufflé sans gluten
+      - chapelure panko
+      - chapelure
+  farine:
+    cnf_id: 4886  # pois chiches : seul match clair
+    aliases:
+      - farine de pois chiches
+  farine_blanche:
+    cnf_id: 1462  # proxy : oat as flour
+    aliases:
+      - farine nutri
+      - farine tout usage
+      - farine
+  farine_amande:
+    cnf_id: 4886  # proxy
+    aliases:
+      - farine d'amande
+  pita:
+    cnf_id: 3709
+    aliases:
+      - pitas de blé entier
+      - pita
+    count_g: 60
+  pain_burger:
+    cnf_id: 3708  # pita blanc proxy
+    aliases:
+      - pains à hamburger
+      - pain à hamburger
+    count_g: 60
+  croute_pizza:
+    cnf_id: 3708  # proxy
+    aliases:
+      - croûtes souples à pizza
+      - croûte à pizza
+    count_g: 200
+
+  # === Légumineuses ===
+  pois_chiches_conserve:
+    cnf_id: 502262
+    aliases:
+      - pois chiches
+      - boîte de pois chiches
+  haricots_noirs_conserve:
+    cnf_id: 502451
+    aliases:
+      - haricots noirs
+      - conserve de haricots noirs
+
+  # === Sauces & condiments ===
+  ketchup:
+    cnf_id: 2494
+    aliases:
+      - ketchup
+  mayonnaise:
+    cnf_id: 531
+    aliases:
+      - mayonnaise allégée
+      - mayonnaise légère
+      - mayonnaise
+  moutarde_dijon:
+    cnf_id: 4970
+    aliases:
+      - moutarde de dijon
+      - moutarde au miel
+  moutarde_ancienne:
+    cnf_id: 4970  # proxy
+    aliases:
+      - moutarde à l'ancienne
+      - moutarde de meaux
+      - moutarde en poudre
+  sauce_soya:
+    cnf_id: 502466
+    aliases:
+      - sauce soya réduite en sodium
+      - sauce soya régulière ou foncée
+      - sauce soya
+      - tamari
+      - sauce tamari
+  sauce_hoisin:
+    cnf_id: 4729
+    aliases:
+      - sauce hoisin sans gluten
+      - sauce hoisin
+  sauce_huitre:
+    cnf_id: 4730
+    aliases:
+      - sauce aux huîtres
+  sauce_sriracha:
+    cnf_id: 1029
+    aliases:
+      - sauce piquante sriracha
+      - sauce sriracha
+      - sriracha
+  sauce_chili:
+    cnf_id: 5354
+    aliases:
+      - sauce chili
+  sauce_worcestershire:
+    cnf_id: 1133
+    aliases:
+      - sauce worcestershire
+      - sauce anglaise
+  sauce_pizza:
+    cnf_id: 2462  # tomate conserve proxy
+    aliases:
+      - sauce à pizza du commerce
+      - sauce à pizza
+      - sauce à spaghetti
+  salsa:
+    cnf_id: 1025
+    aliases:
+      - salsa douce ou piquante
+      - salsa
+  vinaigre_riz:
+    cnf_id: 14  # proxy : blanc
+    aliases:
+      - vinaigre de riz
+  vinaigre_balsamique:
+    cnf_id: 6196
+    aliases:
+      - vinaigre balsamique blanc
+      - vinaigre balsamique
+  vinaigre_cidre:
+    cnf_id: 13
+    aliases:
+      - vinaigre de cidre
+  vinaigre_blanc:
+    cnf_id: 14
+    aliases:
+      - vinaigre de vin blanc
+      - vinaigre de vin rouge
+      - vinaigre de xérès
+      - vinaigre blanc
+      - vinaigre
+  pate_tomate:
+    cnf_id: 2258
+    aliases:
+      - pâte de tomates
+      - pâte de tomate
+  coulis_tomate:
+    cnf_id: 2259
+    aliases:
+      - coulis de tomates
+      - coulis de tomate
+  tomates_dés:
+    cnf_id: 2462
+    aliases:
+      - tomates en dés
+      - tomates en dés sans sel ajouté
+  poivrons_rotis:
+    cnf_id: 2161  # poivron en conserve
+    aliases:
+      - poivrons rôtis bien égouttés
+      - poivrons rôtis
+  fecule_mais:
+    cnf_id: null
+    skip: true
+    aliases:
+      - fécule de maïs
+  bicarbonate:
+    cnf_id: null
+    skip: true
+    aliases:
+      - bicarbonate de soude
+  capres:
+    cnf_id: 4890
+    aliases:
+      - câpres
+  pate_miso:
+    cnf_id: null  # proxy non trouvé
+    skip: true
+    aliases:
+      - pâte de miso
+
+  # === Sucres ===
+  sirop_erable:
+    cnf_id: 4326
+    aliases:
+      - sirop d'érable
+  miel:
+    cnf_id: null  # CNF a plusieurs miel; on utilise un fallback générique
+    skip: true   # 64 cal/c.à.s — accepté à zéro pour v1
+    aliases:
+      - miel du québec
+      - miel
+  cassonade:
+    cnf_id: 4317
+    aliases:
+      - cassonade légèrement tassée
+      - cassonade
+  sucre_blanc:
+    cnf_id: 4318
+    aliases:
+      - sucre blanc
+      - sucre
+  extrait_vanille:
+    cnf_id: null
+    skip: true
+    aliases:
+      - extrait de vanille pur
+      - extrait de vanille
+
+  # === Herbes fraîches ===
+  coriandre_fraiche:
+    cnf_id: 2067
+    aliases:
+      - coriandre fraîche
+      - coriandre
+  persil_frais:
+    cnf_id: 2405
+    aliases:
+      - persil frais
+      - persil
+  basilic_frais_v:
+    cnf_id: 212
+    aliases:
+      - basilic thaï frais
+      - basilic frais
+      - basilic thaï
+  menthe_fraiche:
+    cnf_id: 4724
+    aliases:
+      - menthe fraîche
+      - menthe
+  aneth_frais:
+    cnf_id: 213
+    aliases:
+      - aneth frais
+      - aneth
+  thym_frais:
+    cnf_id: 215
+    aliases:
+      - feuilles de thym frais
+      - branches de thym frais
+      - branche de thym frais
+      - thym frais
+      - thym
+    count_g: 0.5  # 1 branche
+  romarin_frais:
+    cnf_id: 4723
+    aliases:
+      - romarin frais
+      - romarin
+  origan_frais:
+    cnf_id: 195  # proxy : origan moulu
+    aliases:
+      - origan frais
+      - origan
+
+  # === Épices sèches & herbes (mises à zéro car peu d'impact) ===
+  origan_seche:
+    cnf_id: 195
+    aliases:
+      - origan séché
+  thym_seche:
+    cnf_id: 210
+    aliases:
+      - thym séché
+  paprika:
+    cnf_id: 196
+    aliases:
+      - paprika doux
+      - paprika fumé
+      - paprika
+      - assaisonnement cajun
+      - assaisonnement cajun ou tex-mex
+      - épices cajun
+  cumin:
+    cnf_id: 182
+    aliases:
+      - cumin moulu
+      - cumin
+  cayenne:
+    cnf_id: 199
+    aliases:
+      - piment de cayenne moulu
+      - piment de cayenne
+      - cayenne
+  poudre_ail:
+    cnf_id: 188
+    aliases:
+      - poudre d'ail
+  poudre_oignon:
+    cnf_id: 194
+    aliases:
+      - poudre d'oignon
+      - mélange à soupe à l'oignon
+  graines_fenouil:
+    cnf_id: 186
+    aliases:
+      - graines de fenouil
+  clous_girofle:
+    cnf_id: 179
+    aliases:
+      - clous de girofle
+      - clou de girofle
+    count_g: 0.05  # 1 clou ≈ 50 mg
+  graines_coriandre:
+    cnf_id: 181
+    aliases:
+      - graines de coriandre
+  graines_lin:
+    cnf_id: 4528
+    aliases:
+      - graines de lin moulues
+      - graines de lin
+  ciboulette:
+    cnf_id: 2059
+    aliases:
+      - ciboulette
+  herbes_seches_generic:
+    cnf_id: 195  # origan moulu proxy
+    skip: true
+    aliases:
+      - fines herbes séchées
+      - herbes de provence
+      - épices grecques
+      - épices italiennes
+      - épices passe-partout
+      - épices italiennes mélange
+      - assaisonnement grec
+      - assaisonnement italien
+      - assaisonnement ras-el-hanout
+      - épices tarte à la citrouille
+      - cinq-épices moulu
+      - épices everything bagel
+      - flocons de piment fort
+      - feuilles de laurier
+      - laurier
+      - zaatar
+      - pâte de cari tandoori
+  poudre_a_pate:
+    cnf_id: null
+    skip: true
+    aliases:
+      - poudre à pâte
+
+  # === Noix & graines ===
+  arachides:
+    cnf_id: 2548  # à défaut de "arachides nature"
+    aliases:
+      - arachides non salées
+      - arachides
+  noix_cajou:
+    cnf_id: 2546
+    aliases:
+      - noix de cajou naturelles
+      - noix de cajou
+  graines_sesame:
+    cnf_id: 2522
+    aliases:
+      - graines de sésame grillées
+      - graines de sésame
+  graines_citrouille:
+    cnf_id: 2516
+    aliases:
+      - graines de citrouille décortiquées
+      - graines de citrouille
+  beurre_arachides:
+    cnf_id: 3309
+    aliases:
+      - beurre d'arachides
+      - beurre d'arachide
+  beurre_sesame:
+    cnf_id: 2598
+    aliases:
+      - beurre de sésame
+      - tahini
+
+  # === Vins & alcools ===
+  vin_rouge:
+    cnf_id: 2850
+    aliases:
+      - vin rouge
+  vin_blanc:
+    cnf_id: 2852
+    aliases:
+      - vin blanc sec
+      - vin blanc
+
+  # === Bouillons ===
+  bouillon_poulet:
+    cnf_id: 1052  # bouillon poulet eau ajoutée
+    aliases:
+      - bouillon de poulet sans sel ajouté
+      - bouillon de poulet réduit en sodium
+      - bouillon de poulet
+      - concentré de bouillon de poulet liquide
+  bouillon_boeuf:
+    cnf_id: 944
+    aliases:
+      - bouillon de bœuf du commerce réduit en sodium
+      - bouillon de bœuf liquide bovril
+      - bouillon de bœuf
+      - bouillon de boeuf
+
+  # === Divers ===
+  legumes_julienne:
+    cnf_id: null
+    skip: true   # mélange variable, on saute pour v1
+    aliases:
+      - julienne de légumes
+      - sac de légumes surgelés pour la mijoteuse
+      - légumes surgelés pour la mijoteuse
+      - légumes au choix
+      - légumes
+  sans_viande_haché:
+    cnf_id: null
+    skip: true
+    aliases:
+      - sans-viande haché à la mexicaine
+      - sans-viande haché

@@ -1,0 +1,4426 @@
+{
+  "1025": {
+    "gluc": 6.72,
+    "kcal": 29.0,
+    "lip": 0.17,
+    "measures": [
+      {
+        "cf": 1.09467,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.36834,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.16723,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.7367,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.6568,
+        "desc": "60ml",
+        "measure_id": "640"
+      }
+    ],
+    "name_fr": "Sauce, salsa, prête-à-servir",
+    "prot": 1.54
+  },
+  "1029": {
+    "gluc": 1.75,
+    "kcal": 11.0,
+    "lip": 0.37,
+    "measures": [
+      {
+        "cf": 0.95918,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 2.39796,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.04796,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Sauce, piments forts, prête-à-servir",
+    "prot": 0.51
+  },
+  "1052": {
+    "gluc": 0.24,
+    "kcal": 3.0,
+    "lip": 0.02,
+    "measures": [
+      {
+        "cf": 1.0353,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.2942,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 2.5884,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Soupe, bouillon, poulet, conserve, condensée, eau ajoutée",
+    "prot": 0.49
+  },
+  "108": {
+    "gluc": 4.09,
+    "kcal": 264.0,
+    "lip": 21.28,
+    "measures": [
+      {
+        "cf": 0.63398,
+        "desc": "100ml émietté",
+        "measure_id": "344"
+      },
+      {
+        "cf": 1.58495,
+        "desc": "250ml, émietté",
+        "measure_id": "997"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      },
+      {
+        "cf": 0.5,
+        "desc": "50g",
+        "measure_id": "990"
+      }
+    ],
+    "name_fr": "Fromage féta",
+    "prot": 14.21
+  },
+  "111": {
+    "gluc": 2.77,
+    "kcal": 254.0,
+    "lip": 15.92,
+    "measures": [
+      {
+        "cf": 0.5579,
+        "desc": "100ml en dés",
+        "measure_id": "348"
+      },
+      {
+        "cf": 0.4776,
+        "desc": "100ml filamenté",
+        "measure_id": "368"
+      },
+      {
+        "cf": 1.39476,
+        "desc": "250ml, en dés",
+        "measure_id": "994"
+      },
+      {
+        "cf": 1.194,
+        "desc": "250ml, filamenté",
+        "measure_id": "995"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      },
+      {
+        "cf": 0.5,
+        "desc": "50g",
+        "measure_id": "990"
+      }
+    ],
+    "name_fr": "Fromage mozzarella, partiellement écrémé, (52% eau, 16.5% M.G.)",
+    "prot": 24.26
+  },
+  "1133": {
+    "gluc": 19.46,
+    "kcal": 78.0,
+    "lip": 0.0,
+    "measures": [
+      {
+        "cf": 1.1623,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 2.90575,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.05812,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Sauce, worcestershire, prête-à-servir",
+    "prot": 0.0
+  },
+  "119": {
+    "gluc": 1.33,
+    "kcal": 406.0,
+    "lip": 33.82,
+    "measures": [
+      {
+        "cf": 0.5579,
+        "desc": "100ml en dés",
+        "measure_id": "348"
+      },
+      {
+        "cf": 0.4776,
+        "desc": "100ml filamenté",
+        "measure_id": "368"
+      },
+      {
+        "cf": 1.03128,
+        "desc": "100ml fondu",
+        "measure_id": "358"
+      },
+      {
+        "cf": 1.39476,
+        "desc": "250ml, en dés",
+        "measure_id": "994"
+      },
+      {
+        "cf": 1.194,
+        "desc": "250ml, filamenté",
+        "measure_id": "995"
+      },
+      {
+        "cf": 2.57819,
+        "desc": "250ml, fondu",
+        "measure_id": "996"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      },
+      {
+        "cf": 0.5,
+        "desc": "50g",
+        "measure_id": "990"
+      }
+    ],
+    "name_fr": "Fromage cheddar",
+    "prot": 24.04
+  },
+  "125": {
+    "gluc": 0.98,
+    "kcal": 145.0,
+    "lip": 10.01,
+    "measures": [
+      {
+        "cf": 0.5268,
+        "desc": "1 gros oeuf",
+        "measure_id": "142"
+      },
+      {
+        "cf": 0.5813,
+        "desc": "1 oeuf extra gros",
+        "measure_id": "941"
+      },
+      {
+        "cf": 0.6482,
+        "desc": "1 oeuf jumbo",
+        "measure_id": "992"
+      },
+      {
+        "cf": 0.4639,
+        "desc": "1 oeuf moyen",
+        "measure_id": "942"
+      },
+      {
+        "cf": 0.4158,
+        "desc": "1 petit oeuf",
+        "measure_id": "556"
+      },
+      {
+        "cf": 0.3349,
+        "desc": "1 très petit oeuf",
+        "measure_id": "1672"
+      },
+      {
+        "cf": 1.02705,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.28381,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.0536,
+        "desc": "2 oeufs (gros)",
+        "measure_id": "1609"
+      },
+      {
+        "cf": 2.56762,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.5,
+        "desc": "50g",
+        "measure_id": "990"
+      }
+    ],
+    "name_fr": "Oeuf, poule, entier, frais ou congelé, cru",
+    "prot": 11.8
+  },
+  "13": {
+    "gluc": 0.93,
+    "kcal": 22.0,
+    "lip": 0.0,
+    "measures": [
+      {
+        "cf": 1.01437,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.26789,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.15101,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.05068,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Vinaigre, cidre",
+    "prot": 0.0
+  },
+  "138": {
+    "gluc": 2.85,
+    "kcal": 328.0,
+    "lip": 35.0,
+    "measures": [
+      {
+        "cf": 1.00592,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.50719,
+        "desc": "100ml fouetté",
+        "measure_id": "378"
+      },
+      {
+        "cf": 0.15,
+        "desc": "15g",
+        "measure_id": "1467"
+      },
+      {
+        "cf": 0.15088,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 1.26796,
+        "desc": "250ml fouetté",
+        "measure_id": "999"
+      },
+      {
+        "cf": 2.51479,
+        "desc": "250ml liquide (donne 2 tasses fouettée)",
+        "measure_id": "1000"
+      }
+    ],
+    "name_fr": "Crème à fouetter, 35% M.G.",
+    "prot": 2.09
+  },
+  "14": {
+    "gluc": 0.04,
+    "kcal": 18.0,
+    "lip": 0.0,
+    "measures": [
+      {
+        "cf": 1.01437,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.26796,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.15101,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.05068,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Vinaigre, distillé (blanc)",
+    "prot": 0.0
+  },
+  "1462": {
+    "gluc": 68.2,
+    "kcal": 389.0,
+    "lip": 7.0,
+    "measures": [
+      {
+        "cf": 0.4438,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.10946,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.4,
+        "desc": "40g",
+        "measure_id": "1456"
+      },
+      {
+        "cf": 0.332,
+        "desc": "75ml",
+        "measure_id": "641"
+      }
+    ],
+    "name_fr": "Céréale, chaude, avoine (gruau), gros flocons, sèche, Rogers",
+    "prot": 14.2
+  },
+  "1587": {
+    "gluc": 9.32,
+    "kcal": 29.0,
+    "lip": 0.3,
+    "measures": [
+      {
+        "cf": 0.58,
+        "desc": "1 fruit moyen (5.4 cm dia)",
+        "measure_id": "161"
+      },
+      {
+        "cf": 0.84,
+        "desc": "1 gros fruit (6 cm dia)",
+        "measure_id": "144"
+      },
+      {
+        "cf": 0.07,
+        "desc": "1 quartier ou tranche d'un fruit moyen",
+        "measure_id": "1043"
+      },
+      {
+        "cf": 0.89603,
+        "desc": "100ml sections",
+        "measure_id": "617"
+      },
+      {
+        "cf": 1.12003,
+        "desc": "125ml sections",
+        "measure_id": "1037"
+      },
+      {
+        "cf": 2.24007,
+        "desc": "250ml sections",
+        "measure_id": "1038"
+      },
+      {
+        "cf": 0.55,
+        "desc": "55g",
+        "measure_id": "1461"
+      }
+    ],
+    "name_fr": "Citron, cru, sans pelure",
+    "prot": 1.1
+  },
+  "1589": {
+    "gluc": 6.9,
+    "kcal": 22.0,
+    "lip": 0.24,
+    "measures": [
+      {
+        "cf": 1.03128,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.2891,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.15469,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.57819,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.05156,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Citron, jus, frais",
+    "prot": 0.35
+  },
+  "1593": {
+    "gluc": 10.54,
+    "kcal": 30.0,
+    "lip": 0.2,
+    "measures": [
+      {
+        "cf": 0.67,
+        "desc": "1 fruit (5 cm dia)",
+        "measure_id": "115"
+      },
+      {
+        "cf": 0.55,
+        "desc": "55g",
+        "measure_id": "1461"
+      }
+    ],
+    "name_fr": "Lime, crue",
+    "prot": 0.7
+  },
+  "1594": {
+    "gluc": 8.42,
+    "kcal": 25.0,
+    "lip": 0.07,
+    "measures": [
+      {
+        "cf": 1.03973,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.29662,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 2.59932,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.05187,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Lime, jus, frais",
+    "prot": 0.42
+  },
+  "1616": {
+    "gluc": 12.54,
+    "kcal": 49.0,
+    "lip": 0.15,
+    "measures": [
+      {
+        "cf": 1.4,
+        "desc": "1 fruit (7.3 cm dia)",
+        "measure_id": "122"
+      },
+      {
+        "cf": 0.69738,
+        "desc": "100ml sections",
+        "measure_id": "617"
+      },
+      {
+        "cf": 0.87172,
+        "desc": "125ml sections",
+        "measure_id": "1037"
+      },
+      {
+        "cf": 1.4,
+        "desc": "140g",
+        "measure_id": "1457"
+      },
+      {
+        "cf": 1.74345,
+        "desc": "250ml sections",
+        "measure_id": "1038"
+      }
+    ],
+    "name_fr": "Orange, californie, navel, crue",
+    "prot": 0.91
+  },
+  "1619": {
+    "gluc": 10.4,
+    "kcal": 45.0,
+    "lip": 0.2,
+    "measures": [
+      {
+        "cf": 1.04818,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.31023,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 2.62046,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Orange, jus, frais",
+    "prot": 0.7
+  },
+  "1696": {
+    "gluc": 13.81,
+    "kcal": 52.0,
+    "lip": 0.17,
+    "measures": [
+      {
+        "cf": 1.82,
+        "desc": "1 fruit moyen (7cm dia)",
+        "measure_id": "1081"
+      },
+      {
+        "cf": 2.23,
+        "desc": "1 gros fruit (8.3cm dia)",
+        "measure_id": "1082"
+      },
+      {
+        "cf": 1.49,
+        "desc": "1 petit fruit (6.9 cm dia)",
+        "measure_id": "502600"
+      },
+      {
+        "cf": 1.01,
+        "desc": "1 très petit fruit (6.4 cm dia)",
+        "measure_id": "502602"
+      },
+      {
+        "cf": 0.52832,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.46072,
+        "desc": "100ml tranches",
+        "measure_id": "371"
+      },
+      {
+        "cf": 0.6604,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.5759,
+        "desc": "125ml tranches",
+        "measure_id": "971"
+      },
+      {
+        "cf": 1.4,
+        "desc": "140g",
+        "measure_id": "1457"
+      },
+      {
+        "cf": 1.32079,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 1.15179,
+        "desc": "250ml tranches",
+        "measure_id": "979"
+      }
+    ],
+    "name_fr": "Pomme, crue, avec pelure",
+    "prot": 0.26
+  },
+  "1705": {
+    "gluc": 14.49,
+    "kcal": 57.0,
+    "lip": 0.33,
+    "measures": [
+      {
+        "cf": 0.61285,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.76606,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.4,
+        "desc": "140g",
+        "measure_id": "1457"
+      },
+      {
+        "cf": 1.53212,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.68,
+        "desc": "50 baies",
+        "measure_id": "1089"
+      }
+    ],
+    "name_fr": "Bleuet, cru",
+    "prot": 0.74
+  },
+  "1785": {
+    "gluc": 0.0,
+    "kcal": 127.0,
+    "lip": 3.71,
+    "measures": [
+      {
+        "cf": 0.98,
+        "desc": "1 côtelette (151 g)",
+        "measure_id": "47"
+      },
+      {
+        "cf": 1.25,
+        "desc": "125g",
+        "measure_id": "1489"
+      }
+    ],
+    "name_fr": "Porc, longe, milieu (côtelette centre), avec os, maigre, cru",
+    "prot": 21.99
+  },
+  "179": {
+    "gluc": 65.53,
+    "kcal": 274.0,
+    "lip": 13.0,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.43958,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.06594,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.02198,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, clou de girofle, moulu",
+    "prot": 5.97
+  },
+  "181": {
+    "gluc": 54.99,
+    "kcal": 298.0,
+    "lip": 17.77,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.05068,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.01837,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, coriandre (cilantro), graines",
+    "prot": 12.37
+  },
+  "182": {
+    "gluc": 44.24,
+    "kcal": 375.0,
+    "lip": 22.27,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.06081,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.02143,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, cumin, graines",
+    "prot": 17.81
+  },
+  "186": {
+    "gluc": 52.29,
+    "kcal": 345.0,
+    "lip": 14.87,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.05878,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.02041,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, fenouil, graines",
+    "prot": 15.8
+  },
+  "188": {
+    "gluc": 72.73,
+    "kcal": 331.0,
+    "lip": 0.73,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.08514,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.02857,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, ail, poudre",
+    "prot": 16.55
+  },
+  "1931": {
+    "gluc": 0.0,
+    "kcal": 107.0,
+    "lip": 1.3,
+    "measures": [
+      {
+        "cf": 1.25,
+        "desc": "125g",
+        "measure_id": "1489"
+      }
+    ],
+    "name_fr": "Porc, longe, filet, maigre, cru",
+    "prot": 22.2
+  },
+  "194": {
+    "gluc": 79.12,
+    "kcal": 342.0,
+    "lip": 1.04,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.06993,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.02449,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, oignon, poudre",
+    "prot": 10.41
+  },
+  "195": {
+    "gluc": 68.92,
+    "kcal": 265.0,
+    "lip": 4.28,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.04561,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.01531,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, origan, moulu",
+    "prot": 9.0
+  },
+  "196": {
+    "gluc": 53.99,
+    "kcal": 282.0,
+    "lip": 12.89,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.06993,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.02143,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, paprika",
+    "prot": 14.14
+  },
+  "1979": {
+    "gluc": 0.6,
+    "kcal": 498.0,
+    "lip": 39.0,
+    "measures": [
+      {
+        "cf": 0.15,
+        "desc": "15g",
+        "measure_id": "1467"
+      },
+      {
+        "cf": 0.05083,
+        "desc": "15ml miettes",
+        "measure_id": "386"
+      }
+    ],
+    "name_fr": "Porc, salé, bacon en miettes, grillé",
+    "prot": 33.6
+  },
+  "199": {
+    "gluc": 56.63,
+    "kcal": 318.0,
+    "lip": 17.27,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.05372,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.01837,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, piment rouge ou de cayenne",
+    "prot": 12.01
+  },
+  "1990": {
+    "gluc": 3.88,
+    "kcal": 20.0,
+    "lip": 0.12,
+    "measures": [
+      {
+        "cf": 0.2,
+        "desc": "1 grosse tige (18.4cm à 21.6cm long)",
+        "measure_id": "1143"
+      },
+      {
+        "cf": 0.12,
+        "desc": "1 petite tige (12.7cm long. ou moins)",
+        "measure_id": "1141"
+      },
+      {
+        "cf": 0.035,
+        "desc": "1 pointe (5 cm long. et moins)",
+        "measure_id": "1140"
+      },
+      {
+        "cf": 0.16,
+        "desc": "1 tige moyenne (13.3cm à 17.8cm long)",
+        "measure_id": "1142"
+      },
+      {
+        "cf": 0.24,
+        "desc": "1 très grosse tige (22.2cm à 25.4cm long)",
+        "measure_id": "1144"
+      },
+      {
+        "cf": 0.56636,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.70795,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.41589,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.58,
+        "desc": "4 tiges et fleurs",
+        "measure_id": "431"
+      },
+      {
+        "cf": 0.96,
+        "desc": "6 tiges moyennes (13.3cm à 17.8cm long)s",
+        "measure_id": "1473"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Asperge, crue",
+    "prot": 2.2
+  },
+  "2034": {
+    "gluc": 7.37,
+    "kcal": 31.0,
+    "lip": 0.16,
+    "measures": [
+      {
+        "cf": 0.94041,
+        "desc": "1 (0.8cm x 7.6cm dia) + liquide",
+        "measure_id": "456"
+      },
+      {
+        "cf": 0.23,
+        "desc": "1 feuille",
+        "measure_id": "148"
+      },
+      {
+        "cf": 11.34,
+        "desc": "1 gros (14cm dia)",
+        "measure_id": "1154"
+      },
+      {
+        "cf": 8.39,
+        "desc": "1 moyen (12.7cm dia)",
+        "measure_id": "1153"
+      },
+      {
+        "cf": 5.67,
+        "desc": "1 petit (10.2cm dia)",
+        "measure_id": "1152"
+      },
+      {
+        "cf": 0.29586,
+        "desc": "100ml filamenté",
+        "measure_id": "368"
+      },
+      {
+        "cf": 0.37616,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.36983,
+        "desc": "125ml filamenté",
+        "measure_id": "969"
+      },
+      {
+        "cf": 0.4702,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.73965,
+        "desc": "250ml filamenté",
+        "measure_id": "977"
+      },
+      {
+        "cf": 0.9404,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Chou rouge, cru",
+    "prot": 1.43
+  },
+  "2059": {
+    "gluc": 4.35,
+    "kcal": 30.0,
+    "lip": 0.73,
+    "measures": [
+      {
+        "cf": 0.204,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.255,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.03041,
+        "desc": "15ml haché",
+        "measure_id": "387"
+      },
+      {
+        "cf": 0.04,
+        "desc": "4g",
+        "measure_id": "1481"
+      },
+      {
+        "cf": 0.0102,
+        "desc": "5ml haché",
+        "measure_id": "440"
+      }
+    ],
+    "name_fr": "Ciboulette, crue",
+    "prot": 3.27
+  },
+  "2067": {
+    "gluc": 3.67,
+    "kcal": 23.0,
+    "lip": 0.52,
+    "measures": [
+      {
+        "cf": 0.06762,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.08453,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.01014,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.16906,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.04,
+        "desc": "4g",
+        "measure_id": "1481"
+      },
+      {
+        "cf": 0.2,
+        "desc": "9 branches",
+        "measure_id": "1161"
+      }
+    ],
+    "name_fr": "Coriandre (cilantro), crue",
+    "prot": 2.13
+  },
+  "2091": {
+    "gluc": 17.77,
+    "kcal": 80.0,
+    "lip": 0.75,
+    "measures": [
+      {
+        "cf": 0.022,
+        "desc": "1 tranche  (0.3cm 2.5cm dia)",
+        "measure_id": "543"
+      },
+      {
+        "cf": 0.40575,
+        "desc": "100ml tranches",
+        "measure_id": "371"
+      },
+      {
+        "cf": 0.50719,
+        "desc": "125ml tranches",
+        "measure_id": "971"
+      },
+      {
+        "cf": 1.01437,
+        "desc": "250ml tranches",
+        "measure_id": "979"
+      },
+      {
+        "cf": 0.04,
+        "desc": "4g",
+        "measure_id": "1481"
+      },
+      {
+        "cf": 0.234,
+        "desc": "60ml",
+        "measure_id": "640"
+      }
+    ],
+    "name_fr": "Gingembre, racine, crue",
+    "prot": 1.82
+  },
+  "210": {
+    "gluc": 63.94,
+    "kcal": 276.0,
+    "lip": 7.43,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.02737,
+        "desc": "15ml, feuilles",
+        "measure_id": "965"
+      },
+      {
+        "cf": 0.04358,
+        "desc": "15ml, moulu",
+        "measure_id": "963"
+      },
+      {
+        "cf": 0.0102,
+        "desc": "5ml, feuilles",
+        "measure_id": "964"
+      },
+      {
+        "cf": 0.01429,
+        "desc": "5ml, moulu",
+        "measure_id": "962"
+      }
+    ],
+    "name_fr": "Épices, thym, déshydraté",
+    "prot": 9.11
+  },
+  "2116": {
+    "gluc": 3.29,
+    "kcal": 17.0,
+    "lip": 0.3,
+    "measures": [
+      {
+        "cf": 0.1,
+        "desc": "1 feuille",
+        "measure_id": "148"
+      },
+      {
+        "cf": 0.23669,
+        "desc": "100ml filamenté",
+        "measure_id": "368"
+      },
+      {
+        "cf": 0.29586,
+        "desc": "125ml filamenté",
+        "measure_id": "969"
+      },
+      {
+        "cf": 0.59172,
+        "desc": "250ml filamenté",
+        "measure_id": "977"
+      },
+      {
+        "cf": 0.65,
+        "desc": "65g",
+        "measure_id": "1471"
+      }
+    ],
+    "name_fr": "Laitue romaine",
+    "prot": 1.23
+  },
+  "212": {
+    "gluc": 2.65,
+    "kcal": 22.0,
+    "lip": 0.64,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.03043,
+        "desc": "30ml",
+        "measure_id": "428"
+      },
+      {
+        "cf": 0.025,
+        "desc": "5 feuilles",
+        "measure_id": "436"
+      }
+    ],
+    "name_fr": "Basilic, frais",
+    "prot": 3.15
+  },
+  "213": {
+    "gluc": 7.02,
+    "kcal": 43.0,
+    "lip": 1.12,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.03762,
+        "desc": "100ml branches",
+        "measure_id": "1004"
+      },
+      {
+        "cf": 0.09404,
+        "desc": "250ml branches",
+        "measure_id": "1003"
+      },
+      {
+        "cf": 0.01,
+        "desc": "5 branches",
+        "measure_id": "635"
+      }
+    ],
+    "name_fr": "Épices, aneth, frais",
+    "prot": 3.46
+  },
+  "2145": {
+    "gluc": 6.5,
+    "kcal": 34.0,
+    "lip": 0.4,
+    "measures": [
+      {
+        "cf": 0.5283,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Oignon vert (ciboule), cru",
+    "prot": 1.9
+  },
+  "215": {
+    "gluc": 24.45,
+    "kcal": 101.0,
+    "lip": 1.68,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.04,
+        "desc": "1 feuille",
+        "measure_id": "148"
+      },
+      {
+        "cf": 0.02449,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.00816,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, thym, frais",
+    "prot": 5.56
+  },
+  "2151": {
+    "gluc": 13.62,
+    "kcal": 77.0,
+    "lip": 0.4,
+    "measures": [
+      {
+        "cf": 0.60862,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.76078,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.52156,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Pois, petits (verts), congelés, non préparés",
+    "prot": 5.22
+  },
+  "2161": {
+    "gluc": 3.9,
+    "kcal": 18.0,
+    "lip": 0.3,
+    "measures": [
+      {
+        "cf": 0.59172,
+        "desc": "100ml moitiés",
+        "measure_id": "354"
+      },
+      {
+        "cf": 0.73965,
+        "desc": "125ml moitiés",
+        "measure_id": "1007"
+      },
+      {
+        "cf": 1.4793,
+        "desc": "250ml moitiés",
+        "measure_id": "1010"
+      }
+    ],
+    "name_fr": "Poivron vert, conserve, solides et liquide",
+    "prot": 0.8
+  },
+  "2213": {
+    "gluc": 3.63,
+    "kcal": 23.0,
+    "lip": 0.39,
+    "measures": [
+      {
+        "cf": 3.4,
+        "desc": "1 botte",
+        "measure_id": "703"
+      },
+      {
+        "cf": 0.1,
+        "desc": "1 feuille",
+        "measure_id": "148"
+      },
+      {
+        "cf": 0.1268,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.1555,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.31699,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.65,
+        "desc": "65g",
+        "measure_id": "1471"
+      }
+    ],
+    "name_fr": "Épinard, cru",
+    "prot": 2.86
+  },
+  "2258": {
+    "gluc": 18.91,
+    "kcal": 82.0,
+    "lip": 0.47,
+    "measures": [
+      {
+        "cf": 1.16238,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.45298,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.17436,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.90595,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.3487,
+        "desc": "30ml",
+        "measure_id": "428"
+      },
+      {
+        "cf": 0.69743,
+        "desc": "60ml",
+        "measure_id": "640"
+      }
+    ],
+    "name_fr": "Produits à base de tomates, pâte, conserve, sans sel ajouté",
+    "prot": 4.32
+  },
+  "2259": {
+    "gluc": 8.98,
+    "kcal": 38.0,
+    "lip": 0.21,
+    "measures": [
+      {
+        "cf": 1.0567,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.32079,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 2.64159,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.63398,
+        "desc": "60ml",
+        "measure_id": "640"
+      }
+    ],
+    "name_fr": "Produits à base de tomates, conserve, purée, sans sel ajouté",
+    "prot": 1.65
+  },
+  "2326": {
+    "gluc": 16.8,
+    "kcal": 72.0,
+    "lip": 0.1,
+    "measures": [
+      {
+        "cf": 0.67568,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.8446,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.10135,
+        "desc": "15ml haché",
+        "measure_id": "387"
+      },
+      {
+        "cf": 1.72414,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      }
+    ],
+    "name_fr": "Échalote, crue",
+    "prot": 2.5
+  },
+  "2344": {
+    "gluc": 6.32,
+    "kcal": 27.0,
+    "lip": 0.21,
+    "measures": [
+      {
+        "cf": 1.86,
+        "desc": "1 gros (9.5cm long, 7.6cm dia)",
+        "measure_id": "1222"
+      },
+      {
+        "cf": 0.93,
+        "desc": "1/2 gros",
+        "measure_id": "1487"
+      },
+      {
+        "cf": 0.52,
+        "desc": "10 tranches",
+        "measure_id": "704"
+      },
+      {
+        "cf": 0.62975,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.78719,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 1.57439,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Poivron jaune, cru",
+    "prot": 1.0
+  },
+  "2345": {
+    "gluc": 4.48,
+    "kcal": 23.0,
+    "lip": 0.25,
+    "measures": [
+      {
+        "cf": 0.08,
+        "desc": "1 feuille moyenne",
+        "measure_id": "510"
+      },
+      {
+        "cf": 0.16906,
+        "desc": "100ml filamenté",
+        "measure_id": "368"
+      },
+      {
+        "cf": 0.21133,
+        "desc": "125ml filamenté",
+        "measure_id": "969"
+      },
+      {
+        "cf": 0.42265,
+        "desc": "250ml filamenté",
+        "measure_id": "977"
+      },
+      {
+        "cf": 0.65,
+        "desc": "65g",
+        "measure_id": "1471"
+      }
+    ],
+    "name_fr": "Radicchio, cru",
+    "prot": 1.43
+  },
+  "2346": {
+    "gluc": 3.11,
+    "kcal": 21.0,
+    "lip": 0.4,
+    "measures": [
+      {
+        "cf": 0.16,
+        "desc": "1 gros",
+        "measure_id": "139"
+      },
+      {
+        "cf": 0.11,
+        "desc": "1 moyen",
+        "measure_id": "160"
+      },
+      {
+        "cf": 0.66,
+        "desc": "6 moyennes",
+        "measure_id": "443"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Courges d'été, courgettes (zucchini), naines, crues",
+    "prot": 2.71
+  },
+  "2349": {
+    "gluc": 23.33,
+    "kcal": 213.0,
+    "lip": 14.08,
+    "measures": [
+      {
+        "cf": 0.03,
+        "desc": "1 morceau",
+        "measure_id": "196"
+      },
+      {
+        "cf": 0.46492,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.58115,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.1623,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      },
+      {
+        "cf": 0.27895,
+        "desc": "60ml",
+        "measure_id": "640"
+      }
+    ],
+    "name_fr": "Tomate, séchée au soleil, empaquetée dans l'huile, égouttée",
+    "prot": 5.06
+  },
+  "2350": {
+    "gluc": 7.3,
+    "kcal": 31.0,
+    "lip": 0.2,
+    "measures": [
+      {
+        "cf": 2.34,
+        "desc": "1 bulbe",
+        "measure_id": "26"
+      },
+      {
+        "cf": 0.3677,
+        "desc": "100ml tranches",
+        "measure_id": "371"
+      },
+      {
+        "cf": 0.45964,
+        "desc": "125ml tranches",
+        "measure_id": "971"
+      },
+      {
+        "cf": 0.91927,
+        "desc": "250ml tranches",
+        "measure_id": "979"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Fenouil, bulbe, cru",
+    "prot": 1.24
+  },
+  "2352": {
+    "gluc": 3.65,
+    "kcal": 25.0,
+    "lip": 0.66,
+    "measures": [
+      {
+        "cf": 0.02,
+        "desc": "1 feuille",
+        "measure_id": "148"
+      },
+      {
+        "cf": 0.08453,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.10566,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.21133,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.65,
+        "desc": "65g",
+        "measure_id": "1471"
+      }
+    ],
+    "name_fr": "Roquette (arugula), crue",
+    "prot": 2.58
+  },
+  "2374": {
+    "gluc": 6.64,
+    "kcal": 34.0,
+    "lip": 0.37,
+    "measures": [
+      {
+        "cf": 0.31,
+        "desc": "1 fleurette (bouquet)",
+        "measure_id": "499"
+      },
+      {
+        "cf": 1.51,
+        "desc": "1 tige",
+        "measure_id": "563"
+      },
+      {
+        "cf": 0.31,
+        "desc": "1 tige et fleur",
+        "measure_id": "278"
+      },
+      {
+        "cf": 0.37194,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.46492,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.92984,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Brocoli, cru",
+    "prot": 2.82
+  },
+  "2380": {
+    "gluc": 9.58,
+    "kcal": 41.0,
+    "lip": 0.24,
+    "measures": [
+      {
+        "cf": 0.02,
+        "desc": "1 bâtonnet mince",
+        "measure_id": "1247"
+      },
+      {
+        "cf": 0.72,
+        "desc": "1 gros (18.4cm à 21.6cm long)",
+        "measure_id": "1243"
+      },
+      {
+        "cf": 0.07,
+        "desc": "1 gros bâtonnet  (7.6cm long)",
+        "measure_id": "1245"
+      },
+      {
+        "cf": 0.61,
+        "desc": "1 moyen",
+        "measure_id": "160"
+      },
+      {
+        "cf": 0.04,
+        "desc": "1 moyen bâtonnet",
+        "measure_id": "1246"
+      },
+      {
+        "cf": 0.5,
+        "desc": "1 petit (14cm long)",
+        "measure_id": "1244"
+      },
+      {
+        "cf": 0.03,
+        "desc": "1 tranche",
+        "measure_id": "245"
+      },
+      {
+        "cf": 0.54099,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.46492,
+        "desc": "100ml râpé",
+        "measure_id": "353"
+      },
+      {
+        "cf": 0.51564,
+        "desc": "100ml tranches",
+        "measure_id": "371"
+      },
+      {
+        "cf": 0.67625,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.58115,
+        "desc": "125ml râpé",
+        "measure_id": "1241"
+      },
+      {
+        "cf": 0.64455,
+        "desc": "125ml tranches",
+        "measure_id": "971"
+      },
+      {
+        "cf": 1.35249,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 1.1623,
+        "desc": "250ml râpé",
+        "measure_id": "1242"
+      },
+      {
+        "cf": 1.2891,
+        "desc": "250ml tranches",
+        "measure_id": "979"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Carotte, crue",
+    "prot": 0.93
+  },
+  "2386": {
+    "gluc": 2.97,
+    "kcal": 16.0,
+    "lip": 0.17,
+    "measures": [
+      {
+        "cf": 0.04,
+        "desc": "1 bâtonnet (10cm long)",
+        "measure_id": "1253"
+      },
+      {
+        "cf": 0.64,
+        "desc": "1 grosse tige (28cm à 31cm long)",
+        "measure_id": "1237"
+      },
+      {
+        "cf": 0.17,
+        "desc": "1 petite tige (13cm long)",
+        "measure_id": "1239"
+      },
+      {
+        "cf": 0.4,
+        "desc": "1 tige moyenne (19cm à 20cm long)",
+        "measure_id": "1238"
+      },
+      {
+        "cf": 0.52409,
+        "desc": "100ml bâtonnets",
+        "measure_id": "1250"
+      },
+      {
+        "cf": 0.50719,
+        "desc": "100ml en dés",
+        "measure_id": "348"
+      },
+      {
+        "cf": 0.65511,
+        "desc": "125ml bâtonnets",
+        "measure_id": "1251"
+      },
+      {
+        "cf": 0.63398,
+        "desc": "125ml en dés",
+        "measure_id": "968"
+      },
+      {
+        "cf": 1.31023,
+        "desc": "250ml bâtonnets",
+        "measure_id": "1252"
+      },
+      {
+        "cf": 1.26796,
+        "desc": "250ml en dés",
+        "measure_id": "976"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Céleri, cru",
+    "prot": 0.69
+  },
+  "2391": {
+    "gluc": 20.71,
+    "kcal": 88.0,
+    "lip": 0.78,
+    "measures": [
+      {
+        "cf": 0.69315,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.86644,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.73288,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Maïs sucré, jaune, congelé, en grains, non préparé",
+    "prot": 3.02
+  },
+  "2394": {
+    "gluc": 33.06,
+    "kcal": 149.0,
+    "lip": 0.5,
+    "measures": [
+      {
+        "cf": 0.24,
+        "desc": "1 bulbe",
+        "measure_id": "26"
+      },
+      {
+        "cf": 0.03,
+        "desc": "1 gousse",
+        "measure_id": "482"
+      },
+      {
+        "cf": 0.57481,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.71851,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.43702,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.04,
+        "desc": "4g",
+        "measure_id": "1481"
+      },
+      {
+        "cf": 0.02857,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Ail, cru",
+    "prot": 6.36
+  },
+  "2395": {
+    "gluc": 8.75,
+    "kcal": 49.0,
+    "lip": 0.93,
+    "measures": [
+      {
+        "cf": 0.28318,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.35397,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.70795,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Chou vert frisé, cru",
+    "prot": 4.28
+  },
+  "2396": {
+    "gluc": 14.15,
+    "kcal": 61.0,
+    "lip": 0.3,
+    "measures": [
+      {
+        "cf": 0.89,
+        "desc": "1 poireau",
+        "measure_id": "149"
+      },
+      {
+        "cf": 0.06,
+        "desc": "1 tranche",
+        "measure_id": "245"
+      },
+      {
+        "cf": 0.37616,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.4702,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.94041,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Poireaux (bulbe et portion inférieure), crus",
+    "prot": 1.5
+  },
+  "2398": {
+    "gluc": 2.97,
+    "kcal": 14.0,
+    "lip": 0.14,
+    "measures": [
+      {
+        "cf": 0.08,
+        "desc": "1 feuille moyenne",
+        "measure_id": "510"
+      },
+      {
+        "cf": 0.15,
+        "desc": "1 grosse feuille",
+        "measure_id": "1178"
+      },
+      {
+        "cf": 7.55,
+        "desc": "1 grosse tête",
+        "measure_id": "1261"
+      },
+      {
+        "cf": 5.39,
+        "desc": "1 moyenne tête (15cm dia)",
+        "measure_id": "1262"
+      },
+      {
+        "cf": 0.05,
+        "desc": "1 petite feuille",
+        "measure_id": "1177"
+      },
+      {
+        "cf": 3.24,
+        "desc": "1 petite tête",
+        "measure_id": "1263"
+      },
+      {
+        "cf": 0.23247,
+        "desc": "100ml filamenté ou haché",
+        "measure_id": "1175"
+      },
+      {
+        "cf": 0.29059,
+        "desc": "125ml filamenté ou haché",
+        "measure_id": "1173"
+      },
+      {
+        "cf": 0.58118,
+        "desc": "250ml filamenté ou haché",
+        "measure_id": "1174"
+      },
+      {
+        "cf": 0.65,
+        "desc": "65g",
+        "measure_id": "1471"
+      }
+    ],
+    "name_fr": "Laitue iceberg (pommée)",
+    "prot": 0.9
+  },
+  "2401": {
+    "gluc": 9.34,
+    "kcal": 40.0,
+    "lip": 0.1,
+    "measures": [
+      {
+        "cf": 1.5,
+        "desc": "1 gros",
+        "measure_id": "139"
+      },
+      {
+        "cf": 0.38,
+        "desc": "1 grosse tranche ",
+        "measure_id": "1266"
+      },
+      {
+        "cf": 0.14,
+        "desc": "1 moyenne tranche",
+        "measure_id": "163"
+      },
+      {
+        "cf": 0.09,
+        "desc": "1 tranche mince",
+        "measure_id": "1267"
+      },
+      {
+        "cf": 0.6,
+        "desc": "10 rondelles",
+        "measure_id": "337"
+      },
+      {
+        "cf": 0.67625,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.48605,
+        "desc": "100ml tranches",
+        "measure_id": "371"
+      },
+      {
+        "cf": 0.84531,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.60757,
+        "desc": "125ml tranches",
+        "measure_id": "971"
+      },
+      {
+        "cf": 1.69062,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 1.21513,
+        "desc": "250ml tranches",
+        "measure_id": "979"
+      },
+      {
+        "cf": 0.40575,
+        "desc": "60ml haché",
+        "measure_id": "1324"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Oignon, cru",
+    "prot": 1.1
+  },
+  "2405": {
+    "gluc": 6.33,
+    "kcal": 36.0,
+    "lip": 0.79,
+    "measures": [
+      {
+        "cf": 0.1,
+        "desc": "10 branches",
+        "measure_id": "605"
+      },
+      {
+        "cf": 0.25359,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.31699,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.03804,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.63398,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.04,
+        "desc": "4g",
+        "measure_id": "1481"
+      }
+    ],
+    "name_fr": "Persil, frais",
+    "prot": 2.97
+  },
+  "2408": {
+    "gluc": 7.55,
+    "kcal": 42.0,
+    "lip": 0.2,
+    "measures": [
+      {
+        "cf": 0.34,
+        "desc": "10 cosses",
+        "measure_id": "1490"
+      },
+      {
+        "cf": 0.26627,
+        "desc": "100ml entier",
+        "measure_id": "379"
+      },
+      {
+        "cf": 0.4142,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.33284,
+        "desc": "125ml entier",
+        "measure_id": "1011"
+      },
+      {
+        "cf": 0.51775,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.66568,
+        "desc": "250ml entier",
+        "measure_id": "1012"
+      },
+      {
+        "cf": 1.0355,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Pois mange-tout, crus",
+    "prot": 2.8
+  },
+  "2413": {
+    "gluc": 4.64,
+    "kcal": 20.0,
+    "lip": 0.17,
+    "measures": [
+      {
+        "cf": 1.64,
+        "desc": "1 gros",
+        "measure_id": "139"
+      },
+      {
+        "cf": 0.82,
+        "desc": "1/2 moyen",
+        "measure_id": "1501"
+      },
+      {
+        "cf": 0.27,
+        "desc": "10 frites",
+        "measure_id": "339"
+      },
+      {
+        "cf": 0.62975,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.38884,
+        "desc": "100ml tranches",
+        "measure_id": "371"
+      },
+      {
+        "cf": 0.78719,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.48605,
+        "desc": "125ml tranches",
+        "measure_id": "971"
+      },
+      {
+        "cf": 1.57439,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 0.9721,
+        "desc": "250ml tranches",
+        "measure_id": "979"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Poivron vert, cru",
+    "prot": 0.86
+  },
+  "2443": {
+    "gluc": 3.4,
+    "kcal": 16.0,
+    "lip": 0.1,
+    "measures": [
+      {
+        "cf": 0.09,
+        "desc": "1 gros  (2.5cm à 3.2cm dia)",
+        "measure_id": "1283"
+      },
+      {
+        "cf": 0.045,
+        "desc": "1 moyen  (1.9cm à 2.5cm dia)",
+        "measure_id": "1284"
+      },
+      {
+        "cf": 0.02,
+        "desc": "1 petit",
+        "measure_id": "553"
+      },
+      {
+        "cf": 0.01,
+        "desc": "1 tranche",
+        "measure_id": "245"
+      },
+      {
+        "cf": 0.45,
+        "desc": "10 radis",
+        "measure_id": "604"
+      },
+      {
+        "cf": 0.49028,
+        "desc": "100ml tranches",
+        "measure_id": "371"
+      },
+      {
+        "cf": 0.61285,
+        "desc": "125ml tranches",
+        "measure_id": "971"
+      },
+      {
+        "cf": 1.22569,
+        "desc": "250ml tranches",
+        "measure_id": "979"
+      },
+      {
+        "cf": 0.135,
+        "desc": "3 moyens",
+        "measure_id": "1665"
+      },
+      {
+        "cf": 0.65,
+        "desc": "65g",
+        "measure_id": "1471"
+      }
+    ],
+    "name_fr": "Radis, cru",
+    "prot": 0.68
+  },
+  "2444": {
+    "gluc": 8.62,
+    "kcal": 37.0,
+    "lip": 0.16,
+    "measures": [
+      {
+        "cf": 7.72,
+        "desc": "1 gros",
+        "measure_id": "139"
+      },
+      {
+        "cf": 3.86,
+        "desc": "1 moyen",
+        "measure_id": "160"
+      },
+      {
+        "cf": 1.92,
+        "desc": "1 petit",
+        "measure_id": "553"
+      },
+      {
+        "cf": 0.59172,
+        "desc": "100ml en cubes",
+        "measure_id": "347"
+      },
+      {
+        "cf": 0.73965,
+        "desc": "125ml cubes",
+        "measure_id": "1015"
+      },
+      {
+        "cf": 1.4793,
+        "desc": "250ml cubes",
+        "measure_id": "1016"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Rutabaga (chou-navet),  cru",
+    "prot": 1.08
+  },
+  "2460": {
+    "gluc": 3.89,
+    "kcal": 18.0,
+    "lip": 0.2,
+    "measures": [
+      {
+        "cf": 1.82,
+        "desc": "1 gros entier (7.6cm dia)",
+        "measure_id": "1298"
+      },
+      {
+        "cf": 1.23,
+        "desc": "1 moyen entier (6.6cm dia)",
+        "measure_id": "1299"
+      },
+      {
+        "cf": 0.91,
+        "desc": "1 petit entier (6cm dia)",
+        "measure_id": "1300"
+      },
+      {
+        "cf": 0.31,
+        "desc": "1 quartier (1/4 de tomate moyenne)",
+        "measure_id": "1301"
+      },
+      {
+        "cf": 0.17,
+        "desc": "1 tomate cerise",
+        "measure_id": "479"
+      },
+      {
+        "cf": 0.62,
+        "desc": "1 tomate italienne",
+        "measure_id": "1296"
+      },
+      {
+        "cf": 0.62,
+        "desc": "1 tomate oblongue",
+        "measure_id": "1297"
+      },
+      {
+        "cf": 0.76078,
+        "desc": "100ml haché ou tranché",
+        "measure_id": "1290"
+      },
+      {
+        "cf": 0.62975,
+        "desc": "100ml tomates cerises",
+        "measure_id": "1293"
+      },
+      {
+        "cf": 0.95097,
+        "desc": "125ml haché ou tranché",
+        "measure_id": "1291"
+      },
+      {
+        "cf": 0.78719,
+        "desc": "125ml tomates cerises",
+        "measure_id": "1294"
+      },
+      {
+        "cf": 1.90194,
+        "desc": "250ml haché ou tranché",
+        "measure_id": "1292"
+      },
+      {
+        "cf": 1.57439,
+        "desc": "250ml tomates cerises",
+        "measure_id": "1295"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Tomate, rouge, mûre, crue, moyenne durant toute l'année",
+    "prot": 0.88
+  },
+  "2462": {
+    "gluc": 3.47,
+    "kcal": 16.0,
+    "lip": 0.25,
+    "measures": [
+      {
+        "cf": 1.64,
+        "desc": "1 gros",
+        "measure_id": "139"
+      },
+      {
+        "cf": 1.11,
+        "desc": "1 moyen",
+        "measure_id": "160"
+      },
+      {
+        "cf": 0.82,
+        "desc": "1 petit",
+        "measure_id": "553"
+      },
+      {
+        "cf": 1.01437,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.26796,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 2.53593,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Tomate, rouge, mûre, conserve, entière",
+    "prot": 0.79
+  },
+  "2484": {
+    "gluc": 6.03,
+    "kcal": 31.0,
+    "lip": 0.3,
+    "measures": [
+      {
+        "cf": 0.1,
+        "desc": "1 anneau  (7.6cm dia, 0.6cm épaisseur)",
+        "measure_id": "1303"
+      },
+      {
+        "cf": 1.64,
+        "desc": "1 gros (9.5cm long, 7.6cm dia)",
+        "measure_id": "1222"
+      },
+      {
+        "cf": 1.19,
+        "desc": "1 moyen  (7cm long, 6.4cm dia)",
+        "measure_id": "1302"
+      },
+      {
+        "cf": 0.74,
+        "desc": "1 petit",
+        "measure_id": "553"
+      },
+      {
+        "cf": 0.595,
+        "desc": "1/2 moyen",
+        "measure_id": "1501"
+      },
+      {
+        "cf": 0.62975,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.38884,
+        "desc": "100ml tranches",
+        "measure_id": "371"
+      },
+      {
+        "cf": 0.78719,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.48605,
+        "desc": "125ml tranches",
+        "measure_id": "971"
+      },
+      {
+        "cf": 1.57439,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 0.9721,
+        "desc": "250ml tranches",
+        "measure_id": "979"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Poivron rouge, cru",
+    "prot": 0.99
+  },
+  "2494": {
+    "gluc": 27.4,
+    "kcal": 101.0,
+    "lip": 0.1,
+    "measures": [
+      {
+        "cf": 0.09,
+        "desc": "1 paquet (individuel)",
+        "measure_id": "801"
+      },
+      {
+        "cf": 1.01437,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.26796,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.15203,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.53593,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Tomates, ketchup (catsup)",
+    "prot": 1.04
+  },
+  "2505": {
+    "gluc": 17.47,
+    "kcal": 77.0,
+    "lip": 0.09,
+    "measures": [
+      {
+        "cf": 3.69,
+        "desc": "1 gros (7.6cm à 10.8cm dia)",
+        "measure_id": "1274"
+      },
+      {
+        "cf": 2.13,
+        "desc": "1 moyen (5.7cm à 8.3cm dia)",
+        "measure_id": "1275"
+      },
+      {
+        "cf": 1.7,
+        "desc": "1 petit (4.4cm à 6.4cm dia)",
+        "measure_id": "1276"
+      },
+      {
+        "cf": 1.5,
+        "desc": "1 pomme de terre (6.3cm dia)",
+        "measure_id": "218"
+      },
+      {
+        "cf": 0.63398,
+        "desc": "100ml en dés",
+        "measure_id": "348"
+      },
+      {
+        "cf": 1.1,
+        "desc": "110g",
+        "measure_id": "1482"
+      },
+      {
+        "cf": 0.79248,
+        "desc": "125ml en dés",
+        "measure_id": "968"
+      },
+      {
+        "cf": 1.58495,
+        "desc": "250ml en dés",
+        "measure_id": "976"
+      }
+    ],
+    "name_fr": "Pomme de terre, chair et pelure, crue",
+    "prot": 2.02
+  },
+  "2516": {
+    "gluc": 10.71,
+    "kcal": 559.0,
+    "lip": 49.05,
+    "measures": [
+      {
+        "cf": 0.19965,
+        "desc": "100 graines / noix",
+        "measure_id": "609"
+      },
+      {
+        "cf": 0.58326,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.72908,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      },
+      {
+        "cf": 0.34996,
+        "desc": "60ml",
+        "measure_id": "640"
+      }
+    ],
+    "name_fr": "Graines, citrouille et courge, graines, déshydratées",
+    "prot": 30.23
+  },
+  "2522": {
+    "gluc": 26.04,
+    "kcal": 567.0,
+    "lip": 48.0,
+    "measures": [
+      {
+        "cf": 0.541,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.67247,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.08115,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      },
+      {
+        "cf": 0.3246,
+        "desc": "60ml",
+        "measure_id": "640"
+      }
+    ],
+    "name_fr": "Graines, sésame, graines, grillées, décortiquées",
+    "prot": 16.96
+  },
+  "2546": {
+    "gluc": 32.69,
+    "kcal": 574.0,
+    "lip": 46.35,
+    "measures": [
+      {
+        "cf": 0.57904,
+        "desc": "100ml entiers ou moitiés",
+        "measure_id": "1319"
+      },
+      {
+        "cf": 0.7238,
+        "desc": "125ml entiers ou moitiés",
+        "measure_id": "1321"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      },
+      {
+        "cf": 0.34742,
+        "desc": "60ml entiers ou moitiés",
+        "measure_id": "1320"
+      }
+    ],
+    "name_fr": "Noix, noix d'acajou (cajous, anacardes), rôties à sec",
+    "prot": 15.31
+  },
+  "2548": {
+    "gluc": 27.57,
+    "kcal": 587.0,
+    "lip": 49.41,
+    "measures": [
+      {
+        "cf": 1.08108,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.35135,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.16216,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.32432,
+        "desc": "30ml",
+        "measure_id": "428"
+      }
+    ],
+    "name_fr": "Noix, beurre d'acajou (cajous, anacardes), nature",
+    "prot": 17.56
+  },
+  "2565": {
+    "gluc": 2.81,
+    "kcal": 197.0,
+    "lip": 21.33,
+    "measures": [
+      {
+        "cf": 0.9552,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.194,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.15203,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.57312,
+        "desc": "60ml",
+        "measure_id": "640"
+      }
+    ],
+    "name_fr": "Noix, lait de noix de coco (liquide de la noix râpée et eau), conserve",
+    "prot": 2.02
+  },
+  "2598": {
+    "gluc": 17.89,
+    "kcal": 607.0,
+    "lip": 56.44,
+    "measures": [
+      {
+        "cf": 0.94595,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.18243,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.14189,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.28378,
+        "desc": "30ml",
+        "measure_id": "428"
+      }
+    ],
+    "name_fr": "Graines, beurre de sésame, tahini, graines non rôties",
+    "prot": 17.95
+  },
+  "2683": {
+    "gluc": 0.0,
+    "kcal": 207.0,
+    "lip": 13.68,
+    "measures": [
+      {
+        "cf": 1.0,
+        "desc": "100g",
+        "measure_id": "1455"
+      }
+    ],
+    "name_fr": "Boeuf, haché, maigre, cru",
+    "prot": 19.58
+  },
+  "2850": {
+    "gluc": 2.61,
+    "kcal": 85.0,
+    "lip": 0.0,
+    "measures": [
+      {
+        "cf": 0.99763,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.24704,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.49645,
+        "desc": "150ml",
+        "measure_id": "388"
+      }
+    ],
+    "name_fr": "Alcoolisé, vin de table, rouge (11,5% alcool par volume)",
+    "prot": 0.07
+  },
+  "2852": {
+    "gluc": 2.6,
+    "kcal": 82.0,
+    "lip": 0.0,
+    "measures": [
+      {
+        "cf": 0.99763,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.24704,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.49645,
+        "desc": "150ml",
+        "measure_id": "388"
+      }
+    ],
+    "name_fr": "Alcoolisé, vin de table, blanc (11,5% alcool par volume)",
+    "prot": 0.07
+  },
+  "3182": {
+    "gluc": 0.0,
+    "kcal": 208.0,
+    "lip": 13.42,
+    "measures": [
+      {
+        "cf": 1.98,
+        "desc": "1/2 filet",
+        "measure_id": "583"
+      },
+      {
+        "cf": 1.25,
+        "desc": "125g",
+        "measure_id": "1489"
+      }
+    ],
+    "name_fr": "Poisson, saumon, atlantique, élevage, cru",
+    "prot": 20.42
+  },
+  "3211": {
+    "gluc": 0.91,
+    "kcal": 71.0,
+    "lip": 1.01,
+    "measures": [
+      {
+        "cf": 0.07,
+        "desc": "1 gros",
+        "measure_id": "139"
+      },
+      {
+        "cf": 1.25,
+        "desc": "125g",
+        "measure_id": "1489"
+      }
+    ],
+    "name_fr": "Crustacés, crevette, espèces diverses, crues",
+    "prot": 13.61
+  },
+  "3309": {
+    "gluc": 21.57,
+    "kcal": 589.0,
+    "lip": 49.94,
+    "measures": [
+      {
+        "cf": 1.09045,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.15,
+        "desc": "15g",
+        "measure_id": "1467"
+      },
+      {
+        "cf": 2.72612,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.32715,
+        "desc": "30ml",
+        "measure_id": "428"
+      }
+    ],
+    "name_fr": "Beurre d'arachides croquant, gras, sucre et sel ajoutés",
+    "prot": 24.06
+  },
+  "3708": {
+    "gluc": 55.7,
+    "kcal": 275.0,
+    "lip": 1.2,
+    "measures": [
+      {
+        "cf": 0.3,
+        "desc": "1/2 pita (16.5cm dia)",
+        "measure_id": "1509"
+      },
+      {
+        "cf": 0.5,
+        "desc": "50g",
+        "measure_id": "990"
+      }
+    ],
+    "name_fr": "Pain, pita, blanc",
+    "prot": 9.1
+  },
+  "3709": {
+    "gluc": 55.0,
+    "kcal": 266.0,
+    "lip": 2.6,
+    "measures": [
+      {
+        "cf": 0.2835,
+        "desc": "1 pita (10.2cm dia)",
+        "measure_id": "527"
+      },
+      {
+        "cf": 0.64,
+        "desc": "1 pita (16.5 cm dia)",
+        "measure_id": "210"
+      },
+      {
+        "cf": 0.32,
+        "desc": "1/2 pita (16.5cm dia)",
+        "measure_id": "1509"
+      },
+      {
+        "cf": 0.5,
+        "desc": "50g",
+        "measure_id": "990"
+      }
+    ],
+    "name_fr": "Pain, pita, blé entier",
+    "prot": 9.8
+  },
+  "39": {
+    "gluc": 13.91,
+    "kcal": 420.0,
+    "lip": 27.84,
+    "measures": [
+      {
+        "cf": 0.42265,
+        "desc": "100ml râpé",
+        "measure_id": "353"
+      },
+      {
+        "cf": 0.15,
+        "desc": "15g",
+        "measure_id": "1467"
+      },
+      {
+        "cf": 0.0634,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 1.05664,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.5,
+        "desc": "50g",
+        "measure_id": "990"
+      }
+    ],
+    "name_fr": "Fromage parmesan, râpé",
+    "prot": 28.42
+  },
+  "4060": {
+    "gluc": 68.49,
+    "kcal": 384.0,
+    "lip": 5.48,
+    "measures": [
+      {
+        "cf": 0.50719,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.63399,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.26798,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      },
+      {
+        "cf": 0.30431,
+        "desc": "60ml",
+        "measure_id": "640"
+      }
+    ],
+    "name_fr": "Pain, chapelure, séché, émiettée, assaisonnée",
+    "prot": 14.13
+  },
+  "422": {
+    "gluc": 0.0,
+    "kcal": 885.0,
+    "lip": 100.0,
+    "measures": [
+      {
+        "cf": 0.91293,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.09129,
+        "desc": "10ml",
+        "measure_id": "1352"
+      },
+      {
+        "cf": 0.13682,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.28233,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.04592,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Huile végétale, olive",
+    "prot": 0.0
+  },
+  "424": {
+    "gluc": 0.0,
+    "kcal": 885.0,
+    "lip": 100.0,
+    "measures": [
+      {
+        "cf": 0.92139,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.09214,
+        "desc": "10ml",
+        "measure_id": "1352"
+      },
+      {
+        "cf": 0.13784,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.30347,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.04592,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Huile végétale, sésame",
+    "prot": 0.0
+  },
+  "4317": {
+    "gluc": 98.09,
+    "kcal": 380.0,
+    "lip": 0.0,
+    "measures": [
+      {
+        "cf": 0.61285,
+        "desc": "100ml non pressé",
+        "measure_id": "376"
+      },
+      {
+        "cf": 0.92984,
+        "desc": "100ml pressés",
+        "measure_id": "362"
+      },
+      {
+        "cf": 0.76606,
+        "desc": "125ml non pressé",
+        "measure_id": "974"
+      },
+      {
+        "cf": 1.1623,
+        "desc": "125ml pressé",
+        "measure_id": "1129"
+      },
+      {
+        "cf": 1.53212,
+        "desc": "250ml non pressé",
+        "measure_id": "983"
+      },
+      {
+        "cf": 2.326,
+        "desc": "250ml pressé",
+        "measure_id": "1130"
+      },
+      {
+        "cf": 0.04,
+        "desc": "4g",
+        "measure_id": "1481"
+      },
+      {
+        "cf": 0.04649,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Confiseries, sucre, brun (cassonade)",
+    "prot": 0.12
+  },
+  "4318": {
+    "gluc": 99.98,
+    "kcal": 387.0,
+    "lip": 0.0,
+    "measures": [
+      {
+        "cf": 0.84531,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.05664,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.1268,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.11327,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.04,
+        "desc": "4g",
+        "measure_id": "1481"
+      },
+      {
+        "cf": 0.04227,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Confiseries, sucre, granulé",
+    "prot": 0.0
+  },
+  "4326": {
+    "gluc": 66.89,
+    "kcal": 260.0,
+    "lip": 0.24,
+    "measures": [
+      {
+        "cf": 1.33143,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.66429,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.1997,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 3.32857,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.39943,
+        "desc": "30ml",
+        "measure_id": "428"
+      }
+    ],
+    "name_fr": "Confiseries, sirop d'érable, en vrac",
+    "prot": 0.04
+  },
+  "44": {
+    "gluc": 5.14,
+    "kcal": 138.0,
+    "lip": 7.91,
+    "measures": [
+      {
+        "cf": 1.0,
+        "desc": "100g",
+        "measure_id": "1455"
+      },
+      {
+        "cf": 1.03973,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.31023,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 2.59932,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Fromage ricotta, avec lait partiellement écrémé",
+    "prot": 11.39
+  },
+  "4450": {
+    "gluc": 21.34,
+    "kcal": 101.0,
+    "lip": 0.34,
+    "measures": [
+      {
+        "cf": 0.69315,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.86644,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.4,
+        "desc": "140g",
+        "measure_id": "1457"
+      },
+      {
+        "cf": 1.73288,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Grains céréaliers, riz sauvage, cuit",
+    "prot": 3.99
+  },
+  "4459": {
+    "gluc": 72.8,
+    "kcal": 475.0,
+    "lip": 15.43,
+    "measures": [
+      {
+        "cf": 0.19019,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.23774,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.47549,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.25,
+        "desc": "25g",
+        "measure_id": "1574"
+      }
+    ],
+    "name_fr": "Pâtes, nouilles chinoises, chow mein",
+    "prot": 8.11
+  },
+  "4468": {
+    "gluc": 25.16,
+    "kcal": 138.0,
+    "lip": 2.07,
+    "measures": [
+      {
+        "cf": 0.67625,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.84531,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 2.15,
+        "desc": "215g",
+        "measure_id": "1602"
+      },
+      {
+        "cf": 1.69062,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Pâtes, nouilles aux oeufs, non enrichies, cuites",
+    "prot": 4.54
+  },
+  "4476": {
+    "gluc": 79.15,
+    "kcal": 358.0,
+    "lip": 0.52,
+    "measures": [
+      {
+        "cf": 0.84531,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 2.11327,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.45,
+        "desc": "45g",
+        "measure_id": "1601"
+      }
+    ],
+    "name_fr": "Grains céréaliers, riz blanc, grain court, sec",
+    "prot": 6.5
+  },
+  "4490": {
+    "gluc": 23.22,
+    "kcal": 112.0,
+    "lip": 0.16,
+    "measures": [
+      {
+        "cf": 0.66357,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.82946,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.4,
+        "desc": "140g",
+        "measure_id": "1457"
+      },
+      {
+        "cf": 1.65892,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Grains céréaliers, couscous, cuit",
+    "prot": 3.79
+  },
+  "451": {
+    "gluc": 0.0,
+    "kcal": 885.0,
+    "lip": 100.0,
+    "measures": [
+      {
+        "cf": 0.92139,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.09214,
+        "desc": "10ml",
+        "measure_id": "1352"
+      },
+      {
+        "cf": 0.14189,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.30347,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.04592,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Huile végétale, canola (colza)",
+    "prot": 0.0
+  },
+  "4523": {
+    "gluc": 28.17,
+    "kcal": 130.0,
+    "lip": 0.28,
+    "measures": [
+      {
+        "cf": 0.66779,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.83474,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.4,
+        "desc": "140g",
+        "measure_id": "1457"
+      },
+      {
+        "cf": 1.66948,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Grains céréaliers, riz blanc, grain long, ordinaire, cuit",
+    "prot": 2.69
+  },
+  "4528": {
+    "gluc": 28.88,
+    "kcal": 534.0,
+    "lip": 42.16,
+    "measures": [
+      {
+        "cf": 0.47339,
+        "desc": "100ml broyées",
+        "measure_id": "612"
+      },
+      {
+        "cf": 0.71006,
+        "desc": "100ml entier",
+        "measure_id": "379"
+      },
+      {
+        "cf": 0.59174,
+        "desc": "125ml broyé",
+        "measure_id": "1310"
+      },
+      {
+        "cf": 0.88757,
+        "desc": "125ml entier",
+        "measure_id": "1011"
+      },
+      {
+        "cf": 0.1065,
+        "desc": "15ml entier",
+        "measure_id": "502517"
+      },
+      {
+        "cf": 0.07095,
+        "desc": "15ml moulu",
+        "measure_id": "1641"
+      },
+      {
+        "cf": 0.3,
+        "desc": "30g",
+        "measure_id": "1454"
+      },
+      {
+        "cf": 0.14202,
+        "desc": "30ml ground",
+        "measure_id": "502518"
+      },
+      {
+        "cf": 0.28403,
+        "desc": "60ml broyé",
+        "measure_id": "1309"
+      },
+      {
+        "cf": 0.42604,
+        "desc": "60ml entier",
+        "measure_id": "1312"
+      }
+    ],
+    "name_fr": "Graines, lin, entières et moulues",
+    "prot": 18.29
+  },
+  "4723": {
+    "gluc": 20.7,
+    "kcal": 131.0,
+    "lip": 5.86,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.017,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.007,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Épices, romarin, frais",
+    "prot": 3.31
+  },
+  "4724": {
+    "gluc": 14.89,
+    "kcal": 70.0,
+    "lip": 0.94,
+    "measures": [
+      {
+        "cf": 0.005,
+        "desc": "0.5g",
+        "measure_id": "1484"
+      },
+      {
+        "cf": 0.01622,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.001,
+        "desc": "2 feuilles",
+        "measure_id": "798"
+      },
+      {
+        "cf": 0.03243,
+        "desc": "30ml",
+        "measure_id": "428"
+      },
+      {
+        "cf": 0.00541,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Menthe poivrée, fraîche",
+    "prot": 3.75
+  },
+  "4729": {
+    "gluc": 44.08,
+    "kcal": 220.0,
+    "lip": 3.39,
+    "measures": [
+      {
+        "cf": 1.0811,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 2.7027,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.3243,
+        "desc": "30ml",
+        "measure_id": "428"
+      },
+      {
+        "cf": 0.05406,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Sauce, hoisin, prête-à-servir",
+    "prot": 3.31
+  },
+  "4730": {
+    "gluc": 10.92,
+    "kcal": 51.0,
+    "lip": 0.25,
+    "measures": [
+      {
+        "cf": 1.2162,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.18243,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 3.0405,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.06811,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Sauce, huîtres, prête-à-servir",
+    "prot": 1.35
+  },
+  "4848": {
+    "gluc": 2.16,
+    "kcal": 12.0,
+    "lip": 0.16,
+    "measures": [
+      {
+        "cf": 2.672,
+        "desc": "1 gros (20cm longueur)",
+        "measure_id": "859"
+      },
+      {
+        "cf": 2.01,
+        "desc": "1 moyen",
+        "measure_id": "160"
+      },
+      {
+        "cf": 1.464,
+        "desc": "1 petit (15cm longueur)",
+        "measure_id": "860"
+      },
+      {
+        "cf": 0.07,
+        "desc": "1 tranche",
+        "measure_id": "245"
+      },
+      {
+        "cf": 0.56213,
+        "desc": "100ml haché",
+        "measure_id": "343"
+      },
+      {
+        "cf": 0.50296,
+        "desc": "100ml tranches",
+        "measure_id": "371"
+      },
+      {
+        "cf": 0.70266,
+        "desc": "125ml haché",
+        "measure_id": "1031"
+      },
+      {
+        "cf": 0.6287,
+        "desc": "125ml tranches",
+        "measure_id": "971"
+      },
+      {
+        "cf": 1.40533,
+        "desc": "250ml haché",
+        "measure_id": "1032"
+      },
+      {
+        "cf": 1.2574,
+        "desc": "250ml tranches",
+        "measure_id": "979"
+      },
+      {
+        "cf": 0.28,
+        "desc": "4 tranches",
+        "measure_id": "1664"
+      },
+      {
+        "cf": 0.85,
+        "desc": "85g",
+        "measure_id": "1470"
+      }
+    ],
+    "name_fr": "Concombre, pelé, cru",
+    "prot": 0.59
+  },
+  "4886": {
+    "gluc": 57.82,
+    "kcal": 387.0,
+    "lip": 6.69,
+    "measures": [
+      {
+        "cf": 0.2,
+        "desc": "1 portion",
+        "measure_id": "867"
+      },
+      {
+        "cf": 0.3888,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.486,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.15,
+        "desc": "15g",
+        "measure_id": "1467"
+      },
+      {
+        "cf": 0.9721,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Pois chiches, farine (Besan)",
+    "prot": 22.39
+  },
+  "4890": {
+    "gluc": 4.89,
+    "kcal": 23.0,
+    "lip": 0.86,
+    "measures": [
+      {
+        "cf": 0.0872,
+        "desc": "15ml drainé",
+        "measure_id": "955"
+      },
+      {
+        "cf": 0.0291,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Câpres, conserve",
+    "prot": 2.36
+  },
+  "4970": {
+    "gluc": 5.83,
+    "kcal": 60.0,
+    "lip": 3.34,
+    "measures": [
+      {
+        "cf": 0.05,
+        "desc": "1 paquet (individuel)",
+        "measure_id": "801"
+      },
+      {
+        "cf": 1.0525,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.1579,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.0526,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Sauce, moutarde, jaune, prête-à-servir",
+    "prot": 3.74
+  },
+  "502262": {
+    "gluc": 22.87,
+    "kcal": 138.0,
+    "lip": 2.47,
+    "measures": [
+      {
+        "cf": 2.54,
+        "desc": "1 cannette / boîte de conserve",
+        "measure_id": "37"
+      },
+      {
+        "cf": 1.52,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Pois chiches (garbanzo), conserve, égouttés et rinsés",
+    "prot": 7.04
+  },
+  "502369": {
+    "gluc": 1.78,
+    "kcal": 126.0,
+    "lip": 4.22,
+    "measures": [
+      {
+        "cf": 0.275,
+        "desc": "1 tranche",
+        "measure_id": "245"
+      },
+      {
+        "cf": 0.55,
+        "desc": "55g",
+        "measure_id": "1461"
+      }
+    ],
+    "name_fr": "Charcuterie, prosciutto (cotto), extra maigre",
+    "prot": 19.03
+  },
+  "502451": {
+    "gluc": 16.55,
+    "kcal": 91.0,
+    "lip": 0.29,
+    "measures": [
+      {
+        "cf": 1.01442,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.26803,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 2.53605,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Haricots, noirs, grains mûrs, conserve, solides et liquide, réduit en sodium",
+    "prot": 6.03
+  },
+  "502466": {
+    "gluc": 14.44,
+    "kcal": 90.0,
+    "lip": 0.31,
+    "measures": [
+      {
+        "cf": 0.98061,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.14709,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.45152,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.04903,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Soya, sauce (fait avec protéine végétale hydrolysée), réduite en sodium",
+    "prot": 8.19
+  },
+  "502564": {
+    "gluc": 4.2,
+    "kcal": 162.0,
+    "lip": 8.08,
+    "measures": [
+      {
+        "cf": 1.0,
+        "desc": "1 saucisse",
+        "measure_id": "537"
+      },
+      {
+        "cf": 0.75,
+        "desc": "75g",
+        "measure_id": "1496"
+      }
+    ],
+    "name_fr": "Saucisse italienne, porc, teneur réduite en gras et sodium, crue",
+    "prot": 17.13
+  },
+  "502776": {
+    "gluc": 4.0,
+    "kcal": 69.0,
+    "lip": 2.0,
+    "measures": [
+      {
+        "cf": 1.0101,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.2626,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.75,
+        "desc": "175g",
+        "measure_id": "987"
+      },
+      {
+        "cf": 1.7677,
+        "desc": "175ml",
+        "measure_id": "389"
+      },
+      {
+        "cf": 2.5253,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Yogourt, Grec, nature, 2% M.G.",
+    "prot": 9.71
+  },
+  "5241": {
+    "gluc": 6.28,
+    "kcal": 54.0,
+    "lip": 1.75,
+    "measures": [
+      {
+        "cf": 1.0355,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.29438,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.812,
+        "desc": "175ml",
+        "measure_id": "389"
+      },
+      {
+        "cf": 2.58876,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Boisson à base de plantes, soya, originale et vanille, non-enrichie",
+    "prot": 3.27
+  },
+  "5307": {
+    "gluc": 0.0,
+    "kcal": 509.0,
+    "lip": 55.1,
+    "measures": [
+      {
+        "cf": 0.1,
+        "desc": "10g",
+        "measure_id": "1573"
+      }
+    ],
+    "name_fr": "Beurre, léger, salé",
+    "prot": 3.3
+  },
+  "531": {
+    "gluc": 0.57,
+    "kcal": 680.0,
+    "lip": 74.85,
+    "measures": [
+      {
+        "cf": 0.1,
+        "desc": "1 paquet (individuel)",
+        "measure_id": "801"
+      },
+      {
+        "cf": 0.92984,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.13986,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.3246,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.2797,
+        "desc": "30ml",
+        "measure_id": "428"
+      }
+    ],
+    "name_fr": "Vinaigrette, mayonnaise, commerciale, régulière",
+    "prot": 0.96
+  },
+  "5354": {
+    "gluc": 3.9,
+    "kcal": 21.0,
+    "lip": 0.6,
+    "measures": [
+      {
+        "cf": 1.26689,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.15203,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.53378,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.05068,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Sauce chili, piments forts, chili, rouges, conserve",
+    "prot": 0.9
+  },
+  "5510": {
+    "gluc": 0.0,
+    "kcal": 884.0,
+    "lip": 100.0,
+    "measures": [
+      {
+        "cf": 0.92139,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.1,
+        "desc": "10g",
+        "measure_id": "1573"
+      },
+      {
+        "cf": 0.13821,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 0.04607,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Huile végétale, canola (colza) et soya",
+    "prot": 0.0
+  },
+  "5917": {
+    "gluc": 21.3,
+    "kcal": 120.0,
+    "lip": 1.92,
+    "measures": [
+      {
+        "cf": 0.78191,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 0.97739,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 1.4,
+        "desc": "140g",
+        "measure_id": "1457"
+      },
+      {
+        "cf": 1.95477,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Grains céréaliers, quinoa, cuit",
+    "prot": 4.4
+  },
+  "5946": {
+    "gluc": 0.0,
+    "kcal": 147.0,
+    "lip": 6.73,
+    "measures": [
+      {
+        "cf": 1.25,
+        "desc": "125g",
+        "measure_id": "1489"
+      },
+      {
+        "cf": 0.9,
+        "desc": "?",
+        "measure_id": "502468"
+      }
+    ],
+    "name_fr": "Boeuf, épaule, rôti de palette, désossé, maigre, cru",
+    "prot": 20.56
+  },
+  "6022": {
+    "gluc": 0.0,
+    "kcal": 164.0,
+    "lip": 7.85,
+    "measures": [
+      {
+        "cf": 1.25,
+        "desc": "125g",
+        "measure_id": "1489"
+      }
+    ],
+    "name_fr": "Boeuf, flanc, bifteck de flanc, désossé, maigre, cru",
+    "prot": 21.67
+  },
+  "61": {
+    "gluc": 4.8,
+    "kcal": 50.0,
+    "lip": 1.98,
+    "measures": [
+      {
+        "cf": 1.03128,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 2.57819,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Lait, partiellement écrémé, liquide, 2% M.G.",
+    "prot": 3.3
+  },
+  "6196": {
+    "gluc": 17.03,
+    "kcal": 88.0,
+    "lip": 0.0,
+    "measures": [
+      {
+        "cf": 1.07777,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.34721,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 0.16216,
+        "desc": "15ml",
+        "measure_id": "385"
+      },
+      {
+        "cf": 2.69442,
+        "desc": "250ml",
+        "measure_id": "415"
+      },
+      {
+        "cf": 0.05408,
+        "desc": "5ml",
+        "measure_id": "439"
+      }
+    ],
+    "name_fr": "Vinaigre, balsamique",
+    "prot": 0.49
+  },
+  "815": {
+    "gluc": 0.0,
+    "kcal": 146.0,
+    "lip": 7.23,
+    "measures": [
+      {
+        "cf": 1.14,
+        "desc": "1 boulette",
+        "measure_id": "183"
+      },
+      {
+        "cf": 1.0,
+        "desc": "100g",
+        "measure_id": "1455"
+      }
+    ],
+    "name_fr": "Dinde, toutes catégories, hachée, crue",
+    "prot": 18.9
+  },
+  "841": {
+    "gluc": 0.0,
+    "kcal": 120.0,
+    "lip": 2.62,
+    "measures": [
+      {
+        "cf": 2.72,
+        "desc": "1 poitrine",
+        "measure_id": "477"
+      },
+      {
+        "cf": 1.25,
+        "desc": "125g",
+        "measure_id": "1489"
+      }
+    ],
+    "name_fr": "Poulet à griller, poitrine, sans la peau, désossée, viande, crue",
+    "prot": 22.5
+  },
+  "944": {
+    "gluc": 1.5,
+    "kcal": 14.0,
+    "lip": 0.02,
+    "measures": [
+      {
+        "cf": 3.0016,
+        "desc": "1 cannette (284 ml)",
+        "measure_id": "38"
+      },
+      {
+        "cf": 1.05691,
+        "desc": "100ml",
+        "measure_id": "341"
+      },
+      {
+        "cf": 1.32114,
+        "desc": "125ml",
+        "measure_id": "383"
+      },
+      {
+        "cf": 2.64228,
+        "desc": "250ml",
+        "measure_id": "415"
+      }
+    ],
+    "name_fr": "Soupe, bouillon ou consommé, boeuf, conserve, condensé",
+    "prot": 1.95
+  }
+}
