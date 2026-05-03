@@ -985,47 +985,68 @@ function renderNutrition() {
     return;
   }
 
-  // Placeholders : à terme, calculer depuis state.selected[id].wantedPortions et r.calories/macros
-  let totalCalories = 0;
+  let totalCalories = 0, totalProteines = 0, totalGlucides = 0, totalLipides = 0;
   let totalPortions = 0;
-  let hasData = false;
+  let recipesWithData = 0;
+  let recipesWithoutData = [];
   for (const r of sel) {
     const wanted = state.selected[r.id].wantedPortions;
     totalPortions += wanted;
-    if (r.calories !== null) {
-      totalCalories += r.calories * (wanted / r.portions);
-      hasData = true;
+    const factor = wanted / r.portions;
+    if (r.calories !== null || r.proteines !== null || r.glucides !== null || r.lipides !== null) {
+      recipesWithData++;
+      if (r.calories !== null)  totalCalories  += r.calories  * factor;
+      if (r.proteines !== null) totalProteines += r.proteines * factor;
+      if (r.glucides !== null)  totalGlucides  += r.glucides  * factor;
+      if (r.lipides !== null)   totalLipides   += r.lipides   * factor;
+    } else {
+      recipesWithoutData.push(r.titre);
     }
   }
 
-  const fmt = v => v ? Math.round(v) : '—';
-  const placeholder = hasData ? '' : ' <span style="font-size:0.7rem; color:var(--muted)">(à compléter)</span>';
+  const fmt = v => v > 0 ? Math.round(v) : '—';
+  const missingNote = recipesWithoutData.length > 0
+    ? `<p class="nutri-placeholder" style="margin-top:1rem">⚠ ${recipesWithoutData.length} recette${recipesWithoutData.length > 1 ? 's' : ''} sans données nutritionnelles (estimées à venir)</p>`
+    : '';
 
   root.innerHTML = `
     <div class="nutri-total">
       <div class="nutri-total-value">${fmt(totalCalories)}</div>
-      <div class="nutri-total-label">calories totales${placeholder}</div>
+      <div class="nutri-total-label">calories totales</div>
     </div>
     <div class="nutri-row">
       <span class="nutri-label">Protéines</span>
-      <span class="nutri-value">— g</span>
+      <span class="nutri-value">${fmt(totalProteines)} g</span>
     </div>
     <div class="nutri-row">
       <span class="nutri-label">Glucides</span>
-      <span class="nutri-value">— g</span>
+      <span class="nutri-value">${fmt(totalGlucides)} g</span>
     </div>
     <div class="nutri-row">
       <span class="nutri-label">Lipides</span>
-      <span class="nutri-value">— g</span>
+      <span class="nutri-value">${fmt(totalLipides)} g</span>
     </div>
 
     <div class="nutri-per-portion">
-      <div class="panel-subtitle">Par portion</div>
+      <div class="panel-subtitle">Par portion (${totalPortions} au total)</div>
       <div class="nutri-row">
         <span class="nutri-label">Calories</span>
-        <span class="nutri-value">${totalPortions ? fmt(totalCalories / totalPortions) : '—'}</span>
+        <span class="nutri-value">${totalPortions && totalCalories ? fmt(totalCalories / totalPortions) : '—'}</span>
+      </div>
+      <div class="nutri-row">
+        <span class="nutri-label">Protéines</span>
+        <span class="nutri-value">${totalPortions && totalProteines ? fmt(totalProteines / totalPortions) + ' g' : '—'}</span>
+      </div>
+      <div class="nutri-row">
+        <span class="nutri-label">Glucides</span>
+        <span class="nutri-value">${totalPortions && totalGlucides ? fmt(totalGlucides / totalPortions) + ' g' : '—'}</span>
+      </div>
+      <div class="nutri-row">
+        <span class="nutri-label">Lipides</span>
+        <span class="nutri-value">${totalPortions && totalLipides ? fmt(totalLipides / totalPortions) + ' g' : '—'}</span>
       </div>
     </div>
+    ${missingNote}
   `;
 }
 
