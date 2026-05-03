@@ -2082,12 +2082,28 @@ function renderWeekView() {
 
 // ---------- Vue Liste ----------
 function isPantryStaple(name) {
-  // Exclus de la liste de courses : eau, sel, poivre — supposés toujours dispo.
+  // Items exclus de la liste de courses (toujours en stock, non mesurables,
+  // ou doublons d'autres ingrédients de la même recette).
   const n = nameForMatching(name);
   const first = n.split(/\s+/)[0];
+
+  // Toujours en stock
   if (first === 'eau' || first === 'sel' || first === 'poivre') return true;
   if (/^sel\s+et\s+poivre/.test(n)) return true;
   if (/^fleur\s+de\s+sel/.test(n)) return true;
+
+  // Matériel / mesures imprécises (pas un ingrédient achetable)
+  if (first === 'spray') return true;                  // « Spray de cuisson »
+  if (/\bvaporisateur\b/.test(n)) return true;         // « Huile végétale en vaporisateur »
+  if (/\bfilet\s+d/.test(n)) return true;              // « Filet d'huile (d'olive) »
+
+  // Garnitures sans quantité claire
+  if (/\b(pour\s+garnir|pour\s+la\s+garniture|en\s+garniture)\b/.test(n)) return true;
+  if (/\bfacultatif\b/.test(n)) return true;
+
+  // Zeste (l'agrume entier est listé ailleurs dans la recette)
+  if (/^zeste\s+de\b/.test(n)) return true;
+
   return false;
 }
 
