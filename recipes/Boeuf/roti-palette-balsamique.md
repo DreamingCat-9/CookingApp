@@ -23,11 +23,11 @@ nutrition_estimee: true
 - 30 ml (2 c. à soupe) moutarde à l'ancienne (ou moutarde de Meaux)
 - 15 ml (1 c. à soupe) vinaigre balsamique
 - 15 ml (1 c. à soupe) sauce Worcestershire (sauce anglaise)
-- 15 ml (1 c. à soupe) ail haché en pot (ou 3 gousses hachées finement)
+- 15 ml (1 c. à soupe) ail haché en pot (ou 3 gousses d'ail)
 
 ## Préparation
 1. Dans le récipient de la mijoteuse, déposer le rôti et poivrer des 2 côtés.
-2. Dans un petit bol, mélanger tous les ingrédients de la marinade et verser uniformément sur le rôti.
+2. Si vous utilisez des gousses d'ail fraîches, les hacher finement. Dans un petit bol, mélanger tous les ingrédients de la marinade et verser uniformément sur le rôti.
 3. Couvrir et cuire à intensité maximale 5 heures ou jusqu'à ce que la viande se défasse à la fourchette.
 4. Servir sur une purée de légumes.
 
