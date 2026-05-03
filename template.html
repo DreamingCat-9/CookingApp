@@ -1588,7 +1588,13 @@ const CATEGORIES = [
 ];
 function categorize(name) {
   const n = nameForMatching(name);
-  for (const [cat, kws] of CATEGORIES) for (const kw of kws) if (n.includes(kw)) return cat;
+  for (const [cat, kws] of CATEGORIES) {
+    for (const kw of kws) {
+      // Matching par mot entier (\b) pour éviter par ex. « laitue » -> « lait »
+      const re = new RegExp('\\b' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+      if (re.test(n)) return cat;
+    }
+  }
   return 'Autres';
 }
 
