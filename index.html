@@ -341,6 +341,16 @@
     background: rgba(255,255,255,0.25);
     color: white;
   }
+  .cat-pill-certifie.active {
+    background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+    border-color: #f59e0b;
+    color: #78350f;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+  }
+  .cat-pill-certifie.active .count {
+    background: rgba(120, 53, 15, 0.18);
+    color: #78350f;
+  }
 
   /* ============ Recipe feed cards ============ */
   .recipe-feed {
@@ -1819,6 +1829,7 @@ const ui = {
   detailTab: 'ingredients',
   searchQuery: '',
   activeCategory: null,
+  certifiedOnly: false,
   ingredientChecks: {}, // recipeId -> ingredient idx -> bool (per-recipe checklist on detail)
   theme: localStorage.getItem(THEME_KEY) || 'framboise',
 };
@@ -2001,6 +2012,16 @@ function renderCatPills() {
     });
     root.appendChild(btn);
   }
+
+  const certCount = recipes.filter(r => r.certifieBittle).length;
+  const certBtn = document.createElement('button');
+  certBtn.className = 'cat-pill cat-pill-certifie' + (ui.certifiedOnly ? ' active' : '');
+  certBtn.innerHTML = `<span class="icon">👑</span><span>Certifiées</span><span class="count">${certCount}</span>`;
+  certBtn.addEventListener('click', () => {
+    ui.certifiedOnly = !ui.certifiedOnly;
+    renderRecipesView();
+  });
+  root.appendChild(certBtn);
 }
 
 function recipeMatchesFilters(r) {
@@ -2009,6 +2030,7 @@ function recipeMatchesFilters(r) {
     if (!r.titre.toLowerCase().includes(q)) return false;
   }
   if (ui.activeCategory && r.folder !== ui.activeCategory) return false;
+  if (ui.certifiedOnly && !r.certifieBittle) return false;
   return true;
 }
 
