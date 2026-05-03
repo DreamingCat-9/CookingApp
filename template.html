@@ -1564,6 +1564,16 @@ function renderWeekView() {
 }
 
 // ---------- Vue Liste ----------
+function isPantryStaple(name) {
+  // Exclus de la liste de courses : eau, sel, poivre — supposés toujours dispo.
+  const n = nameForMatching(name);
+  const first = n.split(/\s+/)[0];
+  if (first === 'eau' || first === 'sel' || first === 'poivre') return true;
+  if (/^sel\s+et\s+poivre/.test(n)) return true;
+  if (/^fleur\s+de\s+sel/.test(n)) return true;
+  return false;
+}
+
 function buildShoppingList() {
   const items = [];
   for (const r of recipes) {
@@ -1572,6 +1582,7 @@ function buildShoppingList() {
     const factor = sel.wantedPortions / r.portions;
     for (const ing of r.ingredients) {
       const parsed = parseIngredient(ing.raw);
+      if (isPantryStaple(parsed.name)) continue;
       const scaledQty = parsed.qty !== null ? parsed.qty * factor : null;
       items.push({
         qty: scaledQty, unit: parsed.unit, unitKey: normalizeUnit(parsed.unit) || '',
