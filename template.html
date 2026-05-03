@@ -105,6 +105,22 @@
     transition: transform 0.12s;
   }
   .icon-btn-circle:active { transform: scale(0.94); }
+  .icon-btn-circle.sm {
+    width: 38px;
+    height: 38px;
+    box-shadow: var(--shadow-sm);
+  }
+  .icon-btn-circle.outline {
+    background: var(--panel);
+    color: var(--orange-deep);
+    border: 1px solid var(--orange-light);
+    box-shadow: var(--shadow-sm);
+  }
+  .header-actions {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
   .icon-btn-ghost {
     width: 40px;
     height: 40px;
@@ -932,11 +948,23 @@
         <p class="hello" id="greeting">BONSOIR</p>
         <h1 class="display page-title">Bittle.</h1>
       </div>
-      <button class="icon-btn-circle" id="search-toggle" aria-label="Rechercher">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/>
-        </svg>
-      </button>
+      <div class="header-actions">
+        <button class="icon-btn-circle sm outline" id="select-all-btn" aria-label="Sélectionner toutes les recettes visibles">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </button>
+        <button class="icon-btn-circle sm outline" id="deselect-all-btn" aria-label="Tout désélectionner">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
+        <button class="icon-btn-circle" id="search-toggle" aria-label="Rechercher">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/>
+          </svg>
+        </button>
+      </div>
     </header>
     <input type="search" class="search-input hidden" id="search-input" placeholder="Rechercher une recette…">
     <div id="hero"></div>
@@ -1746,6 +1774,26 @@ document.getElementById('search-toggle').addEventListener('click', () => {
 document.getElementById('search-input').addEventListener('input', e => {
   ui.searchQuery = e.target.value.trim();
   renderRecipeFeed();
+});
+
+// ---------- Select / deselect tout ----------
+document.getElementById('select-all-btn').addEventListener('click', () => {
+  const visible = recipes.filter(recipeMatchesFilters);
+  const toAdd = visible.filter(r => !state.selected[r.id]);
+  if (toAdd.length === 0) return;
+  for (const r of toAdd) state.selected[r.id] = { wantedPortions: r.portions };
+  saveState();
+  renderRecipesView();
+});
+
+document.getElementById('deselect-all-btn').addEventListener('click', () => {
+  if (Object.keys(state.selected).length === 0) return;
+  if (!confirm('Désélectionner toutes les recettes ?')) return;
+  state.selected = {};
+  state.checked = {};
+  ui.ingredientChecks = {};
+  saveState();
+  renderRecipesView();
 });
 
 // ---------- Init ----------
