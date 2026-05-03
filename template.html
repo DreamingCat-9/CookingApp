@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recettes & liste de courses</title>
+<style>
+  :root {
+    --bg: #faf9f6;
+    --panel: #fff;
+    --border: #e2e0da;
+    --text: #2a2a2a;
+    --muted: #777;
+    --accent: #2d6a4f;
+    --accent-light: #d8f3dc;
+    --warn: #b95c00;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .count {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  button {
+    background: var(--accent);
+    color: white;
+    border: 0;
+    padding: 0.55rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  button:hover { filter: brightness(1.1); }
+  button.ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+  .folder {
+    margin-bottom: 1.5rem;
+  }
+  .folder h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.5rem;
+  }
+  .recipe {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    transition: border-color 0.15s;
+  }
+  .recipe.selected {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+  .recipe input[type="checkbox"] {
+    margin-top: 0.2rem;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .recipe-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .recipe-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+  }
+  .recipe-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .portions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .portions input {
+    width: 3.5rem;
+    padding: 0.15rem 0.3rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+  .tag {
+    background: rgba(0,0,0,0.06);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+  }
+
+  #shopping {
+    margin-top: 2rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  #shopping h2 {
+    margin-top: 0;
+  }
+  .category {
+    margin-bottom: 1.25rem;
+  }
+  .category h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: 0.25rem;
+  }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid #f0eee8;
+  }
+  .item:last-child { border-bottom: none; }
+  .item input[type="checkbox"] { margin-top: 0.25rem; }
+  .item-text { flex: 1; }
+  .item.checked .item-text {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+  .item-from {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.1rem;
+  }
+  .merge-warn { color: var(--warn); }
+
+  details.recipe-details {
+    margin-top: 0.5rem;
+  }
+  details.recipe-details summary {
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  details.recipe-details pre {
+    background: #f4f3ee;
+    padding: 0.75rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+    margin-top: 0.5rem;
+  }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Recettes & liste de courses</h1>
+  <div class="controls">
+    <span class="count" id="count">0 recette sélectionnée</span>
+    <button id="generate">Générer la liste</button>
+    <button id="reset" class="ghost">Tout désélectionner</button>
+  </div>
+</header>
+
+<main>
+  <section id="recipes-section"></section>
+  <section id="shopping" class="hidden">
+    <h2>Liste de courses</h2>
+    <div id="shopping-list"></div>
+  </section>
+</main>
+
+<script>
+const RECIPES_RAW = /*__RECIPES_DATA__*/;
+
+// ---------- Markdown parsing ----------
+
+function parseRecipe(raw) {
+  const fmMatch = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!fmMatch) return null;
+
+  const fm = {};
+  fmMatch[1].split('\n').forEach(line => {
+    const m = line.match(/^([\w_]+):\s*(.*)$/);
+    if (m) fm[m[1]] = m[2].trim();
+  });
+
+  const body = fmMatch[2];
+  const ingrMatch = body.match(/##\s*Ingr[ée]dients\s*\n([\s\S]*?)(?=\n##\s|$)/);
+  const ingredients = [];
+  let currentSubsection = null;
+
+  if (ingrMatch) {
+    ingrMatch[1].split('\n').forEach(line => {
+      const subMatch = line.match(/^###\s+(.+?)\s*$/);
+      if (subMatch) {
+        currentSubsection = subMatch[1].trim();
+        return;
+      }
+      const itemMatch = line.match(/^-\s+(.+)$/);
+      if (itemMatch) {
+        ingredients.push({ raw: itemMatch[1].trim(), subsection: currentSubsection });
+      }
+    });
+  }
+
+  const tagsMatch = (fm.tags || '').match(/\[(.*)\]/);
+  const tags = tagsMatch
+    ? tagsMatch[1].split(',').map(t => t.trim()).filter(Boolean)
+    : [];
+
+  return {
+    titre: fm.titre || '(sans titre)',
+    portions: parseInt(fm.portions) || 1,
+    tempsPrep: fm.temps_prep || '',
+    tempsCuisson: fm.temps_cuisson || '',
+    tags,
+    ingredients,
+  };
+}
+
+// ---------- Ingredient parsing ----------
+
+const UNIT_PATTERN = '(?:g|kg|ml|l|L|lb|oz|tasses?|c\\.\\s*à\\s*th[ée]|c\\.\\s*à\\s*soupe|gousses?|bo[îi]tes?|pots?|feuilles?|brins?|pieds?|t[êe]tes?|bottes?|paquets?|filets?|tranches?|morceaux?|quartiers?|conserves?|sachets?|contenants?|branches?|pinc[ée]es?|cubes?)';
+
+function parseQty(s) {
+  s = s.replace(/\s+/g, ' ').trim().replace(',', '.');
+  const mixed = s.match(/^(\d+)\s+(\d+)\/(\d+)$/);
+  if (mixed) return parseInt(mixed[1]) + parseInt(mixed[2]) / parseInt(mixed[3]);
+  const frac = s.match(/^(\d+)\/(\d+)$/);
+  if (frac) return parseInt(frac[1]) / parseInt(frac[2]);
+  const n = parseFloat(s);
+  return isNaN(n) ? null : n;
+}
+
+function parseIngredient(raw) {
+  // qty: nombre entier, fraction, décimal, ou nombre mixte (« 1 1/2 »)
+  const qtyRe = /^((?:\d+\s+\d+\/\d+)|(?:\d+[.,]\d+)|(?:\d+\/\d+)|(?:\d+))\s+/;
+  const qtyMatch = raw.match(qtyRe);
+
+  let qty = null;
+  let rest = raw;
+  if (qtyMatch) {
+    qty = parseQty(qtyMatch[1]);
+    rest = raw.slice(qtyMatch[0].length);
+  }
+
+  const unitRe = new RegExp('^(' + UNIT_PATTERN + ')\\s+', 'i');
+  const unitMatch = rest.match(unitRe);
+  let unit = null;
+  if (unitMatch) {
+    unit = unitMatch[1].toLowerCase().replace(/\s+/g, ' ').trim();
+    rest = rest.slice(unitMatch[0].length);
+  }
+
+  // skip parenthèse alternative ex « (1 lb) », « (3 c. à soupe) »
+  rest = rest.replace(/^\([^)]*\)\s*/, '');
+  // skip leading « de » / « d' »
+  rest = rest.replace(/^d['e]\s+/i, '');
+
+  return { qty, unit, name: rest.trim() };
+}
+
+function formatQty(n) {
+  if (n === null || n === undefined) return '';
+  if (Math.abs(n - Math.round(n)) < 0.01) return String(Math.round(n));
+  return n.toFixed(2).replace(/\.?0+$/, '').replace('.', ',');
+}
+
+// ---------- Categorization ----------
+
+function normalizeName(name) {
+  return name
+    .toLowerCase()
+    .replace(/œ/g, 'oe').replace(/æ/g, 'ae')
+    .normalize('NFKD').replace(/[̀-ͯ]/g, '')
+    .replace(/[,;:]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function nameForMatching(name) {
+  // Note: on garde « frais » et « seche » pour distinguer
+  // les herbes fraîches (légumes) des herbes séchées (épices).
+  return normalizeName(name)
+    .replace(/\b(haches?|hachees?|finement|grossierement|tranches?|tranchees?|coupes?|coupees?|emincees?|en\s+(cubes?|des|lanieres|quartiers|biseau|julienne|petales?|rondelles|morceaux|tronc?ons|fines\s+tranches|fleurettes|bouquets?|aiguillettes))\b/g, '')
+    .replace(/\b(divises?|divisees?|au\s+gout|au\s+choix|nature|moulus?|moulues?|broyes?|broyees?|rapes?|rapees?|effiloches?|effilochees?|battu|battue|legerement|emiette[es]?)\b/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function normalizeUnit(u) {
+  if (!u) return null;
+  // gousses/gousse → gousse, tasses → tasse, etc.
+  return u.replace(/s$/, '').replace(/\s+/g, ' ');
+}
+
+const CATEGORIES = [
+  ['Viandes & charcuterie', [
+    'poulet', 'dinde', 'boeuf', 'porc', 'lardon', 'saucisse', 'cotelette',
+    'roti', 'palette', 'bifteck', 'tournedos', 'poitrine', 'haut de cuisse',
+    'filet de porc', 'filet mignon', 'viande', 'jambon', 'chair'
+  ]],
+  ['Produits laitiers & œufs', [
+    'lait de coco', 'lait', 'creme de soya', 'creme', 'beurre d\'arachides',
+    'beurre de sesame', 'beurre', 'yogourt', 'fromage', 'parmesan',
+    'mozzarella', 'ricotta', 'feta', 'cheddar', 'monterey', 'bocconcini',
+    'oeuf'
+  ]],
+  ['Sauces & condiments', [
+    'sauce soya', 'tamari', 'hoisin', 'sriracha', 'huitres', 'mayonnaise',
+    'moutarde', 'ketchup', 'tahini', 'miso', 'salsa', 'barbecue',
+    'sauce piquante', 'vinaigre', 'ail en pot', 'gingembre en pot',
+    'pate de cari', 'concentre de bouillon', 'sauce a pizza', 'sauce tomate',
+    'fecule de mais'
+  ]],
+  ['Conserves & bocaux', [
+    'tomates en des', 'tomates en cubes', 'coulis', 'haricots noirs',
+    'haricots', 'tomates sechees', 'pate de tomates', 'poivrons rotis',
+    'capres', 'boite de', 'conserve', 'pot de'
+  ]],
+  ['Pain, pâtes & céréales', [
+    'chapelure', 'pita', 'naan', 'orzo', 'nouille', 'vermicelle', 'riz',
+    'quinoa', 'udon', 'panko', 'farine', 'chow mein', 'cereale'
+  ]],
+  ['Fruits & légumes', [
+    'oignon', 'ail', 'carotte', 'pomme de terre', 'grelot', 'brocoli',
+    'courgette', 'poivron', 'celeri', 'epinard', 'laitue', 'romaine',
+    'iceberg', 'concombre', 'tomate cerise', 'tomate', 'radis',
+    'champignon', 'asperge', 'chou', 'rutabaga', 'fenouil', 'radicchio',
+    'pois', 'mange-tout', 'echalote', 'bok choy',
+    'feve germee', 'roquette', 'citron', 'lime', 'orange', 'pomme rouge',
+    'pomme', 'courge', 'ciboulette', 'aneth', 'basilic', 'persil',
+    'coriandre', 'menthe', 'thym frais', 'origan frais', 'romarin frais',
+    'estragon', 'gingembre frais'
+  ]],
+  ['Bouillons & vins', [
+    'bouillon', 'vin rouge', 'vin blanc', 'biere'
+  ]],
+  ['Sucré & sirops', [
+    'sirop d\'erable', 'cassonade', 'sucre', 'miel'
+  ]],
+  ['Huiles', [
+    'huile'
+  ]],
+  ['Épices & herbes séchées', [
+    'paprika', 'cumin', 'cajun', 'italien', 'grec', 'passe-partout',
+    'thym seche', 'origan seche', 'romarin seche', 'epices', 'assaisonnement',
+    'herbes de provence', 'cinq-epices', '5-epices', 'cannelle', 'muscade',
+    'girofle', 'laurier', 'piment', 'flocons', 'graines de', 'fines herbes',
+    'poudre d\'oignon', 'poudre d\'ail', 'poudre', 'gingembre', 'sel', 'poivre',
+    'bicarbonate'
+  ]],
+];
+
+function categorize(name) {
+  const n = nameForMatching(name);
+  for (const [cat, kws] of CATEGORIES) {
+    for (const kw of kws) {
+      if (n.includes(kw)) return cat;
+    }
+  }
+  return 'Autres';
+}
+
+// ---------- State ----------
+
+const recipes = RECIPES_RAW.map(r => ({
+  ...r,
+  ...parseRecipe(r.raw),
+}));
+
+const STATE_KEY = 'gestion_alimentaire_state_v1';
+const state = loadState();
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
+    return {
+      selected: s.selected || {},     // id -> { wantedPortions }
+      checked: s.checked || {},       // shopping item key -> bool
+    };
+  } catch {
+    return { selected: {}, checked: {} };
+  }
+}
+
+function saveState() {
+  localStorage.setItem(STATE_KEY, JSON.stringify(state));
+}
+
+// ---------- UI: recipe list ----------
+
+function render() {
+  const root = document.getElementById('recipes-section');
+  root.innerHTML = '';
+
+  const byFolder = {};
+  for (const r of recipes) {
+    if (!byFolder[r.folder]) byFolder[r.folder] = [];
+    byFolder[r.folder].push(r);
+  }
+
+  const folderOrder = ['Volaille', 'Boeuf', 'Porc', 'Végé', 'Autres'];
+  const folders = Object.keys(byFolder).sort((a, b) => {
+    const ai = folderOrder.indexOf(a);
+    const bi = folderOrder.indexOf(b);
+    if (ai === -1 && bi === -1) return a.localeCompare(b);
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+
+  for (const folder of folders) {
+    const section = document.createElement('div');
+    section.className = 'folder';
+    section.innerHTML = `<h2>${folder}</h2>`;
+    const list = document.createElement('div');
+    list.className = 'recipe-list';
+    for (const r of byFolder[folder].sort((a, b) => a.titre.localeCompare(b.titre))) {
+      list.appendChild(renderRecipe(r));
+    }
+    section.appendChild(list);
+    root.appendChild(section);
+  }
+
+  updateCount();
+}
+
+function renderRecipe(r) {
+  const card = document.createElement('div');
+  card.className = 'recipe';
+  const sel = state.selected[r.id];
+  if (sel) card.classList.add('selected');
+
+  const cb = document.createElement('input');
+  cb.type = 'checkbox';
+  cb.checked = !!sel;
+  cb.addEventListener('change', () => {
+    if (cb.checked) {
+      state.selected[r.id] = { wantedPortions: r.portions };
+    } else {
+      delete state.selected[r.id];
+    }
+    saveState();
+    render();
+  });
+
+  const body = document.createElement('div');
+  body.className = 'recipe-body';
+
+  const title = document.createElement('div');
+  title.className = 'recipe-title';
+  title.textContent = r.titre;
+  title.addEventListener('click', () => {
+    cb.checked = !cb.checked;
+    cb.dispatchEvent(new Event('change'));
+  });
+
+  const meta = document.createElement('div');
+  meta.className = 'recipe-meta';
+
+  const portions = document.createElement('div');
+  portions.className = 'portions';
+  const wanted = sel ? sel.wantedPortions : r.portions;
+  portions.innerHTML = `<input type="number" min="1" value="${wanted}"> portions <span style="color:var(--muted)">(recette: ${r.portions})</span>`;
+  const portionsInput = portions.querySelector('input');
+  portionsInput.addEventListener('click', e => e.stopPropagation());
+  portionsInput.addEventListener('change', () => {
+    const v = Math.max(1, parseInt(portionsInput.value) || r.portions);
+    if (state.selected[r.id]) {
+      state.selected[r.id].wantedPortions = v;
+      saveState();
+    }
+  });
+
+  meta.appendChild(portions);
+  for (const tag of r.tags) {
+    const t = document.createElement('span');
+    t.className = 'tag';
+    t.textContent = tag;
+    meta.appendChild(t);
+  }
+
+  body.appendChild(title);
+  body.appendChild(meta);
+  card.appendChild(cb);
+  card.appendChild(body);
+  return card;
+}
+
+function updateCount() {
+  const n = Object.keys(state.selected).length;
+  const el = document.getElementById('count');
+  el.textContent = n === 0
+    ? 'Aucune recette sélectionnée'
+    : (n === 1 ? '1 recette sélectionnée' : `${n} recettes sélectionnées`);
+  document.getElementById('generate').disabled = n === 0;
+}
+
+// ---------- Shopping list ----------
+
+function generate() {
+  const items = [];
+  for (const r of recipes) {
+    const sel = state.selected[r.id];
+    if (!sel) continue;
+    const factor = sel.wantedPortions / r.portions;
+    for (const ing of r.ingredients) {
+      const parsed = parseIngredient(ing.raw);
+      const scaledQty = parsed.qty !== null ? parsed.qty * factor : null;
+      items.push({
+        qty: scaledQty,
+        unit: parsed.unit,
+        unitKey: normalizeUnit(parsed.unit) || '',
+        name: parsed.name,
+        nameKey: nameForMatching(parsed.name),
+        category: categorize(parsed.name),
+        fromRecipe: r.titre,
+      });
+    }
+  }
+
+  // Group by category, then merge by (nameKey, unitKey)
+  const byCategory = {};
+  for (const item of items) {
+    if (!byCategory[item.category]) byCategory[item.category] = new Map();
+    const map = byCategory[item.category];
+    const key = `${item.nameKey}||${item.unitKey}`;
+
+    if (map.has(key)) {
+      const ex = map.get(key);
+      if (ex.qty !== null && item.qty !== null) {
+        ex.qty += item.qty;
+        if (!ex.fromRecipes.includes(item.fromRecipe)) {
+          ex.fromRecipes.push(item.fromRecipe);
+        }
+        continue;
+      }
+      // Quantité indéterminée d'un côté — on garde séparé.
+      map.set(`${key}__dup${map.size}`, {
+        qty: item.qty, unit: item.unit, name: item.name,
+        fromRecipes: [item.fromRecipe],
+      });
+    } else {
+      map.set(key, {
+        qty: item.qty, unit: item.unit, name: item.name,
+        fromRecipes: [item.fromRecipe],
+      });
+    }
+  }
+
+  renderShopping(byCategory);
+  document.getElementById('shopping').classList.remove('hidden');
+  document.getElementById('shopping').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderShopping(byCategory) {
+  const root = document.getElementById('shopping-list');
+  root.innerHTML = '';
+
+  const order = [
+    'Viandes & charcuterie',
+    'Produits laitiers & œufs',
+    'Fruits & légumes',
+    'Conserves & bocaux',
+    'Pain, pâtes & céréales',
+    'Sauces & condiments',
+    'Bouillons & vins',
+    'Sucré & sirops',
+    'Huiles',
+    'Épices & herbes séchées',
+    'Autres',
+  ];
+
+  for (const cat of order) {
+    if (!byCategory[cat]) continue;
+    const div = document.createElement('div');
+    div.className = 'category';
+    div.innerHTML = `<h3>${cat}</h3>`;
+    const items = Array.from(byCategory[cat].values())
+      .sort((a, b) => a.name.localeCompare(b.name));
+    for (const it of items) {
+      div.appendChild(renderItem(it));
+    }
+    root.appendChild(div);
+  }
+}
+
+function renderItem(it) {
+  const row = document.createElement('div');
+  row.className = 'item';
+  const key = `${nameForMatching(it.name)}||${it.unit || ''}`;
+  if (state.checked[key]) row.classList.add('checked');
+
+  const cb = document.createElement('input');
+  cb.type = 'checkbox';
+  cb.checked = !!state.checked[key];
+  cb.addEventListener('change', () => {
+    state.checked[key] = cb.checked;
+    saveState();
+    row.classList.toggle('checked', cb.checked);
+  });
+
+  const text = document.createElement('div');
+  text.className = 'item-text';
+  const qtyStr = it.qty !== null ? `${formatQty(it.qty)} ` : '';
+  const unitStr = it.unit ? `${it.unit} ` : '';
+  text.innerHTML = `<div>${qtyStr}${unitStr}${it.name}</div>`;
+  if (it.fromRecipes.length > 1) {
+    const from = document.createElement('div');
+    from.className = 'item-from';
+    from.textContent = `↳ ${it.fromRecipes.join(' + ')}`;
+    text.appendChild(from);
+  } else if (it.fromRecipes.length === 1) {
+    const from = document.createElement('div');
+    from.className = 'item-from';
+    from.textContent = `↳ ${it.fromRecipes[0]}`;
+    text.appendChild(from);
+  }
+
+  row.appendChild(cb);
+  row.appendChild(text);
+  return row;
+}
+
+// ---------- Wire up ----------
+
+document.getElementById('generate').addEventListener('click', generate);
+document.getElementById('reset').addEventListener('click', () => {
+  if (Object.keys(state.selected).length === 0) return;
+  if (!confirm('Désélectionner toutes les recettes ?')) return;
+  state.selected = {};
+  state.checked = {};
+  saveState();
+  document.getElementById('shopping').classList.add('hidden');
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
