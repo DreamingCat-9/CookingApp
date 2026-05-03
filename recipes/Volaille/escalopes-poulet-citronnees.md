@@ -10,6 +10,7 @@ lipides: 6
 tags: [poulet, four, panko, citron]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

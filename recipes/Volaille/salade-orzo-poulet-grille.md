@@ -10,6 +10,7 @@ lipides: 18
 tags: [poulet, salade, orzo, lunch]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

@@ -427,6 +427,44 @@
     right: 0.6rem;
     z-index: 3;
   }
+  .certifie-badge {
+    position: absolute;
+    bottom: 0.55rem;
+    left: 0.6rem;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
+    background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+    color: #78350f;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.28rem 0.55rem;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  }
+  .certifie-badge .crown {
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+  .detail-certifie-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+    color: #78350f;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+    margin-left: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  }
   .recipe-card-content {
     padding: 0.85rem 1rem 1rem;
   }
@@ -1647,6 +1685,7 @@ function parseRecipe(raw) {
     glucides: parseInt(fm.glucides) || null,
     lipides: parseInt(fm.lipides) || null,
     nutritionEstimee: (fm.nutrition_estimee || '').toLowerCase() === 'true',
+    certifieBittle: (fm.certifie_bittle || '').toLowerCase() === 'true',
   };
 }
 
@@ -2000,6 +2039,7 @@ function renderRecipeFeed() {
              onload="this.parentElement.classList.add('has-photo')"
              onerror="this.remove()">
         <span class="placeholder-badge">Photo à venir</span>
+        ${r.certifieBittle ? '<span class="certifie-badge"><span class="crown">👑</span>Certifiée Bittle</span>' : ''}
         <div class="recipe-checkbox-overlay">
           <div class="recipe-checkbox">${state.selected[r.id] ? '✓' : ''}</div>
         </div>
@@ -2055,7 +2095,7 @@ function renderDetailView() {
           </svg>
         </button>
       </div>
-      <div class="detail-tag-pill">${folderIcon(r.folder)} ${r.folder}</div>
+      <div class="detail-tag-pill">${folderIcon(r.folder)} ${r.folder}</div>${r.certifieBittle ? '<span class="detail-certifie-pill"><span style="font-size:0.85rem">👑</span> Certifiée Bittle</span>' : ''}
       <h1 class="detail-title">${r.titre}</h1>
       ${r.tags.length ? `<div class="detail-tags">${r.tags.map(t => `<span class="detail-mini-tag">${t}</span>`).join('')}</div>` : ''}
     </div>

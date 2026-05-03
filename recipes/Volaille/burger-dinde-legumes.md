@@ -10,6 +10,7 @@ lipides: 18
 tags: [dinde, burger, poêle]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

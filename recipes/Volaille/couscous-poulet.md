@@ -10,6 +10,7 @@ lipides: 8
 tags: [poulet, marocain, ras-el-hanout, casserole]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

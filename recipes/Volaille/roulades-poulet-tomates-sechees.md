@@ -10,6 +10,7 @@ lipides: 10
 tags: [poulet, poêle, élégant, tomates séchées]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

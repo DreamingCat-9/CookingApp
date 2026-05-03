@@ -10,6 +10,7 @@ lipides: 14
 tags: [boeuf, mijoteuse, ragoût, hiver]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

@@ -9,7 +9,8 @@ proteines: 45
 glucides: 22
 lipides: 12
 nutrition_estimee: true
-derniere_fois: 
+derniere_fois:
+certifie_bittle: true
 ---
 
 ## Ingrédients

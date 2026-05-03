@@ -10,6 +10,7 @@ lipides: 12
 tags: [poulet, brochettes, four, moyen-orient, zaatar]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

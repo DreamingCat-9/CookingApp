@@ -10,6 +10,7 @@ lipides: 16
 tags: [végé, bowl, grec, four]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

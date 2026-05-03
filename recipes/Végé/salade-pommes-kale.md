@@ -10,6 +10,7 @@ lipides: 11
 tags: [végé, salade, lunch]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

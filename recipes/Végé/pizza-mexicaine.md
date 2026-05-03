@@ -10,6 +10,7 @@ lipides: 12
 tags: [végé, pizza, mexicain, four]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

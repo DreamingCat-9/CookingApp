@@ -10,6 +10,7 @@ lipides: 2
 tags: [soupe, hiver, économique, légumes]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

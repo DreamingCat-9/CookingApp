@@ -10,6 +10,7 @@ lipides: 10
 tags: [asiatique, salade, fruits de mer]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients

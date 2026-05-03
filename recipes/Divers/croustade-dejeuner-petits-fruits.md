@@ -10,6 +10,7 @@ lipides: 7
 tags: [déjeuner, four, fruits, avoine]
 derniere_fois: 
 nutrition_estimee: true
+certifie_bittle: true
 ---
 
 ## Ingrédients
