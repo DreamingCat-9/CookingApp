@@ -6,14 +6,23 @@
 <title>Recettes & liste de courses de Bittle</title>
 <style>
   :root {
-    --bg: #faf9f6;
-    --panel: #fff;
-    --border: #e2e0da;
-    --text: #2a2a2a;
-    --muted: #777;
+    --bg: #fdf6ec;
+    --panel: #ffffff;
+    --panel-soft: #fef3e6;
+    --border: #ecdcc8;
+    --border-soft: #f5e8d6;
+    --text: #2a2118;
+    --muted: #8a7866;
     --accent: #2d6a4f;
     --accent-light: #d8f3dc;
+    --accent-soft: #e8f5ed;
+    --orange: #ea6c2d;
+    --orange-light: #fde0d0;
     --warn: #b95c00;
+    --shadow: 0 2px 8px rgba(180, 140, 100, 0.08);
+    --shadow-lg: 0 6px 20px rgba(180, 140, 100, 0.12);
+    --radius: 14px;
+    --radius-sm: 10px;
   }
   * { box-sizing: border-box; }
   body {
@@ -23,157 +32,445 @@
     color: var(--text);
     line-height: 1.5;
   }
-  header {
-    background: var(--panel);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 1.5rem;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
+
+  /* ============ Layout ============ */
+  .app {
+    display: grid;
+    grid-template-columns: 240px 1fr 280px;
+    gap: 1.25rem;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 1.25rem;
+    align-items: start;
   }
-  header h1 {
-    margin: 0;
-    font-size: 1.25rem;
+  .col-left, .col-right {
+    position: sticky;
+    top: 1.25rem;
+    max-height: calc(100vh - 2.5rem);
+    overflow-y: auto;
+  }
+  .col-main { min-width: 0; }
+
+  @media (max-width: 1024px) {
+    .app {
+      grid-template-columns: 1fr;
+    }
+    .col-left, .col-right {
+      position: static;
+      max-height: none;
+    }
+  }
+
+  /* ============ Panels ============ */
+  .panel {
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+  .panel-title {
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .panel-subtitle {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ============ Sidebar gauche : catégories ============ */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+    padding: 0.5rem;
+  }
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+    background: var(--orange);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+  .brand-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .brand-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  .cat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .cat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text);
+    font-size: 0.9rem;
+    text-align: left;
+    width: 100%;
+  }
+  .cat-item:hover {
+    background: var(--panel-soft);
+  }
+  .cat-item.active {
+    background: var(--orange-light);
+    border-color: var(--orange);
+    color: var(--orange);
     font-weight: 600;
   }
-  .controls {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    flex-wrap: wrap;
+  .cat-icon {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
   }
-  .count {
+  .cat-count {
+    margin-left: auto;
+    font-size: 0.75rem;
     color: var(--muted);
-    font-size: 0.9rem;
+    background: var(--panel-soft);
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
   }
-  button {
-    background: var(--accent);
-    color: white;
-    border: 0;
-    padding: 0.55rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
+  .cat-item.active .cat-count {
+    background: rgba(255,255,255,0.6);
+    color: var(--orange);
   }
-  button:hover { filter: brightness(1.1); }
-  button.ghost {
+
+  .reset-btn {
+    margin-top: 1rem;
+    width: 100%;
     background: transparent;
     color: var(--muted);
     border: 1px solid var(--border);
-  }
-  button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 1.5rem;
-  }
-  .folder {
-    margin-bottom: 1.5rem;
-  }
-  .folder h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .recipe-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 0.5rem;
-  }
-  .recipe {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.75rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    transition: border-color 0.15s;
-  }
-  .recipe.selected {
-    border-color: var(--accent);
-    background: var(--accent-light);
-  }
-  .recipe input[type="checkbox"] {
-    margin-top: 0.2rem;
+    padding: 0.55rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
     cursor: pointer;
+  }
+  .reset-btn:hover { background: var(--panel-soft); color: var(--text); }
+
+  /* ============ Bannière sélection ============ */
+  .hero {
+    background: linear-gradient(135deg, var(--orange-light), #fef3e6);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+  .hero-empty {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-empty-icon {
+    font-size: 3rem;
     flex-shrink: 0;
   }
-  .recipe-body {
+  .hero-empty h2 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.2rem;
+  }
+  .hero-empty p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hero-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  .hero-header .count-badge {
+    background: var(--orange);
+    color: white;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    margin-left: 0.5rem;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: 0;
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(45, 106, 79, 0.25);
+  }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .selected-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.6rem;
+  }
+  .mini-card {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-soft);
+  }
+  .mini-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .mini-card-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.3;
     flex: 1;
     min-width: 0;
   }
-  .recipe-title {
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-    cursor: pointer;
-  }
-  .recipe-meta {
-    font-size: 0.8rem;
+  .mini-card-remove {
+    background: transparent;
+    border: 0;
     color: var(--muted);
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    line-height: 1;
+    flex-shrink: 0;
   }
-  .portions {
+  .mini-card-remove:hover { color: var(--orange); }
+  .mini-card-controls {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--muted);
   }
-  .portions input {
-    width: 3.5rem;
-    padding: 0.15rem 0.3rem;
+  .mini-card-controls input {
+    width: 3rem;
+    padding: 0.2rem 0.35rem;
     border: 1px solid var(--border);
-    border-radius: 4px;
-    font-size: 0.85rem;
-  }
-  .tag {
-    background: rgba(0,0,0,0.06);
-    padding: 0.1rem 0.4rem;
-    border-radius: 3px;
-    font-size: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
   }
 
-  #shopping {
-    margin-top: 2rem;
+  /* ============ Recherche ============ */
+  .search-bar {
     background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem;
-  }
-  #shopping h2 {
-    margin-top: 0;
-  }
-  .category {
+    border-radius: 999px;
+    padding: 0.6rem 1.1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     margin-bottom: 1.25rem;
   }
+  .search-bar svg { color: var(--muted); flex-shrink: 0; }
+  .search-bar input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--text);
+  }
+  .search-bar input::placeholder { color: var(--muted); }
+
+  /* ============ Recettes ============ */
+  .folder { margin-bottom: 1.5rem; }
+  .folder h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.75rem;
+  }
+  .recipe {
+    background: var(--panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    box-shadow: var(--shadow);
+    transition: all 0.15s;
+    position: relative;
+  }
+  .recipe:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+  .recipe.selected {
+    border-color: var(--orange);
+    background: linear-gradient(180deg, var(--panel) 0%, var(--orange-light) 100%);
+  }
+  .recipe-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .recipe-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    cursor: pointer;
+    flex: 1;
+  }
+  .recipe-checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: white;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: bold;
+    line-height: 1;
+  }
+  .recipe-checkbox.checked {
+    background: var(--orange);
+    border-color: var(--orange);
+  }
+  .recipe-meta {
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.8rem;
+  }
+  .recipe-actions {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: auto;
+  }
+  .btn-view {
+    background: var(--panel-soft);
+    color: var(--orange);
+    border: 0;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 1;
+  }
+  .btn-view:hover { background: var(--orange-light); }
+
+  /* ============ Sidebar droite : nutrition ============ */
+  .nutri-total {
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-soft);
+    margin-bottom: 1rem;
+  }
+  .nutri-total-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .nutri-total-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.3rem;
+  }
+  .nutri-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 0.88rem;
+  }
+  .nutri-row:last-child { border-bottom: 0; }
+  .nutri-label { color: var(--muted); }
+  .nutri-value { font-weight: 600; }
+
+  .nutri-per-portion {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px dashed var(--border-soft);
+  }
+  .nutri-placeholder {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+
+  /* ============ Liste de courses ============ */
+  #shopping {
+    margin-top: 1.5rem;
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  #shopping h2 { margin-top: 0; }
+  .category { margin-bottom: 1.25rem; }
   .category h3 {
     margin: 0 0 0.5rem 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--accent);
-    border-bottom: 2px solid var(--accent-light);
+    border-bottom: 2px solid var(--accent-soft);
     padding-bottom: 0.25rem;
   }
   .item {
     display: flex;
     align-items: flex-start;
     gap: 0.5rem;
-    padding: 0.3rem 0;
-    border-bottom: 1px solid #f0eee8;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border-soft);
   }
   .item:last-child { border-bottom: none; }
   .item input[type="checkbox"] { margin-top: 0.25rem; }
@@ -187,108 +484,12 @@
     color: var(--muted);
     margin-top: 0.1rem;
   }
-  .merge-warn { color: var(--warn); }
 
-  details.recipe-details {
-    margin-top: 0.5rem;
-  }
-  details.recipe-details summary {
-    cursor: pointer;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-  details.recipe-details pre {
-    background: #f4f3ee;
-    padding: 0.75rem;
-    border-radius: 4px;
-    overflow-x: auto;
-    font-size: 0.8rem;
-    white-space: pre-wrap;
-    margin-top: 0.5rem;
-  }
-
-  .hidden { display: none; }
-
-  /* Filtres */
-  .filters {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .filters .row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    align-items: center;
-  }
-  .filters .label {
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-right: 0.5rem;
-    min-width: 80px;
-  }
-  .filters input[type="search"] {
-    flex: 1;
-    min-width: 200px;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-size: 0.9rem;
-  }
-  .pill {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 0.3rem 0.7rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .pill:hover { background: rgba(0,0,0,0.04); }
-  .pill.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
-  .pill.tag-pill.active {
-    background: var(--accent-light);
-    color: var(--accent);
-    border-color: var(--accent);
-  }
-
-  /* Bouton voir ingrédients sur la carte */
-  .recipe-actions {
-    display: flex;
-    gap: 0.4rem;
-    margin-top: 0.4rem;
-  }
-  .btn-view {
-    background: transparent;
-    color: var(--accent);
-    border: 1px solid var(--border);
-    padding: 0.25rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.78rem;
-    cursor: pointer;
-  }
-  .btn-view:hover {
-    background: var(--accent-light);
-    border-color: var(--accent);
-  }
-
-  /* Modal */
+  /* ============ Modal ============ */
   .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(40, 25, 10, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -297,12 +498,13 @@
   }
   .modal {
     background: var(--panel);
-    border-radius: 8px;
+    border-radius: var(--radius);
     max-width: 600px;
     width: 100%;
     max-height: 85vh;
     overflow-y: auto;
     padding: 1.5rem;
+    box-shadow: var(--shadow-lg);
   }
   .modal-header {
     display: flex;
@@ -311,17 +513,10 @@
     gap: 1rem;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-soft);
   }
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.15rem;
-  }
-  .modal-meta {
-    color: var(--muted);
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-  }
+  .modal-header h2 { margin: 0; font-size: 1.15rem; }
+  .modal-meta { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
   .modal-close {
     background: transparent;
     color: var(--muted);
@@ -333,19 +528,14 @@
   }
   .modal h3 {
     margin: 1rem 0 0.5rem 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--accent);
+    color: var(--orange);
   }
   .modal h3:first-of-type { margin-top: 0; }
-  .modal ul {
-    margin: 0;
-    padding-left: 1.25rem;
-  }
-  .modal li {
-    margin-bottom: 0.25rem;
-  }
+  .modal ul { margin: 0; padding-left: 1.25rem; }
+  .modal li { margin-bottom: 0.25rem; }
 
   .empty-state {
     text-align: center;
@@ -353,41 +543,77 @@
     padding: 2rem;
     font-style: italic;
   }
+  .hidden { display: none; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Recettes & liste de courses de Bittle</h1>
-  <div class="controls">
-    <span class="count" id="count">0 recette sélectionnée</span>
-    <button id="generate">Générer la liste</button>
-    <button id="reset" class="ghost">Tout désélectionner</button>
-  </div>
-</header>
+<div class="app">
 
-<main>
-  <section class="filters" id="filters">
-    <div class="row">
+  <!-- ============ COLONNE GAUCHE : catégories ============ -->
+  <aside class="col-left">
+    <div class="panel">
+      <div class="brand">
+        <div class="brand-logo">🍳</div>
+        <div>
+          <div class="brand-name">Bittle</div>
+          <div class="brand-sub">Recettes & courses</div>
+        </div>
+      </div>
+      <div class="panel-subtitle">Catégories</div>
+      <div id="cat-list" class="cat-list"></div>
+      <button id="reset-filters" class="reset-btn" type="button">Réinitialiser</button>
+    </div>
+  </aside>
+
+  <!-- ============ COLONNE PRINCIPALE ============ -->
+  <main class="col-main">
+    <!-- Bannière sélection -->
+    <section id="hero" class="hero"></section>
+
+    <!-- Recherche -->
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/>
+      </svg>
       <input type="search" id="search" placeholder="Rechercher une recette…">
-      <button class="pill" id="reset-filters" type="button">Réinitialiser</button>
     </div>
-    <div class="row">
-      <span class="label">Catégories</span>
-      <div id="folder-pills" class="row" style="gap:0.4rem"></div>
+
+    <!-- Liste de recettes -->
+    <section id="recipes-section"></section>
+
+    <!-- Liste de courses (générée à la demande) -->
+    <section id="shopping" class="hidden">
+      <h2>Liste de courses</h2>
+      <div id="shopping-list"></div>
+    </section>
+  </main>
+
+  <!-- ============ COLONNE DROITE : nutrition ============ -->
+  <aside class="col-right">
+    <div class="panel">
+      <h3 class="panel-title">Nutrition</h3>
+      <div id="nutri-content"></div>
     </div>
-  </section>
-  <section id="recipes-section"></section>
-  <section id="shopping" class="hidden">
-    <h2>Liste de courses</h2>
-    <div id="shopping-list"></div>
-  </section>
-</main>
+  </aside>
+
+</div>
 
 <div id="modal-root"></div>
 
 <script>
-const RECIPES_RAW = [{"folder": "Boeuf", "filename": "boeuf-au-brocoli.md", "id": "Boeuf__boeuf-au-brocoli", "raw": "---\ntitre: Bœuf au brocoli\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 15 min\ntags: [asiatique, wok, sauté]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauté\n- 450 g (1 lb) bifteck de flanc ou tournedos d'intérieur de ronde\n- 5 ml (1 c. à thé) bicarbonate de soude\n- 450 g (1 lb) brocoli, coupé en bouquets\n- 45 ml (3 c. à soupe) huile végétale, divisée\n- 2 oignons verts émincés, le blanc et le vert séparés\n- 2 gousses d'ail hachées\n- 1 petite carotte, coupée en deux sur la longueur et émincée\n- 15 ml (1 c. à soupe) gingembre frais haché\n- Sel et poivre\n\n### Sauce\n- 75 ml (1/3 tasse) eau\n- 45 ml (3 c. à soupe) sauce soya réduite en sodium\n- 45 ml (3 c. à soupe) sauce aux huîtres\n- 15 ml (1 c. à soupe) fécule de maïs\n- 15 ml (1 c. à soupe) sucre\n- 5 ml (1 c. à thé) huile de sésame grillé\n\n## Préparation\n1. Sur un plan de travail, trancher le bifteck dans le sens contraire du grain de la viande. Dans un bol, mélanger la viande avec le bicarbonate de soude. Laisser macérer 15 minutes (voir notes).\n2. Rincer la viande à l'eau froide, égoutter et éponger à l'aide de papier absorbant. Saler et poivrer.\n3. Entre-temps, dans une casserole d'eau bouillante salée, blanchir le brocoli 2 minutes. Égoutter.\n4. Dans un bol, mélanger au fouet tous les ingrédients de la sauce. Réserver.\n5. Dans un wok ou une grande poêle antiadhésive à feu élevé, cuire la moitié de la viande à la fois 2 minutes de chaque côté dans 15 ml (1 c. à soupe) de l'huile, ou jusqu'à ce qu'elle soit bien dorée. Réserver sur une assiette.\n6. Dans le même wok à feu élevé, cuire le blanc des oignons verts, l'ail, la carotte et le gingembre dans le reste de l'huile 2 minutes en remuant.\n7. Ajouter le brocoli et la sauce. Poursuivre la cuisson jusqu'à ce que la sauce épaississe légèrement.\n8. Remettre la viande dans le wok et bien l'enrober de la sauce.\n9. Dans une grande assiette de service, répartir le bœuf au brocoli. Parsemer du vert des oignons verts. Accompagner de riz au jasmin ou de vermicelles de riz, si désiré.\n\n## Notes\n- Le bicarbonate de soude attendrit la viande lors du temps de macération de 15 min.\n- Temps total ajouté : 15 min de macération en plus des 20 min de prep et 15 min de cuisson.\n"}, {"folder": "Boeuf", "filename": "boulettes-bourguignonnes.md", "id": "Boeuf__boulettes-bourguignonnes", "raw": "---\ntitre: Boulettes style bourguignon\nportions: 6\ntemps_prep: 45 min\ntemps_cuisson: 45 min\ntags: [français, four, boulettes, mijoté]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauce style bourguignon\n- 15 ml (1 c. à soupe) huile d'olive\n- 175 g lardons\n- 750 ml (3 tasses, 450 g) carottes en petits dés\n- 1 oignon rouge, haché grossièrement\n- 2 gousses d'ail, hachées\n- 2 clous de girofle\n- 5 ml (1 c. à thé) herbes de Provence\n- 2 feuilles de laurier\n- 375 ml (1 1/2 tasse) vin rouge\n- 1 L (4 tasses) bouillon de bœuf\n- 45 ml (3 c. à soupe) pâte de tomates\n- 2,5 ml (1/2 c. à thé) sel\n- Poivre, au goût\n\n### Boulettes de bœuf\n- 675 g bœuf haché\n- 80 ml (1/3 tasse, 25 g) chapelure de céréales de riz soufflé sans gluten, obtenue au mélangeur\n- 1 œuf\n- 10 ml (2 c. à thé) herbes de Provence\n- 1 gousse d'ail, hachée\n- 2,5 ml (1/2 c. à thé) sel\n- Poivre, au goût\n\n## Préparation\n1. Préchauffer le four à 200 °C (400 °F) et tapisser une plaque à biscuits de papier parchemin.\n2. Dans un grand faitout, chauffer l'huile d'olive à feu moyen-élevé et faire dorer les carottes, l'oignon et les lardons pendant 7 minutes.\n3. Ajouter l'ail, les clous de girofle, les herbes de Provence, le sel, le poivre et les feuilles de laurier. Cuire encore 2 minutes.\n4. Déglacer avec le vin rouge et porter à ébullition. Laisser réduire 5 minutes.\n5. Ajouter le bouillon et la pâte de tomates. Laisser mijoter encore 15 minutes.\n6. Pendant la cuisson de la sauce, dans un grand bol, mélanger tous les ingrédients des boulettes. Former des boulettes de la grosseur d'une balle de golf et les déposer sur la plaque à biscuits. Cuire au four 15 minutes. Réserver.\n7. Ajouter les boulettes dans la sauce et poursuivre la cuisson encore 15 minutes à feu doux.\n"}, {"folder": "Boeuf", "filename": "roti-palette-mijoteuse.md", "id": "Boeuf__roti-palette-mijoteuse", "raw": "---\ntitre: Rôti de palette à la mijoteuse\nportions: 15\ntemps_prep: 20 min\ntemps_cuisson: 8 h\ntags: [mijoteuse, rôti]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Bœuf\n- 30 ml (2 c. à soupe) beurre non salé\n- 1 kg (2,2 lb) rôti de palette de bœuf\n- 500 ml (2 tasses) eau\n- 1 mélange à soupe à l'oignon (1 sachet de 55 g)\n- 45 ml (3 c. à soupe) cassonade\n- 30 ml (2 c. à soupe) bouillon de bœuf liquide Bovril\n- 22 ml (1 1/2 c. à soupe) sauce soya régulière ou foncée (supérieure)\n- 3 gousses d'ail hachées\n- 15 ml (1 c. à soupe) gingembre frais râpé\n- 5 ml (1 c. à thé) moutarde de Dijon\n- 5 ml (1 c. à thé) moutarde à l'ancienne\n- Sel et poivre\n\n### Légumes (facultatifs)\n- 3 grosses carottes en gros tronçons de 4 à 6 cm\n- 4 moyennes pommes de terre en quartiers\n\n### Garniture\n- Persil ou thym frais\n\n## Préparation\n1. Dans une grande poêle en acier inoxydable à feu moyen élevé, faire fondre le beurre. Saisir le rôti de palette environ 2 minutes de chaque côté pour lui donner une belle couleur.\n2. Déposer le rôti de palette saisi dans le fond de la mijoteuse.\n3. Dans un bol, mélanger l'eau avec le reste des ingrédients du bœuf. Verser le mélange sur le rôti saisi, ajouter les légumes (si désirés) dans la mijoteuse, couvrir et cuire 8 heures à faible intensité (basse température) ou 4 heures à intensité élevée pour une cuisson parfaite.\n4. Après le temps de cuisson, à l'aide de deux fourchettes, retirer les morceaux de gras ou les os de la viande et effilocher celle-ci.\n5. Servir les morceaux de viande avec la sauce au goût de bouillon de bœuf et les accompagnements désirés. Garnir de fines herbes comme du persil ou du thym frais.\n\n## Notes\n- 15 portions est ce qu'indique la recette originale, mais la quantité de viande (2,2 lb) suggère plutôt 6-8 portions raisonnables. À valider à la cuisson.\n"}, {"folder": "Boeuf", "filename": "roti-palette-oignons-erable.md", "id": "Boeuf__roti-palette-oignons-erable", "raw": "---\ntitre: Rôti de palette aux oignons et à l'érable à la mijoteuse\nportions: 6\ntemps_prep: 20 min\ntemps_cuisson: 8 h\ntags: [mijoteuse, érable, rôti]\nderniere_fois: \n---\n\n## Ingrédients\n- 30 ml (2 c. à soupe) poudre d'oignon\n- 5 ml (1 c. à thé) poudre d'ail\n- 30 ml (2 c. à soupe) moutarde de Dijon\n- 15 ml (1 c. à soupe) thym frais haché\n- Sel et poivre au goût\n- 1 rôti de palette de bœuf sans os de 900 g (2 lb)\n- 15 ml (1 c. à soupe) huile d'olive\n- 180 ml (3/4 tasse) bouillon de bœuf\n- 80 ml (1/3 tasse) sirop d'érable\n- 1 oignon coupé en rondelles\n- 4 carottes nantaises coupées en morceaux\n- 8 pommes de terre grelots\n- 1/2 petit rutabaga coupé en cubes\n\n## Préparation\n1. Dans un bol, mélanger la poudre d'oignon avec la poudre d'ail, la moutarde et le thym. Saler et poivrer.\n2. Retirer l'excédent de gras du rôti de palette.\n3. Dans une poêle, chauffer l'huile à feu moyen. Saisir le rôti de palette de 1 à 2 minutes de chaque côté. Transférer dans une assiette.\n4. Badigeonner les deux côtés du rôti avec la préparation à la moutarde. Déposer le rôti dans la mijoteuse.\n5. Ajouter le bouillon, le sirop d'érable et les légumes.\n6. Couvrir et cuire de 8 à 9 heures à faible intensité, jusqu'à ce que la viande se défasse facilement à la fourchette.\n"}, {"folder": "Boeuf", "filename": "soupe-boeuf-udon.md", "id": "Boeuf__soupe-boeuf-udon", "raw": "---\ntitre: Soupe au boeuf et aux nouilles udon à la mijoteuse\nportions: 5\ntemps_prep: 20 min\ntemps_cuisson: 8 h\ntags: [asiatique, mijoteuse, soupe]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Soupe\n- 1 kg (2,2 lb) rôti de palette de boeuf désossé, coupé en 8 morceaux\n- 15 ml (1 c. à soupe) huile végétale\n- 1 oignon, émincé\n- 4 gousses d'ail, hachées\n- 15 ml (1 c. à soupe) gingembre frais haché\n- 1,5 litre (6 tasses) bouillon de boeuf\n- 75 ml (1/3 tasse) sauce hoisin, et plus pour le service\n- 5 ml (1 c. à thé) sauce sriracha, et plus pour le service\n- 2,5 ml (1/2 c. à thé) cinq-épices moulu\n\n### Garniture\n- 2 paquets de 200 g chacun de nouilles udon\n- 1 petit brocoli, coupé en petits bouquets\n- 2 carottes, coupées en julienne\n\n## Préparation\n1. Dans une grande poêle antiadhésive à feu moyen-élevé, dorer le boeuf de chaque côté dans l'huile. Déposer dans la mijoteuse.\n2. Dans la même poêle à feu moyen, attendrir l'oignon, l'ail et le gingembre en remuant. Déglacer avec 250 ml (1 tasse) du bouillon. Transvider dans la mijoteuse. Ajouter le reste du bouillon, la sauce hoisin, la sauce sriracha et le cinq-épices.\n3. Couvrir et cuire à basse température (Low) 8 heures.\n4. Dans une grande casserole d'eau bouillante salée, cuire les nouilles et le brocoli 2 minutes. Ajouter les carottes et poursuivre la cuisson 30 secondes. Égoutter.\n5. Répartir les nouilles et les légumes dans des bols. Verser le bouillon chaud dans les bols. Garnir de la viande. Accompagner de sauce hoisin et de sauce sriracha, au goût.\n"}, {"folder": "Divers", "filename": "bagels-air-fryer.md", "id": "Divers__bagels-air-fryer", "raw": "---\ntitre: Bagels au air-fryer\nportions: 4\ntemps_prep: \ntemps_cuisson: 15 min\ntags: [air-fryer, déjeuner, pain]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Recette de base\n- 1 tasse de farine\n- 1 c. à soupe de poudre à pâte\n- 1/2 c. à thé de sel\n- 1 tasse de yogourt grec\n- Spray de cuisson\n\n### Variantes (au choix)\n- Pumpkin Spice : ajouter 3 c. à soupe de cassonade, 1 c. à soupe d'épices tarte à la citrouille et garnir de graines de citrouille\n- Garnir de graines de sésame\n- Garnir d'épices Everything Bagel\n- Ajouter 1/4 tasse de fromage râpé au mélange\n\n## Préparation\n1. Dans un bol, mesurer et ajouter la farine, la poudre à pâte et le sel. Fouetter pour bien mélanger.\n2. Ajouter ensuite le yogourt grec et remuer avec une cuillère en bois ou une spatule en caoutchouc jusqu'à ce que le tout soit combiné.\n3. Former une boule avec la pâte et la déposer sur une surface légèrement farinée.\n4. Pétrir la pâte pendant 2 à 3 minutes, puis la diviser en 4 portions égales.\n5. Rouler chaque morceau en un boudin de 20 à 25 cm (8 à 10 pouces) et pincer les extrémités pour former un bagel.\n6. Vaporiser les bagels de spray de cuisson et saupoudrer des garnitures préférées.\n7. Faire cuire les bagels à la friteuse à air à 390 °F (350 °F) pendant 15 minutes, en retournant à mi-cuisson.\n\n## Notes\n"}, {"folder": "Porc", "filename": "boulettes-saucisses-orzo.md", "id": "Porc__boulettes-saucisses-orzo", "raw": "---\ntitre: Boulettes de saucisses à la courgette, orzo au brocoli\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 20 min\ntags: [italien, four, orzo, boulettes]\nderniere_fois: \n---\n\n## Ingrédients\n- 1 boîte de 398 ml (14 oz) tomates en dés\n- 30 ml (2 c. à soupe) pâte de tomates\n- 450 g (1 lb) saucisses italiennes douces ou fortes, la chair seulement\n- 55 g (3/4 tasse) parmesan frais râpé, divisé\n- 1 courgette, râpée\n- 750 ml (3 tasses) bouillon de poulet\n- 200 g (1 tasse) orzo\n- 1 petit brocoli, râpé\n- 30 ml (2 c. à soupe) beurre\n- Sel et poivre\n\n## Préparation\n1. Placer la grille au centre du four. Préchauffer le four à 230 °C (450 °F).\n2. Dans un plat de cuisson de 33 x 23 cm (13 x 9 po), mélanger les tomates et la pâte de tomates. Saler et poivrer. Réserver.\n3. Dans un grand bol, mélanger la chair à saucisses avec 35 g (1/2 tasse) du parmesan et la courgette. Saler légèrement et poivrer.\n4. À l'aide d'une cuillère à crème glacée de 45 ml (3 c. à soupe), former des boulettes avec le mélange et les répartir dans le plat de cuisson au fur et à mesure.\n5. Cuire au four 15 minutes. Augmenter la température à gril (broil) et poursuivre la cuisson 5 minutes ou jusqu'à ce que les boulettes soient cuites et légèrement dorées et que la sauce ait réduit légèrement.\n6. Entre-temps, dans une casserole, porter à ébullition le bouillon. Saler légèrement et poivrer. Ajouter l'orzo et cuire très al dente, environ 6 minutes. Ajouter le brocoli et poursuivre la cuisson 2 minutes ou jusqu'à ce que l'orzo et le brocoli soient cuits. Retirer du feu.\n7. Ajouter le beurre et le reste du parmesan dans la casserole avec l'orzo. Bien mélanger et rectifier l'assaisonnement.\n8. Dans des assiettes creuses, répartir l'orzo, la sauce tomate et les boulettes. Servir aussitôt.\n"}, {"folder": "Porc", "filename": "cotelettes-porc-bbq.md", "id": "Porc__cotelettes-porc-bbq", "raw": "---\ntitre: Côtelettes de porc au four, sauce barbecue express\nportions: 4\ntemps_prep: 15 min\ntemps_cuisson: 30 min\ntags: [bbq, plaque, four, érable]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Porc et légumes\n- 450 g (1 lb) carottes nantaises, coupées en deux sur la longueur, puis en tronçons biseautés de 2,5 cm (1 po)\n- 280 g (4 tasses) bouquets de brocoli (environ 1 brocoli)\n- 45 ml (3 c. à soupe) huile végétale, divisée\n- 10 ml (2 c. à thé) paprika doux\n- 7,5 ml (1 1/2 c. à thé) cassonade\n- 2,5 ml (1/2 c. à thé) poudre d'ail\n- 2,5 ml (1/2 c. à thé) sel\n- 4 côtelettes de porc désossées d'environ 2 cm (3/4 po) d'épaisseur\n- Ciboulette ciselée, au goût (facultatif)\n\n### Sauce\n- 60 ml (1/4 tasse) ketchup\n- 60 ml (1/4 tasse) sirop d'érable\n- 30 ml (2 c. à soupe) moutarde à l'ancienne\n- 15 ml (1 c. à soupe) vinaigre de cidre\n\n## Préparation\n1. Placer la grille au centre du four. Préchauffer le four à 220 °C (425 °F).\n2. Sur une plaque de cuisson antiadhésive ou tapissée de papier parchemin, enrober les légumes de 30 ml (2 c. à soupe) d'huile. Saler et poivrer. Cuire au four 15 minutes.\n3. Entre-temps, dans un petit bol, mélanger le paprika avec la cassonade, la poudre d'ail et le sel. Poivrer généreusement. Sur une assiette, enrober les côtelettes du mélange d'épices de chaque côté. Arroser du reste de l'huile. Laisser macérer le temps de cuire les légumes.\n4. Retirer la plaque du four. Répartir les côtelettes sur la plaque à travers les légumes. Poursuivre la cuisson 10 minutes ou jusqu'au degré de cuisson désiré. Laisser reposer les côtelettes 5 minutes sur une autre assiette.\n5. Poursuivre la cuisson des légumes au four jusqu'à ce qu'ils soient dorés et tendres, au besoin. Verser le jus de cuisson accumulé sur les légumes et bien mélanger.\n6. Entre-temps, dans une tasse à mesurer ou un bol en verre, mélanger tous les ingrédients de la sauce. Saler et poivrer. Cuire au four à micro-ondes 1 min 30 en remuant à mi-cuisson.\n7. Dans des assiettes, répartir la viande et les légumes. Accompagner de la sauce. Parsemer de ciboulette. Servir avec une purée de pommes de terre, si désiré.\n"}, {"folder": "Porc", "filename": "courgettes-farcies-italienne.md", "id": "Porc__courgettes-farcies-italienne", "raw": "---\ntitre: Courgettes farcies à l'italienne\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 35 min\ntags: [italien, four, farci]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Courgettes\n- 4 courgettes moyennes, coupées en 2 dans le sens de la longueur\n- 30 ml (2 c. à soupe) huile d'olive\n- Sel et poivre, au goût\n- 30 ml (2 c. à soupe) persil frais haché, pour garnir\n\n### Farce\n- Sauce à Spaghetti\n\n### Garniture\n- 125 ml (1/2 tasse) fromage mozzarella râpé\n- 125 ml (1/2 tasse) parmesan râpé\n- 125 ml (1/2 tasse) chapelure panko\n- 2,5 ml (1/2 c. à thé) épices italiennes\n\n## Préparation\n1. Préchauffer le four à 200 °C (400 °F), placer la grille au centre et tapisser une plaque à cuisson de papier parchemin ou d'une feuille antiadhésive réutilisable.\n2. À l'aide d'une cuillère, gratter le centre des courgettes pour enlever les graines et créer une cavité, en laissant une bordure de chair. Badigeonner les courgettes d'huile d'olive et assaisonner.\n3. Déposer sur la plaque et enfourner 15 minutes.\n4. Pendant ce temps, réchauffer la sauce à spaghetti dans une casserole.\n5. Dans un bol, mélanger tous les ingrédients de la garniture.\n6. Répartir la sauce à spaghetti sur les courgettes, parsemer de la garniture, puis remettre au four environ 10 minutes.\n7. Garnir de persil et servir.\n"}, {"folder": "Porc", "filename": "filet-mignon-porc-erable.md", "id": "Porc__filet-mignon-porc-erable", "raw": "---\ntitre: Filet mignon de porc à l'érable\nportions: 3\ntemps_prep: 15 min\ntemps_cuisson: 10 min\ntags: [poêle, érable, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n- 125 ml (1/2 tasse) bouillon de poulet\n- 60 ml (1/4 tasse) sirop d'érable\n- 5 ml (1 c. à thé) moutarde de Dijon\n- 5 ml (1 c. à thé) ketchup\n- 5 ml (1 c. à thé) fécule de maïs\n- 1 filet de porc de 450 g (1 lb)\n- 30 ml (2 c. à soupe) beurre\n- 1 petit oignon, émincé\n- Sel et poivre\n\n## Préparation\n1. Dans un petit bol, mélanger au fouet le bouillon, le sirop d'érable, la moutarde, le ketchup et la fécule de maïs. Réserver.\n2. Sur un plan de travail, couper le filet de porc en tranches d'environ 1,5 cm (1/2 po).\n3. Dans une poêle antiadhésive à feu moyen-élevé, dorer la moitié de la viande à la fois, de chaque côté, dans la moitié du beurre. Réserver sur une assiette.\n4. Ajouter l'oignon dans la poêle et poursuivre la cuisson 2 minutes en remuant.\n5. Ajouter le mélange de bouillon et remettre la viande. Laisser mijoter 2 minutes. Saler et poivrer.\n6. Servir le porc et la sauce avec du riz blanc et un légume au choix, si désiré.\n\n## Notes\n- Recette pour 2 à 3 portions selon l'appétit.\n"}, {"folder": "Porc", "filename": "plaque-porc-grecque.md", "id": "Porc__plaque-porc-grecque", "raw": "---\ntitre: Plaque de porc à la grecque\nportions: 6\ntemps_prep: 15 min\ntemps_cuisson: 30 min\ntags: [grec, four, plaque]\nderniere_fois: \n---\n\n## Ingrédients\n- 1 filet de porc d'environ 450 g (1 lb) coupé en tranches de 1,5 cm (1/2 po)\n- 675 g (1 1/2 lb) pommes de terre grelots coupées en 2 ou 4 selon la grosseur\n- 2 poivrons en gros cubes\n- 1 petit oignon rouge coupé en 8\n- 15 ml (1 c. à soupe) ail haché en pot (ou 3 gousses hachées finement)\n- 30 ml (2 c. à soupe) huile d'olive\n- Le jus de 1 citron (ou 60 ml / 1/4 tasse)\n- Poivre et sel\n- 180 ml (3/4 tasse) fromage feta émietté (120 g / 1/4 lb)\n- 60 ml (1/4 tasse) feuilles d'origan frais\n\n## Préparation\n1. Préchauffer le four à 230 °C (450 °F). Placer la grille au centre du four. Tapisser une plaque de cuisson de papier parchemin.\n2. Déposer le porc, les pommes de terre, les poivrons, l'oignon et l'ail sur la plaque.\n3. Verser l'huile et le jus de citron. Poivrer généreusement et ajouter une pincée de sel. Remuer avec les doigts pour enrober et répartir les ingrédients sur la plaque. Ajouter le fromage feta, sans mélanger.\n4. Cuire au four 30 minutes ou jusqu'à ce que la pointe d'un couteau s'insère facilement dans une pomme de terre.\n5. Au moment de servir, garnir d'origan et, si désiré, accompagner de sauce au yogourt et à l'ail.\n\n## Notes\n- Se conserve 4 jours au réfrigérateur ou 3 mois au congélateur.\n- **Sauce au yogourt et à l'ail (accompagnement facultatif)** : mélanger 250 ml (1 tasse) de yogourt grec nature, 2,5 ml (1/2 c. à thé) d'ail haché en pot, du poivre et une pincée de sel.\n- **Variantes** :\n  - *Italienne* — remplacer citron, feta et origan par tomates séchées, mozzarella fraîche et basilic.\n  - *Asiatique* — remplacer par jus de lime, gingembre et graines de sésame grillées.\n  - *Mexicaine* — remplacer par assaisonnement au chili, salsa et coriandre fraîche.\n"}, {"folder": "Volaille", "filename": "boulettes-dinde-asiatique.md", "id": "Volaille__boulettes-dinde-asiatique", "raw": "---\ntitre: Boulettes de dinde à l'asiatique\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 25 min\ntags: [asiatique, air-fryer, boulettes]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes\n- 450 g (1 lb) dinde hachée\n- 15 ml (1 c. à soupe) gingembre frais haché\n- 3 gousses d'ail hachées finement\n- 60 ml (1/4 tasse) coriandre hachée finement\n- 15 ml (1 c. à soupe) graines de sésame\n- 2 oignons verts hachés finement\n- 1 œuf\n- 150 ml (2/3 tasse) chapelure panko\n- Huile végétale en vaporisateur\n\n### Sauce aigre-douce\n- 80 ml (1/3 tasse) sauce aux huîtres\n- 80 ml (1/3 tasse) jus d'orange\n- 10 ml (2 c. à thé) sriracha\n- 15 ml (1 c. à soupe) miel\n\n## Préparation\n1. Mélanger tous les ingrédients de la sauce dans un petit chaudron et porter à ébullition. Réserver.\n2. Dans un bol, mélanger la dinde, le gingembre, l'ail, la coriandre, les graines de sésame et les oignons verts.\n3. Dans un autre bol, mélanger l'œuf et la chapelure panko. Laisser reposer 2 minutes pour faire gonfler la chapelure, puis l'incorporer à la préparation de dinde.\n4. Façonner 16 boulettes et vaporiser d'huile.\n5. Déposer les boulettes dans le panier du air-fryer et cuire 25 minutes à 200 °C (400 °F) en mode air-fry, en remuant à mi-cuisson.\n6. Servir avec la sauce.\n"}, {"folder": "Volaille", "filename": "boulettes-dinde-coco-arachides.md", "id": "Volaille__boulettes-dinde-coco-arachides", "raw": "---\ntitre: Boulettes de dinde sauce coco-arachides\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 25 min\ntags: [asiatique, four, boulettes]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes de dinde\n- 675 g (1 1/2 lb) dinde hachée\n- 1 tasse (195 g) quinoa cuit, refroidi\n- 3 oignons verts, émincés\n- 1 tasse (45 g) basilic frais haché\n- 1 œuf\n- 15 ml (1 c. à soupe) tamari\n- 2,5 ml (1/2 c. à thé) sel\n- Poivre, au goût\n- 30 ml (2 c. à soupe) huile d'olive\n\n### Sauce coco-arachides\n- 310 ml (1 1/4 tasse) lait de coco en boîte, bien brassé\n- 180 ml (3/4 tasse) beurre d'arachides\n- 45 ml (3 c. à soupe) tamari\n- 2 gousses d'ail, hachées\n- 30 ml (2 c. à soupe) miel\n- 250 ml (1 tasse) eau\n- Jus de 1/2 lime\n\n## Préparation\n1. Placer la grille au centre du four préchauffé à 200 °C (400 °F) et tapisser une plaque à biscuits de papier parchemin.\n2. Dans un grand bol, mélanger tous les ingrédients des boulettes, sauf l'huile. Former des boulettes de la grosseur d'une balle de golf et les déposer sur la plaque.\n3. Badigeonner le dessus des boulettes d'huile d'olive et cuire au four 20 minutes.\n4. Pendant ce temps, dans une grande poêle antiadhésive, mélanger tous les ingrédients de la sauce et cuire à feu très doux, en brassant au fouet, jusqu'à ce que la préparation épaississe et soit fumante.\n5. Servir les boulettes nappées de sauce.\n"}, {"folder": "Volaille", "filename": "boulettes-dinde-moutarde-erable.md", "id": "Volaille__boulettes-dinde-moutarde-erable", "raw": "---\ntitre: Boulettes de dinde, sauce moutarde et érable\nportions: 6\ntemps_prep: 20 min\ntemps_cuisson: 15 min\ntags: [poêle, boulettes, érable]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes\n- 700 g (1 1/2 lb) dinde hachée\n- 1 œuf de grande taille, légèrement battu\n- 1/2 oignon, finement haché\n- 60 ml (1/4 tasse) farine d'amande\n- 4 gousses d'ail, hachées\n- 7,5 ml (1 1/2 c. à thé) romarin frais finement haché\n- 7,5 ml (1 1/2 c. à thé) thym frais finement haché\n- 5 ml (1 c. à thé) sel casher\n- 2,5 ml (1/2 c. à thé) poivre noir fraîchement moulu\n- 45 ml (3 c. à soupe) huile d'olive extra vierge\n\n### Sauce\n- 250 ml (1 tasse) bouillon de poulet\n- 60 ml (1/4 tasse) moutarde de Dijon\n- 60 ml (1/4 tasse) sirop d'érable\n- 30 ml (2 c. à soupe) mayonnaise\n- Romarin et thym frais supplémentaires, pour la garniture\n\n## Préparation\n1. Dans un grand bol, mélanger la dinde hachée, l'œuf, l'oignon, la farine d'amande, l'ail, le romarin, le thym, le sel et le poivre. Mélanger à la main jusqu'à ce que les ingrédients soient bien combinés.\n2. Former environ 30 boulettes avec 22 ml (1 1/2 c. à soupe) du mélange par boulette. Placer sur une assiette.\n3. Faire chauffer 30 ml (2 c. à soupe) d'huile d'olive dans une grande poêle à feu moyen. Faire dorer la moitié des boulettes de tous les côtés pendant 5 à 8 minutes. Retirer et réserver. Ajouter la dernière cuillère à soupe d'huile et répéter avec le reste des boulettes.\n4. Pour la sauce, déglacer la poêle avec le bouillon de poulet, en grattant le fond pour décoller les sucs de cuisson. Incorporer la moutarde de Dijon, le sirop d'érable et la mayonnaise. Fouetter et laisser mijoter jusqu'à ce que la sauce soit crémeuse.\n5. Remettre les boulettes dans la poêle et laisser réchauffer quelques minutes. Garnir d'herbes fraîches hachées avant de servir.\n\n## Notes\n- 30 boulettes pour 6 portions = environ 5 boulettes par portion.\n"}, {"folder": "Volaille", "filename": "boulettes-dinde-ricotta.md", "id": "Volaille__boulettes-dinde-ricotta", "raw": "---\ntitre: Boulettes fondantes à la dinde et à la ricotta\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 20 min\ntags: [italien, four, salade]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes\n- 450 g (1 lb) dinde hachée (ou poulet haché)\n- 1 contenant de 300 g (10 1/2 oz) fromage ricotta à 5 % m.g. (325 ml / 1 1/3 tasse)\n- 1 œuf\n- 125 ml (1/2 tasse) chapelure de blé entier à l'italienne\n- 15 ml (1 c. à soupe) fines herbes séchées (mélange à l'italienne)\n- 1 pincée flocons de piment fort\n- Poivre et sel\n\n### Sauce tomate rapide\n- 1 boîte de 796 ml (28 oz) tomates en dés sans sel ajouté, avec le jus\n- 5 ml (1 c. à thé) poudre d'oignon\n- 5 ml (1 c. à thé) poudre d'ail\n- 5 ml (1 c. à thé) cassonade légèrement tassée\n\n### Salade\n- 30 ml (2 c. à soupe) huile d'olive\n- 15 ml (1 c. à soupe) vinaigre balsamique blanc\n- 1 cœur de laitue romaine en fines tranches\n- 1 petit radicchio, sans le cœur, tranché finement\n- 1/4 oignon rouge en fines tranches\n- 1/2 fenouil en fines tranches (bulbe et tiges), feuilles hachées\n\n### Pour servir\n- Feuilles de basilic frais\n\n## Préparation\n1. Préchauffer le four à 200 °C (400 °F). Placer la grille au centre du four. Tapisser une plaque de cuisson de papier parchemin.\n2. Dans un grand bol, mélanger la dinde, la ricotta, l'œuf, la chapelure, les fines herbes et les flocons de piment. Poivrer généreusement et ajouter une pincée de sel.\n3. Façonner 12 boulettes et les déposer sur la plaque. Cuire au four 20 minutes ou jusqu'à ce que les boulettes soient dorées.\n4. Dans une grande tasse à mesurer allant au four à micro-ondes, au pied-mélangeur, réduire en purée les ingrédients de la sauce tomate. Couvrir d'une pellicule de plastique et cuire 4 ou 5 minutes au four à micro-ondes.\n5. Dans un grand bol, fouetter l'huile et le vinaigre. Incorporer le reste des ingrédients de la salade.\n6. Répartir la salade dans 4 assiettes, puis déposer 3 boulettes par assiette. Napper de sauce tomate et garnir de basilic. Accompagner de pain frais.\n\n## Notes\n- 4 portions de 3 boulettes.\n- Les boulettes se conservent 4 jours au réfrigérateur ou 3 mois au congélateur. La sauce tomate se conserve 1 semaine au réfrigérateur ou 6 mois au congélateur.\n- En cas d'allergie au blé / sans gluten : remplacer la chapelure de blé par de la chapelure à base de maïs ou de riz.\n"}, {"folder": "Volaille", "filename": "boulettes-poulet-grecques.md", "id": "Volaille__boulettes-poulet-grecques", "raw": "---\ntitre: Boulettes de poulet à la grecque, salade de concombres et mayo ail et citron\nportions: 4\ntemps_prep: 35 min\ntemps_cuisson: 20 min\ntags: [grec, four, été]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes\n- 675 g (1 1/2 lb) poulet haché\n- 1 tasse (125 g) courgette râpée finement (environ 1 petite)\n- 1/2 tasse (65 g) chapelure\n- 2 c. à soupe (30 ml) moutarde de Dijon\n- 1 1/2 c. à thé (7,5 ml) assaisonnement grec\n- Zeste de 1/2 citron bien lavé\n- 2 petites gousses d'ail, hachées\n- 1/2 c. à thé (2,5 ml) sel\n\n### Mayo ail et citron\n- 3/4 tasse (165 g) yogourt grec nature\n- 1 petite gousse d'ail, hachée\n- Zeste de 1/2 citron bien lavé\n- 1 c. à soupe (15 ml) jus de citron\n- 1 c. à soupe (15 ml) miel\n- 1/2 c. à thé (2,5 ml) assaisonnement grec\n- 1/4 c. à thé (1,25 ml) sel\n- Poivre, au goût\n\n### Salade de concombres et petits pois\n- 6 concombres libanais, en petits cubes\n- 1 1/2 tasse (225 g) petits pois blanchis\n- 1/3 tasse (15 g) menthe fraîche hachée\n- 3 c. à soupe (45 ml) huile d'olive\n- 1 c. à soupe (15 ml) jus de citron\n- 1 c. à thé (5 ml) moutarde de Dijon\n- 1/2 c. à thé (2,5 ml) sel\n- 1 petite gousse d'ail, hachée\n- Poivre, au goût\n\n## Préparation\n1. Préchauffer le four à 400 °F et placer la grille au centre. Tapisser une plaque à biscuits de parchemin.\n2. Dans un bol, mélanger tous les ingrédients des boulettes. Avec les mains légèrement humides, former des boulettes de la grosseur d'une balle de golf et les déposer sur la plaque. Vaporiser de spray à cuisson. Cuire au four 20 min. Régler la température à broil et cuire 2 min maximum.\n3. Pendant la cuisson des boulettes, préparer la mayo : mélanger tous les ingrédients dans un bol. Réserver.\n4. Mélanger tous les ingrédients de la salade de concombres et petits pois. Servir avec les boulettes et la mayo ail et citron.\n\n## Notes\n- La recette originale mentionne « sauf l'huile » à l'étape 2, mais aucune huile n'est listée dans les ingrédients des boulettes. Possible coquille — la mention a été retirée.\n"}, {"folder": "Volaille", "filename": "cubain-mojo-poulet.md", "id": "Volaille__cubain-mojo-poulet", "raw": "---\ntitre: Cubain-Mojo\nportions: 5\ntemps_prep: 25 min\ntemps_cuisson: 40 min\ntags: [cubain, poêle, riz, marinade]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Poulet\n- 850 g poitrines de poulet coupées en morceaux de 3 cm\n- 1 oignon jaune coupé en lanières\n- 30 ml (2 c. à soupe) ail haché\n- 15 ml (1 c. à soupe) épices passe-partout\n- 10 ml (2 c. à thé) cumin\n- Jus de 3 oranges\n- Jus de 2 limes\n- Jus de 1 citron\n- Sel et poivre\n- 80 ml (1/3 tasse) coriandre fraîche hachée\n\n### Riz aux haricots\n- 1 oignon jaune haché\n- 1 poivron vert haché\n- 1 poivron rouge haché\n- 15 ml (1 c. à soupe) ail haché\n- 250 ml (1 tasse) riz blanc sec, rincé et égoutté\n- 1 conserve de haricots noirs de 540 ml, rincés et égouttés\n- 500 ml (2 tasses) bouillon de poulet sans sel ajouté\n\n## Préparation\n1. Dans un bol, mélanger l'oignon, l'ail, le mélange d'épices passe-partout, le cumin et le jus des agrumes. Déposer le poulet dans un bol avec la moitié du mélange de jus et d'épices. Dans un autre bol, verser le reste du jus avec les oignons. Laisser mariner 30 minutes.\n2. Pendant ce temps, vaporiser une casserole d'huile et la chauffer à feu moyen. Cuire l'oignon pour le riz pendant 2 minutes.\n3. Ajouter le poivron et l'ail dans la casserole, puis remuer. Poursuivre la cuisson 2 minutes en remuant régulièrement.\n4. Ajouter le riz et les haricots. Prolonger la cuisson de 2 minutes, puis verser le bouillon. Porter à ébullition, couvrir et cuire à feu doux 15 à 18 minutes, jusqu'à ce que le liquide soit complètement absorbé. Retirer du feu et laisser reposer 5 minutes avant de remuer le riz à la fourchette.\n5. Au moment de la cuisson du poulet, égoutter les morceaux en conservant la marinade. Vaporiser une poêle d'huile et la chauffer à feu moyen. Cuire la moitié des morceaux de poulet 4 minutes de chaque côté. Réserver dans une assiette et répéter avec le reste.\n6. Transvider la marinade et l'oignon dans la poêle. Déglacer en raclant le fond de la poêle pour détacher les sucs de cuisson. Ajouter de l'eau au besoin. Chauffer 3 minutes en remuant régulièrement et retirer du feu.\n7. Servir le riz, avec le poulet, les oignons et la coriandre.\n"}, {"folder": "Volaille", "filename": "plaque-poulet-grecque.md", "id": "Volaille__plaque-poulet-grecque", "raw": "---\ntitre: Plaque de poulet à la grecque\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 25 min\ntags: [grec, plaque, four]\nderniere_fois: \n---\n\n## Ingrédients\n- 80 ml (1/3 tasse) huile d'olive\n- 60 ml (1/4 tasse) jus de citron\n- 2 gousses d'ail, hachées\n- 15 ml (1 c. à soupe) origan séché\n- 7,5 ml (1 1/2 c. à thé) paprika\n- 5 ml (1 c. à thé) sel\n- Poivre, au goût\n- 4 poitrines de poulet\n- 675 g (1 1/2 lb) pommes de terre grelot coupées en 4 selon la grosseur (4 1/2 tasses)\n- 2 poivrons rouges, tranchés\n- 1 oignon rouge, en petits quartiers\n- 1 citron bien lavé, coupé en 2\n- Brins d'aneth, pour garnir\n\n## Préparation\n1. Préchauffer le four à 180 °C (350 °F) et tapisser 1 ou 2 plaques à biscuits de papier parchemin.\n2. Dans un grand bol, mélanger l'huile d'olive, le jus de citron, l'ail, l'origan, le paprika et le sel. Poivrer.\n3. Ajouter le reste des ingrédients (sauf l'aneth) et mélanger.\n4. Répartir le mélange sur la ou les plaques, en laissant de l'espace entre les ingrédients.\n5. Cuire au four 35 minutes. Régler la température à broil et cuire encore 3 minutes en surveillant bien le poulet pour qu'il ne brûle pas.\n6. Garnir de brins d'aneth. Servir avec de la sauce tzatzíki du commerce.\n"}, {"folder": "Volaille", "filename": "poitrines-poulet-grecque.md", "id": "Volaille__poitrines-poulet-grecque", "raw": "---\ntitre: Poitrines de poulet à la grecque\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 35 min\ntags: [grec, four, marinade]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Marinade\n- 125 ml (1/2 tasse) yogourt grec nature\n- 60 ml (1/4 tasse) huile d'olive\n- 30 ml (2 c. à soupe) jus de citron\n- Zeste de 1 citron\n- 30 ml (2 c. à soupe) origan frais haché\n- 30 ml (2 c. à soupe) épices grecques\n- 15 ml (1 c. à soupe) ail haché\n- 7,5 ml (1/2 c. à soupe) miel\n- 5 ml (1 c. à thé) moutarde de Dijon\n- 2,5 ml (1/2 c. à thé) concentré de bouillon de poulet liquide\n- 1,25 ml (1/4 c. à thé) sel\n- 1,25 ml (1/4 c. à thé) poivre du moulin\n\n### Poulet\n- 908 g (2 lb) poitrines de poulet\n- Origan frais, pour garnir\n\n## Préparation\n1. Dans un grand bol, mélanger tous les ingrédients de la marinade : yogourt grec, huile d'olive, zeste et jus de citron, origan, épices grecques, ail, miel, moutarde, concentré de bouillon, sel et poivre.\n2. À l'aide de papier absorbant, éponger l'excédent d'humidité sur les poitrines. Retirer le surplus de gras visible à l'aide d'un couteau bien aiguisé.\n3. Incorporer le poulet à la marinade. Pour un maximum de saveurs, réfrigérer 12 heures.\n4. Préchauffer le four à 205 °C (400 °F).\n5. Transférer le poulet et la marinade dans un grand plat de cuisson légèrement huilé. Badigeonner les morceaux avec le surplus de marinade.\n6. Cuire au four 35 minutes ou jusqu'à ce que le poulet soit complètement cuit, en retournant aux 15 minutes.\n7. Garnir le poulet d'origan frais et servir immédiatement.\n\n## Notes\n- Prévoir 12 heures de marinade au réfrigérateur pour un maximum de saveurs (non comptées dans le temps de préparation).\n- La recette d'origine utilise « zeste de citron » dans les étapes mais ne le listait pas explicitement dans les ingrédients de la marinade — je l'ai ajouté.\n"}, {"folder": "Volaille", "filename": "poivrons-farcis-dinde.md", "id": "Volaille__poivrons-farcis-dinde", "raw": "---\ntitre: Poivrons farcis à la dinde\nportions: 6\ntemps_prep: 10 min\ntemps_cuisson: 35 min\ntags: [italien, four, farci]\nderniere_fois: \n---\n\n## Ingrédients\n- 6 poivrons, coupés en deux dans le sens de la longueur et épépinés\n- 45 ml (3 c. à soupe) huile d'olive extra-vierge\n- 3 gousses d'ail, hachées\n- 1/2 oignon jaune, coupé en dés\n- 2 branches de céleri, coupées en dés\n- 450 g (1 lb) dinde hachée\n- 700 ml coulis de tomates\n- 500 ml (2 tasses) jeunes épinards, hachés grossièrement\n- 375 ml (1 1/2 tasse) riz cuit\n- 7,5 ml (1/2 c. à soupe) assaisonnement italien\n- Sel casher et poivre noir moulu, au goût\n- 125 ml (1/2 tasse) fromage Monterey Jack ou cheddar\n- Persil haché, pour garnir\n\n## Préparation\n1. Préchauffer le four à 175 °C (350 °F). Couper les poivrons en deux dans le sens de la longueur et retirer les graines et la membrane.\n2. Arroser les poivrons avec 15 ml (1 c. à soupe) d'huile et frotter l'intérieur et l'extérieur pour bien les enrober. Disposer à l'envers dans deux plats de cuisson ou sur une grande plaque, puis précuire 15 minutes.\n3. Pendant ce temps, faire chauffer les 30 ml (2 c. à soupe) d'huile restantes dans une grande poêle à feu moyen-vif. Faire revenir l'oignon et l'ail environ 2 minutes, jusqu'à ce qu'ils soient légèrement attendris. Ajouter le céleri et cuire environ 2 minutes.\n4. Ajouter la dinde hachée et faire cuire jusqu'à ce qu'elle soit bien dorée, en la défaisant avec une spatule au besoin.\n5. Égoutter l'excédent de liquide, puis incorporer le coulis de tomates, le riz, les épinards, l'assaisonnement italien, le sel et le poivre. Mélanger 1 à 2 minutes, jusqu'à ce que les épinards tombent.\n6. Retirer les poivrons du four et les retourner avec des pinces. Farcir du mélange de dinde, puis parsemer de fromage. Remettre au four et cuire 15 à 20 minutes, ou jusqu'à ce que les poivrons soient tendres.\n7. Avant de servir, garnir de persil frais haché.\n\n## Notes\n- L'étape 4 de la recette originale parlait du « bœuf haché », mais l'ingrédient principal est la dinde — j'ai corrigé.\n"}, {"folder": "Volaille", "filename": "poulet-cremeux-cajun.md", "id": "Volaille__poulet-cremeux-cajun", "raw": "---\ntitre: Poulet crémeux au style cajun\nportions: 4\ntemps_prep: 15 min\ntemps_cuisson: 20 min\ntags: [cajun, poêle, sauce-cremeuse]\nderniere_fois: \n---\n\n## Ingrédients\n- 4 poitrines de poulet désossées et sans peau (environ 200 g chacune)\n- 30 ml (2 c. à soupe) assaisonnement cajun\n- 45 ml (3 c. à soupe) huile d'olive extra vierge\n- 125 ml (1/2 tasse) oignon jaune, coupé en dés\n- 125 ml (1/2 tasse) poivron vert, coupé en dés\n- 1 branche de céleri, hachée\n- 2 gousses d'ail, hachées\n- 375 ml (1 1/2 tasse) crème épaisse\n- 60 ml (1/4 tasse) parmesan fraîchement râpé\n- Persil haché, pour garnir\n\n## Préparation\n1. Assaisonner généreusement les deux côtés de chaque poitrine de poulet avec l'assaisonnement cajun.\n2. Dans une grande poêle, faire chauffer 30 ml (2 c. à soupe) d'huile d'olive à feu moyen. Saisir le poulet 3 à 4 minutes de chaque côté, jusqu'à ce qu'il soit bien doré. Retirer le poulet et réserver sur une assiette.\n3. Dans la même poêle, ajouter la dernière cuillère à soupe d'huile, puis l'oignon, le poivron et le céleri. Faire sauter 3 à 4 minutes, jusqu'à ce qu'ils soient tendres. Ajouter l'ail et faire sauter encore 1 minute.\n4. Verser la crème épaisse et le parmesan dans la poêle. Mélanger bien et laisser mijoter doucement.\n5. Remettre le poulet dans la poêle et laisser cuire dans la sauce environ 5 minutes, jusqu'à ce qu'il soit bien chaud et complètement cuit.\n6. Garnir de persil haché avant de servir.\n"}, {"folder": "Volaille", "filename": "poulet-cremeux-moutarde-asperges.md", "id": "Volaille__poulet-cremeux-moutarde-asperges", "raw": "---\ntitre: Poulet crémeux à la moutarde et aux asperges\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 30 min\ntags: [poêle, sauce-cremeuse]\nderniere_fois: \n---\n\n## Ingrédients\n- 4 poitrines de poulet désossées et sans peau\n- Sel et poivre\n- 60 ml (4 c. à soupe) huile d'olive, divisée\n- 1 botte d'asperges (325 g), coupées en 3\n- 125 ml (1/2 tasse, 60 g) échalotes françaises émincées\n- 3 gousses d'ail, hachées\n- 10 ml (2 c. à thé) romarin frais haché\n- 5 ml (1 c. à thé) graines de fenouil broyées\n- 30 ml (2 c. à soupe) vinaigre de xérès\n- 60 ml (1/4 tasse) vin blanc sec\n- 375 ml (1 1/2 tasse) bouillon de poulet\n- 45 ml (3 c. à soupe) moutarde de Dijon\n- 45 ml (3 c. à soupe) parmesan râpé (ou levure alimentaire pour version sans produits laitiers)\n- 2,5 ml (1/2 c. à thé) sel\n- 750 ml (3 tasses, 75 g) bébés épinards\n- 250 ml (1 tasse) crème de soya ou d'avoine de type Belsoy + 60 ml (1/4 tasse) eau très chaude\n- Estragon frais et fleur de sel, pour garnir\n\n## Préparation\n1. Assaisonner les poitrines de poulet de sel et de poivre. Dans une grande poêle en fonte émaillée ou antiadhésive, chauffer 30 ml (2 c. à soupe) d'huile d'olive à feu moyen-élevé et saisir les poitrines 4 minutes de chaque côté, jusqu'à ce qu'elles soient bien dorées. Réserver dans une assiette.\n2. Dans la même poêle, chauffer le reste de l'huile à feu élevé et faire revenir les asperges 2 minutes maximum en brassant souvent. Réserver dans l'assiette avec le poulet.\n3. Réduire le feu à moyen et ajouter les échalotes françaises. Cuire environ 3 minutes en brassant souvent.\n4. Ajouter l'ail, le romarin et les graines de fenouil, et cuire encore 1 minute en brassant.\n5. Déglacer avec le vinaigre de xérès et le vin blanc, et cuire 2 minutes en brassant, jusqu'à ce que le liquide soit presque complètement évaporé.\n6. Ajouter le bouillon de poulet, la moutarde de Dijon, le parmesan et le sel en brassant au fouet. Remettre les poitrines dans la poêle et cuire encore 5 minutes, à couvert, ou jusqu'à ce que les poitrines soient cuites.\n7. Ajouter les épinards et le mélange de crème de soya et d'eau, et bien brasser. Remettre les asperges et cuire encore 2 minutes, jusqu'à ce que les épinards soient tombés et que la sauce épaississe.\n8. Poivrer, garnir d'estragon et saupoudrer de fleur de sel.\n\n## Notes\n- La recette originale présente quelques incohérences : la liste d'ingrédients indiquait « vinaigre de vin rouge » mais les étapes parlent de « xérès » (j'ai gardé xérès). De même, « parmesan » dans la liste vs « levure alimentaire » dans les étapes — j'ai gardé parmesan en mentionnant l'alternative sans produits laitiers.\n- L'estragon en garniture n'apparaissait pas dans la liste d'origine mais est mentionné à l'étape finale.\n"}, {"folder": "Volaille", "filename": "poulet-cremeux-poivrons-rotis.md", "id": "Volaille__poulet-cremeux-poivrons-rotis", "raw": "---\ntitre: Poulet sauce crémeuse aux poivrons rôtis\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 25 min\ntags: [méditerranéen, poêle, four, sauce-cremeuse]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauce crémeuse aux poivrons rôtis\n- 1 pot de 340 ml poivrons rôtis, bien égouttés\n- 250 ml (1 tasse) lait de coco en conserve, bien brassé\n- 15 ml (1 c. à soupe) vinaigre de vin rouge\n- 2 gousses d'ail\n- 5 ml (1 c. à thé) paprika\n- 5 ml (1 c. à thé) origan séché\n- 5 ml (1 c. à thé) sel\n- 60 ml (1/4 tasse, 5 g) persil frais haché\n\n### Poulet\n- 4 poitrines de poulet, sans la peau\n- Sel et poivre, au goût\n- 30 ml (2 c. à soupe) huile d'olive\n- 1 oignon, émincé\n- 1 poivron rouge, émincé\n- 60 ml (1/4 tasse, 10 g) persil frais haché, en garniture\n\n## Préparation\n1. Dans un mélangeur, mixer tous les ingrédients de la sauce jusqu'à l'obtention d'un mélange plus ou moins lisse. Réserver.\n2. Préchauffer le four à 200 °C (400 °F) et placer la grille au centre.\n3. Saler et poivrer le poulet. Dans une grande poêle antiadhésive, chauffer l'huile à feu élevé et dorer les poitrines 3 minutes de chaque côté. Réserver dans une assiette.\n4. Baisser le feu à moyen, ajouter les oignons et les faire dorer 6 minutes en brassant souvent.\n5. Ajouter le poivron rouge et cuire encore 1 minute seulement.\n6. Remettre le poulet dans la poêle et arroser de sauce crémeuse aux poivrons rôtis. Cuire au four 15 minutes.\n7. À la sortie du four, ajouter le persil. Servir avec des pâtes à l'huile d'olive et ciboulette ou avec un riz blanc.\n"}, {"folder": "Volaille", "filename": "poulet-cremeux-tomates-sechees-epinards.md", "id": "Volaille__poulet-cremeux-tomates-sechees-epinards", "raw": "---\ntitre: Poulet crémeux aux tomates séchées et aux épinards\nportions: 4\ntemps_prep: 15 min\ntemps_cuisson: 20 min\ntags: [italien, poêle, sauce-cremeuse]\nderniere_fois: \n---\n\n## Ingrédients\n- 4 poitrines de poulet désossées et sans peau (environ 170 g chacune)\n- 5 ml (1 c. à thé) assaisonnement italien (ou un mélange d'épices comme l'origan, le thym, le basilic et le romarin)\n- 5 ml (1 c. à thé) sel casher\n- 2,5 ml (1/2 c. à thé) poivre noir fraîchement moulu\n- 45 ml (3 c. à soupe) huile d'olive extra vierge\n- 4 gousses d'ail, hachées\n- 60 ml (1/4 tasse) oignon jaune, finement haché\n- 125 ml (1/2 tasse) tomates séchées, finement tranchées\n- 500 ml (2 tasses) jeunes pousses d'épinards\n- 375 ml (1 1/2 tasse) crème épaisse\n- 60 ml (1/4 tasse) parmesan fraîchement râpé\n\n## Préparation\n1. Assaisonner les deux côtés de chaque poitrine de poulet avec l'assaisonnement italien, le sel et le poivre.\n2. Dans une grande poêle, faire chauffer 30 ml (2 c. à soupe) d'huile d'olive à feu moyen. Saisir le poulet 3 à 4 minutes de chaque côté, jusqu'à ce qu'il soit bien doré. Retirer le poulet et réserver.\n3. Dans la même poêle, ajouter la dernière cuillère à soupe d'huile et l'oignon. Faire sauter 2 à 3 minutes, jusqu'à ce qu'il soit tendre.\n4. Ajouter les tomates séchées et l'ail et faire sauter encore 1 minute, jusqu'à ce que les arômes se dégagent.\n5. Ajouter les épinards et faire sauter encore 1 minute, juste le temps qu'ils commencent à flétrir.\n6. Ajouter la crème épaisse et le parmesan. Mélanger bien et laisser la sauce mijoter.\n7. Remettre le poulet dans la poêle et laisser cuire dans la sauce environ 5 minutes, jusqu'à ce qu'il soit bien chaud.\n"}, {"folder": "Volaille", "filename": "poulet-shish-taouk.md", "id": "Volaille__poulet-shish-taouk", "raw": "---\ntitre: Poulet shish taouk\nportions: 8\ntemps_prep: 15 min\ntemps_cuisson: 15 min\ntags: [libanais, poêle, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n- 375 ml (1 1/2 tasse) yogourt nature\n- Le zeste et le jus de 1 citron\n- 30 ml (2 c. à soupe) beurre de sésame (tahini)\n- 30 ml (2 c. à soupe) ail haché en pot (ou 6 gousses hachées finement)\n- 5 ml (1 c. à thé) cumin moulu\n- 5 ml (1 c. à thé) thym séché\n- Poivre et sel\n- 80 ml (1/3 tasse) mayonnaise allégée\n- 750 g (1 2/3 lb) poitrines de poulet désossées (environ 4 petites poitrines)\n- 5 ml (1 c. à thé) huile de canola\n- 1 citron en quartiers (facultatif)\n\n## Préparation\n1. Dans un grand bol, préparer la marinade en mélangeant le yogourt, le zeste et le jus de citron, le beurre de sésame, l'ail et les épices. Poivrer généreusement et ajouter une pincée de sel.\n2. Prélever 250 ml (1 tasse) de la marinade et la transvider dans un bol moyen. Incorporer la mayonnaise et réserver cette sauce pour le service.\n3. Couper le poulet en 2 ou en 3 sur le sens de l'épaisseur pour obtenir des tranches de 1,5 cm (1/2 po). Ajouter le poulet dans le bol de marinade et bien mélanger.\n4. À l'aide d'un pinceau de cuisine, badigeonner d'huile un poêlon strié antiadhésif et préchauffer à feu moyen. Retirer l'excédent de marinade sur le poulet en le raclant avec le dos d'un couteau et déposer le poulet dans le poêlon. Cuire 5 ou 6 minutes de chaque côté. Au besoin, procéder en deux temps selon la taille du poêlon.\n5. Servir avec la sauce réservée et des quartiers de citron. Accompagner de riz et de salade fattouche, ou servir dans un pita garni de laitue, de concombres et de tomates.\n\n## Notes\n- Se conserve 3 jours au réfrigérateur ou 3 mois au congélateur.\n- En cas d'allergie au sésame : remplacer le tahini par du beurre de soya (de type Wowbutter).\n"}, {"folder": "Volaille", "filename": "riz-citronne-poulet.md", "id": "Volaille__riz-citronne-poulet", "raw": "---\ntitre: Riz citronné au poulet tout-en-un\nportions: 6\ntemps_prep: 15 min\ntemps_cuisson: 1 h 10 min\ntags: [four, tout-en-un, citron]\nderniere_fois: \n---\n\n## Ingrédients\n- 750 ml (3 tasses) bouillon de poulet réduit en sodium\n- 375 ml (1 1/2 tasse) riz blanc étuvé à grains longs\n- 1 oignon jaune haché\n- 15 ml (1 c. à soupe) ail haché en pot (ou 3 gousses hachées finement)\n- 2 citrons\n- 12 hauts de cuisse de poulet désossés, sans la peau (environ 800 g / 1 3/4 lb)\n- Poivre et sel\n- 30 ml (2 c. à soupe) feuilles de thym frais (3 ou 4 branches)\n\n## Préparation\n1. Préchauffer le four à 180 °C (350 °F). Placer la grille au centre du four.\n2. Dans un grand poêlon allant au four, mélanger le bouillon, le riz, l'oignon et l'ail.\n3. Zester les 2 citrons au-dessus du poêlon, puis ajouter le jus du premier citron. Mélanger.\n4. Couper le deuxième citron en tranches de 1 cm (3/8 po) d'épaisseur.\n5. Répartir le poulet et les tranches de citron sur le riz et le bouillon, sans mélanger. Poivrer généreusement et ajouter une pincée de sel.\n6. Couvrir et cuire au four 30 minutes.\n7. Poursuivre la cuisson 30 minutes à découvert.\n8. Compléter la cuisson sous le gril (broil) 5 à 7 minutes ou jusqu'à ce que le poulet et le citron soient grillés.\n9. Garnir de thym. Servir accompagné d'une salade verte.\n\n## Notes\n- Se conserve 4 jours au réfrigérateur ou 3 mois au congélateur.\n- Choisir le riz étuvé (aussi appelé « converti » ou « conditionné »), qui reste ferme et devient moins collant à la cuisson que le riz blanc à grains longs régulier. À ne pas confondre avec le riz minute (instantané, précuit ou à cuisson rapide) ni avec le riz prêt à servir (express).\n- Temps de préparation estimé (la valeur n'était pas visible sur la photo originale).\n"}, {"folder": "Volaille", "filename": "salade-asiatique-chou-nappa.md", "id": "Volaille__salade-asiatique-chou-nappa", "raw": "---\ntitre: Salade asiatique de chou nappa au poulet grillé\nportions: 6\ntemps_prep: 20 min\ntemps_cuisson: 6 min\ntags: [asiatique, salade, poêle, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Vinaigrette\n- 125 ml (1/2 tasse) jus d'orange pur\n- 60 ml (1/4 tasse) vinaigre de riz\n- 30 ml (2 c. à soupe) pâte de miso\n- 30 ml (2 c. à soupe) huile de sésame grillé\n- 10 ml (2 c. à thé) ail haché en pot\n- 10 ml (2 c. à thé) gingembre haché en pot\n- 10 ml (2 c. à thé) miel du Québec\n- 5 ml (1 c. à thé) sauce piquante sriracha\n\n### Salade\n- 2 poitrines de poulet désossées, coupées en biseau (450 g / 1 lb)\n- 1 L (4 tasses) chou chinois nappa tranché finement (1/2 chou moyen)\n- 500 ml (2 tasses) chou rouge tranché finement (1/4 chou moyen)\n- 500 ml (2 tasses) pois mange-tout coupés en biseau\n- 250 ml (1 tasse) menthe fraîche hachée\n- 250 ml (1 tasse) coriandre fraîche hachée\n- 750 ml (3 tasses) carottes en julienne (ou 3 grosses carottes râpées)\n- 3 oignons verts hachés\n\n### Garniture\n- 250 ml (1 tasse) nouilles frites chow mein\n- 30 ml (2 c. à soupe) graines de sésame grillées\n\n## Préparation\n1. Dans un grand bol de service, mélanger tous les ingrédients de la vinaigrette.\n2. Dans un bol moyen, déposer le poulet. Prélever 80 ml (1/3 tasse) de la vinaigrette, verser sur le poulet et remuer pour bien l'enrober. Réserver.\n3. Pendant ce temps, préparer les légumes et les herbes fraîches. Déposer dans le bol de service, puis mélanger pour enrober de vinaigrette.\n4. Dans un poêlon strié antiadhésif préchauffé à feu moyen-vif, griller le poulet mariné 2 ou 3 minutes de chaque côté. Au besoin, procéder en 2 temps selon la taille du poêlon.\n5. Déposer le poulet sur les légumes, puis garnir de nouilles frites et de graines de sésame. Servir avec des vermicelles de riz.\n\n## Notes\n- Se conserve 4 jours au réfrigérateur sans la garniture, ne se congèle pas.\n- Les nouilles frites chow mein apportent du croquant à la salade ; on n'en utilise qu'une poignée pour la salade complète, ce qui ajoute donc très peu de gras.\n- Le chou nappa est polyvalent : cru en salade ou en wrap pour profiter de sa texture croquante, ou cuit dans un sauté.\n"}, {"folder": "Volaille", "filename": "salade-ete-poulet-croustillant-erable.md", "id": "Volaille__salade-ete-poulet-croustillant-erable", "raw": "---\ntitre: Salade d'été au poulet croustillant piquant à l'érable\nportions: 4\ntemps_prep: 40 min\ntemps_cuisson: 20 min\ntags: [salade, four, érable]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Poulet croustillant à l'érable\n- 80 ml (1/3 tasse) mayonnaise\n- 80 ml (1/3 tasse) yogourt grec nature\n- 5 ml (1 c. à thé) paprika\n- 2,5 ml (1/2 c. à thé) paprika fumé\n- 1 gousse d'ail, hachée\n- 375 ml (1 1/2 tasse, 210 g) chapelure\n- 2,5 ml (1/2 c. à thé) sel\n- 3 poitrines de poulet en cubes\n- 15 ml (1 c. à soupe) sauce piquante sriracha\n- 80 ml (1/3 tasse) sirop d'érable\n\n### Vinaigrette crémeuse au citron et à l'ail\n- 250 ml (1 tasse) crème de soya Belsoy\n- Zeste de 1 citron\n- 45 ml (3 c. à soupe) jus de citron\n- 15 ml (1 c. à soupe) vinaigre de vin blanc\n- 1 gousse d'ail, hachée\n- 15 ml (1 c. à soupe) moutarde de Dijon\n- 15 ml (1 c. à soupe) câpres hachés grossièrement\n- 3,75 ml (3/4 c. à thé) sel\n- Poivre, au goût\n\n### Salade\n- 1 L (4 tasses, 180 g) laitue iceberg hachée grossièrement\n- 1 L (4 tasses, 180 g) laitue romaine hachée grossièrement\n- 4 concombres libanais, en petits cubes\n- 2 oignons verts, hachés grossièrement\n- 500 ml (2 tasses, 300 g) tomates cerises coupées en 4\n- 1 pomme rouge, en petits cubes\n- 250 ml (1 tasse, 45 g) basilic frais haché grossièrement\n\n## Préparation\n1. Préchauffer le four à 230 °C (450 °F) et tapisser une plaque à biscuits de papier parchemin.\n2. Dans une première assiette, mélanger la mayonnaise, le yogourt, le paprika, le paprika fumé et l'ail. Dans une deuxième assiette, déposer la chapelure et le sel.\n3. Badigeonner les cubes de poulet avec le mélange de mayonnaise et les enrober de chapelure en pressant bien sur toute la surface. Déposer sur la plaque. À l'aide d'un pinceau, badigeonner doucement le dessus d'un peu d'huile.\n4. Cuire au four 15 à 18 minutes ou jusqu'à ce que les cubes soient bien dorés. Laisser tiédir 5 minutes sur la plaque.\n5. Dans un bol, mélanger le sirop d'érable et la sriracha. Badigeonner les cubes de poulet du mélange.\n6. Dans un petit bol, à l'aide d'un fouet, mélanger tous les ingrédients de la vinaigrette.\n7. Dans un grand bol, mélanger tous les ingrédients de la salade avec la vinaigrette. Servir avec le poulet croustillant.\n\n## Notes\n- L'étape « mélanger mayonnaise + paprika + ail » de la recette originale ne mentionnait pas le yogourt grec, mais il est dans la liste d'ingrédients de l'enrobage — je l'ai inclus dans le mélange.\n"}, {"folder": "Volaille", "filename": "salade-poulet-cesar.md", "id": "Volaille__salade-poulet-cesar", "raw": "---\ntitre: Salade poulet césar du fit cook\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 1 h\ntags: [salade, four, césar]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Salade\n- 4 concombres libanais coupés en tranches\n- 605 g (1 1/3 lb) poulet cuit effiloché\n- 12 radis en fines juliennes\n- 1 L (4 tasses) laitue romaine hachée\n\n### Sauce\n- 2 têtes d'ail\n- 1 filet d'huile (pour rôtir l'ail)\n- 250 ml (1 tasse) yogourt grec nature 0%\n- 30 ml (2 c. à soupe) mayonnaise légère\n- 30 ml (2 c. à soupe) parmesan râpé\n- 30 ml (2 c. à soupe) câpres hachées\n- 15 ml (1 c. à soupe) moutarde au miel\n- 15 ml (1 c. à soupe) épices passe-partout\n- 1 citron (zeste et jus)\n\n### Croûtons\n- 2 pitas de blé entier coupés en morceaux de 2 cm\n- 1 filet d'huile\n- Sel et poivre\n\n## Préparation\n1. Préchauffer le four à 175 °C (350 °F).\n2. Couper le dessus des têtes d'ail pour exposer les gousses. Déposer les têtes sur une feuille de papier aluminium, arroser d'huile, saler et poivrer. Emballer et cuire au four 1 heure.\n3. Pendant ce temps, sur une plaque tapissée de papier parchemin, étaler les morceaux de pitas. Arroser d'huile, saler et poivrer. Cuire au four de 10 à 15 minutes, jusqu'à ce que les croûtons soient dorés. Réserver.\n4. Retirer les têtes d'ail du four et les presser au-dessus d'un grand bol pour récupérer les gousses. Réduire les gousses en purée à l'aide d'une fourchette.\n5. Ajouter le reste des ingrédients de la sauce dans le bol. Saler et poivrer. Fouetter jusqu'à l'obtention d'une préparation la plus homogène possible.\n6. Assembler la salade en ajoutant les légumes, le poulet et les croûtons. Verser la sauce et mélanger.\n"}, {"folder": "Volaille", "filename": "salade-poulet-tandoori.md", "id": "Volaille__salade-poulet-tandoori", "raw": "---\ntitre: Salade de poulet tandoori\nportions: 4\ntemps_prep: 15 min\ntemps_cuisson: 15 min\ntags: [indien, salade, poêle, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Salade\n- 2 poitrines de poulet désossées, coupées en 2 sur l'épaisseur (environ 450 g / 1 lb)\n- 30 ml (2 c. à soupe) pâte de cari tandoori\n- 1/2 laitue romaine émincée (environ 1 L / 4 tasses)\n- 250 ml (1 tasse) roquette\n- 250 ml (1 tasse) pois mange-tout coupés en 4 (environ 20 pois mange-tout)\n- 250 ml (1 tasse) radis tranchés finement (environ 8 radis)\n- 1 branche de céleri coupée en biseau\n- 30 ml (2 c. à soupe) coriandre fraîche hachée\n- 1 lime en quartiers\n\n### Vinaigrette\n- 125 ml (1/2 tasse) yogourt grec nature\n- 30 ml (2 c. à soupe) lait\n- 2,5 ml (1/2 c. à thé) ail haché en pot (ou 1 petite gousse hachée finement)\n- Poivre et sel\n\n## Préparation\n1. Dans un grand bol, déposer les poitrines de poulet et la pâte de cari tandoori. Mélanger pour enrober la viande.\n2. Dans un poêlon strié antiadhésif préchauffé à feu moyen-vif, sans ajouter de matière grasse, cuire le poulet de 5 à 7 minutes de chaque côté.\n3. Réserver le poulet dans une assiette et laisser tiédir. Effilocher les poitrines avec les doigts.\n4. Dans un grand bol de service, mélanger la laitue, la roquette, les pois mange-tout, les radis et le céleri.\n5. Déposer le poulet effiloché au centre de la salade.\n6. Dans un petit bol, mélanger les ingrédients de la vinaigrette. Poivrer généreusement et ajouter une pincée de sel. Verser sur la salade.\n7. Garnir de coriandre. Accompagner de pains naans chauds et de quartiers de lime.\n\n## Notes\n- Sans la vinaigrette, la salade se conserve 2 jours au réfrigérateur, ne se congèle pas.\n- La pâte de cari tandoori est une marinade rougeâtre employée pour parfumer les viandes et les volailles. Peu piquante, préparée avec curcuma, gingembre, cumin, fenugrec et cannelle, entre autres. Disponible dans la section des produits ethniques de la plupart des supermarchés.\n"}, {"folder": "Volaille", "filename": "saute-asiatique-poulet-brocoli.md", "id": "Volaille__saute-asiatique-poulet-brocoli", "raw": "---\ntitre: Sauté asiatique de poulet, brocoli, basilic et arachides\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 15 min\ntags: [asiatique, wok, sauté]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauté\n- 4 poitrines de poulet, en cubes\n- Sel et poivre, au goût\n- 30 ml (2 c. à soupe) huile végétale\n- 30 ml (2 c. à soupe) gingembre frais râpé finement\n- 2 petites gousses d'ail, hachées\n- 5 ml (1 c. à thé) graines de coriandre broyées\n- 30 ml (2 c. à soupe) huile de sésame grillé\n- 15 ml (1 c. à soupe) sauce piquante sriracha\n- 30 ml (2 c. à soupe) sauce tamari\n- 80 ml (1/3 tasse) sauce hoisin sans gluten\n- 30 ml (2 c. à soupe) sirop d'érable\n- 1,5 L (6 tasses, 450 g) brocolis en fleurettes (environ 2 brocolis)\n- 2 courgettes, en fines lanières\n- 125 ml (1/2 tasse, 70 g) oignons verts hachés grossièrement\n- 500 ml (2 tasses, 30 g) feuilles de basilic frais\n\n### Garniture\n- 500 ml (2 tasses, 420 g) riz à sushi cuit\n- Feuilles de basilic frais\n\n## Préparation\n1. Saler et poivrer le poulet. Dans une grande poêle antiadhésive, chauffer l'huile à feu moyen-élevé et faire dorer le poulet environ 3 minutes, en brassant.\n2. Ajouter le gingembre, l'ail et les graines de coriandre, et cuire encore 2 minutes, en brassant.\n3. Ajouter l'huile de sésame grillé, la sauce sriracha, la sauce tamari, la sauce hoisin et le sirop d'érable. Poursuivre la cuisson 3 minutes.\n4. Ajouter les fleurettes de brocoli et cuire 3 minutes, en brassant souvent.\n5. Ajouter les courgettes, les oignons verts et le basilic, et cuire encore 1 minute.\n6. Servir le sauté de poulet dans des bols avec le riz et garnir des feuilles de basilic.\n\n## Notes\n- La recette originale mentionne « les petits pois » à l'étape 5 mais aucun petit pois n'apparaît dans la liste d'ingrédients — j'ai remplacé par les courgettes (déjà listées) qui sont l'ingrédient logique à ce moment.\n"}, {"folder": "Volaille", "filename": "saute-poulet-vite-fait.md", "id": "Volaille__saute-poulet-vite-fait", "raw": "---\ntitre: Sauté au poulet vite fait\nportions: 6\ntemps_prep: 15 min\ntemps_cuisson: 15 min\ntags: [asiatique, wok, rapide, sauté]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauté\n- 15 ml (1 c. à soupe) huile de canola\n- 1,25 L (5 tasses) légumes au choix :\n  - **Cuisson longue** : oignons en fines tranches, carottes en rondelles, céleris tranchés en biseau, pieds de brocoli tranchés\n  - **Cuisson courte** : pois mange-tout, mini-bok choys tranchés, poivrons en lanières, fleurons de brocoli, chou chinois nappa en fines tranches, oignons verts en tronçons, courgettes tranchées en biseau, fèves germées\n- 450 g (1 lb) poulet cuit tranché (environ 2 poitrines)\n\n### Sauce\n- 125 ml (1/2 tasse) eau\n- 30 ml (2 c. à soupe) sauce hoisin\n- 15 ml (1 c. à soupe) sauce soya\n- 15 ml (1 c. à soupe) miel du Québec\n- 7,5 ml (1/2 c. à soupe) fécule de maïs\n\n### Garniture (facultatif)\n- Graines de sésame grillées\n- Sauce piquante sriracha\n\n## Préparation\n1. Dans un wok ou un grand poêlon antiadhésif à haut rebord, chauffer l'huile à feu moyen-vif. Cuire les légumes à cuisson longue de 8 à 10 minutes ou jusqu'à ce qu'ils soient tendres et dorés, en remuant à l'occasion.\n2. Pendant ce temps, dans une tasse à mesurer, fouetter les ingrédients de la sauce pour dissoudre complètement la fécule.\n3. Ajouter la sauce, les légumes à cuisson courte et le poulet cuit dans le poêlon. Remuer pour enrober les ingrédients et poursuivre la cuisson de 3 à 5 minutes. Ne pas trop cuire pour que les légumes demeurent croquants.\n4. Servir sur du riz ou des nouilles asiatiques. Si désiré, garnir de graines de sésame et d'un trait de sauce piquante sriracha.\n\n## Notes\n- Se conserve 4 jours au réfrigérateur ou 3 mois au congélateur.\n- **Astuce — préparer le poulet à l'avance** : déposer 5 poitrines de poulet désossées (environ 1,25 kg / 2 1/2 lb) sur une plaque de cuisson tapissée de papier parchemin. Badigeonner de 15 ml (1 c. à soupe) d'huile de canola, poivrer et saler. Cuire au four à 180 °C (350 °F) 30 minutes ou jusqu'à ce que la chair n'ait plus de coloration rosée au centre. Laisser reposer 5 minutes.\n- **Variante** : remplacer le poulet par un reste de filet de porc, de rôti de bœuf ou par des crevettes surgelées et décongelées.\n- Temps de cuisson estimé d'après les étapes (la valeur n'était pas visible sur la photo originale).\n"}, {"folder": "Volaille", "filename": "supremes-volaille-sauce-minute.md", "id": "Volaille__supremes-volaille-sauce-minute", "raw": "---\ntitre: Suprêmes de volaille sauce minute\nportions: 6\ntemps_prep: 20 min\ntemps_cuisson: 15 min\ntags: [poêle, érable, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n- 4 demi-poitrines de poulet désossées et sans peau\n- 30 ml (2 c. à soupe) beurre\n- 15 ml (1 c. à soupe) huile d'olive\n- 5 ml (1 c. à thé) poivre noir concassé\n- 10 ml (2 c. à thé) farine tout usage\n- 125 ml (1/2 tasse) bouillon de poulet\n- 60 ml (1/4 tasse) sirop d'érable\n- 15 ml (1 c. à soupe) sauce soya\n- Sel\n\n## Préparation\n1. Dans une grande poêle antiadhésive, dorer le poulet dans le beurre et l'huile environ 5 minutes de chaque côté ou jusqu'à ce qu'il soit bien cuit. Parsemer de poivre et saler. Réserver sur une assiette au chaud.\n2. Dans la même poêle, saupoudrer la farine sur le gras chaud et cuire 30 secondes en remuant.\n3. Ajouter le bouillon, le sirop d'érable et la sauce soya. Porter à ébullition en remuant et laisser mijoter de 1 à 2 minutes ou jusqu'à ce que la sauce soit sirupeuse. Rectifier l'assaisonnement.\n4. Trancher le poulet en aiguillettes et napper de sauce.\n\n## Notes\n- Le temps de cuisson original (« 8 heures ») dans la recette source est manifestement une coquille (s'agissant d'une cuisson à la poêle en 15 minutes max). J'ai mis 15 min comme valeur réaliste.\n- 4 demi-poitrines pour 6 portions semble peu — peut-être augmenter la quantité si servi seul, ou bien le poulet est complété par des accompagnements.\n"}, {"folder": "Végé", "filename": "socca-pizza.md", "id": "Végé__socca-pizza", "raw": "---\ntitre: Socca pizza\nportions: 2\ntemps_prep: 10 min\ntemps_cuisson: 10 min\ntags: [méditerranéen, végé, pizza, four, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Pâte\n- 125 ml (1/2 tasse) farine de pois chiches\n- 125 ml (1/2 tasse) eau\n- 1 œuf\n- 2,5 ml (1/2 c. à thé) graines de fenouil\n- Poivre et sel\n- 5 ml (1 c. à thé) huile d'olive\n\n### Garniture\n- 1/2 courgette (zucchini) tranchée très finement\n- 6 boules fromage bocconcini de taille cocktail (60 g / 2 oz)\n- 60 ml (1/4 tasse) sauce à pizza du commerce\n- Feuilles de basilic frais déchiquetées\n\n## Préparation\n1. Préchauffer le four à gril (broil).\n2. Dans un bol moyen, à l'aide d'un fouet, mélanger la farine, l'eau, l'œuf et les graines de fenouil. Poivrer généreusement et ajouter une pincée de sel.\n3. Dans un poêlon antiadhésif allant au four, chauffer l'huile à feu moyen-vif. Verser la pâte dans le poêlon et cuire 2 ou 3 minutes, sans remuer. Terminer la cuisson sous le gril (broil) 2 ou 3 minutes ou jusqu'à ce que la socca soit légèrement dorée.\n4. Répartir la courgette sur la socca. Déchirer le fromage en morceaux et répartir sur les courgettes. Parsemer de petites cuillerées de sauce à pizza.\n5. Poursuivre la cuisson sous le gril (broil) 2 minutes pour faire fondre le fromage.\n6. Pour servir, garnir de basilic frais. Accompagner d'une salade verte, si désiré.\n\n## Notes\n- Se conserve 3 jours au réfrigérateur, ne se congèle pas.\n- Originaire du sud de la France, la socca est un pain plat sans gluten préparé à base de farine de pois chiches. La cousine italienne s'appelle la farinata.\n- En cas d'allergie aux œufs : remplacer l'œuf par 15 ml (1 c. à soupe) de graines de lin moulues trempées 5 minutes dans 30 ml (2 c. à soupe) d'eau.\n"}];
+const RECIPES_RAW = [{"folder": "Boeuf", "filename": "boeuf-au-brocoli.md", "id": "Boeuf\\boeuf-au-brocoli", "raw": "---\ntitre: Bœuf au brocoli\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 15 min\ntags: [asiatique, wok, sauté]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauté\n- 450 g (1 lb) bifteck de flanc ou tournedos d'intérieur de ronde\n- 5 ml (1 c. à thé) bicarbonate de soude\n- 450 g (1 lb) brocoli, coupé en bouquets\n- 45 ml (3 c. à soupe) huile végétale, divisée\n- 2 oignons verts émincés, le blanc et le vert séparés\n- 2 gousses d'ail hachées\n- 1 petite carotte, coupée en deux sur la longueur et émincée\n- 15 ml (1 c. à soupe) gingembre frais haché\n- Sel et poivre\n\n### Sauce\n- 75 ml (1/3 tasse) eau\n- 45 ml (3 c. à soupe) sauce soya réduite en sodium\n- 45 ml (3 c. à soupe) sauce aux huîtres\n- 15 ml (1 c. à soupe) fécule de maïs\n- 15 ml (1 c. à soupe) sucre\n- 5 ml (1 c. à thé) huile de sésame grillé\n\n## Préparation\n1. Sur un plan de travail, trancher le bifteck dans le sens contraire du grain de la viande. Dans un bol, mélanger la viande avec le bicarbonate de soude. Laisser macérer 15 minutes (voir notes).\n2. Rincer la viande à l'eau froide, égoutter et éponger à l'aide de papier absorbant. Saler et poivrer.\n3. Entre-temps, dans une casserole d'eau bouillante salée, blanchir le brocoli 2 minutes. Égoutter.\n4. Dans un bol, mélanger au fouet tous les ingrédients de la sauce. Réserver.\n5. Dans un wok ou une grande poêle antiadhésive à feu élevé, cuire la moitié de la viande à la fois 2 minutes de chaque côté dans 15 ml (1 c. à soupe) de l'huile, ou jusqu'à ce qu'elle soit bien dorée. Réserver sur une assiette.\n6. Dans le même wok à feu élevé, cuire le blanc des oignons verts, l'ail, la carotte et le gingembre dans le reste de l'huile 2 minutes en remuant.\n7. Ajouter le brocoli et la sauce. Poursuivre la cuisson jusqu'à ce que la sauce épaississe légèrement.\n8. Remettre la viande dans le wok et bien l'enrober de la sauce.\n9. Dans une grande assiette de service, répartir le bœuf au brocoli. Parsemer du vert des oignons verts. Accompagner de riz au jasmin ou de vermicelles de riz, si désiré.\n\n## Notes\n- Le bicarbonate de soude attendrit la viande lors du temps de macération de 15 min.\n- Temps total ajouté : 15 min de macération en plus des 20 min de prep et 15 min de cuisson.\n"}, {"folder": "Boeuf", "filename": "boulettes-bourguignonnes.md", "id": "Boeuf\\boulettes-bourguignonnes", "raw": "---\ntitre: Boulettes style bourguignon\nportions: 6\ntemps_prep: 45 min\ntemps_cuisson: 45 min\ntags: [français, four, boulettes, mijoté]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauce style bourguignon\n- 15 ml (1 c. à soupe) huile d'olive\n- 175 g lardons\n- 750 ml (3 tasses, 450 g) carottes en petits dés\n- 1 oignon rouge, haché grossièrement\n- 2 gousses d'ail, hachées\n- 2 clous de girofle\n- 5 ml (1 c. à thé) herbes de Provence\n- 2 feuilles de laurier\n- 375 ml (1 1/2 tasse) vin rouge\n- 1 L (4 tasses) bouillon de bœuf\n- 45 ml (3 c. à soupe) pâte de tomates\n- 2,5 ml (1/2 c. à thé) sel\n- Poivre, au goût\n\n### Boulettes de bœuf\n- 675 g bœuf haché\n- 80 ml (1/3 tasse, 25 g) chapelure de céréales de riz soufflé sans gluten, obtenue au mélangeur\n- 1 œuf\n- 10 ml (2 c. à thé) herbes de Provence\n- 1 gousse d'ail, hachée\n- 2,5 ml (1/2 c. à thé) sel\n- Poivre, au goût\n\n## Préparation\n1. Préchauffer le four à 200 °C (400 °F) et tapisser une plaque à biscuits de papier parchemin.\n2. Dans un grand faitout, chauffer l'huile d'olive à feu moyen-élevé et faire dorer les carottes, l'oignon et les lardons pendant 7 minutes.\n3. Ajouter l'ail, les clous de girofle, les herbes de Provence, le sel, le poivre et les feuilles de laurier. Cuire encore 2 minutes.\n4. Déglacer avec le vin rouge et porter à ébullition. Laisser réduire 5 minutes.\n5. Ajouter le bouillon et la pâte de tomates. Laisser mijoter encore 15 minutes.\n6. Pendant la cuisson de la sauce, dans un grand bol, mélanger tous les ingrédients des boulettes. Former des boulettes de la grosseur d'une balle de golf et les déposer sur la plaque à biscuits. Cuire au four 15 minutes. Réserver.\n7. Ajouter les boulettes dans la sauce et poursuivre la cuisson encore 15 minutes à feu doux.\n"}, {"folder": "Boeuf", "filename": "roti-palette-mijoteuse.md", "id": "Boeuf\\roti-palette-mijoteuse", "raw": "---\ntitre: Rôti de palette à la mijoteuse\nportions: 15\ntemps_prep: 20 min\ntemps_cuisson: 8 h\ntags: [mijoteuse, rôti]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Bœuf\n- 30 ml (2 c. à soupe) beurre non salé\n- 1 kg (2,2 lb) rôti de palette de bœuf\n- 500 ml (2 tasses) eau\n- 1 mélange à soupe à l'oignon (1 sachet de 55 g)\n- 45 ml (3 c. à soupe) cassonade\n- 30 ml (2 c. à soupe) bouillon de bœuf liquide Bovril\n- 22 ml (1 1/2 c. à soupe) sauce soya régulière ou foncée (supérieure)\n- 3 gousses d'ail hachées\n- 15 ml (1 c. à soupe) gingembre frais râpé\n- 5 ml (1 c. à thé) moutarde de Dijon\n- 5 ml (1 c. à thé) moutarde à l'ancienne\n- Sel et poivre\n\n### Légumes (facultatifs)\n- 3 grosses carottes en gros tronçons de 4 à 6 cm\n- 4 moyennes pommes de terre en quartiers\n\n### Garniture\n- Persil ou thym frais\n\n## Préparation\n1. Dans une grande poêle en acier inoxydable à feu moyen élevé, faire fondre le beurre. Saisir le rôti de palette environ 2 minutes de chaque côté pour lui donner une belle couleur.\n2. Déposer le rôti de palette saisi dans le fond de la mijoteuse.\n3. Dans un bol, mélanger l'eau avec le reste des ingrédients du bœuf. Verser le mélange sur le rôti saisi, ajouter les légumes (si désirés) dans la mijoteuse, couvrir et cuire 8 heures à faible intensité (basse température) ou 4 heures à intensité élevée pour une cuisson parfaite.\n4. Après le temps de cuisson, à l'aide de deux fourchettes, retirer les morceaux de gras ou les os de la viande et effilocher celle-ci.\n5. Servir les morceaux de viande avec la sauce au goût de bouillon de bœuf et les accompagnements désirés. Garnir de fines herbes comme du persil ou du thym frais.\n\n## Notes\n- 15 portions est ce qu'indique la recette originale, mais la quantité de viande (2,2 lb) suggère plutôt 6-8 portions raisonnables. À valider à la cuisson.\n"}, {"folder": "Boeuf", "filename": "roti-palette-oignons-erable.md", "id": "Boeuf\\roti-palette-oignons-erable", "raw": "---\ntitre: Rôti de palette aux oignons et à l'érable à la mijoteuse\nportions: 6\ntemps_prep: 20 min\ntemps_cuisson: 8 h\ntags: [mijoteuse, érable, rôti]\nderniere_fois: \n---\n\n## Ingrédients\n- 30 ml (2 c. à soupe) poudre d'oignon\n- 5 ml (1 c. à thé) poudre d'ail\n- 30 ml (2 c. à soupe) moutarde de Dijon\n- 15 ml (1 c. à soupe) thym frais haché\n- Sel et poivre au goût\n- 1 rôti de palette de bœuf sans os de 900 g (2 lb)\n- 15 ml (1 c. à soupe) huile d'olive\n- 180 ml (3/4 tasse) bouillon de bœuf\n- 80 ml (1/3 tasse) sirop d'érable\n- 1 oignon coupé en rondelles\n- 4 carottes nantaises coupées en morceaux\n- 8 pommes de terre grelots\n- 1/2 petit rutabaga coupé en cubes\n\n## Préparation\n1. Dans un bol, mélanger la poudre d'oignon avec la poudre d'ail, la moutarde et le thym. Saler et poivrer.\n2. Retirer l'excédent de gras du rôti de palette.\n3. Dans une poêle, chauffer l'huile à feu moyen. Saisir le rôti de palette de 1 à 2 minutes de chaque côté. Transférer dans une assiette.\n4. Badigeonner les deux côtés du rôti avec la préparation à la moutarde. Déposer le rôti dans la mijoteuse.\n5. Ajouter le bouillon, le sirop d'érable et les légumes.\n6. Couvrir et cuire de 8 à 9 heures à faible intensité, jusqu'à ce que la viande se défasse facilement à la fourchette.\n"}, {"folder": "Boeuf", "filename": "soupe-boeuf-udon.md", "id": "Boeuf\\soupe-boeuf-udon", "raw": "---\ntitre: Soupe au boeuf et aux nouilles udon à la mijoteuse\nportions: 5\ntemps_prep: 20 min\ntemps_cuisson: 8 h\ntags: [asiatique, mijoteuse, soupe]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Soupe\n- 1 kg (2,2 lb) rôti de palette de boeuf désossé, coupé en 8 morceaux\n- 15 ml (1 c. à soupe) huile végétale\n- 1 oignon, émincé\n- 4 gousses d'ail, hachées\n- 15 ml (1 c. à soupe) gingembre frais haché\n- 1,5 litre (6 tasses) bouillon de boeuf\n- 75 ml (1/3 tasse) sauce hoisin, et plus pour le service\n- 5 ml (1 c. à thé) sauce sriracha, et plus pour le service\n- 2,5 ml (1/2 c. à thé) cinq-épices moulu\n\n### Garniture\n- 2 paquets de 200 g chacun de nouilles udon\n- 1 petit brocoli, coupé en petits bouquets\n- 2 carottes, coupées en julienne\n\n## Préparation\n1. Dans une grande poêle antiadhésive à feu moyen-élevé, dorer le boeuf de chaque côté dans l'huile. Déposer dans la mijoteuse.\n2. Dans la même poêle à feu moyen, attendrir l'oignon, l'ail et le gingembre en remuant. Déglacer avec 250 ml (1 tasse) du bouillon. Transvider dans la mijoteuse. Ajouter le reste du bouillon, la sauce hoisin, la sauce sriracha et le cinq-épices.\n3. Couvrir et cuire à basse température (Low) 8 heures.\n4. Dans une grande casserole d'eau bouillante salée, cuire les nouilles et le brocoli 2 minutes. Ajouter les carottes et poursuivre la cuisson 30 secondes. Égoutter.\n5. Répartir les nouilles et les légumes dans des bols. Verser le bouillon chaud dans les bols. Garnir de la viande. Accompagner de sauce hoisin et de sauce sriracha, au goût.\n"}, {"folder": "Divers", "filename": "bagels-air-fryer.md", "id": "Divers\\bagels-air-fryer", "raw": "---\ntitre: Bagels au air-fryer\nportions: 4\ntemps_prep: \ntemps_cuisson: 15 min\ntags: [air-fryer, déjeuner, pain]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Recette de base\n- 1 tasse de farine\n- 1 c. à soupe de poudre à pâte\n- 1/2 c. à thé de sel\n- 1 tasse de yogourt grec\n- Spray de cuisson\n\n### Variantes (au choix)\n- Pumpkin Spice : ajouter 3 c. à soupe de cassonade, 1 c. à soupe d'épices tarte à la citrouille et garnir de graines de citrouille\n- Garnir de graines de sésame\n- Garnir d'épices Everything Bagel\n- Ajouter 1/4 tasse de fromage râpé au mélange\n\n## Préparation\n1. Dans un bol, mesurer et ajouter la farine, la poudre à pâte et le sel. Fouetter pour bien mélanger.\n2. Ajouter ensuite le yogourt grec et remuer avec une cuillère en bois ou une spatule en caoutchouc jusqu'à ce que le tout soit combiné.\n3. Former une boule avec la pâte et la déposer sur une surface légèrement farinée.\n4. Pétrir la pâte pendant 2 à 3 minutes, puis la diviser en 4 portions égales.\n5. Rouler chaque morceau en un boudin de 20 à 25 cm (8 à 10 pouces) et pincer les extrémités pour former un bagel.\n6. Vaporiser les bagels de spray de cuisson et saupoudrer des garnitures préférées.\n7. Faire cuire les bagels à la friteuse à air à 390 °F (350 °F) pendant 15 minutes, en retournant à mi-cuisson.\n\n## Notes\n"}, {"folder": "Porc", "filename": "boulettes-saucisses-orzo.md", "id": "Porc\\boulettes-saucisses-orzo", "raw": "---\ntitre: Boulettes de saucisses à la courgette, orzo au brocoli\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 20 min\ntags: [italien, four, orzo, boulettes]\nderniere_fois: \n---\n\n## Ingrédients\n- 1 boîte de 398 ml (14 oz) tomates en dés\n- 30 ml (2 c. à soupe) pâte de tomates\n- 450 g (1 lb) saucisses italiennes douces ou fortes, la chair seulement\n- 55 g (3/4 tasse) parmesan frais râpé, divisé\n- 1 courgette, râpée\n- 750 ml (3 tasses) bouillon de poulet\n- 200 g (1 tasse) orzo\n- 1 petit brocoli, râpé\n- 30 ml (2 c. à soupe) beurre\n- Sel et poivre\n\n## Préparation\n1. Placer la grille au centre du four. Préchauffer le four à 230 °C (450 °F).\n2. Dans un plat de cuisson de 33 x 23 cm (13 x 9 po), mélanger les tomates et la pâte de tomates. Saler et poivrer. Réserver.\n3. Dans un grand bol, mélanger la chair à saucisses avec 35 g (1/2 tasse) du parmesan et la courgette. Saler légèrement et poivrer.\n4. À l'aide d'une cuillère à crème glacée de 45 ml (3 c. à soupe), former des boulettes avec le mélange et les répartir dans le plat de cuisson au fur et à mesure.\n5. Cuire au four 15 minutes. Augmenter la température à gril (broil) et poursuivre la cuisson 5 minutes ou jusqu'à ce que les boulettes soient cuites et légèrement dorées et que la sauce ait réduit légèrement.\n6. Entre-temps, dans une casserole, porter à ébullition le bouillon. Saler légèrement et poivrer. Ajouter l'orzo et cuire très al dente, environ 6 minutes. Ajouter le brocoli et poursuivre la cuisson 2 minutes ou jusqu'à ce que l'orzo et le brocoli soient cuits. Retirer du feu.\n7. Ajouter le beurre et le reste du parmesan dans la casserole avec l'orzo. Bien mélanger et rectifier l'assaisonnement.\n8. Dans des assiettes creuses, répartir l'orzo, la sauce tomate et les boulettes. Servir aussitôt.\n"}, {"folder": "Porc", "filename": "cotelettes-porc-bbq.md", "id": "Porc\\cotelettes-porc-bbq", "raw": "---\ntitre: Côtelettes de porc au four, sauce barbecue express\nportions: 4\ntemps_prep: 15 min\ntemps_cuisson: 30 min\ntags: [bbq, plaque, four, érable]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Porc et légumes\n- 450 g (1 lb) carottes nantaises, coupées en deux sur la longueur, puis en tronçons biseautés de 2,5 cm (1 po)\n- 280 g (4 tasses) bouquets de brocoli (environ 1 brocoli)\n- 45 ml (3 c. à soupe) huile végétale, divisée\n- 10 ml (2 c. à thé) paprika doux\n- 7,5 ml (1 1/2 c. à thé) cassonade\n- 2,5 ml (1/2 c. à thé) poudre d'ail\n- 2,5 ml (1/2 c. à thé) sel\n- 4 côtelettes de porc désossées d'environ 2 cm (3/4 po) d'épaisseur\n- Ciboulette ciselée, au goût (facultatif)\n\n### Sauce\n- 60 ml (1/4 tasse) ketchup\n- 60 ml (1/4 tasse) sirop d'érable\n- 30 ml (2 c. à soupe) moutarde à l'ancienne\n- 15 ml (1 c. à soupe) vinaigre de cidre\n\n## Préparation\n1. Placer la grille au centre du four. Préchauffer le four à 220 °C (425 °F).\n2. Sur une plaque de cuisson antiadhésive ou tapissée de papier parchemin, enrober les légumes de 30 ml (2 c. à soupe) d'huile. Saler et poivrer. Cuire au four 15 minutes.\n3. Entre-temps, dans un petit bol, mélanger le paprika avec la cassonade, la poudre d'ail et le sel. Poivrer généreusement. Sur une assiette, enrober les côtelettes du mélange d'épices de chaque côté. Arroser du reste de l'huile. Laisser macérer le temps de cuire les légumes.\n4. Retirer la plaque du four. Répartir les côtelettes sur la plaque à travers les légumes. Poursuivre la cuisson 10 minutes ou jusqu'au degré de cuisson désiré. Laisser reposer les côtelettes 5 minutes sur une autre assiette.\n5. Poursuivre la cuisson des légumes au four jusqu'à ce qu'ils soient dorés et tendres, au besoin. Verser le jus de cuisson accumulé sur les légumes et bien mélanger.\n6. Entre-temps, dans une tasse à mesurer ou un bol en verre, mélanger tous les ingrédients de la sauce. Saler et poivrer. Cuire au four à micro-ondes 1 min 30 en remuant à mi-cuisson.\n7. Dans des assiettes, répartir la viande et les légumes. Accompagner de la sauce. Parsemer de ciboulette. Servir avec une purée de pommes de terre, si désiré.\n"}, {"folder": "Porc", "filename": "courgettes-farcies-italienne.md", "id": "Porc\\courgettes-farcies-italienne", "raw": "---\ntitre: Courgettes farcies à l'italienne\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 35 min\ntags: [italien, four, farci]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Courgettes\n- 4 courgettes moyennes, coupées en 2 dans le sens de la longueur\n- 30 ml (2 c. à soupe) huile d'olive\n- Sel et poivre, au goût\n- 30 ml (2 c. à soupe) persil frais haché, pour garnir\n\n### Farce\n- Sauce à Spaghetti\n\n### Garniture\n- 125 ml (1/2 tasse) fromage mozzarella râpé\n- 125 ml (1/2 tasse) parmesan râpé\n- 125 ml (1/2 tasse) chapelure panko\n- 2,5 ml (1/2 c. à thé) épices italiennes\n\n## Préparation\n1. Préchauffer le four à 200 °C (400 °F), placer la grille au centre et tapisser une plaque à cuisson de papier parchemin ou d'une feuille antiadhésive réutilisable.\n2. À l'aide d'une cuillère, gratter le centre des courgettes pour enlever les graines et créer une cavité, en laissant une bordure de chair. Badigeonner les courgettes d'huile d'olive et assaisonner.\n3. Déposer sur la plaque et enfourner 15 minutes.\n4. Pendant ce temps, réchauffer la sauce à spaghetti dans une casserole.\n5. Dans un bol, mélanger tous les ingrédients de la garniture.\n6. Répartir la sauce à spaghetti sur les courgettes, parsemer de la garniture, puis remettre au four environ 10 minutes.\n7. Garnir de persil et servir.\n"}, {"folder": "Porc", "filename": "filet-mignon-porc-erable.md", "id": "Porc\\filet-mignon-porc-erable", "raw": "---\ntitre: Filet mignon de porc à l'érable\nportions: 3\ntemps_prep: 15 min\ntemps_cuisson: 10 min\ntags: [poêle, érable, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n- 125 ml (1/2 tasse) bouillon de poulet\n- 60 ml (1/4 tasse) sirop d'érable\n- 5 ml (1 c. à thé) moutarde de Dijon\n- 5 ml (1 c. à thé) ketchup\n- 5 ml (1 c. à thé) fécule de maïs\n- 1 filet de porc de 450 g (1 lb)\n- 30 ml (2 c. à soupe) beurre\n- 1 petit oignon, émincé\n- Sel et poivre\n\n## Préparation\n1. Dans un petit bol, mélanger au fouet le bouillon, le sirop d'érable, la moutarde, le ketchup et la fécule de maïs. Réserver.\n2. Sur un plan de travail, couper le filet de porc en tranches d'environ 1,5 cm (1/2 po).\n3. Dans une poêle antiadhésive à feu moyen-élevé, dorer la moitié de la viande à la fois, de chaque côté, dans la moitié du beurre. Réserver sur une assiette.\n4. Ajouter l'oignon dans la poêle et poursuivre la cuisson 2 minutes en remuant.\n5. Ajouter le mélange de bouillon et remettre la viande. Laisser mijoter 2 minutes. Saler et poivrer.\n6. Servir le porc et la sauce avec du riz blanc et un légume au choix, si désiré.\n\n## Notes\n- Recette pour 2 à 3 portions selon l'appétit.\n"}, {"folder": "Porc", "filename": "plaque-porc-grecque.md", "id": "Porc\\plaque-porc-grecque", "raw": "---\ntitre: Plaque de porc à la grecque\nportions: 6\ntemps_prep: 15 min\ntemps_cuisson: 30 min\ntags: [grec, four, plaque]\nderniere_fois: \n---\n\n## Ingrédients\n- 1 filet de porc d'environ 450 g (1 lb) coupé en tranches de 1,5 cm (1/2 po)\n- 675 g (1 1/2 lb) pommes de terre grelots coupées en 2 ou 4 selon la grosseur\n- 2 poivrons en gros cubes\n- 1 petit oignon rouge coupé en 8\n- 15 ml (1 c. à soupe) ail haché en pot (ou 3 gousses hachées finement)\n- 30 ml (2 c. à soupe) huile d'olive\n- Le jus de 1 citron (ou 60 ml / 1/4 tasse)\n- Poivre et sel\n- 180 ml (3/4 tasse) fromage feta émietté (120 g / 1/4 lb)\n- 60 ml (1/4 tasse) feuilles d'origan frais\n\n## Préparation\n1. Préchauffer le four à 230 °C (450 °F). Placer la grille au centre du four. Tapisser une plaque de cuisson de papier parchemin.\n2. Déposer le porc, les pommes de terre, les poivrons, l'oignon et l'ail sur la plaque.\n3. Verser l'huile et le jus de citron. Poivrer généreusement et ajouter une pincée de sel. Remuer avec les doigts pour enrober et répartir les ingrédients sur la plaque. Ajouter le fromage feta, sans mélanger.\n4. Cuire au four 30 minutes ou jusqu'à ce que la pointe d'un couteau s'insère facilement dans une pomme de terre.\n5. Au moment de servir, garnir d'origan et, si désiré, accompagner de sauce au yogourt et à l'ail.\n\n## Notes\n- Se conserve 4 jours au réfrigérateur ou 3 mois au congélateur.\n- **Sauce au yogourt et à l'ail (accompagnement facultatif)** : mélanger 250 ml (1 tasse) de yogourt grec nature, 2,5 ml (1/2 c. à thé) d'ail haché en pot, du poivre et une pincée de sel.\n- **Variantes** :\n  - *Italienne* — remplacer citron, feta et origan par tomates séchées, mozzarella fraîche et basilic.\n  - *Asiatique* — remplacer par jus de lime, gingembre et graines de sésame grillées.\n  - *Mexicaine* — remplacer par assaisonnement au chili, salsa et coriandre fraîche.\n"}, {"folder": "Volaille", "filename": "boulettes-dinde-asiatique.md", "id": "Volaille\\boulettes-dinde-asiatique", "raw": "---\ntitre: Boulettes de dinde à l'asiatique\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 25 min\ntags: [asiatique, air-fryer, boulettes]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes\n- 450 g (1 lb) dinde hachée\n- 15 ml (1 c. à soupe) gingembre frais haché\n- 3 gousses d'ail hachées finement\n- 60 ml (1/4 tasse) coriandre hachée finement\n- 15 ml (1 c. à soupe) graines de sésame\n- 2 oignons verts hachés finement\n- 1 œuf\n- 150 ml (2/3 tasse) chapelure panko\n- Huile végétale en vaporisateur\n\n### Sauce aigre-douce\n- 80 ml (1/3 tasse) sauce aux huîtres\n- 80 ml (1/3 tasse) jus d'orange\n- 10 ml (2 c. à thé) sriracha\n- 15 ml (1 c. à soupe) miel\n\n## Préparation\n1. Mélanger tous les ingrédients de la sauce dans un petit chaudron et porter à ébullition. Réserver.\n2. Dans un bol, mélanger la dinde, le gingembre, l'ail, la coriandre, les graines de sésame et les oignons verts.\n3. Dans un autre bol, mélanger l'œuf et la chapelure panko. Laisser reposer 2 minutes pour faire gonfler la chapelure, puis l'incorporer à la préparation de dinde.\n4. Façonner 16 boulettes et vaporiser d'huile.\n5. Déposer les boulettes dans le panier du air-fryer et cuire 25 minutes à 200 °C (400 °F) en mode air-fry, en remuant à mi-cuisson.\n6. Servir avec la sauce.\n"}, {"folder": "Volaille", "filename": "boulettes-dinde-coco-arachides.md", "id": "Volaille\\boulettes-dinde-coco-arachides", "raw": "---\ntitre: Boulettes de dinde sauce coco-arachides\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 25 min\ntags: [asiatique, four, boulettes]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes de dinde\n- 675 g (1 1/2 lb) dinde hachée\n- 1 tasse (195 g) quinoa cuit, refroidi\n- 3 oignons verts, émincés\n- 1 tasse (45 g) basilic frais haché\n- 1 œuf\n- 15 ml (1 c. à soupe) tamari\n- 2,5 ml (1/2 c. à thé) sel\n- Poivre, au goût\n- 30 ml (2 c. à soupe) huile d'olive\n\n### Sauce coco-arachides\n- 310 ml (1 1/4 tasse) lait de coco en boîte, bien brassé\n- 180 ml (3/4 tasse) beurre d'arachides\n- 45 ml (3 c. à soupe) tamari\n- 2 gousses d'ail, hachées\n- 30 ml (2 c. à soupe) miel\n- 250 ml (1 tasse) eau\n- Jus de 1/2 lime\n\n## Préparation\n1. Placer la grille au centre du four préchauffé à 200 °C (400 °F) et tapisser une plaque à biscuits de papier parchemin.\n2. Dans un grand bol, mélanger tous les ingrédients des boulettes, sauf l'huile. Former des boulettes de la grosseur d'une balle de golf et les déposer sur la plaque.\n3. Badigeonner le dessus des boulettes d'huile d'olive et cuire au four 20 minutes.\n4. Pendant ce temps, dans une grande poêle antiadhésive, mélanger tous les ingrédients de la sauce et cuire à feu très doux, en brassant au fouet, jusqu'à ce que la préparation épaississe et soit fumante.\n5. Servir les boulettes nappées de sauce.\n"}, {"folder": "Volaille", "filename": "boulettes-dinde-moutarde-erable.md", "id": "Volaille\\boulettes-dinde-moutarde-erable", "raw": "---\ntitre: Boulettes de dinde, sauce moutarde et érable\nportions: 6\ntemps_prep: 20 min\ntemps_cuisson: 15 min\ntags: [poêle, boulettes, érable]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes\n- 700 g (1 1/2 lb) dinde hachée\n- 1 œuf de grande taille, légèrement battu\n- 1/2 oignon, finement haché\n- 60 ml (1/4 tasse) farine d'amande\n- 4 gousses d'ail, hachées\n- 7,5 ml (1 1/2 c. à thé) romarin frais finement haché\n- 7,5 ml (1 1/2 c. à thé) thym frais finement haché\n- 5 ml (1 c. à thé) sel casher\n- 2,5 ml (1/2 c. à thé) poivre noir fraîchement moulu\n- 45 ml (3 c. à soupe) huile d'olive extra vierge\n\n### Sauce\n- 250 ml (1 tasse) bouillon de poulet\n- 60 ml (1/4 tasse) moutarde de Dijon\n- 60 ml (1/4 tasse) sirop d'érable\n- 30 ml (2 c. à soupe) mayonnaise\n- Romarin et thym frais supplémentaires, pour la garniture\n\n## Préparation\n1. Dans un grand bol, mélanger la dinde hachée, l'œuf, l'oignon, la farine d'amande, l'ail, le romarin, le thym, le sel et le poivre. Mélanger à la main jusqu'à ce que les ingrédients soient bien combinés.\n2. Former environ 30 boulettes avec 22 ml (1 1/2 c. à soupe) du mélange par boulette. Placer sur une assiette.\n3. Faire chauffer 30 ml (2 c. à soupe) d'huile d'olive dans une grande poêle à feu moyen. Faire dorer la moitié des boulettes de tous les côtés pendant 5 à 8 minutes. Retirer et réserver. Ajouter la dernière cuillère à soupe d'huile et répéter avec le reste des boulettes.\n4. Pour la sauce, déglacer la poêle avec le bouillon de poulet, en grattant le fond pour décoller les sucs de cuisson. Incorporer la moutarde de Dijon, le sirop d'érable et la mayonnaise. Fouetter et laisser mijoter jusqu'à ce que la sauce soit crémeuse.\n5. Remettre les boulettes dans la poêle et laisser réchauffer quelques minutes. Garnir d'herbes fraîches hachées avant de servir.\n\n## Notes\n- 30 boulettes pour 6 portions = environ 5 boulettes par portion.\n"}, {"folder": "Volaille", "filename": "boulettes-dinde-ricotta.md", "id": "Volaille\\boulettes-dinde-ricotta", "raw": "---\ntitre: Boulettes fondantes à la dinde et à la ricotta\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 20 min\ntags: [italien, four, salade]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes\n- 450 g (1 lb) dinde hachée (ou poulet haché)\n- 1 contenant de 300 g (10 1/2 oz) fromage ricotta à 5 % m.g. (325 ml / 1 1/3 tasse)\n- 1 œuf\n- 125 ml (1/2 tasse) chapelure de blé entier à l'italienne\n- 15 ml (1 c. à soupe) fines herbes séchées (mélange à l'italienne)\n- 1 pincée flocons de piment fort\n- Poivre et sel\n\n### Sauce tomate rapide\n- 1 boîte de 796 ml (28 oz) tomates en dés sans sel ajouté, avec le jus\n- 5 ml (1 c. à thé) poudre d'oignon\n- 5 ml (1 c. à thé) poudre d'ail\n- 5 ml (1 c. à thé) cassonade légèrement tassée\n\n### Salade\n- 30 ml (2 c. à soupe) huile d'olive\n- 15 ml (1 c. à soupe) vinaigre balsamique blanc\n- 1 cœur de laitue romaine en fines tranches\n- 1 petit radicchio, sans le cœur, tranché finement\n- 1/4 oignon rouge en fines tranches\n- 1/2 fenouil en fines tranches (bulbe et tiges), feuilles hachées\n\n### Pour servir\n- Feuilles de basilic frais\n\n## Préparation\n1. Préchauffer le four à 200 °C (400 °F). Placer la grille au centre du four. Tapisser une plaque de cuisson de papier parchemin.\n2. Dans un grand bol, mélanger la dinde, la ricotta, l'œuf, la chapelure, les fines herbes et les flocons de piment. Poivrer généreusement et ajouter une pincée de sel.\n3. Façonner 12 boulettes et les déposer sur la plaque. Cuire au four 20 minutes ou jusqu'à ce que les boulettes soient dorées.\n4. Dans une grande tasse à mesurer allant au four à micro-ondes, au pied-mélangeur, réduire en purée les ingrédients de la sauce tomate. Couvrir d'une pellicule de plastique et cuire 4 ou 5 minutes au four à micro-ondes.\n5. Dans un grand bol, fouetter l'huile et le vinaigre. Incorporer le reste des ingrédients de la salade.\n6. Répartir la salade dans 4 assiettes, puis déposer 3 boulettes par assiette. Napper de sauce tomate et garnir de basilic. Accompagner de pain frais.\n\n## Notes\n- 4 portions de 3 boulettes.\n- Les boulettes se conservent 4 jours au réfrigérateur ou 3 mois au congélateur. La sauce tomate se conserve 1 semaine au réfrigérateur ou 6 mois au congélateur.\n- En cas d'allergie au blé / sans gluten : remplacer la chapelure de blé par de la chapelure à base de maïs ou de riz.\n"}, {"folder": "Volaille", "filename": "boulettes-poulet-grecques.md", "id": "Volaille\\boulettes-poulet-grecques", "raw": "---\ntitre: Boulettes de poulet à la grecque, salade de concombres et mayo ail et citron\nportions: 4\ntemps_prep: 35 min\ntemps_cuisson: 20 min\ntags: [grec, four, été]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Boulettes\n- 675 g (1 1/2 lb) poulet haché\n- 1 tasse (125 g) courgette râpée finement (environ 1 petite)\n- 1/2 tasse (65 g) chapelure\n- 2 c. à soupe (30 ml) moutarde de Dijon\n- 1 1/2 c. à thé (7,5 ml) assaisonnement grec\n- Zeste de 1/2 citron bien lavé\n- 2 petites gousses d'ail, hachées\n- 1/2 c. à thé (2,5 ml) sel\n\n### Mayo ail et citron\n- 3/4 tasse (165 g) yogourt grec nature\n- 1 petite gousse d'ail, hachée\n- Zeste de 1/2 citron bien lavé\n- 1 c. à soupe (15 ml) jus de citron\n- 1 c. à soupe (15 ml) miel\n- 1/2 c. à thé (2,5 ml) assaisonnement grec\n- 1/4 c. à thé (1,25 ml) sel\n- Poivre, au goût\n\n### Salade de concombres et petits pois\n- 6 concombres libanais, en petits cubes\n- 1 1/2 tasse (225 g) petits pois blanchis\n- 1/3 tasse (15 g) menthe fraîche hachée\n- 3 c. à soupe (45 ml) huile d'olive\n- 1 c. à soupe (15 ml) jus de citron\n- 1 c. à thé (5 ml) moutarde de Dijon\n- 1/2 c. à thé (2,5 ml) sel\n- 1 petite gousse d'ail, hachée\n- Poivre, au goût\n\n## Préparation\n1. Préchauffer le four à 400 °F et placer la grille au centre. Tapisser une plaque à biscuits de parchemin.\n2. Dans un bol, mélanger tous les ingrédients des boulettes. Avec les mains légèrement humides, former des boulettes de la grosseur d'une balle de golf et les déposer sur la plaque. Vaporiser de spray à cuisson. Cuire au four 20 min. Régler la température à broil et cuire 2 min maximum.\n3. Pendant la cuisson des boulettes, préparer la mayo : mélanger tous les ingrédients dans un bol. Réserver.\n4. Mélanger tous les ingrédients de la salade de concombres et petits pois. Servir avec les boulettes et la mayo ail et citron.\n\n## Notes\n- La recette originale mentionne « sauf l'huile » à l'étape 2, mais aucune huile n'est listée dans les ingrédients des boulettes. Possible coquille — la mention a été retirée.\n"}, {"folder": "Volaille", "filename": "cubain-mojo-poulet.md", "id": "Volaille\\cubain-mojo-poulet", "raw": "---\ntitre: Cubain-Mojo\nportions: 5\ntemps_prep: 25 min\ntemps_cuisson: 40 min\ntags: [cubain, poêle, riz, marinade]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Poulet\n- 850 g poitrines de poulet coupées en morceaux de 3 cm\n- 1 oignon jaune coupé en lanières\n- 30 ml (2 c. à soupe) ail haché\n- 15 ml (1 c. à soupe) épices passe-partout\n- 10 ml (2 c. à thé) cumin\n- Jus de 3 oranges\n- Jus de 2 limes\n- Jus de 1 citron\n- Sel et poivre\n- 80 ml (1/3 tasse) coriandre fraîche hachée\n\n### Riz aux haricots\n- 1 oignon jaune haché\n- 1 poivron vert haché\n- 1 poivron rouge haché\n- 15 ml (1 c. à soupe) ail haché\n- 250 ml (1 tasse) riz blanc sec, rincé et égoutté\n- 1 conserve de haricots noirs de 540 ml, rincés et égouttés\n- 500 ml (2 tasses) bouillon de poulet sans sel ajouté\n\n## Préparation\n1. Dans un bol, mélanger l'oignon, l'ail, le mélange d'épices passe-partout, le cumin et le jus des agrumes. Déposer le poulet dans un bol avec la moitié du mélange de jus et d'épices. Dans un autre bol, verser le reste du jus avec les oignons. Laisser mariner 30 minutes.\n2. Pendant ce temps, vaporiser une casserole d'huile et la chauffer à feu moyen. Cuire l'oignon pour le riz pendant 2 minutes.\n3. Ajouter le poivron et l'ail dans la casserole, puis remuer. Poursuivre la cuisson 2 minutes en remuant régulièrement.\n4. Ajouter le riz et les haricots. Prolonger la cuisson de 2 minutes, puis verser le bouillon. Porter à ébullition, couvrir et cuire à feu doux 15 à 18 minutes, jusqu'à ce que le liquide soit complètement absorbé. Retirer du feu et laisser reposer 5 minutes avant de remuer le riz à la fourchette.\n5. Au moment de la cuisson du poulet, égoutter les morceaux en conservant la marinade. Vaporiser une poêle d'huile et la chauffer à feu moyen. Cuire la moitié des morceaux de poulet 4 minutes de chaque côté. Réserver dans une assiette et répéter avec le reste.\n6. Transvider la marinade et l'oignon dans la poêle. Déglacer en raclant le fond de la poêle pour détacher les sucs de cuisson. Ajouter de l'eau au besoin. Chauffer 3 minutes en remuant régulièrement et retirer du feu.\n7. Servir le riz, avec le poulet, les oignons et la coriandre.\n"}, {"folder": "Volaille", "filename": "plaque-poulet-grecque.md", "id": "Volaille\\plaque-poulet-grecque", "raw": "---\ntitre: Plaque de poulet à la grecque\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 25 min\ntags: [grec, plaque, four]\nderniere_fois: \n---\n\n## Ingrédients\n- 80 ml (1/3 tasse) huile d'olive\n- 60 ml (1/4 tasse) jus de citron\n- 2 gousses d'ail, hachées\n- 15 ml (1 c. à soupe) origan séché\n- 7,5 ml (1 1/2 c. à thé) paprika\n- 5 ml (1 c. à thé) sel\n- Poivre, au goût\n- 4 poitrines de poulet\n- 675 g (1 1/2 lb) pommes de terre grelot coupées en 4 selon la grosseur (4 1/2 tasses)\n- 2 poivrons rouges, tranchés\n- 1 oignon rouge, en petits quartiers\n- 1 citron bien lavé, coupé en 2\n- Brins d'aneth, pour garnir\n\n## Préparation\n1. Préchauffer le four à 180 °C (350 °F) et tapisser 1 ou 2 plaques à biscuits de papier parchemin.\n2. Dans un grand bol, mélanger l'huile d'olive, le jus de citron, l'ail, l'origan, le paprika et le sel. Poivrer.\n3. Ajouter le reste des ingrédients (sauf l'aneth) et mélanger.\n4. Répartir le mélange sur la ou les plaques, en laissant de l'espace entre les ingrédients.\n5. Cuire au four 35 minutes. Régler la température à broil et cuire encore 3 minutes en surveillant bien le poulet pour qu'il ne brûle pas.\n6. Garnir de brins d'aneth. Servir avec de la sauce tzatzíki du commerce.\n"}, {"folder": "Volaille", "filename": "poitrines-poulet-grecque.md", "id": "Volaille\\poitrines-poulet-grecque", "raw": "---\ntitre: Poitrines de poulet à la grecque\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 35 min\ntags: [grec, four, marinade]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Marinade\n- 125 ml (1/2 tasse) yogourt grec nature\n- 60 ml (1/4 tasse) huile d'olive\n- 30 ml (2 c. à soupe) jus de citron\n- Zeste de 1 citron\n- 30 ml (2 c. à soupe) origan frais haché\n- 30 ml (2 c. à soupe) épices grecques\n- 15 ml (1 c. à soupe) ail haché\n- 7,5 ml (1/2 c. à soupe) miel\n- 5 ml (1 c. à thé) moutarde de Dijon\n- 2,5 ml (1/2 c. à thé) concentré de bouillon de poulet liquide\n- 1,25 ml (1/4 c. à thé) sel\n- 1,25 ml (1/4 c. à thé) poivre du moulin\n\n### Poulet\n- 908 g (2 lb) poitrines de poulet\n- Origan frais, pour garnir\n\n## Préparation\n1. Dans un grand bol, mélanger tous les ingrédients de la marinade : yogourt grec, huile d'olive, zeste et jus de citron, origan, épices grecques, ail, miel, moutarde, concentré de bouillon, sel et poivre.\n2. À l'aide de papier absorbant, éponger l'excédent d'humidité sur les poitrines. Retirer le surplus de gras visible à l'aide d'un couteau bien aiguisé.\n3. Incorporer le poulet à la marinade. Pour un maximum de saveurs, réfrigérer 12 heures.\n4. Préchauffer le four à 205 °C (400 °F).\n5. Transférer le poulet et la marinade dans un grand plat de cuisson légèrement huilé. Badigeonner les morceaux avec le surplus de marinade.\n6. Cuire au four 35 minutes ou jusqu'à ce que le poulet soit complètement cuit, en retournant aux 15 minutes.\n7. Garnir le poulet d'origan frais et servir immédiatement.\n\n## Notes\n- Prévoir 12 heures de marinade au réfrigérateur pour un maximum de saveurs (non comptées dans le temps de préparation).\n- La recette d'origine utilise « zeste de citron » dans les étapes mais ne le listait pas explicitement dans les ingrédients de la marinade — je l'ai ajouté.\n"}, {"folder": "Volaille", "filename": "poivrons-farcis-dinde.md", "id": "Volaille\\poivrons-farcis-dinde", "raw": "---\ntitre: Poivrons farcis à la dinde\nportions: 6\ntemps_prep: 10 min\ntemps_cuisson: 35 min\ntags: [italien, four, farci]\nderniere_fois: \n---\n\n## Ingrédients\n- 6 poivrons, coupés en deux dans le sens de la longueur et épépinés\n- 45 ml (3 c. à soupe) huile d'olive extra-vierge\n- 3 gousses d'ail, hachées\n- 1/2 oignon jaune, coupé en dés\n- 2 branches de céleri, coupées en dés\n- 450 g (1 lb) dinde hachée\n- 700 ml coulis de tomates\n- 500 ml (2 tasses) jeunes épinards, hachés grossièrement\n- 375 ml (1 1/2 tasse) riz cuit\n- 7,5 ml (1/2 c. à soupe) assaisonnement italien\n- Sel casher et poivre noir moulu, au goût\n- 125 ml (1/2 tasse) fromage Monterey Jack ou cheddar\n- Persil haché, pour garnir\n\n## Préparation\n1. Préchauffer le four à 175 °C (350 °F). Couper les poivrons en deux dans le sens de la longueur et retirer les graines et la membrane.\n2. Arroser les poivrons avec 15 ml (1 c. à soupe) d'huile et frotter l'intérieur et l'extérieur pour bien les enrober. Disposer à l'envers dans deux plats de cuisson ou sur une grande plaque, puis précuire 15 minutes.\n3. Pendant ce temps, faire chauffer les 30 ml (2 c. à soupe) d'huile restantes dans une grande poêle à feu moyen-vif. Faire revenir l'oignon et l'ail environ 2 minutes, jusqu'à ce qu'ils soient légèrement attendris. Ajouter le céleri et cuire environ 2 minutes.\n4. Ajouter la dinde hachée et faire cuire jusqu'à ce qu'elle soit bien dorée, en la défaisant avec une spatule au besoin.\n5. Égoutter l'excédent de liquide, puis incorporer le coulis de tomates, le riz, les épinards, l'assaisonnement italien, le sel et le poivre. Mélanger 1 à 2 minutes, jusqu'à ce que les épinards tombent.\n6. Retirer les poivrons du four et les retourner avec des pinces. Farcir du mélange de dinde, puis parsemer de fromage. Remettre au four et cuire 15 à 20 minutes, ou jusqu'à ce que les poivrons soient tendres.\n7. Avant de servir, garnir de persil frais haché.\n\n## Notes\n- L'étape 4 de la recette originale parlait du « bœuf haché », mais l'ingrédient principal est la dinde — j'ai corrigé.\n"}, {"folder": "Volaille", "filename": "poulet-cremeux-cajun.md", "id": "Volaille\\poulet-cremeux-cajun", "raw": "---\ntitre: Poulet crémeux au style cajun\nportions: 4\ntemps_prep: 15 min\ntemps_cuisson: 20 min\ntags: [cajun, poêle, sauce-cremeuse]\nderniere_fois: \n---\n\n## Ingrédients\n- 4 poitrines de poulet désossées et sans peau (environ 200 g chacune)\n- 30 ml (2 c. à soupe) assaisonnement cajun\n- 45 ml (3 c. à soupe) huile d'olive extra vierge\n- 125 ml (1/2 tasse) oignon jaune, coupé en dés\n- 125 ml (1/2 tasse) poivron vert, coupé en dés\n- 1 branche de céleri, hachée\n- 2 gousses d'ail, hachées\n- 375 ml (1 1/2 tasse) crème épaisse\n- 60 ml (1/4 tasse) parmesan fraîchement râpé\n- Persil haché, pour garnir\n\n## Préparation\n1. Assaisonner généreusement les deux côtés de chaque poitrine de poulet avec l'assaisonnement cajun.\n2. Dans une grande poêle, faire chauffer 30 ml (2 c. à soupe) d'huile d'olive à feu moyen. Saisir le poulet 3 à 4 minutes de chaque côté, jusqu'à ce qu'il soit bien doré. Retirer le poulet et réserver sur une assiette.\n3. Dans la même poêle, ajouter la dernière cuillère à soupe d'huile, puis l'oignon, le poivron et le céleri. Faire sauter 3 à 4 minutes, jusqu'à ce qu'ils soient tendres. Ajouter l'ail et faire sauter encore 1 minute.\n4. Verser la crème épaisse et le parmesan dans la poêle. Mélanger bien et laisser mijoter doucement.\n5. Remettre le poulet dans la poêle et laisser cuire dans la sauce environ 5 minutes, jusqu'à ce qu'il soit bien chaud et complètement cuit.\n6. Garnir de persil haché avant de servir.\n"}, {"folder": "Volaille", "filename": "poulet-cremeux-moutarde-asperges.md", "id": "Volaille\\poulet-cremeux-moutarde-asperges", "raw": "---\ntitre: Poulet crémeux à la moutarde et aux asperges\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 30 min\ntags: [poêle, sauce-cremeuse]\nderniere_fois: \n---\n\n## Ingrédients\n- 4 poitrines de poulet désossées et sans peau\n- Sel et poivre\n- 60 ml (4 c. à soupe) huile d'olive, divisée\n- 1 botte d'asperges (325 g), coupées en 3\n- 125 ml (1/2 tasse, 60 g) échalotes françaises émincées\n- 3 gousses d'ail, hachées\n- 10 ml (2 c. à thé) romarin frais haché\n- 5 ml (1 c. à thé) graines de fenouil broyées\n- 30 ml (2 c. à soupe) vinaigre de xérès\n- 60 ml (1/4 tasse) vin blanc sec\n- 375 ml (1 1/2 tasse) bouillon de poulet\n- 45 ml (3 c. à soupe) moutarde de Dijon\n- 45 ml (3 c. à soupe) parmesan râpé (ou levure alimentaire pour version sans produits laitiers)\n- 2,5 ml (1/2 c. à thé) sel\n- 750 ml (3 tasses, 75 g) bébés épinards\n- 250 ml (1 tasse) crème de soya ou d'avoine de type Belsoy + 60 ml (1/4 tasse) eau très chaude\n- Estragon frais et fleur de sel, pour garnir\n\n## Préparation\n1. Assaisonner les poitrines de poulet de sel et de poivre. Dans une grande poêle en fonte émaillée ou antiadhésive, chauffer 30 ml (2 c. à soupe) d'huile d'olive à feu moyen-élevé et saisir les poitrines 4 minutes de chaque côté, jusqu'à ce qu'elles soient bien dorées. Réserver dans une assiette.\n2. Dans la même poêle, chauffer le reste de l'huile à feu élevé et faire revenir les asperges 2 minutes maximum en brassant souvent. Réserver dans l'assiette avec le poulet.\n3. Réduire le feu à moyen et ajouter les échalotes françaises. Cuire environ 3 minutes en brassant souvent.\n4. Ajouter l'ail, le romarin et les graines de fenouil, et cuire encore 1 minute en brassant.\n5. Déglacer avec le vinaigre de xérès et le vin blanc, et cuire 2 minutes en brassant, jusqu'à ce que le liquide soit presque complètement évaporé.\n6. Ajouter le bouillon de poulet, la moutarde de Dijon, le parmesan et le sel en brassant au fouet. Remettre les poitrines dans la poêle et cuire encore 5 minutes, à couvert, ou jusqu'à ce que les poitrines soient cuites.\n7. Ajouter les épinards et le mélange de crème de soya et d'eau, et bien brasser. Remettre les asperges et cuire encore 2 minutes, jusqu'à ce que les épinards soient tombés et que la sauce épaississe.\n8. Poivrer, garnir d'estragon et saupoudrer de fleur de sel.\n\n## Notes\n- La recette originale présente quelques incohérences : la liste d'ingrédients indiquait « vinaigre de vin rouge » mais les étapes parlent de « xérès » (j'ai gardé xérès). De même, « parmesan » dans la liste vs « levure alimentaire » dans les étapes — j'ai gardé parmesan en mentionnant l'alternative sans produits laitiers.\n- L'estragon en garniture n'apparaissait pas dans la liste d'origine mais est mentionné à l'étape finale.\n"}, {"folder": "Volaille", "filename": "poulet-cremeux-poivrons-rotis.md", "id": "Volaille\\poulet-cremeux-poivrons-rotis", "raw": "---\ntitre: Poulet sauce crémeuse aux poivrons rôtis\nportions: 4\ntemps_prep: 20 min\ntemps_cuisson: 25 min\ntags: [méditerranéen, poêle, four, sauce-cremeuse]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauce crémeuse aux poivrons rôtis\n- 1 pot de 340 ml poivrons rôtis, bien égouttés\n- 250 ml (1 tasse) lait de coco en conserve, bien brassé\n- 15 ml (1 c. à soupe) vinaigre de vin rouge\n- 2 gousses d'ail\n- 5 ml (1 c. à thé) paprika\n- 5 ml (1 c. à thé) origan séché\n- 5 ml (1 c. à thé) sel\n- 60 ml (1/4 tasse, 5 g) persil frais haché\n\n### Poulet\n- 4 poitrines de poulet, sans la peau\n- Sel et poivre, au goût\n- 30 ml (2 c. à soupe) huile d'olive\n- 1 oignon, émincé\n- 1 poivron rouge, émincé\n- 60 ml (1/4 tasse, 10 g) persil frais haché, en garniture\n\n## Préparation\n1. Dans un mélangeur, mixer tous les ingrédients de la sauce jusqu'à l'obtention d'un mélange plus ou moins lisse. Réserver.\n2. Préchauffer le four à 200 °C (400 °F) et placer la grille au centre.\n3. Saler et poivrer le poulet. Dans une grande poêle antiadhésive, chauffer l'huile à feu élevé et dorer les poitrines 3 minutes de chaque côté. Réserver dans une assiette.\n4. Baisser le feu à moyen, ajouter les oignons et les faire dorer 6 minutes en brassant souvent.\n5. Ajouter le poivron rouge et cuire encore 1 minute seulement.\n6. Remettre le poulet dans la poêle et arroser de sauce crémeuse aux poivrons rôtis. Cuire au four 15 minutes.\n7. À la sortie du four, ajouter le persil. Servir avec des pâtes à l'huile d'olive et ciboulette ou avec un riz blanc.\n"}, {"folder": "Volaille", "filename": "poulet-cremeux-tomates-sechees-epinards.md", "id": "Volaille\\poulet-cremeux-tomates-sechees-epinards", "raw": "---\ntitre: Poulet crémeux aux tomates séchées et aux épinards\nportions: 4\ntemps_prep: 15 min\ntemps_cuisson: 20 min\ntags: [italien, poêle, sauce-cremeuse]\nderniere_fois: \n---\n\n## Ingrédients\n- 4 poitrines de poulet désossées et sans peau (environ 170 g chacune)\n- 5 ml (1 c. à thé) assaisonnement italien (ou un mélange d'épices comme l'origan, le thym, le basilic et le romarin)\n- 5 ml (1 c. à thé) sel casher\n- 2,5 ml (1/2 c. à thé) poivre noir fraîchement moulu\n- 45 ml (3 c. à soupe) huile d'olive extra vierge\n- 4 gousses d'ail, hachées\n- 60 ml (1/4 tasse) oignon jaune, finement haché\n- 125 ml (1/2 tasse) tomates séchées, finement tranchées\n- 500 ml (2 tasses) jeunes pousses d'épinards\n- 375 ml (1 1/2 tasse) crème épaisse\n- 60 ml (1/4 tasse) parmesan fraîchement râpé\n\n## Préparation\n1. Assaisonner les deux côtés de chaque poitrine de poulet avec l'assaisonnement italien, le sel et le poivre.\n2. Dans une grande poêle, faire chauffer 30 ml (2 c. à soupe) d'huile d'olive à feu moyen. Saisir le poulet 3 à 4 minutes de chaque côté, jusqu'à ce qu'il soit bien doré. Retirer le poulet et réserver.\n3. Dans la même poêle, ajouter la dernière cuillère à soupe d'huile et l'oignon. Faire sauter 2 à 3 minutes, jusqu'à ce qu'il soit tendre.\n4. Ajouter les tomates séchées et l'ail et faire sauter encore 1 minute, jusqu'à ce que les arômes se dégagent.\n5. Ajouter les épinards et faire sauter encore 1 minute, juste le temps qu'ils commencent à flétrir.\n6. Ajouter la crème épaisse et le parmesan. Mélanger bien et laisser la sauce mijoter.\n7. Remettre le poulet dans la poêle et laisser cuire dans la sauce environ 5 minutes, jusqu'à ce qu'il soit bien chaud.\n"}, {"folder": "Volaille", "filename": "poulet-shish-taouk.md", "id": "Volaille\\poulet-shish-taouk", "raw": "---\ntitre: Poulet shish taouk\nportions: 8\ntemps_prep: 15 min\ntemps_cuisson: 15 min\ntags: [libanais, poêle, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n- 375 ml (1 1/2 tasse) yogourt nature\n- Le zeste et le jus de 1 citron\n- 30 ml (2 c. à soupe) beurre de sésame (tahini)\n- 30 ml (2 c. à soupe) ail haché en pot (ou 6 gousses hachées finement)\n- 5 ml (1 c. à thé) cumin moulu\n- 5 ml (1 c. à thé) thym séché\n- Poivre et sel\n- 80 ml (1/3 tasse) mayonnaise allégée\n- 750 g (1 2/3 lb) poitrines de poulet désossées (environ 4 petites poitrines)\n- 5 ml (1 c. à thé) huile de canola\n- 1 citron en quartiers (facultatif)\n\n## Préparation\n1. Dans un grand bol, préparer la marinade en mélangeant le yogourt, le zeste et le jus de citron, le beurre de sésame, l'ail et les épices. Poivrer généreusement et ajouter une pincée de sel.\n2. Prélever 250 ml (1 tasse) de la marinade et la transvider dans un bol moyen. Incorporer la mayonnaise et réserver cette sauce pour le service.\n3. Couper le poulet en 2 ou en 3 sur le sens de l'épaisseur pour obtenir des tranches de 1,5 cm (1/2 po). Ajouter le poulet dans le bol de marinade et bien mélanger.\n4. À l'aide d'un pinceau de cuisine, badigeonner d'huile un poêlon strié antiadhésif et préchauffer à feu moyen. Retirer l'excédent de marinade sur le poulet en le raclant avec le dos d'un couteau et déposer le poulet dans le poêlon. Cuire 5 ou 6 minutes de chaque côté. Au besoin, procéder en deux temps selon la taille du poêlon.\n5. Servir avec la sauce réservée et des quartiers de citron. Accompagner de riz et de salade fattouche, ou servir dans un pita garni de laitue, de concombres et de tomates.\n\n## Notes\n- Se conserve 3 jours au réfrigérateur ou 3 mois au congélateur.\n- En cas d'allergie au sésame : remplacer le tahini par du beurre de soya (de type Wowbutter).\n"}, {"folder": "Volaille", "filename": "riz-citronne-poulet.md", "id": "Volaille\\riz-citronne-poulet", "raw": "---\ntitre: Riz citronné au poulet tout-en-un\nportions: 6\ntemps_prep: 15 min\ntemps_cuisson: 1 h 10 min\ntags: [four, tout-en-un, citron]\nderniere_fois: \n---\n\n## Ingrédients\n- 750 ml (3 tasses) bouillon de poulet réduit en sodium\n- 375 ml (1 1/2 tasse) riz blanc étuvé à grains longs\n- 1 oignon jaune haché\n- 15 ml (1 c. à soupe) ail haché en pot (ou 3 gousses hachées finement)\n- 2 citrons\n- 12 hauts de cuisse de poulet désossés, sans la peau (environ 800 g / 1 3/4 lb)\n- Poivre et sel\n- 30 ml (2 c. à soupe) feuilles de thym frais (3 ou 4 branches)\n\n## Préparation\n1. Préchauffer le four à 180 °C (350 °F). Placer la grille au centre du four.\n2. Dans un grand poêlon allant au four, mélanger le bouillon, le riz, l'oignon et l'ail.\n3. Zester les 2 citrons au-dessus du poêlon, puis ajouter le jus du premier citron. Mélanger.\n4. Couper le deuxième citron en tranches de 1 cm (3/8 po) d'épaisseur.\n5. Répartir le poulet et les tranches de citron sur le riz et le bouillon, sans mélanger. Poivrer généreusement et ajouter une pincée de sel.\n6. Couvrir et cuire au four 30 minutes.\n7. Poursuivre la cuisson 30 minutes à découvert.\n8. Compléter la cuisson sous le gril (broil) 5 à 7 minutes ou jusqu'à ce que le poulet et le citron soient grillés.\n9. Garnir de thym. Servir accompagné d'une salade verte.\n\n## Notes\n- Se conserve 4 jours au réfrigérateur ou 3 mois au congélateur.\n- Choisir le riz étuvé (aussi appelé « converti » ou « conditionné »), qui reste ferme et devient moins collant à la cuisson que le riz blanc à grains longs régulier. À ne pas confondre avec le riz minute (instantané, précuit ou à cuisson rapide) ni avec le riz prêt à servir (express).\n- Temps de préparation estimé (la valeur n'était pas visible sur la photo originale).\n"}, {"folder": "Volaille", "filename": "salade-asiatique-chou-nappa.md", "id": "Volaille\\salade-asiatique-chou-nappa", "raw": "---\ntitre: Salade asiatique de chou nappa au poulet grillé\nportions: 6\ntemps_prep: 20 min\ntemps_cuisson: 6 min\ntags: [asiatique, salade, poêle, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Vinaigrette\n- 125 ml (1/2 tasse) jus d'orange pur\n- 60 ml (1/4 tasse) vinaigre de riz\n- 30 ml (2 c. à soupe) pâte de miso\n- 30 ml (2 c. à soupe) huile de sésame grillé\n- 10 ml (2 c. à thé) ail haché en pot\n- 10 ml (2 c. à thé) gingembre haché en pot\n- 10 ml (2 c. à thé) miel du Québec\n- 5 ml (1 c. à thé) sauce piquante sriracha\n\n### Salade\n- 2 poitrines de poulet désossées, coupées en biseau (450 g / 1 lb)\n- 1 L (4 tasses) chou chinois nappa tranché finement (1/2 chou moyen)\n- 500 ml (2 tasses) chou rouge tranché finement (1/4 chou moyen)\n- 500 ml (2 tasses) pois mange-tout coupés en biseau\n- 250 ml (1 tasse) menthe fraîche hachée\n- 250 ml (1 tasse) coriandre fraîche hachée\n- 750 ml (3 tasses) carottes en julienne (ou 3 grosses carottes râpées)\n- 3 oignons verts hachés\n\n### Garniture\n- 250 ml (1 tasse) nouilles frites chow mein\n- 30 ml (2 c. à soupe) graines de sésame grillées\n\n## Préparation\n1. Dans un grand bol de service, mélanger tous les ingrédients de la vinaigrette.\n2. Dans un bol moyen, déposer le poulet. Prélever 80 ml (1/3 tasse) de la vinaigrette, verser sur le poulet et remuer pour bien l'enrober. Réserver.\n3. Pendant ce temps, préparer les légumes et les herbes fraîches. Déposer dans le bol de service, puis mélanger pour enrober de vinaigrette.\n4. Dans un poêlon strié antiadhésif préchauffé à feu moyen-vif, griller le poulet mariné 2 ou 3 minutes de chaque côté. Au besoin, procéder en 2 temps selon la taille du poêlon.\n5. Déposer le poulet sur les légumes, puis garnir de nouilles frites et de graines de sésame. Servir avec des vermicelles de riz.\n\n## Notes\n- Se conserve 4 jours au réfrigérateur sans la garniture, ne se congèle pas.\n- Les nouilles frites chow mein apportent du croquant à la salade ; on n'en utilise qu'une poignée pour la salade complète, ce qui ajoute donc très peu de gras.\n- Le chou nappa est polyvalent : cru en salade ou en wrap pour profiter de sa texture croquante, ou cuit dans un sauté.\n"}, {"folder": "Volaille", "filename": "salade-ete-poulet-croustillant-erable.md", "id": "Volaille\\salade-ete-poulet-croustillant-erable", "raw": "---\ntitre: Salade d'été au poulet croustillant piquant à l'érable\nportions: 4\ntemps_prep: 40 min\ntemps_cuisson: 20 min\ntags: [salade, four, érable]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Poulet croustillant à l'érable\n- 80 ml (1/3 tasse) mayonnaise\n- 80 ml (1/3 tasse) yogourt grec nature\n- 5 ml (1 c. à thé) paprika\n- 2,5 ml (1/2 c. à thé) paprika fumé\n- 1 gousse d'ail, hachée\n- 375 ml (1 1/2 tasse, 210 g) chapelure\n- 2,5 ml (1/2 c. à thé) sel\n- 3 poitrines de poulet en cubes\n- 15 ml (1 c. à soupe) sauce piquante sriracha\n- 80 ml (1/3 tasse) sirop d'érable\n\n### Vinaigrette crémeuse au citron et à l'ail\n- 250 ml (1 tasse) crème de soya Belsoy\n- Zeste de 1 citron\n- 45 ml (3 c. à soupe) jus de citron\n- 15 ml (1 c. à soupe) vinaigre de vin blanc\n- 1 gousse d'ail, hachée\n- 15 ml (1 c. à soupe) moutarde de Dijon\n- 15 ml (1 c. à soupe) câpres hachés grossièrement\n- 3,75 ml (3/4 c. à thé) sel\n- Poivre, au goût\n\n### Salade\n- 1 L (4 tasses, 180 g) laitue iceberg hachée grossièrement\n- 1 L (4 tasses, 180 g) laitue romaine hachée grossièrement\n- 4 concombres libanais, en petits cubes\n- 2 oignons verts, hachés grossièrement\n- 500 ml (2 tasses, 300 g) tomates cerises coupées en 4\n- 1 pomme rouge, en petits cubes\n- 250 ml (1 tasse, 45 g) basilic frais haché grossièrement\n\n## Préparation\n1. Préchauffer le four à 230 °C (450 °F) et tapisser une plaque à biscuits de papier parchemin.\n2. Dans une première assiette, mélanger la mayonnaise, le yogourt, le paprika, le paprika fumé et l'ail. Dans une deuxième assiette, déposer la chapelure et le sel.\n3. Badigeonner les cubes de poulet avec le mélange de mayonnaise et les enrober de chapelure en pressant bien sur toute la surface. Déposer sur la plaque. À l'aide d'un pinceau, badigeonner doucement le dessus d'un peu d'huile.\n4. Cuire au four 15 à 18 minutes ou jusqu'à ce que les cubes soient bien dorés. Laisser tiédir 5 minutes sur la plaque.\n5. Dans un bol, mélanger le sirop d'érable et la sriracha. Badigeonner les cubes de poulet du mélange.\n6. Dans un petit bol, à l'aide d'un fouet, mélanger tous les ingrédients de la vinaigrette.\n7. Dans un grand bol, mélanger tous les ingrédients de la salade avec la vinaigrette. Servir avec le poulet croustillant.\n\n## Notes\n- L'étape « mélanger mayonnaise + paprika + ail » de la recette originale ne mentionnait pas le yogourt grec, mais il est dans la liste d'ingrédients de l'enrobage — je l'ai inclus dans le mélange.\n"}, {"folder": "Volaille", "filename": "salade-poulet-cesar.md", "id": "Volaille\\salade-poulet-cesar", "raw": "---\ntitre: Salade poulet césar du fit cook\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 1 h\ntags: [salade, four, césar]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Salade\n- 4 concombres libanais coupés en tranches\n- 605 g (1 1/3 lb) poulet cuit effiloché\n- 12 radis en fines juliennes\n- 1 L (4 tasses) laitue romaine hachée\n\n### Sauce\n- 2 têtes d'ail\n- 1 filet d'huile (pour rôtir l'ail)\n- 250 ml (1 tasse) yogourt grec nature 0%\n- 30 ml (2 c. à soupe) mayonnaise légère\n- 30 ml (2 c. à soupe) parmesan râpé\n- 30 ml (2 c. à soupe) câpres hachées\n- 15 ml (1 c. à soupe) moutarde au miel\n- 15 ml (1 c. à soupe) épices passe-partout\n- 1 citron (zeste et jus)\n\n### Croûtons\n- 2 pitas de blé entier coupés en morceaux de 2 cm\n- 1 filet d'huile\n- Sel et poivre\n\n## Préparation\n1. Préchauffer le four à 175 °C (350 °F).\n2. Couper le dessus des têtes d'ail pour exposer les gousses. Déposer les têtes sur une feuille de papier aluminium, arroser d'huile, saler et poivrer. Emballer et cuire au four 1 heure.\n3. Pendant ce temps, sur une plaque tapissée de papier parchemin, étaler les morceaux de pitas. Arroser d'huile, saler et poivrer. Cuire au four de 10 à 15 minutes, jusqu'à ce que les croûtons soient dorés. Réserver.\n4. Retirer les têtes d'ail du four et les presser au-dessus d'un grand bol pour récupérer les gousses. Réduire les gousses en purée à l'aide d'une fourchette.\n5. Ajouter le reste des ingrédients de la sauce dans le bol. Saler et poivrer. Fouetter jusqu'à l'obtention d'une préparation la plus homogène possible.\n6. Assembler la salade en ajoutant les légumes, le poulet et les croûtons. Verser la sauce et mélanger.\n"}, {"folder": "Volaille", "filename": "salade-poulet-tandoori.md", "id": "Volaille\\salade-poulet-tandoori", "raw": "---\ntitre: Salade de poulet tandoori\nportions: 4\ntemps_prep: 15 min\ntemps_cuisson: 15 min\ntags: [indien, salade, poêle, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Salade\n- 2 poitrines de poulet désossées, coupées en 2 sur l'épaisseur (environ 450 g / 1 lb)\n- 30 ml (2 c. à soupe) pâte de cari tandoori\n- 1/2 laitue romaine émincée (environ 1 L / 4 tasses)\n- 250 ml (1 tasse) roquette\n- 250 ml (1 tasse) pois mange-tout coupés en 4 (environ 20 pois mange-tout)\n- 250 ml (1 tasse) radis tranchés finement (environ 8 radis)\n- 1 branche de céleri coupée en biseau\n- 30 ml (2 c. à soupe) coriandre fraîche hachée\n- 1 lime en quartiers\n\n### Vinaigrette\n- 125 ml (1/2 tasse) yogourt grec nature\n- 30 ml (2 c. à soupe) lait\n- 2,5 ml (1/2 c. à thé) ail haché en pot (ou 1 petite gousse hachée finement)\n- Poivre et sel\n\n## Préparation\n1. Dans un grand bol, déposer les poitrines de poulet et la pâte de cari tandoori. Mélanger pour enrober la viande.\n2. Dans un poêlon strié antiadhésif préchauffé à feu moyen-vif, sans ajouter de matière grasse, cuire le poulet de 5 à 7 minutes de chaque côté.\n3. Réserver le poulet dans une assiette et laisser tiédir. Effilocher les poitrines avec les doigts.\n4. Dans un grand bol de service, mélanger la laitue, la roquette, les pois mange-tout, les radis et le céleri.\n5. Déposer le poulet effiloché au centre de la salade.\n6. Dans un petit bol, mélanger les ingrédients de la vinaigrette. Poivrer généreusement et ajouter une pincée de sel. Verser sur la salade.\n7. Garnir de coriandre. Accompagner de pains naans chauds et de quartiers de lime.\n\n## Notes\n- Sans la vinaigrette, la salade se conserve 2 jours au réfrigérateur, ne se congèle pas.\n- La pâte de cari tandoori est une marinade rougeâtre employée pour parfumer les viandes et les volailles. Peu piquante, préparée avec curcuma, gingembre, cumin, fenugrec et cannelle, entre autres. Disponible dans la section des produits ethniques de la plupart des supermarchés.\n"}, {"folder": "Volaille", "filename": "saute-asiatique-poulet-brocoli.md", "id": "Volaille\\saute-asiatique-poulet-brocoli", "raw": "---\ntitre: Sauté asiatique de poulet, brocoli, basilic et arachides\nportions: 4\ntemps_prep: 25 min\ntemps_cuisson: 15 min\ntags: [asiatique, wok, sauté]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauté\n- 4 poitrines de poulet, en cubes\n- Sel et poivre, au goût\n- 30 ml (2 c. à soupe) huile végétale\n- 30 ml (2 c. à soupe) gingembre frais râpé finement\n- 2 petites gousses d'ail, hachées\n- 5 ml (1 c. à thé) graines de coriandre broyées\n- 30 ml (2 c. à soupe) huile de sésame grillé\n- 15 ml (1 c. à soupe) sauce piquante sriracha\n- 30 ml (2 c. à soupe) sauce tamari\n- 80 ml (1/3 tasse) sauce hoisin sans gluten\n- 30 ml (2 c. à soupe) sirop d'érable\n- 1,5 L (6 tasses, 450 g) brocolis en fleurettes (environ 2 brocolis)\n- 2 courgettes, en fines lanières\n- 125 ml (1/2 tasse, 70 g) oignons verts hachés grossièrement\n- 500 ml (2 tasses, 30 g) feuilles de basilic frais\n\n### Garniture\n- 500 ml (2 tasses, 420 g) riz à sushi cuit\n- Feuilles de basilic frais\n\n## Préparation\n1. Saler et poivrer le poulet. Dans une grande poêle antiadhésive, chauffer l'huile à feu moyen-élevé et faire dorer le poulet environ 3 minutes, en brassant.\n2. Ajouter le gingembre, l'ail et les graines de coriandre, et cuire encore 2 minutes, en brassant.\n3. Ajouter l'huile de sésame grillé, la sauce sriracha, la sauce tamari, la sauce hoisin et le sirop d'érable. Poursuivre la cuisson 3 minutes.\n4. Ajouter les fleurettes de brocoli et cuire 3 minutes, en brassant souvent.\n5. Ajouter les courgettes, les oignons verts et le basilic, et cuire encore 1 minute.\n6. Servir le sauté de poulet dans des bols avec le riz et garnir des feuilles de basilic.\n\n## Notes\n- La recette originale mentionne « les petits pois » à l'étape 5 mais aucun petit pois n'apparaît dans la liste d'ingrédients — j'ai remplacé par les courgettes (déjà listées) qui sont l'ingrédient logique à ce moment.\n"}, {"folder": "Volaille", "filename": "saute-poulet-vite-fait.md", "id": "Volaille\\saute-poulet-vite-fait", "raw": "---\ntitre: Sauté au poulet vite fait\nportions: 6\ntemps_prep: 15 min\ntemps_cuisson: 15 min\ntags: [asiatique, wok, rapide, sauté]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Sauté\n- 15 ml (1 c. à soupe) huile de canola\n- 1,25 L (5 tasses) légumes au choix :\n  - **Cuisson longue** : oignons en fines tranches, carottes en rondelles, céleris tranchés en biseau, pieds de brocoli tranchés\n  - **Cuisson courte** : pois mange-tout, mini-bok choys tranchés, poivrons en lanières, fleurons de brocoli, chou chinois nappa en fines tranches, oignons verts en tronçons, courgettes tranchées en biseau, fèves germées\n- 450 g (1 lb) poulet cuit tranché (environ 2 poitrines)\n\n### Sauce\n- 125 ml (1/2 tasse) eau\n- 30 ml (2 c. à soupe) sauce hoisin\n- 15 ml (1 c. à soupe) sauce soya\n- 15 ml (1 c. à soupe) miel du Québec\n- 7,5 ml (1/2 c. à soupe) fécule de maïs\n\n### Garniture (facultatif)\n- Graines de sésame grillées\n- Sauce piquante sriracha\n\n## Préparation\n1. Dans un wok ou un grand poêlon antiadhésif à haut rebord, chauffer l'huile à feu moyen-vif. Cuire les légumes à cuisson longue de 8 à 10 minutes ou jusqu'à ce qu'ils soient tendres et dorés, en remuant à l'occasion.\n2. Pendant ce temps, dans une tasse à mesurer, fouetter les ingrédients de la sauce pour dissoudre complètement la fécule.\n3. Ajouter la sauce, les légumes à cuisson courte et le poulet cuit dans le poêlon. Remuer pour enrober les ingrédients et poursuivre la cuisson de 3 à 5 minutes. Ne pas trop cuire pour que les légumes demeurent croquants.\n4. Servir sur du riz ou des nouilles asiatiques. Si désiré, garnir de graines de sésame et d'un trait de sauce piquante sriracha.\n\n## Notes\n- Se conserve 4 jours au réfrigérateur ou 3 mois au congélateur.\n- **Astuce — préparer le poulet à l'avance** : déposer 5 poitrines de poulet désossées (environ 1,25 kg / 2 1/2 lb) sur une plaque de cuisson tapissée de papier parchemin. Badigeonner de 15 ml (1 c. à soupe) d'huile de canola, poivrer et saler. Cuire au four à 180 °C (350 °F) 30 minutes ou jusqu'à ce que la chair n'ait plus de coloration rosée au centre. Laisser reposer 5 minutes.\n- **Variante** : remplacer le poulet par un reste de filet de porc, de rôti de bœuf ou par des crevettes surgelées et décongelées.\n- Temps de cuisson estimé d'après les étapes (la valeur n'était pas visible sur la photo originale).\n"}, {"folder": "Volaille", "filename": "supremes-volaille-sauce-minute.md", "id": "Volaille\\supremes-volaille-sauce-minute", "raw": "---\ntitre: Suprêmes de volaille sauce minute\nportions: 6\ntemps_prep: 20 min\ntemps_cuisson: 15 min\ntags: [poêle, érable, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n- 4 demi-poitrines de poulet désossées et sans peau\n- 30 ml (2 c. à soupe) beurre\n- 15 ml (1 c. à soupe) huile d'olive\n- 5 ml (1 c. à thé) poivre noir concassé\n- 10 ml (2 c. à thé) farine tout usage\n- 125 ml (1/2 tasse) bouillon de poulet\n- 60 ml (1/4 tasse) sirop d'érable\n- 15 ml (1 c. à soupe) sauce soya\n- Sel\n\n## Préparation\n1. Dans une grande poêle antiadhésive, dorer le poulet dans le beurre et l'huile environ 5 minutes de chaque côté ou jusqu'à ce qu'il soit bien cuit. Parsemer de poivre et saler. Réserver sur une assiette au chaud.\n2. Dans la même poêle, saupoudrer la farine sur le gras chaud et cuire 30 secondes en remuant.\n3. Ajouter le bouillon, le sirop d'érable et la sauce soya. Porter à ébullition en remuant et laisser mijoter de 1 à 2 minutes ou jusqu'à ce que la sauce soit sirupeuse. Rectifier l'assaisonnement.\n4. Trancher le poulet en aiguillettes et napper de sauce.\n\n## Notes\n- Le temps de cuisson original (« 8 heures ») dans la recette source est manifestement une coquille (s'agissant d'une cuisson à la poêle en 15 minutes max). J'ai mis 15 min comme valeur réaliste.\n- 4 demi-poitrines pour 6 portions semble peu — peut-être augmenter la quantité si servi seul, ou bien le poulet est complété par des accompagnements.\n"}, {"folder": "Végé", "filename": "socca-pizza.md", "id": "Végé\\socca-pizza", "raw": "---\ntitre: Socca pizza\nportions: 2\ntemps_prep: 10 min\ntemps_cuisson: 10 min\ntags: [méditerranéen, végé, pizza, four, rapide]\nderniere_fois: \n---\n\n## Ingrédients\n\n### Pâte\n- 125 ml (1/2 tasse) farine de pois chiches\n- 125 ml (1/2 tasse) eau\n- 1 œuf\n- 2,5 ml (1/2 c. à thé) graines de fenouil\n- Poivre et sel\n- 5 ml (1 c. à thé) huile d'olive\n\n### Garniture\n- 1/2 courgette (zucchini) tranchée très finement\n- 6 boules fromage bocconcini de taille cocktail (60 g / 2 oz)\n- 60 ml (1/4 tasse) sauce à pizza du commerce\n- Feuilles de basilic frais déchiquetées\n\n## Préparation\n1. Préchauffer le four à gril (broil).\n2. Dans un bol moyen, à l'aide d'un fouet, mélanger la farine, l'eau, l'œuf et les graines de fenouil. Poivrer généreusement et ajouter une pincée de sel.\n3. Dans un poêlon antiadhésif allant au four, chauffer l'huile à feu moyen-vif. Verser la pâte dans le poêlon et cuire 2 ou 3 minutes, sans remuer. Terminer la cuisson sous le gril (broil) 2 ou 3 minutes ou jusqu'à ce que la socca soit légèrement dorée.\n4. Répartir la courgette sur la socca. Déchirer le fromage en morceaux et répartir sur les courgettes. Parsemer de petites cuillerées de sauce à pizza.\n5. Poursuivre la cuisson sous le gril (broil) 2 minutes pour faire fondre le fromage.\n6. Pour servir, garnir de basilic frais. Accompagner d'une salade verte, si désiré.\n\n## Notes\n- Se conserve 3 jours au réfrigérateur, ne se congèle pas.\n- Originaire du sud de la France, la socca est un pain plat sans gluten préparé à base de farine de pois chiches. La cousine italienne s'appelle la farinata.\n- En cas d'allergie aux œufs : remplacer l'œuf par 15 ml (1 c. à soupe) de graines de lin moulues trempées 5 minutes dans 30 ml (2 c. à soupe) d'eau.\n"}];
+
+const FOLDER_META = {
+  'Volaille': { icon: '🍗', order: 0 },
+  'Boeuf':    { icon: '🥩', order: 1 },
+  'Porc':     { icon: '🐖', order: 2 },
+  'Végé':     { icon: '🥦', order: 3 },
+  'Divers':   { icon: '✨', order: 4 },
+  'Autres':   { icon: '📦', order: 99 },
+};
+const folderIcon = f => (FOLDER_META[f] || {}).icon || '📦';
+const folderOrder = f => (FOLDER_META[f] || {}).order ?? 50;
 
 // ---------- Markdown parsing ----------
 
@@ -432,6 +658,10 @@ function parseRecipe(raw) {
     tempsCuisson: fm.temps_cuisson || '',
     tags,
     ingredients,
+    calories: parseInt(fm.calories) || null,
+    proteines: parseInt(fm.proteines) || null,
+    glucides: parseInt(fm.glucides) || null,
+    lipides: parseInt(fm.lipides) || null,
   };
 }
 
@@ -450,7 +680,6 @@ function parseQty(s) {
 }
 
 function parseIngredient(raw) {
-  // qty: nombre entier, fraction, décimal, ou nombre mixte (« 1 1/2 »)
   const qtyRe = /^((?:\d+\s+\d+\/\d+)|(?:\d+[.,]\d+)|(?:\d+\/\d+)|(?:\d+))\s+/;
   const qtyMatch = raw.match(qtyRe);
 
@@ -469,9 +698,7 @@ function parseIngredient(raw) {
     rest = rest.slice(unitMatch[0].length);
   }
 
-  // skip parenthèse alternative ex « (1 lb) », « (3 c. à soupe) »
   rest = rest.replace(/^\([^)]*\)\s*/, '');
-  // skip leading « de » / « d' »
   rest = rest.replace(/^d['e]\s+/i, '');
 
   return { qty, unit, name: rest.trim() };
@@ -496,8 +723,6 @@ function normalizeName(name) {
 }
 
 function nameForMatching(name) {
-  // Note: on garde « frais » et « seche » pour distinguer
-  // les herbes fraîches (légumes) des herbes séchées (épices).
   return normalizeName(name)
     .replace(/\b(haches?|hachees?|finement|grossierement|tranches?|tranchees?|coupes?|coupees?|emincees?|en\s+(cubes?|des|lanieres|quartiers|biseau|julienne|petales?|rondelles|morceaux|tronc?ons|fines\s+tranches|fleurettes|bouquets?|aiguillettes))\b/g, '')
     .replace(/\b(divises?|divisees?|au\s+gout|au\s+choix|nature|moulus?|moulues?|broyes?|broyees?|rapes?|rapees?|effiloches?|effilochees?|battu|battue|legerement|emiette[es]?)\b/g, '')
@@ -507,7 +732,6 @@ function nameForMatching(name) {
 
 function normalizeUnit(u) {
   if (!u) return null;
-  // gousses/gousse → gousse, tasses → tasse, etc.
   return u.replace(/s$/, '').replace(/\s+/g, ' ');
 }
 
@@ -597,8 +821,8 @@ function loadState() {
   try {
     const s = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
     return {
-      selected: s.selected || {},     // id -> { wantedPortions }
-      checked: s.checked || {},       // shopping item key -> bool
+      selected: s.selected || {},
+      checked: s.checked || {},
     };
   } catch {
     return { selected: {}, checked: {} };
@@ -618,7 +842,194 @@ function recipeMatchesFilters(r) {
   return true;
 }
 
-// ---------- UI: recipe list ----------
+function selectedRecipes() {
+  return recipes.filter(r => state.selected[r.id]);
+}
+
+// ---------- Sidebar gauche : catégories ----------
+
+function renderCategories() {
+  const counts = {};
+  for (const r of recipes) counts[r.folder] = (counts[r.folder] || 0) + 1;
+
+  const folders = Object.keys(counts).sort((a, b) => folderOrder(a) - folderOrder(b));
+
+  const root = document.getElementById('cat-list');
+  root.innerHTML = '';
+
+  // « Tout »
+  const allBtn = document.createElement('button');
+  allBtn.type = 'button';
+  allBtn.className = 'cat-item' + (filters.folders.size === 0 ? ' active' : '');
+  allBtn.innerHTML = `
+    <span class="cat-icon">🍽️</span>
+    <span>Tout</span>
+    <span class="cat-count">${recipes.length}</span>
+  `;
+  allBtn.addEventListener('click', () => {
+    filters.folders.clear();
+    renderCategories();
+    render();
+  });
+  root.appendChild(allBtn);
+
+  for (const f of folders) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cat-item' + (filters.folders.has(f) ? ' active' : '');
+    btn.innerHTML = `
+      <span class="cat-icon">${folderIcon(f)}</span>
+      <span>${f}</span>
+      <span class="cat-count">${counts[f]}</span>
+    `;
+    btn.addEventListener('click', () => {
+      if (filters.folders.has(f)) filters.folders.delete(f);
+      else filters.folders.add(f);
+      renderCategories();
+      render();
+    });
+    root.appendChild(btn);
+  }
+}
+
+// ---------- Bannière sélection ----------
+
+function renderHero() {
+  const hero = document.getElementById('hero');
+  const sel = selectedRecipes();
+
+  if (sel.length === 0) {
+    hero.innerHTML = `
+      <div class="hero-empty">
+        <div class="hero-empty-icon">👨‍🍳</div>
+        <div>
+          <h2>Bonjour Bittle&nbsp;!</h2>
+          <p>Sélectionne des recettes pour générer ta liste de courses.</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  hero.innerHTML = `
+    <div class="hero-header">
+      <h2>Recettes sélectionnées <span class="count-badge">${sel.length}</span></h2>
+      <div style="display:flex; gap:0.5rem">
+        <button class="btn-primary" id="generate-btn">Générer la liste de courses</button>
+        <button class="reset-btn" id="clear-selection" style="margin:0; width:auto">Tout retirer</button>
+      </div>
+    </div>
+    <div class="selected-grid" id="selected-grid"></div>
+  `;
+
+  const grid = document.getElementById('selected-grid');
+  for (const r of sel) {
+    grid.appendChild(renderMiniCard(r));
+  }
+
+  document.getElementById('generate-btn').addEventListener('click', generate);
+  document.getElementById('clear-selection').addEventListener('click', () => {
+    if (!confirm('Retirer toutes les recettes sélectionnées ?')) return;
+    state.selected = {};
+    state.checked = {};
+    saveState();
+    document.getElementById('shopping').classList.add('hidden');
+    rerenderAll();
+  });
+}
+
+function renderMiniCard(r) {
+  const card = document.createElement('div');
+  card.className = 'mini-card';
+  const sel = state.selected[r.id];
+  const wanted = sel ? sel.wantedPortions : r.portions;
+
+  card.innerHTML = `
+    <div class="mini-card-header">
+      <div class="mini-card-title">${folderIcon(r.folder)} ${r.titre}</div>
+      <button class="mini-card-remove" title="Retirer">×</button>
+    </div>
+    <div class="mini-card-controls">
+      <input type="number" min="1" value="${wanted}">
+      <span>portions</span>
+    </div>
+  `;
+
+  card.querySelector('.mini-card-remove').addEventListener('click', () => {
+    delete state.selected[r.id];
+    saveState();
+    rerenderAll();
+  });
+
+  const input = card.querySelector('input');
+  input.addEventListener('change', () => {
+    const v = Math.max(1, parseInt(input.value) || r.portions);
+    if (state.selected[r.id]) {
+      state.selected[r.id].wantedPortions = v;
+      saveState();
+      renderNutrition();
+    }
+  });
+
+  return card;
+}
+
+// ---------- Sidebar droite : nutrition ----------
+
+function renderNutrition() {
+  const root = document.getElementById('nutri-content');
+  const sel = selectedRecipes();
+
+  if (sel.length === 0) {
+    root.innerHTML = `<p class="nutri-placeholder">Sélectionne des recettes pour voir les valeurs nutritionnelles.</p>`;
+    return;
+  }
+
+  // Placeholders : à terme, calculer depuis state.selected[id].wantedPortions et r.calories/macros
+  let totalCalories = 0;
+  let totalPortions = 0;
+  let hasData = false;
+  for (const r of sel) {
+    const wanted = state.selected[r.id].wantedPortions;
+    totalPortions += wanted;
+    if (r.calories !== null) {
+      totalCalories += r.calories * (wanted / r.portions);
+      hasData = true;
+    }
+  }
+
+  const fmt = v => v ? Math.round(v) : '—';
+  const placeholder = hasData ? '' : ' <span style="font-size:0.7rem; color:var(--muted)">(à compléter)</span>';
+
+  root.innerHTML = `
+    <div class="nutri-total">
+      <div class="nutri-total-value">${fmt(totalCalories)}</div>
+      <div class="nutri-total-label">calories totales${placeholder}</div>
+    </div>
+    <div class="nutri-row">
+      <span class="nutri-label">Protéines</span>
+      <span class="nutri-value">— g</span>
+    </div>
+    <div class="nutri-row">
+      <span class="nutri-label">Glucides</span>
+      <span class="nutri-value">— g</span>
+    </div>
+    <div class="nutri-row">
+      <span class="nutri-label">Lipides</span>
+      <span class="nutri-value">— g</span>
+    </div>
+
+    <div class="nutri-per-portion">
+      <div class="panel-subtitle">Par portion</div>
+      <div class="nutri-row">
+        <span class="nutri-label">Calories</span>
+        <span class="nutri-value">${totalPortions ? fmt(totalCalories / totalPortions) : '—'}</span>
+      </div>
+    </div>
+  `;
+}
+
+// ---------- Liste de recettes ----------
 
 function render() {
   const root = document.getElementById('recipes-section');
@@ -631,7 +1042,6 @@ function render() {
     msg.className = 'empty-state';
     msg.textContent = 'Aucune recette ne correspond aux filtres.';
     root.appendChild(msg);
-    updateCount();
     return;
   }
 
@@ -641,20 +1051,12 @@ function render() {
     byFolder[r.folder].push(r);
   }
 
-  const folderOrder = ['Volaille', 'Boeuf', 'Porc', 'Végé', 'Divers', 'Autres'];
-  const folders = Object.keys(byFolder).sort((a, b) => {
-    const ai = folderOrder.indexOf(a);
-    const bi = folderOrder.indexOf(b);
-    if (ai === -1 && bi === -1) return a.localeCompare(b);
-    if (ai === -1) return 1;
-    if (bi === -1) return -1;
-    return ai - bi;
-  });
+  const folders = Object.keys(byFolder).sort((a, b) => folderOrder(a) - folderOrder(b));
 
   for (const folder of folders) {
     const section = document.createElement('div');
     section.className = 'folder';
-    section.innerHTML = `<h2>${folder}</h2>`;
+    section.innerHTML = `<h2>${folderIcon(folder)} ${folder}</h2>`;
     const list = document.createElement('div');
     list.className = 'recipe-list';
     for (const r of byFolder[folder].sort((a, b) => a.titre.localeCompare(b.titre))) {
@@ -662,28 +1064,6 @@ function render() {
     }
     section.appendChild(list);
     root.appendChild(section);
-  }
-
-  updateCount();
-}
-
-function renderFilters() {
-  const folders = [...new Set(recipes.map(r => r.folder))].sort();
-
-  const folderRoot = document.getElementById('folder-pills');
-  folderRoot.innerHTML = '';
-  for (const f of folders) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'pill' + (filters.folders.has(f) ? ' active' : '');
-    btn.textContent = f;
-    btn.addEventListener('click', () => {
-      if (filters.folders.has(f)) filters.folders.delete(f);
-      else filters.folders.add(f);
-      renderFilters();
-      render();
-    });
-    folderRoot.appendChild(btn);
   }
 }
 
@@ -693,48 +1073,40 @@ function renderRecipe(r) {
   const sel = state.selected[r.id];
   if (sel) card.classList.add('selected');
 
-  const cb = document.createElement('input');
-  cb.type = 'checkbox';
-  cb.checked = !!sel;
-  cb.addEventListener('change', () => {
-    if (cb.checked) {
-      state.selected[r.id] = { wantedPortions: r.portions };
-    } else {
-      delete state.selected[r.id];
-    }
-    saveState();
-    render();
-  });
-
-  const body = document.createElement('div');
-  body.className = 'recipe-body';
+  const top = document.createElement('div');
+  top.className = 'recipe-top';
 
   const title = document.createElement('div');
   title.className = 'recipe-title';
   title.textContent = r.titre;
-  title.addEventListener('click', () => {
-    cb.checked = !cb.checked;
-    cb.dispatchEvent(new Event('change'));
-  });
+
+  const cb = document.createElement('div');
+  cb.className = 'recipe-checkbox' + (sel ? ' checked' : '');
+  cb.innerHTML = sel ? '✓' : '';
+
+  const toggleSelect = () => {
+    if (state.selected[r.id]) {
+      delete state.selected[r.id];
+    } else {
+      state.selected[r.id] = { wantedPortions: r.portions };
+    }
+    saveState();
+    rerenderAll();
+  };
+
+  cb.addEventListener('click', toggleSelect);
+  title.addEventListener('click', toggleSelect);
+
+  top.appendChild(title);
+  top.appendChild(cb);
 
   const meta = document.createElement('div');
   meta.className = 'recipe-meta';
-
-  const portions = document.createElement('div');
-  portions.className = 'portions';
-  const wanted = sel ? sel.wantedPortions : r.portions;
-  portions.innerHTML = `<input type="number" min="1" value="${wanted}"> portions <span style="color:var(--muted)">(recette: ${r.portions})</span>`;
-  const portionsInput = portions.querySelector('input');
-  portionsInput.addEventListener('click', e => e.stopPropagation());
-  portionsInput.addEventListener('change', () => {
-    const v = Math.max(1, parseInt(portionsInput.value) || r.portions);
-    if (state.selected[r.id]) {
-      state.selected[r.id].wantedPortions = v;
-      saveState();
-    }
-  });
-
-  meta.appendChild(portions);
+  const metaParts = [`${r.portions} portions`];
+  if (r.tempsPrep) metaParts.push(`prép. ${r.tempsPrep}`);
+  if (r.tempsCuisson) metaParts.push(`cuisson ${r.tempsCuisson}`);
+  if (r.calories) metaParts.push(`${r.calories} cal`);
+  meta.innerHTML = metaParts.map(p => `<span>${p}</span>`).join('');
 
   const actions = document.createElement('div');
   actions.className = 'recipe-actions';
@@ -748,13 +1120,13 @@ function renderRecipe(r) {
   });
   actions.appendChild(viewBtn);
 
-  body.appendChild(title);
-  body.appendChild(meta);
-  body.appendChild(actions);
-  card.appendChild(cb);
-  card.appendChild(body);
+  card.appendChild(top);
+  card.appendChild(meta);
+  card.appendChild(actions);
   return card;
 }
+
+// ---------- Modal ingrédients ----------
 
 function showIngredientsModal(r) {
   const root = document.getElementById('modal-root');
@@ -776,7 +1148,8 @@ function showIngredientsModal(r) {
   if (r.portions) metaParts.push(`${r.portions} portions`);
   if (r.tempsPrep) metaParts.push(`prép. ${r.tempsPrep}`);
   if (r.tempsCuisson) metaParts.push(`cuisson ${r.tempsCuisson}`);
-  titleWrap.innerHTML = `<h2>${r.titre}</h2>` +
+  if (r.calories) metaParts.push(`${r.calories} cal`);
+  titleWrap.innerHTML = `<h2>${folderIcon(r.folder)} ${r.titre}</h2>` +
     (metaParts.length ? `<div class="modal-meta">${metaParts.join(' · ')}</div>` : '');
   const closeBtn = document.createElement('button');
   closeBtn.className = 'modal-close';
@@ -835,16 +1208,7 @@ function closeModal() {
   document.removeEventListener('keydown', escClose);
 }
 
-function updateCount() {
-  const n = Object.keys(state.selected).length;
-  const el = document.getElementById('count');
-  el.textContent = n === 0
-    ? 'Aucune recette sélectionnée'
-    : (n === 1 ? '1 recette sélectionnée' : `${n} recettes sélectionnées`);
-  document.getElementById('generate').disabled = n === 0;
-}
-
-// ---------- Shopping list ----------
+// ---------- Liste de courses ----------
 
 function generate() {
   const items = [];
@@ -867,7 +1231,6 @@ function generate() {
     }
   }
 
-  // Group by category, then merge by (nameKey, unitKey)
   const byCategory = {};
   for (const item of items) {
     if (!byCategory[item.category]) byCategory[item.category] = new Map();
@@ -883,7 +1246,6 @@ function generate() {
         }
         continue;
       }
-      // Quantité indéterminée d'un côté — on garde séparé.
       map.set(`${key}__dup${map.size}`, {
         qty: item.qty, unit: item.unit, name: item.name,
         fromRecipes: [item.fromRecipe],
@@ -953,15 +1315,10 @@ function renderItem(it) {
   const qtyStr = it.qty !== null ? `${formatQty(it.qty)} ` : '';
   const unitStr = it.unit ? `${it.unit} ` : '';
   text.innerHTML = `<div>${qtyStr}${unitStr}${it.name}</div>`;
-  if (it.fromRecipes.length > 1) {
+  if (it.fromRecipes.length >= 1) {
     const from = document.createElement('div');
     from.className = 'item-from';
     from.textContent = `↳ ${it.fromRecipes.join(' + ')}`;
-    text.appendChild(from);
-  } else if (it.fromRecipes.length === 1) {
-    const from = document.createElement('div');
-    from.className = 'item-from';
-    from.textContent = `↳ ${it.fromRecipes[0]}`;
     text.appendChild(from);
   }
 
@@ -970,16 +1327,20 @@ function renderItem(it) {
   return row;
 }
 
-// ---------- Wire up ----------
+// ---------- Orchestration ----------
 
-document.getElementById('generate').addEventListener('click', generate);
-document.getElementById('reset').addEventListener('click', () => {
-  if (Object.keys(state.selected).length === 0) return;
-  if (!confirm('Désélectionner toutes les recettes ?')) return;
-  state.selected = {};
-  state.checked = {};
-  saveState();
-  document.getElementById('shopping').classList.add('hidden');
+function rerenderAll() {
+  renderCategories();
+  renderHero();
+  renderNutrition();
+  render();
+}
+
+document.getElementById('reset-filters').addEventListener('click', () => {
+  filters.search = '';
+  filters.folders.clear();
+  document.getElementById('search').value = '';
+  renderCategories();
   render();
 });
 
@@ -988,16 +1349,7 @@ document.getElementById('search').addEventListener('input', e => {
   render();
 });
 
-document.getElementById('reset-filters').addEventListener('click', () => {
-  filters.search = '';
-  filters.folders.clear();
-  document.getElementById('search').value = '';
-  renderFilters();
-  render();
-});
-
-renderFilters();
-render();
+rerenderAll();
 </script>
 </body>
 </html>

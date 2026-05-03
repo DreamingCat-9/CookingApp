@@ -6,14 +6,23 @@
 <title>Recettes & liste de courses de Bittle</title>
 <style>
   :root {
-    --bg: #faf9f6;
-    --panel: #fff;
-    --border: #e2e0da;
-    --text: #2a2a2a;
-    --muted: #777;
+    --bg: #fdf6ec;
+    --panel: #ffffff;
+    --panel-soft: #fef3e6;
+    --border: #ecdcc8;
+    --border-soft: #f5e8d6;
+    --text: #2a2118;
+    --muted: #8a7866;
     --accent: #2d6a4f;
     --accent-light: #d8f3dc;
+    --accent-soft: #e8f5ed;
+    --orange: #ea6c2d;
+    --orange-light: #fde0d0;
     --warn: #b95c00;
+    --shadow: 0 2px 8px rgba(180, 140, 100, 0.08);
+    --shadow-lg: 0 6px 20px rgba(180, 140, 100, 0.12);
+    --radius: 14px;
+    --radius-sm: 10px;
   }
   * { box-sizing: border-box; }
   body {
@@ -23,157 +32,445 @@
     color: var(--text);
     line-height: 1.5;
   }
-  header {
-    background: var(--panel);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 1.5rem;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
+
+  /* ============ Layout ============ */
+  .app {
+    display: grid;
+    grid-template-columns: 240px 1fr 280px;
+    gap: 1.25rem;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 1.25rem;
+    align-items: start;
   }
-  header h1 {
-    margin: 0;
-    font-size: 1.25rem;
+  .col-left, .col-right {
+    position: sticky;
+    top: 1.25rem;
+    max-height: calc(100vh - 2.5rem);
+    overflow-y: auto;
+  }
+  .col-main { min-width: 0; }
+
+  @media (max-width: 1024px) {
+    .app {
+      grid-template-columns: 1fr;
+    }
+    .col-left, .col-right {
+      position: static;
+      max-height: none;
+    }
+  }
+
+  /* ============ Panels ============ */
+  .panel {
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+  .panel-title {
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .panel-subtitle {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ============ Sidebar gauche : catégories ============ */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+    padding: 0.5rem;
+  }
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+    background: var(--orange);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+  .brand-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .brand-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  .cat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .cat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text);
+    font-size: 0.9rem;
+    text-align: left;
+    width: 100%;
+  }
+  .cat-item:hover {
+    background: var(--panel-soft);
+  }
+  .cat-item.active {
+    background: var(--orange-light);
+    border-color: var(--orange);
+    color: var(--orange);
     font-weight: 600;
   }
-  .controls {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    flex-wrap: wrap;
+  .cat-icon {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
   }
-  .count {
+  .cat-count {
+    margin-left: auto;
+    font-size: 0.75rem;
     color: var(--muted);
-    font-size: 0.9rem;
+    background: var(--panel-soft);
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
   }
-  button {
-    background: var(--accent);
-    color: white;
-    border: 0;
-    padding: 0.55rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
+  .cat-item.active .cat-count {
+    background: rgba(255,255,255,0.6);
+    color: var(--orange);
   }
-  button:hover { filter: brightness(1.1); }
-  button.ghost {
+
+  .reset-btn {
+    margin-top: 1rem;
+    width: 100%;
     background: transparent;
     color: var(--muted);
     border: 1px solid var(--border);
-  }
-  button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 1.5rem;
-  }
-  .folder {
-    margin-bottom: 1.5rem;
-  }
-  .folder h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .recipe-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 0.5rem;
-  }
-  .recipe {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.75rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    transition: border-color 0.15s;
-  }
-  .recipe.selected {
-    border-color: var(--accent);
-    background: var(--accent-light);
-  }
-  .recipe input[type="checkbox"] {
-    margin-top: 0.2rem;
+    padding: 0.55rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
     cursor: pointer;
+  }
+  .reset-btn:hover { background: var(--panel-soft); color: var(--text); }
+
+  /* ============ Bannière sélection ============ */
+  .hero {
+    background: linear-gradient(135deg, var(--orange-light), #fef3e6);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+  .hero-empty {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-empty-icon {
+    font-size: 3rem;
     flex-shrink: 0;
   }
-  .recipe-body {
+  .hero-empty h2 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.2rem;
+  }
+  .hero-empty p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hero-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  .hero-header .count-badge {
+    background: var(--orange);
+    color: white;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    margin-left: 0.5rem;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: 0;
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(45, 106, 79, 0.25);
+  }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .selected-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.6rem;
+  }
+  .mini-card {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-soft);
+  }
+  .mini-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .mini-card-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.3;
     flex: 1;
     min-width: 0;
   }
-  .recipe-title {
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-    cursor: pointer;
-  }
-  .recipe-meta {
-    font-size: 0.8rem;
+  .mini-card-remove {
+    background: transparent;
+    border: 0;
     color: var(--muted);
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    line-height: 1;
+    flex-shrink: 0;
   }
-  .portions {
+  .mini-card-remove:hover { color: var(--orange); }
+  .mini-card-controls {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--muted);
   }
-  .portions input {
-    width: 3.5rem;
-    padding: 0.15rem 0.3rem;
+  .mini-card-controls input {
+    width: 3rem;
+    padding: 0.2rem 0.35rem;
     border: 1px solid var(--border);
-    border-radius: 4px;
-    font-size: 0.85rem;
-  }
-  .tag {
-    background: rgba(0,0,0,0.06);
-    padding: 0.1rem 0.4rem;
-    border-radius: 3px;
-    font-size: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
   }
 
-  #shopping {
-    margin-top: 2rem;
+  /* ============ Recherche ============ */
+  .search-bar {
     background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem;
-  }
-  #shopping h2 {
-    margin-top: 0;
-  }
-  .category {
+    border-radius: 999px;
+    padding: 0.6rem 1.1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     margin-bottom: 1.25rem;
   }
+  .search-bar svg { color: var(--muted); flex-shrink: 0; }
+  .search-bar input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--text);
+  }
+  .search-bar input::placeholder { color: var(--muted); }
+
+  /* ============ Recettes ============ */
+  .folder { margin-bottom: 1.5rem; }
+  .folder h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.75rem;
+  }
+  .recipe {
+    background: var(--panel);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    box-shadow: var(--shadow);
+    transition: all 0.15s;
+    position: relative;
+  }
+  .recipe:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+  .recipe.selected {
+    border-color: var(--orange);
+    background: linear-gradient(180deg, var(--panel) 0%, var(--orange-light) 100%);
+  }
+  .recipe-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .recipe-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    cursor: pointer;
+    flex: 1;
+  }
+  .recipe-checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: white;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: bold;
+    line-height: 1;
+  }
+  .recipe-checkbox.checked {
+    background: var(--orange);
+    border-color: var(--orange);
+  }
+  .recipe-meta {
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.8rem;
+  }
+  .recipe-actions {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: auto;
+  }
+  .btn-view {
+    background: var(--panel-soft);
+    color: var(--orange);
+    border: 0;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 1;
+  }
+  .btn-view:hover { background: var(--orange-light); }
+
+  /* ============ Sidebar droite : nutrition ============ */
+  .nutri-total {
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-soft);
+    margin-bottom: 1rem;
+  }
+  .nutri-total-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .nutri-total-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.3rem;
+  }
+  .nutri-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 0.88rem;
+  }
+  .nutri-row:last-child { border-bottom: 0; }
+  .nutri-label { color: var(--muted); }
+  .nutri-value { font-weight: 600; }
+
+  .nutri-per-portion {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px dashed var(--border-soft);
+  }
+  .nutri-placeholder {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+
+  /* ============ Liste de courses ============ */
+  #shopping {
+    margin-top: 1.5rem;
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  #shopping h2 { margin-top: 0; }
+  .category { margin-bottom: 1.25rem; }
   .category h3 {
     margin: 0 0 0.5rem 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--accent);
-    border-bottom: 2px solid var(--accent-light);
+    border-bottom: 2px solid var(--accent-soft);
     padding-bottom: 0.25rem;
   }
   .item {
     display: flex;
     align-items: flex-start;
     gap: 0.5rem;
-    padding: 0.3rem 0;
-    border-bottom: 1px solid #f0eee8;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border-soft);
   }
   .item:last-child { border-bottom: none; }
   .item input[type="checkbox"] { margin-top: 0.25rem; }
@@ -187,108 +484,12 @@
     color: var(--muted);
     margin-top: 0.1rem;
   }
-  .merge-warn { color: var(--warn); }
 
-  details.recipe-details {
-    margin-top: 0.5rem;
-  }
-  details.recipe-details summary {
-    cursor: pointer;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-  details.recipe-details pre {
-    background: #f4f3ee;
-    padding: 0.75rem;
-    border-radius: 4px;
-    overflow-x: auto;
-    font-size: 0.8rem;
-    white-space: pre-wrap;
-    margin-top: 0.5rem;
-  }
-
-  .hidden { display: none; }
-
-  /* Filtres */
-  .filters {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .filters .row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    align-items: center;
-  }
-  .filters .label {
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-right: 0.5rem;
-    min-width: 80px;
-  }
-  .filters input[type="search"] {
-    flex: 1;
-    min-width: 200px;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-size: 0.9rem;
-  }
-  .pill {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 0.3rem 0.7rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .pill:hover { background: rgba(0,0,0,0.04); }
-  .pill.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
-  .pill.tag-pill.active {
-    background: var(--accent-light);
-    color: var(--accent);
-    border-color: var(--accent);
-  }
-
-  /* Bouton voir ingrédients sur la carte */
-  .recipe-actions {
-    display: flex;
-    gap: 0.4rem;
-    margin-top: 0.4rem;
-  }
-  .btn-view {
-    background: transparent;
-    color: var(--accent);
-    border: 1px solid var(--border);
-    padding: 0.25rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.78rem;
-    cursor: pointer;
-  }
-  .btn-view:hover {
-    background: var(--accent-light);
-    border-color: var(--accent);
-  }
-
-  /* Modal */
+  /* ============ Modal ============ */
   .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(40, 25, 10, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -297,12 +498,13 @@
   }
   .modal {
     background: var(--panel);
-    border-radius: 8px;
+    border-radius: var(--radius);
     max-width: 600px;
     width: 100%;
     max-height: 85vh;
     overflow-y: auto;
     padding: 1.5rem;
+    box-shadow: var(--shadow-lg);
   }
   .modal-header {
     display: flex;
@@ -311,17 +513,10 @@
     gap: 1rem;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-soft);
   }
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.15rem;
-  }
-  .modal-meta {
-    color: var(--muted);
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-  }
+  .modal-header h2 { margin: 0; font-size: 1.15rem; }
+  .modal-meta { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
   .modal-close {
     background: transparent;
     color: var(--muted);
@@ -333,19 +528,14 @@
   }
   .modal h3 {
     margin: 1rem 0 0.5rem 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--accent);
+    color: var(--orange);
   }
   .modal h3:first-of-type { margin-top: 0; }
-  .modal ul {
-    margin: 0;
-    padding-left: 1.25rem;
-  }
-  .modal li {
-    margin-bottom: 0.25rem;
-  }
+  .modal ul { margin: 0; padding-left: 1.25rem; }
+  .modal li { margin-bottom: 0.25rem; }
 
   .empty-state {
     text-align: center;
@@ -353,41 +543,77 @@
     padding: 2rem;
     font-style: italic;
   }
+  .hidden { display: none; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Recettes & liste de courses de Bittle</h1>
-  <div class="controls">
-    <span class="count" id="count">0 recette sélectionnée</span>
-    <button id="generate">Générer la liste</button>
-    <button id="reset" class="ghost">Tout désélectionner</button>
-  </div>
-</header>
+<div class="app">
 
-<main>
-  <section class="filters" id="filters">
-    <div class="row">
+  <!-- ============ COLONNE GAUCHE : catégories ============ -->
+  <aside class="col-left">
+    <div class="panel">
+      <div class="brand">
+        <div class="brand-logo">🍳</div>
+        <div>
+          <div class="brand-name">Bittle</div>
+          <div class="brand-sub">Recettes & courses</div>
+        </div>
+      </div>
+      <div class="panel-subtitle">Catégories</div>
+      <div id="cat-list" class="cat-list"></div>
+      <button id="reset-filters" class="reset-btn" type="button">Réinitialiser</button>
+    </div>
+  </aside>
+
+  <!-- ============ COLONNE PRINCIPALE ============ -->
+  <main class="col-main">
+    <!-- Bannière sélection -->
+    <section id="hero" class="hero"></section>
+
+    <!-- Recherche -->
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/>
+      </svg>
       <input type="search" id="search" placeholder="Rechercher une recette…">
-      <button class="pill" id="reset-filters" type="button">Réinitialiser</button>
     </div>
-    <div class="row">
-      <span class="label">Catégories</span>
-      <div id="folder-pills" class="row" style="gap:0.4rem"></div>
+
+    <!-- Liste de recettes -->
+    <section id="recipes-section"></section>
+
+    <!-- Liste de courses (générée à la demande) -->
+    <section id="shopping" class="hidden">
+      <h2>Liste de courses</h2>
+      <div id="shopping-list"></div>
+    </section>
+  </main>
+
+  <!-- ============ COLONNE DROITE : nutrition ============ -->
+  <aside class="col-right">
+    <div class="panel">
+      <h3 class="panel-title">Nutrition</h3>
+      <div id="nutri-content"></div>
     </div>
-  </section>
-  <section id="recipes-section"></section>
-  <section id="shopping" class="hidden">
-    <h2>Liste de courses</h2>
-    <div id="shopping-list"></div>
-  </section>
-</main>
+  </aside>
+
+</div>
 
 <div id="modal-root"></div>
 
 <script>
 const RECIPES_RAW = /*__RECIPES_DATA__*/;
+
+const FOLDER_META = {
+  'Volaille': { icon: '🍗', order: 0 },
+  'Boeuf':    { icon: '🥩', order: 1 },
+  'Porc':     { icon: '🐖', order: 2 },
+  'Végé':     { icon: '🥦', order: 3 },
+  'Divers':   { icon: '✨', order: 4 },
+  'Autres':   { icon: '📦', order: 99 },
+};
+const folderIcon = f => (FOLDER_META[f] || {}).icon || '📦';
+const folderOrder = f => (FOLDER_META[f] || {}).order ?? 50;
 
 // ---------- Markdown parsing ----------
 
@@ -432,6 +658,10 @@ function parseRecipe(raw) {
     tempsCuisson: fm.temps_cuisson || '',
     tags,
     ingredients,
+    calories: parseInt(fm.calories) || null,
+    proteines: parseInt(fm.proteines) || null,
+    glucides: parseInt(fm.glucides) || null,
+    lipides: parseInt(fm.lipides) || null,
   };
 }
 
@@ -450,7 +680,6 @@ function parseQty(s) {
 }
 
 function parseIngredient(raw) {
-  // qty: nombre entier, fraction, décimal, ou nombre mixte (« 1 1/2 »)
   const qtyRe = /^((?:\d+\s+\d+\/\d+)|(?:\d+[.,]\d+)|(?:\d+\/\d+)|(?:\d+))\s+/;
   const qtyMatch = raw.match(qtyRe);
 
@@ -469,9 +698,7 @@ function parseIngredient(raw) {
     rest = rest.slice(unitMatch[0].length);
   }
 
-  // skip parenthèse alternative ex « (1 lb) », « (3 c. à soupe) »
   rest = rest.replace(/^\([^)]*\)\s*/, '');
-  // skip leading « de » / « d' »
   rest = rest.replace(/^d['e]\s+/i, '');
 
   return { qty, unit, name: rest.trim() };
@@ -496,8 +723,6 @@ function normalizeName(name) {
 }
 
 function nameForMatching(name) {
-  // Note: on garde « frais » et « seche » pour distinguer
-  // les herbes fraîches (légumes) des herbes séchées (épices).
   return normalizeName(name)
     .replace(/\b(haches?|hachees?|finement|grossierement|tranches?|tranchees?|coupes?|coupees?|emincees?|en\s+(cubes?|des|lanieres|quartiers|biseau|julienne|petales?|rondelles|morceaux|tronc?ons|fines\s+tranches|fleurettes|bouquets?|aiguillettes))\b/g, '')
     .replace(/\b(divises?|divisees?|au\s+gout|au\s+choix|nature|moulus?|moulues?|broyes?|broyees?|rapes?|rapees?|effiloches?|effilochees?|battu|battue|legerement|emiette[es]?)\b/g, '')
@@ -507,7 +732,6 @@ function nameForMatching(name) {
 
 function normalizeUnit(u) {
   if (!u) return null;
-  // gousses/gousse → gousse, tasses → tasse, etc.
   return u.replace(/s$/, '').replace(/\s+/g, ' ');
 }
 
@@ -597,8 +821,8 @@ function loadState() {
   try {
     const s = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
     return {
-      selected: s.selected || {},     // id -> { wantedPortions }
-      checked: s.checked || {},       // shopping item key -> bool
+      selected: s.selected || {},
+      checked: s.checked || {},
     };
   } catch {
     return { selected: {}, checked: {} };
@@ -618,7 +842,194 @@ function recipeMatchesFilters(r) {
   return true;
 }
 
-// ---------- UI: recipe list ----------
+function selectedRecipes() {
+  return recipes.filter(r => state.selected[r.id]);
+}
+
+// ---------- Sidebar gauche : catégories ----------
+
+function renderCategories() {
+  const counts = {};
+  for (const r of recipes) counts[r.folder] = (counts[r.folder] || 0) + 1;
+
+  const folders = Object.keys(counts).sort((a, b) => folderOrder(a) - folderOrder(b));
+
+  const root = document.getElementById('cat-list');
+  root.innerHTML = '';
+
+  // « Tout »
+  const allBtn = document.createElement('button');
+  allBtn.type = 'button';
+  allBtn.className = 'cat-item' + (filters.folders.size === 0 ? ' active' : '');
+  allBtn.innerHTML = `
+    <span class="cat-icon">🍽️</span>
+    <span>Tout</span>
+    <span class="cat-count">${recipes.length}</span>
+  `;
+  allBtn.addEventListener('click', () => {
+    filters.folders.clear();
+    renderCategories();
+    render();
+  });
+  root.appendChild(allBtn);
+
+  for (const f of folders) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cat-item' + (filters.folders.has(f) ? ' active' : '');
+    btn.innerHTML = `
+      <span class="cat-icon">${folderIcon(f)}</span>
+      <span>${f}</span>
+      <span class="cat-count">${counts[f]}</span>
+    `;
+    btn.addEventListener('click', () => {
+      if (filters.folders.has(f)) filters.folders.delete(f);
+      else filters.folders.add(f);
+      renderCategories();
+      render();
+    });
+    root.appendChild(btn);
+  }
+}
+
+// ---------- Bannière sélection ----------
+
+function renderHero() {
+  const hero = document.getElementById('hero');
+  const sel = selectedRecipes();
+
+  if (sel.length === 0) {
+    hero.innerHTML = `
+      <div class="hero-empty">
+        <div class="hero-empty-icon">👨‍🍳</div>
+        <div>
+          <h2>Bonjour Bittle&nbsp;!</h2>
+          <p>Sélectionne des recettes pour générer ta liste de courses.</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  hero.innerHTML = `
+    <div class="hero-header">
+      <h2>Recettes sélectionnées <span class="count-badge">${sel.length}</span></h2>
+      <div style="display:flex; gap:0.5rem">
+        <button class="btn-primary" id="generate-btn">Générer la liste de courses</button>
+        <button class="reset-btn" id="clear-selection" style="margin:0; width:auto">Tout retirer</button>
+      </div>
+    </div>
+    <div class="selected-grid" id="selected-grid"></div>
+  `;
+
+  const grid = document.getElementById('selected-grid');
+  for (const r of sel) {
+    grid.appendChild(renderMiniCard(r));
+  }
+
+  document.getElementById('generate-btn').addEventListener('click', generate);
+  document.getElementById('clear-selection').addEventListener('click', () => {
+    if (!confirm('Retirer toutes les recettes sélectionnées ?')) return;
+    state.selected = {};
+    state.checked = {};
+    saveState();
+    document.getElementById('shopping').classList.add('hidden');
+    rerenderAll();
+  });
+}
+
+function renderMiniCard(r) {
+  const card = document.createElement('div');
+  card.className = 'mini-card';
+  const sel = state.selected[r.id];
+  const wanted = sel ? sel.wantedPortions : r.portions;
+
+  card.innerHTML = `
+    <div class="mini-card-header">
+      <div class="mini-card-title">${folderIcon(r.folder)} ${r.titre}</div>
+      <button class="mini-card-remove" title="Retirer">×</button>
+    </div>
+    <div class="mini-card-controls">
+      <input type="number" min="1" value="${wanted}">
+      <span>portions</span>
+    </div>
+  `;
+
+  card.querySelector('.mini-card-remove').addEventListener('click', () => {
+    delete state.selected[r.id];
+    saveState();
+    rerenderAll();
+  });
+
+  const input = card.querySelector('input');
+  input.addEventListener('change', () => {
+    const v = Math.max(1, parseInt(input.value) || r.portions);
+    if (state.selected[r.id]) {
+      state.selected[r.id].wantedPortions = v;
+      saveState();
+      renderNutrition();
+    }
+  });
+
+  return card;
+}
+
+// ---------- Sidebar droite : nutrition ----------
+
+function renderNutrition() {
+  const root = document.getElementById('nutri-content');
+  const sel = selectedRecipes();
+
+  if (sel.length === 0) {
+    root.innerHTML = `<p class="nutri-placeholder">Sélectionne des recettes pour voir les valeurs nutritionnelles.</p>`;
+    return;
+  }
+
+  // Placeholders : à terme, calculer depuis state.selected[id].wantedPortions et r.calories/macros
+  let totalCalories = 0;
+  let totalPortions = 0;
+  let hasData = false;
+  for (const r of sel) {
+    const wanted = state.selected[r.id].wantedPortions;
+    totalPortions += wanted;
+    if (r.calories !== null) {
+      totalCalories += r.calories * (wanted / r.portions);
+      hasData = true;
+    }
+  }
+
+  const fmt = v => v ? Math.round(v) : '—';
+  const placeholder = hasData ? '' : ' <span style="font-size:0.7rem; color:var(--muted)">(à compléter)</span>';
+
+  root.innerHTML = `
+    <div class="nutri-total">
+      <div class="nutri-total-value">${fmt(totalCalories)}</div>
+      <div class="nutri-total-label">calories totales${placeholder}</div>
+    </div>
+    <div class="nutri-row">
+      <span class="nutri-label">Protéines</span>
+      <span class="nutri-value">— g</span>
+    </div>
+    <div class="nutri-row">
+      <span class="nutri-label">Glucides</span>
+      <span class="nutri-value">— g</span>
+    </div>
+    <div class="nutri-row">
+      <span class="nutri-label">Lipides</span>
+      <span class="nutri-value">— g</span>
+    </div>
+
+    <div class="nutri-per-portion">
+      <div class="panel-subtitle">Par portion</div>
+      <div class="nutri-row">
+        <span class="nutri-label">Calories</span>
+        <span class="nutri-value">${totalPortions ? fmt(totalCalories / totalPortions) : '—'}</span>
+      </div>
+    </div>
+  `;
+}
+
+// ---------- Liste de recettes ----------
 
 function render() {
   const root = document.getElementById('recipes-section');
@@ -631,7 +1042,6 @@ function render() {
     msg.className = 'empty-state';
     msg.textContent = 'Aucune recette ne correspond aux filtres.';
     root.appendChild(msg);
-    updateCount();
     return;
   }
 
@@ -641,20 +1051,12 @@ function render() {
     byFolder[r.folder].push(r);
   }
 
-  const folderOrder = ['Volaille', 'Boeuf', 'Porc', 'Végé', 'Divers', 'Autres'];
-  const folders = Object.keys(byFolder).sort((a, b) => {
-    const ai = folderOrder.indexOf(a);
-    const bi = folderOrder.indexOf(b);
-    if (ai === -1 && bi === -1) return a.localeCompare(b);
-    if (ai === -1) return 1;
-    if (bi === -1) return -1;
-    return ai - bi;
-  });
+  const folders = Object.keys(byFolder).sort((a, b) => folderOrder(a) - folderOrder(b));
 
   for (const folder of folders) {
     const section = document.createElement('div');
     section.className = 'folder';
-    section.innerHTML = `<h2>${folder}</h2>`;
+    section.innerHTML = `<h2>${folderIcon(folder)} ${folder}</h2>`;
     const list = document.createElement('div');
     list.className = 'recipe-list';
     for (const r of byFolder[folder].sort((a, b) => a.titre.localeCompare(b.titre))) {
@@ -662,28 +1064,6 @@ function render() {
     }
     section.appendChild(list);
     root.appendChild(section);
-  }
-
-  updateCount();
-}
-
-function renderFilters() {
-  const folders = [...new Set(recipes.map(r => r.folder))].sort();
-
-  const folderRoot = document.getElementById('folder-pills');
-  folderRoot.innerHTML = '';
-  for (const f of folders) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'pill' + (filters.folders.has(f) ? ' active' : '');
-    btn.textContent = f;
-    btn.addEventListener('click', () => {
-      if (filters.folders.has(f)) filters.folders.delete(f);
-      else filters.folders.add(f);
-      renderFilters();
-      render();
-    });
-    folderRoot.appendChild(btn);
   }
 }
 
@@ -693,48 +1073,40 @@ function renderRecipe(r) {
   const sel = state.selected[r.id];
   if (sel) card.classList.add('selected');
 
-  const cb = document.createElement('input');
-  cb.type = 'checkbox';
-  cb.checked = !!sel;
-  cb.addEventListener('change', () => {
-    if (cb.checked) {
-      state.selected[r.id] = { wantedPortions: r.portions };
-    } else {
-      delete state.selected[r.id];
-    }
-    saveState();
-    render();
-  });
-
-  const body = document.createElement('div');
-  body.className = 'recipe-body';
+  const top = document.createElement('div');
+  top.className = 'recipe-top';
 
   const title = document.createElement('div');
   title.className = 'recipe-title';
   title.textContent = r.titre;
-  title.addEventListener('click', () => {
-    cb.checked = !cb.checked;
-    cb.dispatchEvent(new Event('change'));
-  });
+
+  const cb = document.createElement('div');
+  cb.className = 'recipe-checkbox' + (sel ? ' checked' : '');
+  cb.innerHTML = sel ? '✓' : '';
+
+  const toggleSelect = () => {
+    if (state.selected[r.id]) {
+      delete state.selected[r.id];
+    } else {
+      state.selected[r.id] = { wantedPortions: r.portions };
+    }
+    saveState();
+    rerenderAll();
+  };
+
+  cb.addEventListener('click', toggleSelect);
+  title.addEventListener('click', toggleSelect);
+
+  top.appendChild(title);
+  top.appendChild(cb);
 
   const meta = document.createElement('div');
   meta.className = 'recipe-meta';
-
-  const portions = document.createElement('div');
-  portions.className = 'portions';
-  const wanted = sel ? sel.wantedPortions : r.portions;
-  portions.innerHTML = `<input type="number" min="1" value="${wanted}"> portions <span style="color:var(--muted)">(recette: ${r.portions})</span>`;
-  const portionsInput = portions.querySelector('input');
-  portionsInput.addEventListener('click', e => e.stopPropagation());
-  portionsInput.addEventListener('change', () => {
-    const v = Math.max(1, parseInt(portionsInput.value) || r.portions);
-    if (state.selected[r.id]) {
-      state.selected[r.id].wantedPortions = v;
-      saveState();
-    }
-  });
-
-  meta.appendChild(portions);
+  const metaParts = [`${r.portions} portions`];
+  if (r.tempsPrep) metaParts.push(`prép. ${r.tempsPrep}`);
+  if (r.tempsCuisson) metaParts.push(`cuisson ${r.tempsCuisson}`);
+  if (r.calories) metaParts.push(`${r.calories} cal`);
+  meta.innerHTML = metaParts.map(p => `<span>${p}</span>`).join('');
 
   const actions = document.createElement('div');
   actions.className = 'recipe-actions';
@@ -748,13 +1120,13 @@ function renderRecipe(r) {
   });
   actions.appendChild(viewBtn);
 
-  body.appendChild(title);
-  body.appendChild(meta);
-  body.appendChild(actions);
-  card.appendChild(cb);
-  card.appendChild(body);
+  card.appendChild(top);
+  card.appendChild(meta);
+  card.appendChild(actions);
   return card;
 }
+
+// ---------- Modal ingrédients ----------
 
 function showIngredientsModal(r) {
   const root = document.getElementById('modal-root');
@@ -776,7 +1148,8 @@ function showIngredientsModal(r) {
   if (r.portions) metaParts.push(`${r.portions} portions`);
   if (r.tempsPrep) metaParts.push(`prép. ${r.tempsPrep}`);
   if (r.tempsCuisson) metaParts.push(`cuisson ${r.tempsCuisson}`);
-  titleWrap.innerHTML = `<h2>${r.titre}</h2>` +
+  if (r.calories) metaParts.push(`${r.calories} cal`);
+  titleWrap.innerHTML = `<h2>${folderIcon(r.folder)} ${r.titre}</h2>` +
     (metaParts.length ? `<div class="modal-meta">${metaParts.join(' · ')}</div>` : '');
   const closeBtn = document.createElement('button');
   closeBtn.className = 'modal-close';
@@ -835,16 +1208,7 @@ function closeModal() {
   document.removeEventListener('keydown', escClose);
 }
 
-function updateCount() {
-  const n = Object.keys(state.selected).length;
-  const el = document.getElementById('count');
-  el.textContent = n === 0
-    ? 'Aucune recette sélectionnée'
-    : (n === 1 ? '1 recette sélectionnée' : `${n} recettes sélectionnées`);
-  document.getElementById('generate').disabled = n === 0;
-}
-
-// ---------- Shopping list ----------
+// ---------- Liste de courses ----------
 
 function generate() {
   const items = [];
@@ -867,7 +1231,6 @@ function generate() {
     }
   }
 
-  // Group by category, then merge by (nameKey, unitKey)
   const byCategory = {};
   for (const item of items) {
     if (!byCategory[item.category]) byCategory[item.category] = new Map();
@@ -883,7 +1246,6 @@ function generate() {
         }
         continue;
       }
-      // Quantité indéterminée d'un côté — on garde séparé.
       map.set(`${key}__dup${map.size}`, {
         qty: item.qty, unit: item.unit, name: item.name,
         fromRecipes: [item.fromRecipe],
@@ -953,15 +1315,10 @@ function renderItem(it) {
   const qtyStr = it.qty !== null ? `${formatQty(it.qty)} ` : '';
   const unitStr = it.unit ? `${it.unit} ` : '';
   text.innerHTML = `<div>${qtyStr}${unitStr}${it.name}</div>`;
-  if (it.fromRecipes.length > 1) {
+  if (it.fromRecipes.length >= 1) {
     const from = document.createElement('div');
     from.className = 'item-from';
     from.textContent = `↳ ${it.fromRecipes.join(' + ')}`;
-    text.appendChild(from);
-  } else if (it.fromRecipes.length === 1) {
-    const from = document.createElement('div');
-    from.className = 'item-from';
-    from.textContent = `↳ ${it.fromRecipes[0]}`;
     text.appendChild(from);
   }
 
@@ -970,16 +1327,20 @@ function renderItem(it) {
   return row;
 }
 
-// ---------- Wire up ----------
+// ---------- Orchestration ----------
 
-document.getElementById('generate').addEventListener('click', generate);
-document.getElementById('reset').addEventListener('click', () => {
-  if (Object.keys(state.selected).length === 0) return;
-  if (!confirm('Désélectionner toutes les recettes ?')) return;
-  state.selected = {};
-  state.checked = {};
-  saveState();
-  document.getElementById('shopping').classList.add('hidden');
+function rerenderAll() {
+  renderCategories();
+  renderHero();
+  renderNutrition();
+  render();
+}
+
+document.getElementById('reset-filters').addEventListener('click', () => {
+  filters.search = '';
+  filters.folders.clear();
+  document.getElementById('search').value = '';
+  renderCategories();
   render();
 });
 
@@ -988,16 +1349,7 @@ document.getElementById('search').addEventListener('input', e => {
   render();
 });
 
-document.getElementById('reset-filters').addEventListener('click', () => {
-  filters.search = '';
-  filters.folders.clear();
-  document.getElementById('search').value = '';
-  renderFilters();
-  render();
-});
-
-renderFilters();
-render();
+rerenderAll();
 </script>
 </body>
 </html>
