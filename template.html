@@ -1456,7 +1456,7 @@
     <header class="page-header">
       <div>
         <p class="hello" id="greeting">BONSOIR</p>
-        <h1 class="display page-title">Bittle.</h1>
+        <h1 class="display page-title" id="page-title">Bittle.</h1>
       </div>
       <div class="header-actions">
         <button class="icon-btn-circle sm outline" id="select-all-btn" aria-label="Sélectionner toutes les recettes visibles">
@@ -1873,6 +1873,9 @@ function setGreeting() {
   else if (h < 12) g = 'BONJOUR';
   else g = 'BON APRÈS-MIDI';
   document.getElementById('greeting').textContent = g;
+  const NAMES = ['Bittle', 'Chatoune', 'Sarah'];
+  const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+  document.getElementById('page-title').textContent = `${name} 👸.`;
 }
 
 // ---------- View switching ----------
