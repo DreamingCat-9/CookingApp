@@ -1864,7 +1864,35 @@ function categorize(name) {
 }
 
 // ---------- State ----------
-const recipes = RECIPES_RAW.map(r => ({ ...r, ...parseRecipe(r.raw) }));
+// Calcule les macros par portion à partir de la ventilation CNF (source de vérité unique).
+// Si aucune donnée calculée n'est disponible, retourne null pour chaque champ et on
+// tombera en fallback sur les valeurs du frontmatter.
+function macrosFromBreakdown(breakdown, portions) {
+  if (!breakdown || !breakdown.length) return null;
+  const ok = breakdown.filter(m => m.status === 'ok');
+  if (!ok.length) return null;
+  const tot = ok.reduce((s, m) => ({
+    kcal: s.kcal + (m.kcal || 0),
+    prot: s.prot + (m.prot || 0),
+    gluc: s.gluc + (m.gluc || 0),
+    lip:  s.lip  + (m.lip  || 0),
+  }), { kcal: 0, prot: 0, gluc: 0, lip: 0 });
+  const p = portions || 1;
+  return {
+    calories:  Math.round(tot.kcal / p),
+    proteines: Math.round(tot.prot / p),
+    glucides:  Math.round(tot.gluc / p),
+    lipides:   Math.round(tot.lip  / p),
+    nutritionEstimee: true,
+  };
+}
+
+const recipes = RECIPES_RAW.map(r => {
+  const parsed = parseRecipe(r.raw);
+  const computed = macrosFromBreakdown(r.macros_par_ingredient, parsed.portions);
+  // Les valeurs calculées CNF sont la source de vérité ; le frontmatter sert de fallback.
+  return { ...r, ...parsed, ...(computed || {}) };
+});
 const STATE_KEY = 'gestion_alimentaire_state_v1';
 const THEME_KEY = 'bittle_theme_v1';
 const THEMES = [
@@ -2341,7 +2369,7 @@ function renderDetailTabContent(r, wanted) {
         <div class="nutri-card"><div class="lbl">Glucides</div><div class="val">${px}${fmt(g)}<span style="font-size:0.85rem;color:var(--muted)"> g</span></div><div class="sub">par portion: ${px}${fmt(r.glucides)} g</div></div>
         <div class="nutri-card"><div class="lbl">Lipides</div><div class="val">${px}${fmt(l)}<span style="font-size:0.85rem;color:var(--muted)"> g</span></div><div class="sub">par portion: ${px}${fmt(r.lipides)} g</div></div>
       </div>
-      <p class="nutri-note">Pour ${wanted} portion${wanted > 1 ? 's' : ''}. ${r.nutritionEstimee ? '≈ valeurs estimées (USDA / Santé Canada)' : ''}</p>
+      <p class="nutri-note">Pour ${wanted} portion${wanted > 1 ? 's' : ''}. ≈ calculé à partir des ingrédients (CNF, Santé Canada).</p>
     `;
 
     // Ventilation par ingrédient (depuis macros_par_ingredient embarqué par build.py)
